@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
     try {
       const resend = new Resend(resendKey);
       await resend.emails.send({
-        from: "WMRS Form <noreply@wmrs.com>",
+        from: "WMRS Form <noreply@wmrservice.com>",
         to: company.notificationEmail,
         replyTo: email,
         subject: `Invoice submission — ${companyName}`,

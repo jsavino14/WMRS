@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wmrs.com"),
+  metadataBase: new URL("https://wmrservice.com"),
   title: {
     default: "WMRS - Waste Cost Reduction for Multi-Location Businesses",
     template: "%s | WMRS",

@@ -63,7 +63,7 @@ export default function Image() {
             opacity: 0.5,
           }}
         >
-          wmrs.com
+          wmrservice.com
         </div>
       </div>
     ),

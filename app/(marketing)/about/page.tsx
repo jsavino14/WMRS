@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* ── Main section: copy left / image right ────────────────────────── */}
+      {/* ── Intro: copy left / image right (full height) ─────────────────── */}
       <section className="relative bg-white overflow-hidden">
 
         {/* Desktop image: absolute, full-height, flush to right viewport edge */}
@@ -25,49 +25,27 @@ export default function AboutPage() {
             alt="Waste invoices spread on a surface"
             fill
             className="object-cover object-center"
-            sizes="50vw"
+            sizes="40vw"
             priority
           />
         </div>
 
-        {/* Left column — matches homepage container/left-offset */}
+        {/* Left column */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="lg:w-[60%] lg:pr-16">
-
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {about.hero.h1}
             </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-10">
+            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8">
               {about.hero.sub}
             </p>
-
-            {/* Founding story + track record (no heading — h1 covers it) */}
-            <div className="space-y-4 mb-10">
+            <div className="space-y-4">
               {about.sections[0].body.map((para, i) => (
                 <p key={i} className="text-base text-charcoal/70 leading-relaxed">
                   {para}
                 </p>
               ))}
             </div>
-
-            {/* Remaining sections with headings */}
-            <div className="space-y-8 divide-y divide-charcoal/8">
-              {about.sections.slice(1).map((section, i) => (
-                <div key={i} className={i > 0 ? "pt-8" : ""}>
-                  <h2 className="text-base font-black text-charcoal mb-3">
-                    {section.heading}
-                  </h2>
-                  <div className="space-y-3">
-                    {section.body.map((para, j) => (
-                      <p key={j} className="text-base text-charcoal/70 leading-relaxed">
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
           </div>
         </div>
 
@@ -82,6 +60,26 @@ export default function AboutPage() {
           />
         </div>
 
+      </section>
+
+      {/* ── Two-column band ───────────────────────────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+            {about.sections.slice(1).map((section, i) => (
+              <div key={i}>
+                <h2 className="text-xl font-black text-charcoal mb-4">
+                  {section.heading}
+                </h2>
+                {section.body.map((para, j) => (
+                  <p key={j} className="text-base text-charcoal/70 leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}

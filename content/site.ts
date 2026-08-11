@@ -10,9 +10,9 @@ export const company = {
   legalName: "Waste Management Reduction Services, LLC",
   phone: "914-485-1500",
   phoneHref: "tel:9144851500",
-  email: "[contact@wmrs.com]",
+  email: "Info@WMRService.com",
   /** Where form submissions are forwarded via Resend */
-  notificationEmail: "[alerts@wmrs.com]",
+  notificationEmail: "[alerts@wmrservice.com]",
 };
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
@@ -426,7 +426,7 @@ export const about = {
     {
       heading: "You get a person, not a queue.",
       body: [
-        "Every account has a dedicated manager with a direct line. When a pickup is missed or a charge appears that you don't recognise, you call someone who knows your account - not a 1-800 number.",
+        "Every account has a dedicated manager with a direct line. When a pickup is missed or a charge appears that you don't recognize, you call someone who knows your account - not an 800 number.",
       ],
     },
   ],
@@ -469,6 +469,6 @@ export const contact = {
     heading: "Prefer to call or email directly?",
     phone: "914-485-1500",
     phoneHref: "tel:9144851500",
-    email: "[contact@wmrs.com]",
+    email: "Info@WMRService.com",
   },
 };
