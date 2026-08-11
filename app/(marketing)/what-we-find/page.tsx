@@ -32,9 +32,21 @@ export default function WhatWeFind() {
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {whatWeFind.hero.h1}
             </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
+            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-6">
               {whatWeFind.hero.sub}
             </p>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              {whatWeFind.items.map((item, i) => (
+                <span key={item.number} className="flex items-center gap-x-2">
+                  <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-accent">
+                    {item.label}
+                  </span>
+                  {i < whatWeFind.items.length - 1 && (
+                    <span className="text-charcoal/25 select-none leading-none">·</span>
+                  )}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
         <div className="lg:hidden relative aspect-[4/3]">
@@ -77,6 +89,9 @@ export default function WhatWeFind() {
                 {item.number}
               </div>
               <div>
+                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-accent mb-3">
+                  {item.label}
+                </p>
                 <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-6 max-w-xl">
                   {item.title}
                 </h2>

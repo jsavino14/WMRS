@@ -341,6 +341,7 @@ export const whatWeFind = {
   items: [
     {
       number: "01",
+      label: "Oversized containers",
       title: "Containers sized for a business you no longer are.",
       detail: [
         "Container sizing is set at contract inception. If your business has contracted - fewer locations, lower volume, different operations - the container didn't change. You're paying for cubic yards of capacity that goes out half-full.",
@@ -349,6 +350,7 @@ export const whatWeFind = {
     },
     {
       number: "02",
+      label: "Unneeded pickups",
       title: "Pickups scheduled more often than you generate waste.",
       detail: [
         "Weekly pickup on a container that fills every two weeks is a recurring double-charge. It accumulates quietly. A business with ten locations paying for unnecessary pickups at each one will often find this is their single largest line-item adjustment.",
@@ -357,6 +359,7 @@ export const whatWeFind = {
     },
     {
       number: "03",
+      label: "Compounding surcharges",
       title: "Fuel and environmental surcharges billed as a percentage of the total.",
       detail: [
         "Fuel surcharges should reflect actual fuel costs - ideally as a flat fee or tied to a published index. When structured as a percentage of the base rate, they compound every time the base rate increases.",
@@ -365,6 +368,7 @@ export const whatWeFind = {
     },
     {
       number: "04",
+      label: "Buried escalators",
       title: "Auto-renewing contracts with annual escalators nobody agreed to.",
       detail: [
         "The escalator language is usually in the original agreement - often a clause allowing annual increases of 3–5% or the CPI, whichever is greater. Clients agree to it once and then forget it exists.",
@@ -374,6 +378,7 @@ export const whatWeFind = {
     },
     {
       number: "05",
+      label: "Ghost locations",
       title: "Billing for closed locations and containers already hauled away.",
       detail: [
         "Haulers don't always close accounts cleanly when a location closes. The service stops, but the billing line can remain. For multi-location businesses with regular openings and closings, this accumulates.",
@@ -382,6 +387,7 @@ export const whatWeFind = {
     },
     {
       number: "06",
+      label: "Mispriced recyclables",
       title: "Recyclables going out as trash, at trash prices.",
       detail: [
         "Cardboard, clean plastic, aluminum, and certain metals have commodity value. When they go out in the general waste stream - because nobody set up separate collection, or because the recycling program was quietly discontinued - you're paying the higher trash rate for material that could generate a credit.",
