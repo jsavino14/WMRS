@@ -86,28 +86,25 @@ export default function WhatWeFind() {
             {whatWeFind.items.map((item, i) => (
               <div
                 key={item.number}
-                className={`relative py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+                className={`grid grid-cols-[48px_1fr] gap-8 py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
               >
-                {/* Mobile: number inline above */}
-                <div className="text-4xl font-black text-charcoal/10 leading-none mb-4 lg:hidden">
+                <div className="text-4xl font-black text-charcoal/10 leading-none pt-1">
                   {item.number}
                 </div>
-                {/* Desktop: number hangs into left gutter */}
-                <div className="hidden lg:block absolute -left-8 top-14 text-4xl font-black text-charcoal/10 leading-none select-none">
-                  {item.number}
-                </div>
-                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-charcoal/50 mb-3">
-                  {item.label}
-                </p>
-                <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-6 max-w-xl">
-                  {item.title}
-                </h2>
-                <div className="space-y-4">
-                  {item.detail.map((para, j) => (
-                    <p key={j} className="text-base text-charcoal/65 leading-relaxed">
-                      {para}
-                    </p>
-                  ))}
+                <div>
+                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-charcoal/50 mb-3">
+                    {item.label}
+                  </p>
+                  <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-6 max-w-xl">
+                    {item.title}
+                  </h2>
+                  <div className="space-y-4">
+                    {item.detail.map((para, j) => (
+                      <p key={j} className="text-base text-charcoal/65 leading-relaxed">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

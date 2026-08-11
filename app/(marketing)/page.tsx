@@ -120,24 +120,20 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14 max-w-xl">
             Four steps. Zero upfront cost.
           </h2>
-          {/* Steps — numbers hang left of the container edge on desktop */}
           <div className="divide-y divide-charcoal/8 max-w-3xl">
             {home.steps.map((step) => (
-              <div key={step.number} className="relative py-8">
-                {/* Mobile: number inline above */}
-                <div className="text-3xl font-black text-charcoal/10 leading-none mb-2 lg:hidden">
+              <div key={step.number} className="grid grid-cols-[48px_1fr] gap-8 py-8">
+                <div className="text-3xl font-black text-charcoal/10 leading-none pt-1">
                   {step.number}
                 </div>
-                {/* Desktop: number hangs into left gutter */}
-                <div className="hidden lg:block absolute -left-8 top-8 text-3xl font-black text-charcoal/10 leading-none select-none">
-                  {step.number}
+                <div>
+                  <h3 className="text-lg font-bold text-charcoal mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-base text-charcoal/60 leading-relaxed">
+                    {step.body}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-charcoal mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-base text-charcoal/60 leading-relaxed">
-                  {step.body}
-                </p>
               </div>
             ))}
           </div>

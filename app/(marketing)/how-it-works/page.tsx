@@ -56,25 +56,22 @@ export default function HowItWorksPage() {
             {howItWorksPage.steps.map((step, i) => (
               <div
                 key={step.number}
-                className={`relative py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+                className={`grid grid-cols-[48px_1fr] gap-8 py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
               >
-                {/* Mobile: number inline above */}
-                <div className="text-4xl font-black text-charcoal/10 leading-none mb-4 lg:hidden">
+                <div className="text-4xl font-black text-charcoal/10 leading-none pt-1">
                   {step.number}
                 </div>
-                {/* Desktop: number hangs into left gutter */}
-                <div className="hidden lg:block absolute -left-8 top-14 text-4xl font-black text-charcoal/10 leading-none select-none">
-                  {step.number}
-                </div>
-                <h2 className="text-2xl font-black text-charcoal mb-6">
-                  {step.title}
-                </h2>
-                <div className="space-y-4">
-                  {step.body.map((para, j) => (
-                    <p key={j} className="text-base text-charcoal/65 leading-relaxed">
-                      {para}
-                    </p>
-                  ))}
+                <div>
+                  <h2 className="text-2xl font-black text-charcoal mb-6">
+                    {step.title}
+                  </h2>
+                  <div className="space-y-4">
+                    {step.body.map((para, j) => (
+                      <p key={j} className="text-base text-charcoal/65 leading-relaxed">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
