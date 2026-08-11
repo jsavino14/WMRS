@@ -42,7 +42,7 @@ export default function AboutPage() {
 
             {/* Photo slot + Independence callout */}
             <div className="space-y-8">
-              {/* Photo placeholder — replace with <Image> when photo is available */}
+              {/* Photo placeholder - replace with <Image> when photo is available */}
               <div className="aspect-[3/4] bg-charcoal/8 border border-charcoal/10 flex items-center justify-center">
                 <p className="text-sm text-charcoal/30 text-center px-6">
                   Photo

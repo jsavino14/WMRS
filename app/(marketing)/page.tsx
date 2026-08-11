@@ -18,7 +18,7 @@ export default function HomePage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
-        {/* Photo — full bleed behind everything, anchored right */}
+        {/* Photo - full bleed behind everything, anchored right */}
         <div className="absolute top-0 bottom-0 w-[85%] lg:w-[65%]" style={{ right: "-5%" }}>
           <Image
             src="/hero.png"
@@ -31,7 +31,7 @@ export default function HomePage() {
         </div>
 
         {/*
-          Legibility gradient — mobile/tablet only.
+          Legibility gradient - mobile/tablet only.
           The photo's own white fade handles desktop.
           This ensures the text zone is always on white regardless of photo position.
         */}
@@ -229,7 +229,7 @@ export default function HomePage() {
                 <blockquote className="border-l-2 border-accent pl-4">
                   <p className="text-sm text-charcoal/65 italic leading-relaxed">{cs.quote}</p>
                   <footer className="mt-2 text-xs text-charcoal/40 font-medium">
-                    — {cs.quoteName}
+                    - {cs.quoteName}
                   </footer>
                 </blockquote>
               </div>

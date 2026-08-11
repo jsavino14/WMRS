@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// content/site.ts — single source of truth for every word, number, and datum
+// content/site.ts - single source of truth for every word, number, and datum
 // on the site. Changing the savings percentage is a one-line edit here.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -28,9 +28,9 @@ export const navLinks = [
 
 export const meta = {
   home: {
-    title: "WMRS — Waste Cost Reduction for Multi-Location Businesses",
+    title: "WMRS - Waste Cost Reduction for Multi-Location Businesses",
     description:
-      "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost — you keep 50% of what we save.",
+      "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost - you keep 50% of what we save.",
   },
   howItWorks: {
     title: "How It Works | WMRS",
@@ -45,7 +45,7 @@ export const meta = {
   whoWeWorkWith: {
     title: "Who We Work With | WMRS",
     description:
-      "WMRS works with multi-location businesses — restaurants, retail chains, property managers, hotels, and more. If you pay multiple waste bills, we can help.",
+      "WMRS works with multi-location businesses - restaurants, retail chains, property managers, hotels, and more. If you pay multiple waste bills, we can help.",
   },
   about: {
     title: "About WMRS",
@@ -64,7 +64,7 @@ export const meta = {
 export const home = {
   hero: {
     h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
-    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing so it stays fixed. You keep your hauler. Your service doesn't change. We split what we save you, 50/50 — and if we find nothing, you owe us nothing.",
+    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing so it stays fixed. You keep your hauler. Your service doesn't change. We split what we save you, 50/50 - and if we find nothing, you owe us nothing.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
     ctaSecondary: "Call 914-485-1500",
@@ -83,7 +83,7 @@ export const home = {
     h2: "Nobody's job is to read the trash bill.",
     paragraphs: [
       "Waste invoices are designed to be processed, not read. The line items are vague, the fees have official-sounding names, and the total is close enough to last month's that no one flags it. That's the point.",
-      "The fees that look standard — fuel surcharges, environmental fees, administrative charges — are negotiable. They are added by haulers precisely because most customers treat them as fixed. They are not.",
+      "The fees that look standard - fuel surcharges, environmental fees, administrative charges - are negotiable. They are added by haulers precisely because most customers treat them as fixed. They are not.",
       "Costs drift 20–40% above market over years of auto-renewing contracts that nobody has reread. By the time a business notices, the rate is locked in for another term.",
     ],
   },
@@ -102,7 +102,7 @@ export const home = {
     {
       number: "03",
       title: "We renegotiate.",
-      body: "With your existing hauler in almost every case. Same truck, same driver, same schedule — lower number at the bottom of the bill.",
+      body: "With your existing hauler in almost every case. Same truck, same driver, same schedule - lower number at the bottom of the bill.",
     },
     {
       number: "04",
@@ -152,7 +152,7 @@ export const faq = [
   },
   {
     q: "We're locked into a contract.",
-    a: "Usually fine — sometimes the best time to call. Contract terms often include provisions we can work with, and your next renewal becomes an opportunity.",
+    a: "Usually fine - sometimes the best time to call. Contract terms often include provisions we can work with, and your next renewal becomes an opportunity.",
   },
   {
     q: "We already negotiated our rate.",
@@ -168,63 +168,63 @@ export const faq = [
   },
 ];
 
-// ─── Case studies (placeholder — replace with real data) ─────────────────────
+// ─── Case studies (placeholder - replace with real data) ─────────────────────
 
 export const caseStudies = [
   {
-    industry: "[INDUSTRY — e.g. Quick-Service Restaurant Group]",
+    industry: "[INDUSTRY - e.g. Quick-Service Restaurant Group]",
     state: "[STATE]",
     locationCount: "[X]",
     situation:
-      "[Describe the situation — e.g. A regional chain on a contract auto-renewed without review for six years. No one at the company had compared rates since the original agreement.]",
+      "[Describe the situation - e.g. A regional chain on a contract auto-renewed without review for six years. No one at the company had compared rates since the original agreement.]",
     found:
-      "[What WMRS found — e.g. Fuel surcharges billed as 18% of the total, two closed locations still on the account, and a pickup frequency set for pre-COVID volume.]",
+      "[What WMRS found - e.g. Fuel surcharges billed as 18% of the total, two closed locations still on the account, and a pickup frequency set for pre-COVID volume.]",
     result: {
       saved: "$[XX,XXX]",
       reduction: "[XX]%",
       annualSavings: "$[XX,XXX] per year",
     },
     quote:
-      "[Quote from the client — e.g. 'We had no idea the contract had renewed at that rate. WMRS found it in the first audit and had it corrected within the month.']",
+      "[Quote from the client - e.g. 'We had no idea the contract had renewed at that rate. WMRS found it in the first audit and had it corrected within the month.']",
     quoteName: "[First Name, Title]",
   },
   {
-    industry: "[INDUSTRY — e.g. Regional Hotel Group]",
+    industry: "[INDUSTRY - e.g. Regional Hotel Group]",
     state: "[STATE]",
     locationCount: "[X]",
     situation:
-      "[Describe the situation — e.g. An ownership group managing properties across three states, each with separate hauler agreements negotiated locally with no central oversight.]",
+      "[Describe the situation - e.g. An ownership group managing properties across three states, each with separate hauler agreements negotiated locally with no central oversight.]",
     found:
-      "[What WMRS found — e.g. Rate inconsistencies of up to 40% between comparable properties, environmental surcharges structured as percentages, and outdated container sizing at the highest-volume locations.]",
+      "[What WMRS found - e.g. Rate inconsistencies of up to 40% between comparable properties, environmental surcharges structured as percentages, and outdated container sizing at the highest-volume locations.]",
     result: {
       saved: "$[XX,XXX]",
       reduction: "[XX]%",
       annualSavings: "$[XX,XXX] per year",
     },
     quote:
-      "[Quote — e.g. 'The decentralized contracts made this impossible to manage. WMRS brought it under one audit and found savings we couldn't have seen from the inside.']",
+      "[Quote - e.g. 'The decentralized contracts made this impossible to manage. WMRS brought it under one audit and found savings we couldn't have seen from the inside.']",
     quoteName: "[First Name, Title]",
   },
   {
-    industry: "[INDUSTRY — e.g. Commercial Property Management]",
+    industry: "[INDUSTRY - e.g. Commercial Property Management]",
     state: "[STATE]",
     locationCount: "[X]",
     situation:
-      "[Describe the situation — e.g. A property manager overseeing retail and mixed-use buildings, responsible for waste costs passed through to tenants but rarely reviewed.]",
+      "[Describe the situation - e.g. A property manager overseeing retail and mixed-use buildings, responsible for waste costs passed through to tenants but rarely reviewed.]",
     found:
-      "[What WMRS found — e.g. Pass-through billing errors, recyclable streams misclassified as trash, and one property still paying for a compactor removed two years prior.]",
+      "[What WMRS found - e.g. Pass-through billing errors, recyclable streams misclassified as trash, and one property still paying for a compactor removed two years prior.]",
     result: {
       saved: "$[XX,XXX]",
       reduction: "[XX]%",
       annualSavings: "$[XX,XXX] per year",
     },
     quote:
-      "[Quote — e.g. 'We were billing tenants for costs we hadn't verified ourselves. Finding the compactor charge alone justified the whole audit.']",
+      "[Quote - e.g. 'We were billing tenants for costs we hadn't verified ourselves. Finding the compactor charge alone justified the whole audit.']",
     quoteName: "[First Name, Title]",
   },
 ];
 
-// ─── Client logos — ship empty; section hides when empty ─────────────────────
+// ─── Client logos - ship empty; section hides when empty ─────────────────────
 // To add a logo: { name: "Acme Corp", src: "/logos/acme.svg" }
 
 export const clientLogos: { name: string; src: string }[] = [];
@@ -295,7 +295,7 @@ export const howItWorksPage = {
       number: "02",
       title: "We audit it.",
       body: [
-        "We compare your rates to what haulers in your market are actually accepting for equivalent service — container size, pickup frequency, location type. Not list rates. Actual negotiated rates.",
+        "We compare your rates to what haulers in your market are actually accepting for equivalent service - container size, pickup frequency, location type. Not list rates. Actual negotiated rates.",
         "We review every fee on the bill: fuel surcharges, environmental fees, administrative charges, late fees, overage fees. We check whether the contract has an automatic renewal clause, what the escalator language says, and when the next renewal window opens.",
         "We look at your pickup frequency against typical generation patterns for businesses like yours. We check whether all locations and containers on the bill are active. We check how your recyclables are classified.",
       ],
@@ -304,7 +304,7 @@ export const howItWorksPage = {
       number: "03",
       title: "We renegotiate.",
       body: [
-        "In almost every case, we work with your existing hauler. Changing haulers is disruptive and rarely necessary. Haulers are motivated to retain accounts — they'll often adjust rates rather than lose the business.",
+        "In almost every case, we work with your existing hauler. Changing haulers is disruptive and rarely necessary. Haulers are motivated to retain accounts - they'll often adjust rates rather than lose the business.",
         "We handle all communication with the hauler. You don't have to be on calls or write letters. We present the audit findings and negotiate from there.",
         "In cases where the existing hauler won't move, we'll tell you what competing haulers would offer. The decision on whether to switch is always yours.",
       ],
@@ -314,7 +314,7 @@ export const howItWorksPage = {
       title: "We take over the billing.",
       body: [
         "Once the rate is set, every invoice from your hauler comes to us. We review every line every month against the negotiated terms.",
-        "Rate increases, new fees, billing for service changes you didn't request — we catch them before you pay them. If there's a legitimate change, we'll flag it. If there isn't, we handle the correction.",
+        "Rate increases, new fees, billing for service changes you didn't request - we catch them before you pay them. If there's a legitimate change, we'll flag it. If there isn't, we handle the correction.",
         "Your operations team doesn't have to manage waste billing anymore. We do it.",
       ],
     },
@@ -334,7 +334,7 @@ export const whatWeFind = {
       number: "01",
       title: "Containers sized for a business you no longer are.",
       detail: [
-        "Container sizing is set at contract inception. If your business has contracted — fewer locations, lower volume, different operations — the container didn't change. You're paying for cubic yards of capacity that goes out half-full.",
+        "Container sizing is set at contract inception. If your business has contracted - fewer locations, lower volume, different operations - the container didn't change. You're paying for cubic yards of capacity that goes out half-full.",
         "Rightsizing a container is one of the cleanest reductions we make. It requires no rate negotiation, just an amendment to the service terms. The savings are immediate and permanent.",
       ],
     },
@@ -350,7 +350,7 @@ export const whatWeFind = {
       number: "03",
       title: "Fuel and environmental surcharges billed as a percentage of the total.",
       detail: [
-        "Fuel surcharges should reflect actual fuel costs — ideally as a flat fee or tied to a published index. When structured as a percentage of the base rate, they compound every time the base rate increases.",
+        "Fuel surcharges should reflect actual fuel costs - ideally as a flat fee or tied to a published index. When structured as a percentage of the base rate, they compound every time the base rate increases.",
         "Over a multi-year contract with annual escalators, a percentage-based surcharge grows faster than the base rate. We negotiate these to flat amounts, which produces meaningful savings over the life of the contract.",
       ],
     },
@@ -358,7 +358,7 @@ export const whatWeFind = {
       number: "04",
       title: "Auto-renewing contracts with annual escalators nobody agreed to.",
       detail: [
-        "The escalator language is usually in the original agreement — often a clause allowing annual increases of 3–5% or the CPI, whichever is greater. Clients agree to it once and then forget it exists.",
+        "The escalator language is usually in the original agreement - often a clause allowing annual increases of 3–5% or the CPI, whichever is greater. Clients agree to it once and then forget it exists.",
         "Auto-renewal is the mechanism. The combination of auto-renewal and an escalator means a rate that was competitive in year one can be 20–40% above market by year five. We see this constantly.",
         "The best time to address it is before the next renewal window closes. The second best time is now.",
       ],
@@ -368,14 +368,14 @@ export const whatWeFind = {
       title: "Billing for closed locations and containers already hauled away.",
       detail: [
         "Haulers don't always close accounts cleanly when a location closes. The service stops, but the billing line can remain. For multi-location businesses with regular openings and closings, this accumulates.",
-        "We've found clients being billed for locations that closed two or three years prior. The hauler isn't always acting in bad faith — sometimes it's an administrative gap on both sides. We find it and recover it.",
+        "We've found clients being billed for locations that closed two or three years prior. The hauler isn't always acting in bad faith - sometimes it's an administrative gap on both sides. We find it and recover it.",
       ],
     },
     {
       number: "06",
       title: "Recyclables going out as trash, at trash prices.",
       detail: [
-        "Cardboard, clean plastic, aluminum, and certain metals have commodity value. When they go out in the general waste stream — because nobody set up separate collection, or because the recycling program was quietly discontinued — you're paying the higher trash rate for material that could generate a credit.",
+        "Cardboard, clean plastic, aluminum, and certain metals have commodity value. When they go out in the general waste stream - because nobody set up separate collection, or because the recycling program was quietly discontinued - you're paying the higher trash rate for material that could generate a credit.",
         "Establishing a separate recycling stream isn't always straightforward, but for high-volume locations it often produces savings that exceed anything we find in rate negotiation.",
       ],
     },
@@ -401,8 +401,8 @@ export const about = {
     sub: "The work is straightforward: find the overcharges, fix them, and keep them fixed.",
   },
   body: [
-    "[Founder Name] spent [X] years on the hauler side — [brief background on role, e.g. in regional operations and contract management for a major carrier]. He saw how billing worked from the inside, which overcharges were intentional and which were just administrative drift, and which rates customers could have negotiated if they'd known to ask.",
-    "He started WMRS in 2008 to work on the other side of that relationship. The model is simple: audit the bill, fix what's wrong, and stay on the account to make sure it doesn't drift back. Revenue comes entirely from savings — if we don't find savings, the client pays nothing.",
+    "[Founder Name] spent [X] years on the hauler side - [brief background on role, e.g. in regional operations and contract management for a major carrier]. He saw how billing worked from the inside, which overcharges were intentional and which were just administrative drift, and which rates customers could have negotiated if they'd known to ask.",
+    "He started WMRS in 2008 to work on the other side of that relationship. The model is simple: audit the bill, fix what's wrong, and stay on the account to make sure it doesn't drift back. Revenue comes entirely from savings - if we don't find savings, the client pays nothing.",
     "WMRS has worked with [X]+ clients across [X] states, covering [X]+ locations and identifying more than $[X]M in overcharges and savings opportunities.",
     "We are not owned by a hauler, funded by a hauler, or paid by a hauler. Our entire revenue comes from the savings we deliver to you. That alignment is the point.",
   ],
@@ -429,7 +429,7 @@ export const contact = {
       },
       file: {
         label: "Invoice",
-        hint: "PDF, PNG, or JPG — max 10 MB",
+        hint: "PDF, PNG, or JPG - max 10 MB",
       },
     },
     submit: "Send invoice",

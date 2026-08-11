@@ -84,7 +84,7 @@ export default function WhoWeWorkWith() {
                 <blockquote className="border-l-2 border-accent pl-4">
                   <p className="text-sm text-charcoal/65 italic leading-relaxed">{cs.quote}</p>
                   <footer className="mt-2 text-xs text-charcoal/40 font-medium">
-                    — {cs.quoteName}
+                    - {cs.quoteName}
                   </footer>
                 </blockquote>
               </div>
