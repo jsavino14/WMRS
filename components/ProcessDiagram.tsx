@@ -61,6 +61,18 @@ const ANIM_CSS = `
   .wmrs-anim-bar {
     animation: wmrs-shrink 1400ms ease-out 2400ms both;
   }
+
+  @keyframes wmrs-badge {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .wmrs-badge { animation: wmrs-badge 300ms ease-out 3200ms both; }
+
+  @keyframes wmrs-check {
+    from { stroke-dasharray: 0 14; }
+    to   { stroke-dasharray: 14 0; }
+  }
+  .wmrs-check { animation: wmrs-check 500ms ease-out 3300ms both; }
 `;
 
 // ── Invoice panel ─────────────────────────────────────────────────────────────
@@ -142,6 +154,22 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
           height={TOT_H}
           fill={CHARCOAL}
         />
+      )}
+
+      {/* ── Checkmark badge (panel 04 only) ──────────────────────────────── */}
+      {variant === 3 && (
+        <g>
+          <circle cx={56} cy={90} r={7} fill={ACCENT} className="wmrs-badge" />
+          <polyline
+            points="52,90 55,93 61,87"
+            stroke="white"
+            strokeWidth={2}
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="wmrs-check"
+          />
+        </g>
       )}
     </svg>
   );
