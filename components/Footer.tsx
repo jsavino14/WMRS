@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="opacity-90 brightness-0 invert">
+            <div className="text-white">
               <Logo />
             </div>
             <p className="text-sm leading-relaxed text-white/50">
