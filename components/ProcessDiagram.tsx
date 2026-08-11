@@ -8,7 +8,7 @@ const ACCENT   = "#2E7D4F";
 const GREY     = "#C9CFCB";
 
 // ── Panel geometry (SVG units; viewBox 0 0 66 100) ───────────────────────────
-const PAD    = 5;    // horizontal inset
+const PAD    = 5;
 const IW     = 56;   // inner bar width (66 - 2×PAD)
 const BAR_H  = 5;
 const ACC_H  = 7;    // accent bar height (slightly thicker)
@@ -19,15 +19,10 @@ const TOT_H  = 10;
 const TOT_FULL  = Math.round(IW * 0.70); // 39 — panels 01, 02
 const TOT_SHORT = Math.round(IW * 0.35); // 20 — panels 03 (final), 04
 
-// Bar y-positions
-const Y7 = [10, 19, 28, 37, 46, 55, 64]; // 7 bars (panels 01, 02)
-const Y5 = [10, 20, 30, 40, 50];          // 5 bars (panels 03, 04)
-
-// Varying bar widths for visual realism
+const Y7 = [10, 19, 28, 37, 46, 55, 64];
+const Y5 = [10, 20, 30, 40, 50];
 const W7 = [IW, 44, IW, 38, IW, 36, 48];
 const W5 = [36, IW, 28, 46, 34];
-
-// Accent bar indices in panel 02 (0-based; bars 1, 3, 5 are green)
 const ACC_IDX = new Set([1, 3, 5]);
 
 // ── Invoice panel ─────────────────────────────────────────────────────────────
@@ -36,13 +31,7 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
   const isStack = variant === 3;
   const yBars   = isWide ? Y7 : Y5;
   const wBars   = isWide ? W7 : W5;
-
-  // Panel 03 (variant 2): starts at full width; JS animates it down.
-  // Panel 04 (variant 3): statically short.
-  const totalBarW = variant === 3 ? TOT_SHORT : TOT_FULL;
-
-  // Stack variant needs extra viewBox space for offset layers
-  const offset = isStack ? 10 : 0;
+  const offset  = isStack ? 10 : 0;
 
   return (
     <svg
@@ -51,7 +40,6 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
       aria-hidden="true"
       style={{ display: "block", width: "100%", height: "auto" }}
     >
-      {/* Offset layers behind panel 04 — reads as ongoing, not finished */}
       {isStack && (
         <>
           <rect x={-8} y={-8} width={65} height={99} fill="#fff" stroke={CHARCOAL} strokeWidth={2} />
@@ -59,17 +47,14 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
         </>
       )}
 
-      {/* Panel outline */}
       <rect x={0.5} y={0.5} width={65} height={99} fill="#fff" stroke={CHARCOAL} strokeWidth={2.5} />
 
-      {/* Line-item bars */}
       {yBars.map((y, i) => {
         const isAcc = variant === 1 && ACC_IDX.has(i);
         return (
           <rect
             key={i}
-            x={PAD}
-            y={y}
+            x={PAD} y={y}
             width={wBars[i]}
             height={isAcc ? ACC_H : BAR_H}
             fill={isAcc ? ACCENT : GREY}
@@ -77,22 +62,44 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
         );
       })}
 
-      {/* Rule above total */}
       <line
-        x1={PAD} y1={RULE_Y}
-        x2={PAD + IW} y2={RULE_Y}
+        x1={PAD} y1={RULE_Y} x2={PAD + IW} y2={RULE_Y}
         stroke={CHARCOAL} strokeWidth={0.75} opacity={0.3}
       />
 
-      {/* Total bar — panel 03 carries data-anim so JS can find and animate it */}
-      <rect
-        x={PAD}
-        y={TOT_Y}
-        width={totalBarW}
-        height={TOT_H}
-        fill={CHARCOAL}
-        {...(variant === 2 ? { "data-anim": "total-bar" } : {})}
-      />
+      {/* Panel 03: SMIL animation on the width attribute.
+          begin="0.7s" = 700 ms after SVG is added to the DOM.
+          fill="freeze" = stays at the final (short) width after completion.
+          No JS required for the animation itself; JS only handles
+          prefers-reduced-motion cleanup in ProcessDiagram's useEffect. */}
+      {variant === 2 ? (
+        <rect
+          x={PAD} y={TOT_Y}
+          width={TOT_FULL}
+          height={TOT_H}
+          fill={CHARCOAL}
+          data-anim="total-bar"
+        >
+          <animate
+            attributeName="width"
+            from={TOT_FULL}
+            to={TOT_SHORT}
+            dur="0.65s"
+            begin="0.7s"
+            fill="freeze"
+            calcMode="spline"
+            keyTimes="0;1"
+            keySplines="0 0 0.58 1"
+          />
+        </rect>
+      ) : (
+        <rect
+          x={PAD} y={TOT_Y}
+          width={variant === 3 ? TOT_SHORT : TOT_FULL}
+          height={TOT_H}
+          fill={CHARCOAL}
+        />
+      )}
     </svg>
   );
 }
@@ -131,37 +138,17 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const bars = wrapperRef.current?.querySelectorAll<SVGRectElement>('[data-anim="total-bar"]');
-    if (!bars?.length) return;
+    // The SMIL <animate> handles the animation natively. This effect only
+    // handles the prefers-reduced-motion case: remove the animate element
+    // and snap the bar to its final short width immediately.
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    // Reduced-motion: snap to final width immediately, no animation.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      bars.forEach((bar) => bar.setAttribute("width", String(TOT_SHORT)));
-      return;
-    }
-
-    // Animate the width attribute via rAF — left edge (x=PAD) stays fixed,
-    // right edge shrinks. This is visually identical to scaleX from the left
-    // and works reliably across all browsers without CSS transition concerns.
-    //
-    // 700ms delay: page has settled and the eye has landed on the diagram.
-    // Fires once per mount, never loops, never replays.
-    const id = setTimeout(() => {
-      const startTime = performance.now();
-
-      function tick(now: number) {
-        const t = Math.min((now - startTime) / 650, 1);
-        // ease-out quadratic: fast start, gentle landing
-        const eased = 1 - (1 - t) * (1 - t);
-        const w = TOT_FULL + (TOT_SHORT - TOT_FULL) * eased;
-        bars!.forEach((bar) => bar.setAttribute("width", String(w)));
-        if (t < 1) requestAnimationFrame(tick);
-      }
-
-      requestAnimationFrame(tick);
-    }, 700);
-
-    return () => clearTimeout(id);
+    wrapperRef.current
+      ?.querySelectorAll<SVGRectElement>('[data-anim="total-bar"]')
+      .forEach((bar) => {
+        bar.querySelector("animate")?.remove();
+        bar.setAttribute("width", String(TOT_SHORT));
+      });
   }, []);
 
   return (
@@ -208,7 +195,6 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
           columnGap: "6px",
         }}
       >
-        {/* Row 1: step numbers */}
         {steps.map((step, i) => (
           <div
             key={`n-${i}`}
@@ -229,7 +215,6 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
           </div>
         ))}
 
-        {/* Row 2: panels + arrows */}
         {steps.map((_step, i) => [
           <div key={`p-${i}`} style={{ gridColumn: `${i * 2 + 1}`, gridRow: "2" }}>
             <Panel variant={i as 0 | 1 | 2 | 3} />
@@ -245,7 +230,6 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
           ),
         ])}
 
-        {/* Row 3: labels */}
         {steps.map((step, i) => (
           <div
             key={`l-${i}`}
