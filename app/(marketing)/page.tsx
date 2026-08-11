@@ -50,7 +50,7 @@ export default function HomePage() {
               src="/hero.png"
               alt="Industrial roll-off container"
               fill
-              className="object-cover object-center"
+              className="object-cover object-right"
               priority
               sizes="50vw"
             />
@@ -62,7 +62,7 @@ export default function HomePage() {
             src="/hero.png"
             alt="Industrial roll-off container"
             fill
-            className="object-cover object-center"
+            className="object-cover object-right"
             priority
             sizes="100vw"
           />
