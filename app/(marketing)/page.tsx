@@ -17,15 +17,17 @@ export default function HomePage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[640px] flex items-center">
-        {/* Photo — full bleed behind everything, anchored right so dumpster is visible */}
-        <Image
-          src="/hero.png"
-          alt="Industrial roll-off container"
-          fill
-          className="object-cover object-right"
-          priority
-          sizes="100vw"
-        />
+        {/* Photo — right-aligned, 52% wide, shifted further right so right edge crops */}
+        <div className="absolute top-0 bottom-0 right-0 w-[52%] translate-x-[18%]">
+          <Image
+            src="/hero.png"
+            alt="Industrial roll-off container"
+            fill
+            className="object-cover object-left"
+            priority
+            sizes="52vw"
+          />
+        </div>
         {/* Text — sits over the white-faded left portion of the photo */}
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
           <div className="max-w-xl">
