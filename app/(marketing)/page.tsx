@@ -73,7 +73,16 @@ export default function HomePage() {
       {/* ── Trust bar ────────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-0 gap-y-0">
+          {/* Mobile: stacked, left-aligned */}
+          <div className="flex flex-col sm:hidden gap-0 py-1">
+            {home.trustBar.map((item, i) => (
+              <span key={i} className="text-xs text-white/55 font-medium py-1.5">
+                {item}
+              </span>
+            ))}
+          </div>
+          {/* sm+: single row with dividers */}
+          <div className="hidden sm:flex flex-wrap items-center justify-center gap-x-0 gap-y-0">
             {home.trustBar.map((item, i) => (
               <div key={i} className="flex items-center">
                 <span className="text-xs text-white/55 font-medium py-1 px-4 whitespace-nowrap">
