@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Container } from "@/components/Container";
 import { meta, whatWeFind, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -23,11 +24,11 @@ export default function WhatWeFind() {
             alt="Commercial dumpster against a concrete wall"
             fill
             className="object-cover object-center"
-            sizes="40vw"
+            sizes="50vw"
             priority
           />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <Container className="relative py-20 lg:py-28">
           <div className="lg:w-1/2 lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {whatWeFind.hero.h1}
@@ -35,20 +36,21 @@ export default function WhatWeFind() {
             <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-6">
               {whatWeFind.hero.sub}
             </p>
+            {/* Condensed findings list */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               {whatWeFind.items.map((item, i) => (
                 <span key={item.number} className="flex items-center gap-x-2">
-                  <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-accent">
+                  <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-charcoal/70">
                     {item.label}
                   </span>
                   {i < whatWeFind.items.length - 1 && (
-                    <span className="text-charcoal/25 select-none leading-none">·</span>
+                    <span className="text-charcoal/40 select-none leading-none">·</span>
                   )}
                 </span>
               ))}
             </div>
           </div>
-        </div>
+        </Container>
         <div className="lg:hidden relative aspect-[4/3]">
           <Image
             src="/what-we-find.png"
@@ -62,34 +64,39 @@ export default function WhatWeFind() {
 
       {/* ── Contract context ─────────────────────────────────────────────── */}
       <section className="bg-offwhite py-16 lg:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
             {whatWeFind.contractContext.heading}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 max-w-5xl">
             {whatWeFind.contractContext.body.map((para, i) => (
               <p key={i} className="text-base text-charcoal/65 leading-relaxed">
                 {para}
               </p>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── Findings ─────────────────────────────────────────────────────── */}
       <section className="bg-white py-4">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <p className="label mb-10 pt-14">The six findings</p>
-          {whatWeFind.items.map((item, i) => (
-            <div
-              key={item.number}
-              className={`grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-6 py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
-            >
-              <div className="text-6xl font-black text-charcoal/8 leading-none">
-                {item.number}
-              </div>
-              <div>
-                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-accent mb-3">
+          <div className="max-w-3xl">
+            {whatWeFind.items.map((item, i) => (
+              <div
+                key={item.number}
+                className={`relative py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+              >
+                {/* Mobile: number inline above */}
+                <div className="text-4xl font-black text-charcoal/10 leading-none mb-4 lg:hidden">
+                  {item.number}
+                </div>
+                {/* Desktop: number hangs into left gutter */}
+                <div className="hidden lg:block absolute -left-8 top-14 text-4xl font-black text-charcoal/10 leading-none select-none">
+                  {item.number}
+                </div>
+                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-charcoal/50 mb-3">
                   {item.label}
                 </p>
                 <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-6 max-w-xl">
@@ -103,15 +110,15 @@ export default function WhatWeFind() {
                   ))}
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
           <div className="pb-14" />
-        </div>
+        </Container>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
             Find out what's on your bill.
@@ -133,7 +140,7 @@ export default function WhatWeFind() {
               Call {company.phone}
             </a>
           </div>
-        </div>
+        </Container>
       </section>
     </>
   );

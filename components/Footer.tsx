@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { Container } from "./Container";
 import { company, navLinks } from "@/content/site";
 
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal text-white/70">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <Container className="py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="space-y-4">
@@ -77,7 +78,7 @@ export function Footer() {
             Independent since 2008
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

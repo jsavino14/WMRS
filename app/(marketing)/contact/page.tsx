@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Container } from "@/components/Container";
 import { meta, contact } from "@/content/site";
 import { ContactForm } from "@/components/ContactForm";
 
@@ -16,7 +17,7 @@ export default function ContactPage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white pt-20 pb-16 lg:pt-28 lg:pb-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-6 max-w-xl">
             {contact.hero.h1}
@@ -24,12 +25,12 @@ export default function ContactPage() {
           <p className="text-lg text-charcoal/60 leading-relaxed max-w-xl">
             {contact.hero.sub}
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* ── Form + sidebar ────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-12 lg:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16">
             {/* Form */}
             <div>
@@ -77,7 +78,7 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
     </>
   );

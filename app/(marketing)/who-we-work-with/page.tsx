@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Container } from "@/components/Container";
 import { meta, whoWeWorkWith, industries, caseStudies, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function WhoWeWorkWith() {
       <section className="relative bg-white overflow-hidden">
         {/* Image slot — replace div with <Image fill> when ready */}
         <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[40%] bg-charcoal/6 border-l border-charcoal/10" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <Container className="relative py-20 lg:py-28">
           <div className="lg:w-[60%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {whoWeWorkWith.hero.h1}
@@ -27,15 +28,15 @@ export default function WhoWeWorkWith() {
               {whoWeWorkWith.hero.sub}
             </p>
           </div>
-        </div>
+        </Container>
         <div className="lg:hidden aspect-[4/3] bg-charcoal/6 border-t border-charcoal/10" />
       </section>
 
       {/* ── Industries grid ───────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <p className="label mb-10">Industries</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 divide-y divide-charcoal/8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 divide-y divide-charcoal/8 max-w-4xl">
             {industries.map((industry, i) => (
               <div
                 key={i}
@@ -50,12 +51,12 @@ export default function WhoWeWorkWith() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── Case studies ─────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <p className="label mb-6">Case Studies</p>
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             What clients have found.
@@ -94,12 +95,12 @@ export default function WhoWeWorkWith() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-16 border-t border-charcoal/8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-4">
+        <Container className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/contact"
             className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
@@ -112,7 +113,7 @@ export default function WhoWeWorkWith() {
           >
             Call {company.phone}
           </a>
-        </div>
+        </Container>
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Container } from "@/components/Container";
 import { meta, about, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default function AboutPage() {
         </div>
 
         {/* Left column */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <Container className="relative py-20 lg:py-28">
           <div className="lg:w-[60%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {about.hero.h1}
@@ -47,7 +48,7 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </div>
+        </Container>
 
         {/* Mobile image: below copy, 4:3 */}
         <div className="lg:hidden relative aspect-[4/3]">
@@ -64,7 +65,7 @@ export default function AboutPage() {
 
       {/* ── Two-column band ───────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
             {about.sections.slice(1).map((section, i) => (
               <div key={i}>
@@ -79,12 +80,12 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 border-t border-charcoal/8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
             Ready to find out what you're paying?
@@ -106,7 +107,7 @@ export default function AboutPage() {
               Call {company.phone}
             </a>
           </div>
-        </div>
+        </Container>
       </section>
     </>
   );

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { Container } from "@/components/Container";
 import { meta, howItWorksPage, home, faq, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -16,10 +18,18 @@ export default function HowItWorksPage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
-        {/* Image slot — replace div with <Image fill> when ready */}
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[40%] bg-charcoal/6 border-l border-charcoal/10" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="lg:w-[60%] lg:pr-16">
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
+          <Image
+            src="/how-it-works.png"
+            alt="Commercial compactor unit against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+            priority
+          />
+        </div>
+        <Container className="relative py-20 lg:py-28">
+          <div className="lg:w-1/2 lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {howItWorksPage.hero.h1}
             </h1>
@@ -27,22 +37,35 @@ export default function HowItWorksPage() {
               {howItWorksPage.hero.sub}
             </p>
           </div>
+        </Container>
+        <div className="lg:hidden relative aspect-[4/3]">
+          <Image
+            src="/how-it-works.png"
+            alt="Commercial compactor unit against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
         </div>
-        <div className="lg:hidden aspect-[4/3] bg-charcoal/6 border-t border-charcoal/10" />
       </section>
 
-      {/* ── Steps (expanded) ─────────────────────────────────────────────── */}
+      {/* ── Steps ────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-16 lg:py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-1">
-          {howItWorksPage.steps.map((step, i) => (
-            <div
-              key={step.number}
-              className={`grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-6 py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
-            >
-              <div className="text-6xl font-black text-charcoal/8 leading-none">
-                {step.number}
-              </div>
-              <div>
+        <Container>
+          <div className="max-w-3xl">
+            {howItWorksPage.steps.map((step, i) => (
+              <div
+                key={step.number}
+                className={`relative py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+              >
+                {/* Mobile: number inline above */}
+                <div className="text-4xl font-black text-charcoal/10 leading-none mb-4 lg:hidden">
+                  {step.number}
+                </div>
+                {/* Desktop: number hangs into left gutter */}
+                <div className="hidden lg:block absolute -left-8 top-14 text-4xl font-black text-charcoal/10 leading-none select-none">
+                  {step.number}
+                </div>
                 <h2 className="text-2xl font-black text-charcoal mb-6">
                   {step.title}
                 </h2>
@@ -54,14 +77,14 @@ export default function HowItWorksPage() {
                   ))}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Container>
       </section>
 
       {/* ── What It Costs ────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <p className="label text-accent mb-6">{home.cost.label}</p>
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
             {home.cost.h2}
@@ -70,17 +93,17 @@ export default function HowItWorksPage() {
           <p className="text-lg text-white/65 leading-relaxed max-w-2xl">
             {home.cost.body}
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <p className="label mb-6">FAQ</p>
           <h2 className="text-3xl font-black text-charcoal mb-12 max-w-xl">
             Common questions.
           </h2>
-          <div className="divide-y divide-charcoal/8">
+          <div className="divide-y divide-charcoal/8 max-w-4xl">
             {faq.map((item, i) => (
               <div
                 key={i}
@@ -91,12 +114,12 @@ export default function HowItWorksPage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-16 border-t border-charcoal/8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-4">
+        <Container className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/contact"
             className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
@@ -109,7 +132,7 @@ export default function HowItWorksPage() {
           >
             Call {company.phone}
           </a>
-        </div>
+        </Container>
       </section>
     </>
   );

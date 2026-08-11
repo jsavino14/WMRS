@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Container } from "@/components/Container";
 import { meta, home, faq, caseStudies, clientLogos, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -30,49 +31,47 @@ export default function HomePage() {
           />
         </div>
 
-        {/*
-          Legibility gradient - mobile/tablet only.
-          The photo's own white fade handles desktop.
-          This ensures the text zone is always on white regardless of photo position.
-        */}
+        {/* Legibility gradient - mobile/tablet only */}
         <div
           className="lg:hidden absolute inset-0 z-[5] pointer-events-none"
           style={{ background: "linear-gradient(to right, white 48%, rgba(255,255,255,0) 80%)" }}
         />
 
         {/* Text */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="max-w-[320px] sm:max-w-[420px] lg:max-w-[680px]">
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-              {home.hero.h1[0]}
-              <br />
-              {home.hero.h1[1]}
-            </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8">
-              {home.hero.sub}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href={home.hero.ctaPrimaryHref}
-                className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-              >
-                {home.hero.ctaPrimary}
-              </Link>
-              <a
-                href={home.hero.ctaSecondaryHref}
-                className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-              >
-                {home.hero.ctaSecondary}
-              </a>
+        <div className="relative z-10 w-full py-16 lg:py-20">
+          <Container>
+            <div className="max-w-[320px] sm:max-w-[420px] lg:max-w-[680px]">
+              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+                {home.hero.h1[0]}
+                <br />
+                {home.hero.h1[1]}
+              </h1>
+              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8">
+                {home.hero.sub}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href={home.hero.ctaPrimaryHref}
+                  className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
+                >
+                  {home.hero.ctaPrimary}
+                </Link>
+                <a
+                  href={home.hero.ctaSecondaryHref}
+                  className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
+                >
+                  {home.hero.ctaSecondary}
+                </a>
+              </div>
             </div>
-          </div>
+          </Container>
         </div>
 
       </section>
 
       {/* ── Trust bar ────────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           {/* Mobile: stacked, left-aligned */}
           <div className="flex flex-col sm:hidden gap-0 py-1">
             {home.trustBar.map((item, i) => (
@@ -94,54 +93,55 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── The Problem ──────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
             {home.problem.h2}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
             {home.problem.paragraphs.map((para, i) => (
               <p key={i} className="text-base text-charcoal/65 leading-relaxed">
                 {para}
               </p>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── How It Works ─────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14 max-w-xl">
             Four steps. Zero upfront cost.
           </h2>
-          <div className="space-y-0 divide-y divide-charcoal/8">
+          {/* Steps — numbers hang left of the container edge on desktop */}
+          <div className="divide-y divide-charcoal/8 max-w-3xl">
             {home.steps.map((step) => (
-              <div
-                key={step.number}
-                className="grid grid-cols-[64px_1fr] gap-6 py-8"
-              >
-                <div className="text-4xl font-black text-charcoal/10 leading-none pt-1">
+              <div key={step.number} className="relative py-8">
+                {/* Mobile: number inline above */}
+                <div className="text-3xl font-black text-charcoal/10 leading-none mb-2 lg:hidden">
                   {step.number}
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-charcoal mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-base text-charcoal/60 leading-relaxed">
-                    {step.body}
-                  </p>
+                {/* Desktop: number hangs into left gutter */}
+                <div className="hidden lg:block absolute -left-8 top-8 text-3xl font-black text-charcoal/10 leading-none select-none">
+                  {step.number}
                 </div>
+                <h3 className="text-lg font-bold text-charcoal mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-base text-charcoal/60 leading-relaxed">
+                  {step.body}
+                </p>
               </div>
             ))}
           </div>
-          <div className="mt-10">
+          <div className="mt-10 max-w-3xl">
             <Link
               href="/how-it-works"
               className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
@@ -149,12 +149,12 @@ export default function HomePage() {
               Full process detail →
             </Link>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── What It Costs ────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
             {home.cost.h2}
@@ -162,17 +162,17 @@ export default function HomePage() {
           <p className="text-lg text-white/65 leading-relaxed max-w-2xl">
             {home.cost.body}
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* ── What We Find ─────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.whatWeFind.h2}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 divide-y divide-charcoal/8 sm:divide-y-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 divide-y divide-charcoal/8 sm:divide-y-0 max-w-3xl">
             {home.whatWeFind.items.map((item, i) => (
               <div
                 key={i}
@@ -191,12 +191,12 @@ export default function HomePage() {
               Detail on each overcharge →
             </Link>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── Proof / Case Studies ─────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.proof.h2}
@@ -235,13 +235,13 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── Client logos (hidden when empty) ────────────────────────────── */}
       {clientLogos.length > 0 && (
         <section className="bg-offwhite py-14">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Container>
             <p className="label text-center mb-8">Clients</p>
             <div className="flex flex-wrap items-center justify-center gap-10">
               {clientLogos.map((logo) => (
@@ -254,18 +254,18 @@ export default function HomePage() {
                 />
               ))}
             </div>
-          </div>
+          </Container>
         </section>
       )}
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             Common questions.
           </h2>
-          <div className="divide-y divide-charcoal/8">
+          <div className="divide-y divide-charcoal/8 max-w-4xl">
             {faq.map((item, i) => (
               <div key={i} className="py-7 grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4 md:gap-12">
                 <p className="text-base font-semibold text-charcoal">{item.q}</p>
@@ -273,12 +273,12 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* ── Closing CTA ──────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-md">
             {home.closingCta.h2}
@@ -300,7 +300,7 @@ export default function HomePage() {
               Call {company.phone}
             </a>
           </div>
-        </div>
+        </Container>
       </section>
     </>
   );
