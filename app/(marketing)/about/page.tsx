@@ -15,16 +15,29 @@ export default function AboutPage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-20 pb-20 lg:pt-28 lg:pb-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">{about.hero.label}</p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-6 max-w-2xl">
-            {about.hero.h1}
-          </h1>
-          <p className="text-lg text-charcoal/60 leading-relaxed max-w-xl">
-            {about.hero.sub}
-          </p>
+      <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
+
+        {/* Photo slot - replace div with <Image> when ready */}
+        <div className="absolute top-0 bottom-0 w-[85%] lg:w-[65%] bg-charcoal/5" style={{ right: "-5%" }} />
+
+        {/* Legibility gradient - mobile/tablet only */}
+        <div
+          className="lg:hidden absolute inset-0 z-[5] pointer-events-none"
+          style={{ background: "linear-gradient(to right, white 48%, rgba(255,255,255,0) 80%)" }}
+        />
+
+        {/* Text */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="max-w-[320px] sm:max-w-[420px] lg:max-w-[680px]">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+              {about.hero.h1}
+            </h1>
+            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
+              {about.hero.sub}
+            </p>
+          </div>
         </div>
+
       </section>
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}
