@@ -16,9 +16,8 @@ const RULE_Y = 75;
 const TOT_Y  = 82;
 const TOT_H  = 10;
 
-const TOT_FULL   = Math.round(IW * 0.70); // 39 — panels 01, 02
-const TOT_SHORT  = Math.round(IW * 0.35); // 20 — panels 03 (final), 04
-const ANIM_SCALE = TOT_SHORT / TOT_FULL;  // ≈ 0.513
+const TOT_FULL  = Math.round(IW * 0.70); // 39 — panels 01, 02
+const TOT_SHORT = Math.round(IW * 0.35); // 20 — panels 03 (final), 04
 
 // Bar y-positions
 const Y7 = [10, 19, 28, 37, 46, 55, 64]; // 7 bars (panels 01, 02)
@@ -38,8 +37,8 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
   const yBars   = isWide ? Y7 : Y5;
   const wBars   = isWide ? W7 : W5;
 
-  // Panel 03 total bar starts wide so the CSS animation has room to shrink.
-  // Panel 04 is statically short (no animation).
+  // Panel 03 (variant 2): starts at full width; JS animates it down.
+  // Panel 04 (variant 3): statically short.
   const totalBarW = variant === 3 ? TOT_SHORT : TOT_FULL;
 
   // Stack variant needs extra viewBox space for offset layers
@@ -52,7 +51,7 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
       aria-hidden="true"
       style={{ display: "block", width: "100%", height: "auto" }}
     >
-      {/* Offset layers behind panel 04 (stack = ongoing, not finished) */}
+      {/* Offset layers behind panel 04 — reads as ongoing, not finished */}
       {isStack && (
         <>
           <rect x={-8} y={-8} width={65} height={99} fill="#fff" stroke={CHARCOAL} strokeWidth={2} />
@@ -85,7 +84,7 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
         stroke={CHARCOAL} strokeWidth={0.75} opacity={0.3}
       />
 
-      {/* Total bar — panel 03 carries data-anim and is animated via JS */}
+      {/* Total bar — panel 03 carries data-anim so JS can find and animate it */}
       <rect
         x={PAD}
         y={TOT_Y}
@@ -93,11 +92,6 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
         height={TOT_H}
         fill={CHARCOAL}
         {...(variant === 2 ? { "data-anim": "total-bar" } : {})}
-        style={
-          variant === 2
-            ? { transformBox: "fill-box", transformOrigin: "left center" }
-            : undefined
-        }
       />
     </svg>
   );
@@ -139,23 +133,32 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
   useEffect(() => {
     const bars = wrapperRef.current?.querySelectorAll<SVGRectElement>('[data-anim="total-bar"]');
     if (!bars?.length) return;
-    if (!bars.length) return;
 
-    // Reduced-motion: render final state immediately, no transition
+    // Reduced-motion: snap to final width immediately, no animation.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      bars.forEach((bar) => {
-        bar.style.transform = `scaleX(${ANIM_SCALE})`;
-      });
+      bars.forEach((bar) => bar.setAttribute("width", String(TOT_SHORT)));
       return;
     }
 
-    // Bar renders at TOT_FULL width in the SVG (no CSS transform applied yet).
-    // After 700ms the page has settled and the eye has landed on the diagram.
+    // Animate the width attribute via rAF — left edge (x=PAD) stays fixed,
+    // right edge shrinks. This is visually identical to scaleX from the left
+    // and works reliably across all browsers without CSS transition concerns.
+    //
+    // 700ms delay: page has settled and the eye has landed on the diagram.
+    // Fires once per mount, never loops, never replays.
     const id = setTimeout(() => {
-      bars.forEach((bar) => {
-        bar.style.transition = "transform 650ms ease-out";
-        bar.style.transform = `scaleX(${ANIM_SCALE})`;
-      });
+      const startTime = performance.now();
+
+      function tick(now: number) {
+        const t = Math.min((now - startTime) / 650, 1);
+        // ease-out quadratic: fast start, gentle landing
+        const eased = 1 - (1 - t) * (1 - t);
+        const w = TOT_FULL + (TOT_SHORT - TOT_FULL) * eased;
+        bars!.forEach((bar) => bar.setAttribute("width", String(w)));
+        if (t < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
     }, 700);
 
     return () => clearTimeout(id);
