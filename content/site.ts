@@ -18,17 +18,17 @@ export const company = {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export const navLinks = [
-  { label: "What You're Overpaying", href: "/what-we-find" },
-  { label: "How We Fix It", href: "/how-it-works" },
-  { label: "Who We Do It For", href: "/who-we-work-with" },
-  { label: "Who We Are", href: "/about" },
+  { label: "What You're Overpaying", href: "/overpaying" },
+  { label: "How We Fix It", href: "/how-we-fix-it" },
+  { label: "Who We Do It For", href: "/who-we-do-it-for" },
+  { label: "Who We Are", href: "/who-we-are" },
 ];
 
 // ─── Per-page SEO metadata ────────────────────────────────────────────────────
 
 export const meta = {
   home: {
-    title: "WMRS - Waste Cost Reduction for Multi-Location Businesses",
+    title: "Waste Cost Reduction for Multi-Location Businesses",
     description:
       "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost - you keep 50% of what we save.",
   },
@@ -279,7 +279,7 @@ export const industries = [
 export const howItWorksPage = {
   hero: {
     label: "The Process",
-    h1: "A free audit. A negotiation. A fixed bill.",
+    h1: ["A free audit.", "A negotiation.", "A fixed bill."],
     sub: "No meetings up front, no contracts, no fees until we've saved you money. Here's exactly what happens.",
   },
   steps: [

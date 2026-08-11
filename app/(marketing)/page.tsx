@@ -139,7 +139,7 @@ export default function HomePage() {
           </div>
           <div className="mt-10 max-w-3xl">
             <Link
-              href="/how-it-works"
+              href="/how-we-fix-it"
               className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
             >
               Full process detail →
@@ -181,7 +181,7 @@ export default function HomePage() {
           </div>
           <div className="mt-10">
             <Link
-              href="/what-we-find"
+              href="/overpaying"
               className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
             >
               Detail on each overcharge →

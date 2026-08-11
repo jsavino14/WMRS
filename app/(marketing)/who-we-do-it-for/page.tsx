@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { meta, whoWeWorkWith, industries, caseStudies, company } from "@/content/site";
 
@@ -17,8 +18,16 @@ export default function WhoWeWorkWith() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
-        {/* Image slot — replace div with <Image fill> when ready */}
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[40%] bg-charcoal/6 border-l border-charcoal/10" />
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
+          <Image
+            src="/who-we-do-it-for.jpg"
+            alt="Aerial view of a logistics facility with loading docks"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+            priority
+          />
+        </div>
         <Container className="relative py-20 lg:py-28">
           <div className="lg:w-[60%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
@@ -29,7 +38,15 @@ export default function WhoWeWorkWith() {
             </p>
           </div>
         </Container>
-        <div className="lg:hidden aspect-[4/3] bg-charcoal/6 border-t border-charcoal/10" />
+        <div className="lg:hidden relative aspect-[4/3]">
+          <Image
+            src="/who-we-do-it-for.jpg"
+            alt="Aerial view of a logistics facility with loading docks"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
       </section>
 
       {/* ── Industries grid ───────────────────────────────────────────────── */}
