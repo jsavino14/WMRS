@@ -111,7 +111,7 @@ export function TrustBar() {
 
       const tick = (now: number) => {
         if (t0 === null) t0 = now;
-        const p     = Math.min((now - t0) / 900, 1);
+        const p     = Math.min((now - t0) / 1800, 1);
         const eased = 1 - (1 - p) ** 3;
         setDisplayed(Math.round(from + eased * 100));
         if (p < 1) requestAnimationFrame(tick);
