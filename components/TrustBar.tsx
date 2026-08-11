@@ -4,26 +4,26 @@ import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
 import { customerBaseline, customerAsOf, customerGrowthPerYear } from "@/content/site";
 
-// ── Customer count ─────────────────────────────────────────────────────────
+// ── Client count: floor to nearest 100 so we never show an exact figure ───
 
 function computeCount(): number {
   const base = new Date(customerAsOf);
-  const now = new Date();
+  const now  = new Date();
   const months = Math.max(
     0,
     (now.getFullYear() - base.getFullYear()) * 12 + (now.getMonth() - base.getMonth()),
   );
-  return Math.round(customerBaseline + (customerBaseline * customerGrowthPerYear / 12) * months);
+  const exact = customerBaseline + (customerBaseline * customerGrowthPerYear / 12) * months;
+  return Math.floor(exact / 100) * 100;
 }
 
 // ── Inline SVG logos ───────────────────────────────────────────────────────
-// Rendered fill="currentColor" so CSS color controls them.
+// Each SVG gets an explicit height attribute so the browser knows its size.
+// fill="currentColor" inherits white from the parent span.
 
-interface SvgProps { style?: React.CSSProperties }
-
-function ChefsWarehouseLogo({ style }: SvgProps) {
+function ChefsWarehouseLogo({ height }: { height: number }) {
   return (
-    <svg viewBox="0 0 134.87 53.5" fill="currentColor" aria-hidden="true" style={style}>
+    <svg viewBox="0 0 134.87 53.5" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
       <path d="M79.88,15.6c-1.69-6.4-7.91-10.36-14.29-9.37s-11.14,6.73-10.8,13.28c.33,6.41,5.44,11.63,11.9,12.07,6.44.43,12.32-4.07,13.43-10.61h5.62c-1.38,9.66-9.99,16.45-19.56,15.75s-17-8.67-17.04-18.27S56.41.91,65.89.07s18.35,5.87,19.84,15.54h-5.84Z"/>
       <polygon points="73.64 13.68 76.56 13.7 73.05 26.04 70.18 26.03 67.35 18.26 64.6 26.03 61.77 26.05 58.25 13.7 61.16 13.66 63.41 21.41 66.14 13.68 68.6 13.69 71.4 21.41 73.64 13.68"/>
       <polygon points="58.7 43.87 61.44 43.83 59 53.34 56.08 53.35 55.03 47.33 53.79 53.32 50.82 53.34 48.55 43.85 51.42 43.84 52.51 50.04 53.72 43.84 56.57 43.83 57.66 50.2 58.7 43.87"/>
@@ -47,9 +47,9 @@ function ChefsWarehouseLogo({ style }: SvgProps) {
   );
 }
 
-function BaldorLogo({ style }: SvgProps) {
+function BaldorLogo({ height }: { height: number }) {
   return (
-    <svg viewBox="0 0 126.58 79.58" fill="currentColor" aria-hidden="true" style={style}>
+    <svg viewBox="0 0 126.58 79.58" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
       <path d="M69.01,0c18.52,1.74,38.55,7.01,50.91,21.92,8.96,10.81,8.86,25.38-.23,36.13-5.17,6.11-11.66,10.59-19.09,13.99-12.51,5.71-25.81,7.78-39.61,7.52-18.64-.35-40-6.19-52.65-20.01-11.12-12.13-11.1-27.19-.04-39.39,4.79-5.29,10.52-9.05,16.99-12.15C35.68,3.03,46.66,1.02,57.89,0h11.12ZM107.94,63.68c4.49-3.03,8.28-6.68,11.18-11.18,5.07-7.87,5.09-17.42.03-25.27-6.22-9.66-17.49-16.07-28.55-19.46C66.89.5,36.24,2.57,16.27,17.82,6.09,25.58.27,37.46,5.9,49.44c2.31,4.92,5.81,8.9,10.13,12.26,23.84,18.51,66.88,18.92,91.9,1.99Z"/>
       <path d="M105.26,61.46c-18.6,12.23-45.18,13.87-66.38,7.9-10.94-3.08-22.77-9.33-28.42-19.11-3.74-6.47-3.81-13.98-.18-20.49,5.61-10.06,17.78-16.44,28.92-19.53,16-4.45,32.84-4.4,48.81.14,10.62,3.02,21.66,8.91,27.62,18.11,7.94,12.26,1.44,25.22-10.37,32.99ZM62.95,49.84l-3.41.53c.22-9.4.55-18.47,1.84-27.68.43-3.06,1.62-5.08,3.63-8.03-1.63-.22-3.19-.26-5.04-.21-1.75,9.06-3.03,17.73-3.36,26.95l-.42,11.62c2.31-.7,4.65-1.23,7.08-1.64l-.33-1.55ZM75.29,52.98l7-1.61.02-1.57-3.71.6c.18-8.43.5-16.3,1.36-24.53.32-3.1,1.16-6.32,2.66-8.92l1.44-2.5-5.09.04c-1.13,6.41-2.02,12.17-2.78,18.37-1.09-.59-2.71-.52-3.72.33-8.5,7.14-10.14,18.58-6.5,19.43,2.33.54,4.52-1.4,5.7-3.18l3.94-5.93-.31,9.47ZM27.49,52.82c2.55.52,5.26-.15,7.01-1.77s2.35-4.04,2.22-6.46c-.17-3.29-2.07-5.55-5.62-6.37,3.05-1.68,4.52-4.72,3.09-7.71-1.03-2.15-3.47-3.5-5.96-3.45l-9.83.17c-.35,0-1.11.79-.81.95,1.46.78,3.01.13,3.37.98l.81,1.93.07,18.69c-1.53,1.58-4.26.41-4.2,1.27l.08,1.09c-.02-.22,5.19-.26,9.77.67ZM55,50.08c-.94-.55-1.69-.43-3.3-.17.25-5.83.89-11.84,1.51-17.46l-5.28.22c-3.17.13-9.92,9.03-9.84,16.85.01,1.06.66,2.61,1.39,3,3.46,1.85,7.35-4.77,9.96-9.07.05,3.24-.29,6.16-.74,9.49l6.3-2.86ZM87.68,53c3.76.21,6.44-1.8,7.77-5,1.93-4.64,2.07-12.36-1.6-15.16-4.37-1.12-8.76,1.49-9.97,5.98-.91,3.39-1.16,6.99-.73,10.5.27,2.21,2.26,3.57,4.53,3.69ZM110.97,36.1l-.07-3.45c-1.48.21-2.99.98-3.54,2.19l-3.29,7.26.32-9.2-6.73,1.76c-.2.12-.22,1.39-.09,1.54l3.85-.93-.93,17.09,1.96.02c1.63-5.69,3.7-15.46,8.53-16.28Z"/>
       <path d="M75.47,34.23c2.66,2.34-3.92,16.67-7.47,15.21-2.36-.97-.64-9.83,5.29-14.94.38-.32,1.82-.59,2.18-.27Z"/>
@@ -61,9 +61,9 @@ function BaldorLogo({ style }: SvgProps) {
   );
 }
 
-function ImperialLogo({ style }: SvgProps) {
+function ImperialLogo({ height }: { height: number }) {
   return (
-    <svg viewBox="0 0 138.32 83.41" fill="currentColor" aria-hidden="true" style={style}>
+    <svg viewBox="0 0 138.32 83.41" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
       <path d="M21.04,59.24c.82,3.12,3.22,5.79,1.41,9.63-1.18,2.5-3.85,5.17-7.56,5.16H0s.04-27.68.04-27.68l14.14.07c3.12.02,5.13,2.41,6.52,4.19,2.26,2.89.18,6.13.34,8.63ZM13.34,56.98c1.28,0,2.08-1.09,2.07-2.11s-.8-2.16-2.07-2.18l-6.9-.07v4.39s6.9-.04,6.9-.04ZM15.05,67.54c1.38-.03,1.86-1.79,1.61-2.51-.3-.84-1.09-1.63-2.23-1.63h-7.94c-.17,1.66-.17,2.75,0,4.33l8.57-.19Z"/>
       <path d="M26.93,41.62l-6.34.11-.15-10.59c-.02-1.65-1.47-2.82-2.85-2.88-1.57-.07-3.04,1.25-3.06,3.04l-.12,10.39-6.27.02v-18.14c2.58-.12,4.69-.37,6.88.49,3.13-1.8,6.77-1.53,9.7.8,3-2.22,6.16-2.52,9.29-1.17,2.76,1.2,5.22,3.94,5.27,7.49l.14,10.5-6.33.04-.15-10.6c-.02-1.65-1.44-2.79-2.85-2.88s-3.08,1.17-3.09,2.94l-.07,10.41Z"/>
       <path d="M41.18,51.02l-.08-27.54c2.15-.09,4.66-.03,6.71.39,4.31-1.61,8.87-1.2,11.89,2.35s3.06,8.58.44,12.09c-3.01,4.02-8.24,4.87-12.67,2.53l-.06,10.18h-6.23ZM50.69,36.65c2.96.64,5.05-1.68,5.01-4.23-.03-2.28-1.98-4.43-4.66-4.09-2.16.27-3.38,2.13-3.52,4.15-.11,1.59.96,3.68,3.16,4.16Z"/>
@@ -86,34 +86,23 @@ function ImperialLogo({ style }: SvgProps) {
   );
 }
 
-// ── Logo definitions (order: as specified in clientLogos) ─────────────────
+// ── Logo definitions ───────────────────────────────────────────────────────
+// height is the explicit SVG pixel height; width scales proportionally via viewBox.
+// Fallback renders the company name as text if the SVG somehow can't display.
 
-const LOGOS = [
-  {
-    name: "The Chefs\u2019 Warehouse",
-    Logo: ChefsWarehouseLogo,
-    // Wide flat wordmark — constrain height more than width
-    style: { display: "block", height: "auto", maxHeight: 26, maxWidth: 130, width: "auto" } as React.CSSProperties,
-  },
-  {
-    name: "Baldor Specialty Foods",
-    Logo: BaldorLogo,
-    style: { display: "block", height: "auto", maxHeight: 32, maxWidth: 100, width: "auto" } as React.CSSProperties,
-  },
-  {
-    name: "Imperial Bag \u0026 Paper",
-    Logo: ImperialLogo,
-    style: { display: "block", height: "auto", maxHeight: 32, maxWidth: 100, width: "auto" } as React.CSSProperties,
-  },
+const LOGOS: { name: string; Logo: (p: { height: number }) => React.ReactElement; height: number }[] = [
+  { name: "The Chefs\u2019 Warehouse", Logo: ChefsWarehouseLogo, height: 22 },
+  { name: "Baldor Specialty Foods",   Logo: BaldorLogo,          height: 28 },
+  { name: "Imperial Bag \u0026 Paper", Logo: ImperialLogo,        height: 28 },
 ];
 
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function TrustBar() {
-  const count = computeCount();
+  const count = computeCount(); // already floored to nearest 100
   const [displayed, setDisplayed] = useState(count);
   const spanRef = useRef<HTMLSpanElement>(null);
-  const fired = useRef(false);
+  const fired   = useRef(false);
 
   useEffect(() => {
     const el = spanRef.current;
@@ -131,8 +120,8 @@ export function TrustBar() {
         const duration = 900;
 
         const tick = (now: number) => {
-          const p = Math.min((now - t0) / duration, 1);
-          const eased = 1 - (1 - p) ** 3; // ease-out cubic
+          const p     = Math.min((now - t0) / duration, 1);
+          const eased = 1 - (1 - p) ** 3;
           setDisplayed(Math.round(eased * count));
           if (p < 1) requestAnimationFrame(tick);
         };
@@ -152,32 +141,27 @@ export function TrustBar() {
       <Container>
         <div className="flex flex-col [@media(min-width:900px)]:flex-row [@media(min-width:900px)]:items-center gap-4 [@media(min-width:900px)]:gap-8">
 
-          {/* Counter */}
-          <p className="flex items-baseline gap-2 whitespace-nowrap flex-shrink-0">
-            <span
-              ref={spanRef}
-              className="text-base font-bold text-white tabular-nums"
-              aria-label={`${count.toLocaleString()} customers`}
-            >
+          {/* "Trusted by N+ clients" */}
+          <p
+            className="text-xs font-medium text-white/55 whitespace-nowrap flex-shrink-0"
+            aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
+          >
+            Trusted by{" "}
+            <span ref={spanRef} className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
-            <span className="text-xs font-medium text-white/55 uppercase tracking-widest">
-              customers
-            </span>
+            + clients
           </p>
-
-          {/* Divider — desktop only */}
-          <div className="hidden [@media(min-width:900px)]:block h-4 w-px bg-white/20 flex-shrink-0" />
 
           {/* Logos */}
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-            {LOGOS.map(({ name, Logo, style }) => (
+            {LOGOS.map(({ name, Logo, height }) => (
               <span
                 key={name}
                 title={name}
                 className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
               >
-                <Logo style={style} />
+                <Logo height={height} />
               </span>
             ))}
           </div>
