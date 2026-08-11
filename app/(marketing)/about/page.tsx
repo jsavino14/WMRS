@@ -19,7 +19,7 @@ export default function AboutPage() {
       <section className="relative bg-white overflow-hidden">
 
         {/* Desktop image: absolute, full-height, flush to right viewport edge */}
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[40%]">
           <Image
             src="/about.png"
             alt="Waste invoices spread on a surface"
@@ -32,7 +32,7 @@ export default function AboutPage() {
 
         {/* Left column — matches homepage container/left-offset */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="lg:w-1/2 lg:pr-16">
+          <div className="lg:w-[60%] lg:pr-16">
 
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {about.hero.h1}
