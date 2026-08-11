@@ -16,16 +16,25 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[560px] lg:min-h-[620px]">
-          {/* Text column */}
-          <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
+      <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[640px] flex items-center">
+        {/* Photo — full bleed behind everything, anchored right so dumpster is visible */}
+        <Image
+          src="/hero.png"
+          alt="Industrial roll-off container"
+          fill
+          className="object-cover object-right"
+          priority
+          sizes="100vw"
+        />
+        {/* Text — sits over the white-faded left portion of the photo */}
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
+          <div className="max-w-xl">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-8">
               {home.hero.h1[0]}
               <br />
               {home.hero.h1[1]}
             </h1>
-            <p className="text-lg text-charcoal/65 leading-relaxed mb-10 max-w-lg">
+            <p className="text-lg text-charcoal/65 leading-relaxed mb-10">
               {home.hero.sub}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -43,28 +52,6 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-          {/* Photo column — hidden on mobile, shown lg+ */}
-          <div className="relative hidden lg:block">
-            <Image
-              src="/hero.png"
-              alt="Industrial roll-off container"
-              fill
-              className="object-cover object-right"
-              priority
-              sizes="50vw"
-            />
-          </div>
-        </div>
-        {/* Mobile image — full width, capped height, below the text */}
-        <div className="relative lg:hidden h-56 sm:h-72 w-full">
-          <Image
-            src="/hero.png"
-            alt="Industrial roll-off container"
-            fill
-            className="object-cover object-right"
-            priority
-            sizes="100vw"
-          />
         </div>
       </section>
 
