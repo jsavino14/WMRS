@@ -73,7 +73,7 @@ export const home = {
   },
 
   trustBar: [
-    "Independent since 2008",
+    "50+ years of industry experience",
     "[X] clients",
     "[X] locations under management",
     "$[X]M in savings identified",
