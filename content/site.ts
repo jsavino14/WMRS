@@ -62,7 +62,7 @@ export const meta = {
 // ─── Customer counter ─────────────────────────────────────────────────────────
 // TrustBar computes: baseline + (baseline × growthPerYear / 12) × whole months since asOf
 
-export const customerBaseline      = 1000;
+export const customerBaseline      = 2000;
 export const customerAsOf          = "2026-08-01";
 export const customerGrowthPerYear = 0.10;
 
@@ -72,7 +72,7 @@ export const customerGrowthPerYear = 0.10;
 export const clientLogos = [
   { name: "The Chefs' Warehouse", file: "/logos/chefs-warehouse.svg" },
   { name: "Baldor Specialty Foods", file: "/logos/baldor.svg" },
-  { name: "Imperial Bag & Paper",  file: "/logos/imperial.svg" },
+  { name: "Imperial Brady",         file: "/logos/imperial.svg" },
 ];
 
 // ─── Home page ────────────────────────────────────────────────────────────────

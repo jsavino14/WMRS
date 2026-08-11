@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
 import { customerBaseline, customerAsOf, customerGrowthPerYear } from "@/content/site";
 
-// ── Client count: floor to nearest 100 so we never show an exact figure ───
+// ── Client count: floor to nearest 100 — never show an exact figure ───────
 
 function computeCount(): number {
   const base = new Date(customerAsOf);
@@ -18,7 +18,7 @@ function computeCount(): number {
 }
 
 // ── Inline SVG logos ───────────────────────────────────────────────────────
-// Each SVG gets an explicit height attribute so the browser knows its size.
+// Explicit height attribute (not CSS max-height) is what makes SVGs render.
 // fill="currentColor" inherits white from the parent span.
 
 function ChefsWarehouseLogo({ height }: { height: number }) {
@@ -87,74 +87,72 @@ function ImperialLogo({ height }: { height: number }) {
 }
 
 // ── Logo definitions ───────────────────────────────────────────────────────
-// height is the explicit SVG pixel height; width scales proportionally via viewBox.
-// Fallback renders the company name as text if the SVG somehow can't display.
+// Heights doubled vs. original to match the taller bar.
+// name is used as title tooltip and aria fallback text.
 
 const LOGOS: { name: string; Logo: (p: { height: number }) => React.ReactElement; height: number }[] = [
-  { name: "The Chefs\u2019 Warehouse", Logo: ChefsWarehouseLogo, height: 22 },
-  { name: "Baldor Specialty Foods",   Logo: BaldorLogo,          height: 28 },
-  { name: "Imperial Bag \u0026 Paper", Logo: ImperialLogo,        height: 28 },
+  { name: "The Chefs\u2019 Warehouse", Logo: ChefsWarehouseLogo, height: 44 },
+  { name: "Baldor Specialty Foods",    Logo: BaldorLogo,          height: 56 },
+  { name: "Imperial Brady",            Logo: ImperialLogo,        height: 56 },
 ];
 
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function TrustBar() {
-  const count = computeCount(); // already floored to nearest 100
-  const [displayed, setDisplayed] = useState(count);
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const fired   = useRef(false);
+  const count = computeCount(); // floored to nearest 100
+  const [displayed, setDisplayed] = useState(count); // SSR renders final value
+  const animatedRef = useRef(false);
 
   useEffect(() => {
-    const el = spanRef.current;
-    if (!el) return;
+    if (animatedRef.current) return;
+    animatedRef.current = true;
 
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || fired.current) return;
-        fired.current = true;
-        obs.disconnect();
+    // prefers-reduced-motion: keep the final value, no animation
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const from = count - 100; // start 100 below the target
 
-        const t0 = performance.now();
-        const duration = 900;
+    const id = setTimeout(() => {
+      setDisplayed(from);
 
-        const tick = (now: number) => {
-          const p     = Math.min((now - t0) / duration, 1);
-          const eased = 1 - (1 - p) ** 3;
-          setDisplayed(Math.round(eased * count));
-          if (p < 1) requestAnimationFrame(tick);
-        };
+      let startTime: number | null = null;
 
-        setDisplayed(0);
-        requestAnimationFrame(tick);
-      },
-      { threshold: 0.5 },
-    );
+      const tick = (now: number) => {
+        if (startTime === null) startTime = now;
+        const p     = Math.min((now - startTime) / 900, 1);
+        const eased = 1 - (1 - p) ** 3; // ease-out cubic
+        setDisplayed(Math.round(from + eased * 100));
+        if (p < 1) requestAnimationFrame(tick);
+      };
 
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [count]);
+      requestAnimationFrame(tick);
+    }, 700);
+
+    return () => clearTimeout(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <section className="bg-charcoal py-5">
+    <section className="bg-charcoal py-10">
       <Container>
-        <div className="flex flex-col [@media(min-width:900px)]:flex-row [@media(min-width:900px)]:items-center gap-4 [@media(min-width:900px)]:gap-8">
+        {/* Desktop (≥900px): counter left, logos spread right */}
+        <div className="hidden [@media(min-width:900px)]:flex items-center gap-10">
 
-          {/* "Trusted by N+ clients" */}
+          {/* Counter */}
           <p
-            className="text-xs font-medium text-white/55 whitespace-nowrap flex-shrink-0"
+            className="text-sm font-medium text-white/55 whitespace-nowrap flex-shrink-0"
             aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
           >
             Trusted by{" "}
-            <span ref={spanRef} className="text-white font-bold tabular-nums">
+            <span className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
             + clients
           </p>
 
-          {/* Logos */}
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+          {/* Logos: fill remaining space, distributed evenly, capped so they
+              don't stretch too wide when only 3 of 5 slots are filled */}
+          <div className="flex flex-1 items-center justify-evenly max-w-2xl">
             {LOGOS.map(({ name, Logo, height }) => (
               <span
                 key={name}
@@ -167,6 +165,32 @@ export function TrustBar() {
           </div>
 
         </div>
+
+        {/* Mobile / tablet (<900px): counter on top, logos below */}
+        <div className="[@media(min-width:900px)]:hidden flex flex-col gap-6">
+          <p
+            className="text-sm font-medium text-white/55"
+            aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
+          >
+            Trusted by{" "}
+            <span className="text-white font-bold tabular-nums">
+              {displayed.toLocaleString()}
+            </span>
+            + clients
+          </p>
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-5">
+            {LOGOS.map(({ name, Logo, height }) => (
+              <span
+                key={name}
+                title={name}
+                className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+              >
+                <Logo height={Math.round(height * 0.75)} />
+              </span>
+            ))}
+          </div>
+        </div>
+
       </Container>
     </section>
   );
