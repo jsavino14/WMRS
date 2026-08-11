@@ -29,7 +29,7 @@ export default function WhatWeFind() {
           />
         </div>
         <Container className="relative py-20 lg:py-28">
-          <div className="lg:w-1/2 lg:pr-16">
+          <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {whatWeFind.hero.h1}
             </h1>
