@@ -100,13 +100,11 @@ const LOGOS: { name: string; Logo: (p: { height: number }) => React.ReactElement
 
 export function TrustBar() {
   const count = computeCount(); // floored to nearest 100
-  const [displayed, setDisplayed] = useState(count); // SSR renders final value
+  const from = count - 100;
+  const [displayed, setDisplayed] = useState(from);
 
   useEffect(() => {
-    const from = count - 100;
-
     const id = setTimeout(() => {
-      setDisplayed(from);
       let t0: number | null = null;
 
       const tick = (now: number) => {
