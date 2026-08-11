@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const CHARCOAL = "#1E2428";
 const ACCENT   = "#2E7D4F";
@@ -9,15 +7,15 @@ const GREY     = "#C9CFCB";
 
 // ── Panel geometry (SVG units; viewBox 0 0 66 100) ───────────────────────────
 const PAD    = 5;
-const IW     = 56;   // inner bar width (66 - 2×PAD)
+const IW     = 56;
 const BAR_H  = 5;
-const ACC_H  = 7;    // accent bar height (slightly thicker)
+const ACC_H  = 7;
 const RULE_Y = 75;
 const TOT_Y  = 82;
 const TOT_H  = 10;
 
-const TOT_FULL  = Math.round(IW * 0.70); // 39 — panels 01, 02
-const TOT_SHORT = Math.round(IW * 0.35); // 20 — panels 03 (final), 04
+const TOT_FULL  = Math.round(IW * 0.70); // 39
+const TOT_SHORT = Math.round(IW * 0.35); // 20
 
 const Y7 = [10, 19, 28, 37, 46, 55, 64];
 const Y5 = [10, 20, 30, 40, 50];
@@ -67,39 +65,16 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
         stroke={CHARCOAL} strokeWidth={0.75} opacity={0.3}
       />
 
-      {/* Panel 03: SMIL animation on the width attribute.
-          begin="0.7s" = 700 ms after SVG is added to the DOM.
-          fill="freeze" = stays at the final (short) width after completion.
-          No JS required for the animation itself; JS only handles
-          prefers-reduced-motion cleanup in ProcessDiagram's useEffect. */}
-      {variant === 2 ? (
-        <rect
-          x={PAD} y={TOT_Y}
-          width={TOT_FULL}
-          height={TOT_H}
-          fill={CHARCOAL}
-          data-anim="total-bar"
-        >
-          <animate
-            attributeName="width"
-            from={TOT_FULL}
-            to={TOT_SHORT}
-            dur="0.65s"
-            begin="0.7s"
-            fill="freeze"
-            calcMode="spline"
-            keyTimes="0;1"
-            keySplines="0 0 0.58 1"
-          />
-        </rect>
-      ) : (
-        <rect
-          x={PAD} y={TOT_Y}
-          width={variant === 3 ? TOT_SHORT : TOT_FULL}
-          height={TOT_H}
-          fill={CHARCOAL}
-        />
-      )}
+      {/* Panel 03: data-anim triggers the CSS keyframe animation in globals.css.
+          animation-fill-mode: both means the bar shows at full width during the
+          700ms delay, then shrinks to 0.51× over 650ms ease-out. */}
+      <rect
+        x={PAD} y={TOT_Y}
+        width={variant === 2 ? TOT_FULL : variant === 3 ? TOT_SHORT : TOT_FULL}
+        height={TOT_H}
+        fill={CHARCOAL}
+        {...(variant === 2 ? { "data-anim": "total-bar" } : {})}
+      />
     </svg>
   );
 }
@@ -109,11 +84,7 @@ function HorizArrow() {
   return (
     <svg width="24" height="12" viewBox="0 0 24 12" fill="none" aria-hidden="true">
       <line x1={0} y1={6} x2={18} y2={6} stroke={CHARCOAL} strokeWidth={1.5} strokeLinecap="round" />
-      <polyline
-        points="13,1.5 22,6 13,10.5"
-        stroke={CHARCOAL} strokeWidth={1.5}
-        strokeLinejoin="round" strokeLinecap="round"
-      />
+      <polyline points="13,1.5 22,6 13,10.5" stroke={CHARCOAL} strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   );
 }
@@ -122,11 +93,7 @@ function DownArrow() {
   return (
     <svg width="12" height="24" viewBox="0 0 12 24" fill="none" aria-hidden="true">
       <line x1={6} y1={0} x2={6} y2={18} stroke={CHARCOAL} strokeWidth={1.5} strokeLinecap="round" />
-      <polyline
-        points="1.5,13 6,22 10.5,13"
-        stroke={CHARCOAL} strokeWidth={1.5}
-        strokeLinejoin="round" strokeLinecap="round"
-      />
+      <polyline points="1.5,13 6,22 10.5,13" stroke={CHARCOAL} strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   );
 }
@@ -135,24 +102,8 @@ function DownArrow() {
 type Step = { number: string; diagramLabel: string };
 
 export function ProcessDiagram({ steps }: { steps: Step[] }) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // The SMIL <animate> handles the animation natively. This effect only
-    // handles the prefers-reduced-motion case: remove the animate element
-    // and snap the bar to its final short width immediately.
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    wrapperRef.current
-      ?.querySelectorAll<SVGRectElement>('[data-anim="total-bar"]')
-      .forEach((bar) => {
-        bar.querySelector("animate")?.remove();
-        bar.setAttribute("width", String(TOT_SHORT));
-      });
-  }, []);
-
   return (
-    <div ref={wrapperRef}>
+    <div>
       {/* ── Mobile: vertical stack (< 640px) ─────────────────────────────── */}
       <div className="flex flex-col sm:hidden">
         {steps.map((step, i) => (
@@ -162,15 +113,7 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
                 <Panel variant={i as 0 | 1 | 2 | 3} />
               </div>
               <div className="flex flex-col gap-1 pt-2">
-                <span
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: 700,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: ACCENT,
-                  }}
-                >
+                <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ACCENT }}>
                   {step.number}
                 </span>
                 <span className="text-sm font-semibold text-charcoal">
@@ -179,37 +122,17 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
               </div>
             </div>
             {i < steps.length - 1 && (
-              <div className="pl-11 py-3">
-                <DownArrow />
-              </div>
+              <div className="pl-11 py-3"><DownArrow /></div>
             )}
           </div>
         ))}
       </div>
 
       {/* ── Desktop: horizontal CSS grid (≥ 640px) ───────────────────────── */}
-      <div
-        className="hidden sm:grid"
-        style={{
-          gridTemplateColumns: "1fr 24px 1fr 24px 1fr 24px 1fr",
-          columnGap: "6px",
-        }}
-      >
+      <div className="hidden sm:grid" style={{ gridTemplateColumns: "1fr 24px 1fr 24px 1fr 24px 1fr", columnGap: "6px" }}>
         {steps.map((step, i) => (
-          <div
-            key={`n-${i}`}
-            style={{ gridColumn: `${i * 2 + 1}`, gridRow: "1" }}
-            className="pb-2"
-          >
-            <span
-              style={{
-                fontSize: "10px",
-                fontWeight: 700,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: ACCENT,
-              }}
-            >
+          <div key={`n-${i}`} style={{ gridColumn: `${i * 2 + 1}`, gridRow: "1" }} className="pb-2">
+            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ACCENT }}>
               {step.number}
             </span>
           </div>
@@ -220,25 +143,15 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
             <Panel variant={i as 0 | 1 | 2 | 3} />
           </div>,
           i < 3 && (
-            <div
-              key={`a-${i}`}
-              style={{ gridColumn: `${i * 2 + 2}`, gridRow: "2" }}
-              className="flex items-center justify-center"
-            >
+            <div key={`a-${i}`} style={{ gridColumn: `${i * 2 + 2}`, gridRow: "2" }} className="flex items-center justify-center">
               <HorizArrow />
             </div>
           ),
         ])}
 
         {steps.map((step, i) => (
-          <div
-            key={`l-${i}`}
-            style={{ gridColumn: `${i * 2 + 1}`, gridRow: "3" }}
-            className="pt-3"
-          >
-            <span className="text-xs font-semibold text-charcoal">
-              {step.diagramLabel}
-            </span>
+          <div key={`l-${i}`} style={{ gridColumn: `${i * 2 + 1}`, gridRow: "3" }} className="pt-3">
+            <span className="text-xs font-semibold text-charcoal">{step.diagramLabel}</span>
           </div>
         ))}
       </div>
