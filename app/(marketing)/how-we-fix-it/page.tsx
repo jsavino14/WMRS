@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { ProcessDiagram } from "@/components/ProcessDiagram";
 import { meta, howItWorksPage, home, faq, company } from "@/content/site";
@@ -69,17 +70,36 @@ export default function HowItWorksPage() {
       </section>
 
       {/* ── What It Costs ────────────────────────────────────────────────── */}
-      <section className="bg-charcoal py-20 lg:py-28">
-        <Container>
-          <p className="label text-accent mb-6">{home.cost.label}</p>
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
-            {home.cost.h2}
-          </h2>
-          <div className="w-12 h-px bg-accent mb-8" />
-          <p className="text-lg text-white/65 leading-relaxed max-w-2xl">
-            {home.cost.body}
-          </p>
+      <section className="relative bg-charcoal overflow-hidden">
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
+          <Image
+            src="/compacter.png"
+            alt="Commercial compactor unit"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+          />
+        </div>
+        <Container className="relative py-20 lg:py-28">
+          <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
+              {home.cost.h2}
+            </h2>
+            <div className="w-12 h-px bg-accent mb-8" />
+            <p className="text-lg text-white/65 leading-relaxed">
+              {home.cost.body}
+            </p>
+          </div>
         </Container>
+        <div className="lg:hidden relative aspect-[4/3]">
+          <Image
+            src="/compacter.png"
+            alt="Commercial compactor unit"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
