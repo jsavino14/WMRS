@@ -16,12 +16,33 @@ const TOT_H  = 10;
 
 const TOT_FULL  = Math.round(IW * 0.70); // 39
 const TOT_SHORT = Math.round(IW * 0.35); // 20
+const SCALE     = (TOT_SHORT / TOT_FULL).toFixed(4); // "0.5128"
 
 const Y7 = [10, 19, 28, 37, 46, 55, 64];
 const Y5 = [10, 20, 30, 40, 50];
 const W7 = [IW, 44, IW, 38, IW, 36, 48];
 const W5 = [36, IW, 28, 46, 34];
 const ACC_IDX = new Set([1, 3, 5]);
+
+// CSS lives here so it's guaranteed to load with the component and uses
+// className (not data-* spread) so the selector always matches.
+const ANIM_CSS = `
+  @keyframes shrink-total-bar {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(${SCALE}); }
+  }
+  .wmrs-anim-bar {
+    transform-box: fill-box;
+    transform-origin: left center;
+    animation: shrink-total-bar 650ms ease-out 700ms both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wmrs-anim-bar {
+      animation: none;
+      transform: scaleX(${SCALE});
+    }
+  }
+`;
 
 // ── Invoice panel ─────────────────────────────────────────────────────────────
 function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
@@ -65,15 +86,12 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
         stroke={CHARCOAL} strokeWidth={0.75} opacity={0.3}
       />
 
-      {/* Panel 03: data-anim triggers the CSS keyframe animation in globals.css.
-          animation-fill-mode: both means the bar shows at full width during the
-          700ms delay, then shrinks to 0.51× over 650ms ease-out. */}
       <rect
         x={PAD} y={TOT_Y}
-        width={variant === 2 ? TOT_FULL : variant === 3 ? TOT_SHORT : TOT_FULL}
+        width={variant === 3 ? TOT_SHORT : TOT_FULL}
         height={TOT_H}
         fill={CHARCOAL}
-        {...(variant === 2 ? { "data-anim": "total-bar" } : {})}
+        className={variant === 2 ? "wmrs-anim-bar" : undefined}
       />
     </svg>
   );
@@ -104,6 +122,10 @@ type Step = { number: string; diagramLabel: string };
 export function ProcessDiagram({ steps }: { steps: Step[] }) {
   return (
     <div>
+      {/* Scoped animation styles — co-located so they always load with the component */}
+      {/* eslint-disable-next-line react/no-danger */}
+      <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
+
       {/* ── Mobile: vertical stack (< 640px) ─────────────────────────────── */}
       <div className="flex flex-col sm:hidden">
         {steps.map((step, i) => (

@@ -18,21 +18,3 @@
   }
 }
 
-/* ── Process diagram total-bar animation ───────────────────────────────────── */
-@keyframes shrink-total-bar {
-  from { transform: scaleX(1); }
-  to   { transform: scaleX(0.51); }
-}
-
-[data-anim="total-bar"] {
-  transform-box: fill-box;
-  transform-origin: left center;
-  animation: shrink-total-bar 650ms ease-out 700ms both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-anim="total-bar"] {
-    animation: none;
-    transform: scaleX(0.51);
-  }
-}
