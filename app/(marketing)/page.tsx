@@ -16,60 +16,42 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white overflow-hidden">
+      <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
-        {/* ── Desktop (lg+): photo absolutely behind copy ── */}
-        <div className="relative hidden lg:flex items-center min-h-[480px]">
-          <div className="absolute top-0 bottom-0 w-[65%]" style={{ right: "-5%" }}>
-            <Image
-              src="/hero.png"
-              alt="Industrial roll-off container"
-              fill
-              className="object-cover object-left"
-              priority
-              sizes="65vw"
-            />
-          </div>
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-            <div className="max-w-[680px]">
-              <h1 className="text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-                {home.hero.h1[0]}
-                <br />
-                {home.hero.h1[1]}
-              </h1>
-              <p className="text-lg text-charcoal/65 leading-relaxed mb-8 max-w-lg">
-                {home.hero.sub}
-              </p>
-              <div className="flex flex-row gap-4">
-                <Link
-                  href={home.hero.ctaPrimaryHref}
-                  className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-                >
-                  {home.hero.ctaPrimary}
-                </Link>
-                <a
-                  href={home.hero.ctaSecondaryHref}
-                  className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-                >
-                  {home.hero.ctaSecondary}
-                </a>
-              </div>
-            </div>
-          </div>
+        {/* Photo — full bleed behind everything, anchored right */}
+        <div className="absolute top-0 bottom-0 w-[65%]" style={{ right: "-5%" }}>
+          <Image
+            src="/hero.png"
+            alt="Industrial roll-off container"
+            fill
+            className="object-cover object-left"
+            priority
+            sizes="65vw"
+          />
         </div>
 
-        {/* ── Mobile / tablet (<lg): white text block, photo strip below ── */}
-        <div className="lg:hidden">
-          <div className="px-4 sm:px-8 pt-14 pb-10">
-            <h1 className="text-4xl sm:text-5xl font-black text-charcoal leading-[1.08] mb-6">
+        {/*
+          Legibility gradient — mobile/tablet only.
+          The photo's own white fade handles desktop.
+          This ensures the text zone is always on white regardless of photo position.
+        */}
+        <div
+          className="lg:hidden absolute inset-0 z-[5] pointer-events-none"
+          style={{ background: "linear-gradient(to right, white 48%, rgba(255,255,255,0) 80%)" }}
+        />
+
+        {/* Text */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="max-w-[320px] sm:max-w-[420px] lg:max-w-[680px]">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {home.hero.h1[0]}
               <br />
               {home.hero.h1[1]}
             </h1>
-            <p className="text-base sm:text-lg text-charcoal/65 leading-relaxed mb-8 max-w-lg">
+            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8">
               {home.hero.sub}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href={home.hero.ctaPrimaryHref}
                 className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
@@ -83,17 +65,6 @@ export default function HomePage() {
                 {home.hero.ctaSecondary}
               </a>
             </div>
-          </div>
-          {/* Photo strip — below the text, readable */}
-          <div className="relative h-52 sm:h-72 w-full">
-            <Image
-              src="/hero.png"
-              alt="Industrial roll-off container"
-              fill
-              className="object-cover object-center"
-              priority
-              sizes="100vw"
-            />
           </div>
         </div>
 
