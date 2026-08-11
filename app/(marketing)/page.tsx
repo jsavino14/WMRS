@@ -19,7 +19,7 @@ export default function HomePage() {
       <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
         {/* Photo — full bleed behind everything, anchored right */}
-        <div className="absolute top-0 bottom-0 w-[65%]" style={{ right: "-5%" }}>
+        <div className="absolute top-0 bottom-0 w-[85%] lg:w-[65%]" style={{ right: "-5%" }}>
           <Image
             src="/hero.png"
             alt="Industrial roll-off container"
