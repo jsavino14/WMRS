@@ -17,20 +17,20 @@ export default function HomePage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[640px] flex items-center">
-        {/* Photo — 55% wide, right edge clips ~8% off screen */}
-        <div className="absolute top-0 bottom-0 w-[55%]" style={{ right: "-8%" }}>
+        {/* Photo — 65% wide, starts from right-center, behind copy */}
+        <div className="absolute top-0 bottom-0 w-[65%]" style={{ right: "-5%" }}>
           <Image
             src="/hero.png"
             alt="Industrial roll-off container"
             fill
             className="object-cover object-left"
             priority
-            sizes="55vw"
+            sizes="65vw"
           />
         </div>
-        {/* Text — wider column, sits over the white-faded left of the photo */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
-          <div className="max-w-[580px]">
+        {/* Text — aligned to same left edge as the nav logo */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+          <div className="max-w-[520px]">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-8">
               {home.hero.h1[0]}
               <br />
