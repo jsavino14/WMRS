@@ -12,7 +12,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="text-white">
-              <Logo align="start" />
+              <Logo withDescriptor align="start" />
             </div>
             <p className="text-sm leading-relaxed text-white/50">
               {company.legalName}
