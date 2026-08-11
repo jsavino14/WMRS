@@ -59,6 +59,22 @@ export const meta = {
   },
 };
 
+// ─── Customer counter ─────────────────────────────────────────────────────────
+// TrustBar computes: baseline + (baseline × growthPerYear / 12) × whole months since asOf
+
+export const customerBaseline      = 1000;
+export const customerAsOf          = "2026-08-01";
+export const customerGrowthPerYear = 0.10;
+
+// ─── Client logos ─────────────────────────────────────────────────────────────
+// SVGs live in /public/logos/. TrustBar embeds them inline for CSS color control.
+
+export const clientLogos = [
+  { name: "The Chefs' Warehouse", file: "/logos/chefs-warehouse.svg" },
+  { name: "Baldor Specialty Foods", file: "/logos/baldor.svg" },
+  { name: "Imperial Bag & Paper",  file: "/logos/imperial.svg" },
+];
+
 // ─── Home page ────────────────────────────────────────────────────────────────
 
 export const home = {
@@ -70,14 +86,6 @@ export const home = {
     ctaSecondary: "Call 914-485-1500",
     ctaSecondaryHref: "tel:9144851500",
   },
-
-  trustBar: [
-    "50+ years of combined industry experience",
-    "[X] clients",
-    "[X] locations under management",
-    "$[X]M in savings identified",
-    "Not owned by, affiliated with, or paid by any hauler",
-  ],
 
   problem: {
     h2: "Nobody's job is to read the trash bill.",
@@ -224,10 +232,7 @@ export const caseStudies = [
   },
 ];
 
-// ─── Client logos - ship empty; section hides when empty ─────────────────────
-// To add a logo: { name: "Acme Corp", src: "/logos/acme.svg" }
-
-export const clientLogos: { name: string; src: string }[] = [];
+// clientLogos is defined above, near customerBaseline.
 
 // ─── Industries (used on Who We Work With) ───────────────────────────────────
 

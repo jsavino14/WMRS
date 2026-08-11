@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, home, faq, caseStudies, clientLogos, company } from "@/content/site";
+import { meta, home, faq, caseStudies, company } from "@/content/site";
+import { TrustBar } from "@/components/TrustBar";
 
 export const metadata: Metadata = {
   title: meta.home.title,
@@ -70,31 +71,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Trust bar ────────────────────────────────────────────────────── */}
-      <section className="bg-charcoal py-5">
-        <Container>
-          {/* Mobile: stacked, left-aligned */}
-          <div className="flex flex-col sm:hidden gap-0 py-1">
-            {home.trustBar.map((item, i) => (
-              <span key={i} className="text-xs text-white/55 font-medium py-1.5">
-                {item}
-              </span>
-            ))}
-          </div>
-          {/* sm+: single row with dividers */}
-          <div className="hidden sm:flex flex-wrap items-center justify-center gap-x-0 gap-y-0">
-            {home.trustBar.map((item, i) => (
-              <div key={i} className="flex items-center">
-                <span className="text-xs text-white/55 font-medium py-1 px-4 whitespace-nowrap">
-                  {item}
-                </span>
-                {i < home.trustBar.length - 1 && (
-                  <span className="text-white/20 text-xs">·</span>
-                )}
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <TrustBar />
 
       {/* ── The Problem ──────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
@@ -234,25 +211,6 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── Client logos (hidden when empty) ────────────────────────────── */}
-      {clientLogos.length > 0 && (
-        <section className="bg-offwhite py-14">
-          <Container>
-            <p className="label text-center mb-8">Clients</p>
-            <div className="flex flex-wrap items-center justify-center gap-10">
-              {clientLogos.map((logo) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={logo.name}
-                  src={logo.src}
-                  alt={logo.name}
-                  className="h-8 w-auto opacity-50 grayscale"
-                />
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
