@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { meta, home, faq, caseStudies, clientLogos, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -15,29 +16,54 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-20 pb-24 lg:pt-28 lg:pb-32">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="w-8 h-px bg-accent mb-8" />
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-8 max-w-3xl">
-            {home.hero.h1}
-          </h1>
-          <p className="text-lg text-charcoal/65 leading-relaxed max-w-2xl mb-10">
-            {home.hero.sub}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href={home.hero.ctaPrimaryHref}
-              className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-            >
-              {home.hero.ctaPrimary}
-            </Link>
-            <a
-              href={home.hero.ctaSecondaryHref}
-              className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-            >
-              {home.hero.ctaSecondary}
-            </a>
+      <section className="bg-white overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[560px] lg:min-h-[620px]">
+          {/* Text column */}
+          <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
+            <div className="w-8 h-px bg-accent mb-8" />
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-8">
+              {home.hero.h1}
+            </h1>
+            <p className="text-lg text-charcoal/65 leading-relaxed mb-10 max-w-lg">
+              {home.hero.sub}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href={home.hero.ctaPrimaryHref}
+                className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
+              >
+                {home.hero.ctaPrimary}
+              </Link>
+              <a
+                href={home.hero.ctaSecondaryHref}
+                className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
+              >
+                {home.hero.ctaSecondary}
+              </a>
+            </div>
           </div>
+          {/* Photo column — hidden on mobile, shown lg+ */}
+          <div className="relative hidden lg:block">
+            <Image
+              src="/hero.png"
+              alt="Industrial roll-off container"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="50vw"
+            />
+          </div>
+        </div>
+        {/* Mobile image — full width, capped height, below the text */}
+        <div className="relative lg:hidden h-56 sm:h-72 w-full">
+          <Image
+            src="/hero.png"
+            alt="Industrial roll-off container"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="100vw"
+          />
         </div>
       </section>
 
