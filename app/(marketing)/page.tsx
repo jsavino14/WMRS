@@ -22,7 +22,9 @@ export default function HomePage() {
           <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
             <div className="w-8 h-px bg-accent mb-8" />
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-8">
-              {home.hero.h1}
+              {home.hero.h1[0]}
+              <br />
+              {home.hero.h1[1]}
             </h1>
             <p className="text-lg text-charcoal/65 leading-relaxed mb-10 max-w-lg">
               {home.hero.sub}

@@ -64,7 +64,7 @@ export const meta = {
 
 export const home = {
   hero: {
-    h1: "You're probably overpaying for trash. We'll prove it for free.",
+    h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
     sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing so it stays fixed. You keep your hauler. Your service doesn't change. We split what we save you, 50/50 — and if we find nothing, you owe us nothing.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
