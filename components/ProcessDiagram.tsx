@@ -50,16 +50,16 @@ const ANIM_CSS = `
     from { stroke-dasharray: 0 ${ACC_W[5]}; }
     to   { stroke-dasharray: ${ACC_W[5]} 0; }
   }
-  .wmrs-acc-1 { animation: wmrs-grow-${ACC_W[1]} 200ms ease-out  500ms both; }
-  .wmrs-acc-3 { animation: wmrs-grow-${ACC_W[3]} 200ms ease-out  700ms both; }
-  .wmrs-acc-5 { animation: wmrs-grow-${ACC_W[5]} 200ms ease-out  900ms both; }
+  .wmrs-acc-1 { animation: wmrs-grow-${ACC_W[1]} 450ms ease-out  500ms both; }
+  .wmrs-acc-3 { animation: wmrs-grow-${ACC_W[3]} 450ms ease-out 1100ms both; }
+  .wmrs-acc-5 { animation: wmrs-grow-${ACC_W[5]} 450ms ease-out 1700ms both; }
 
   @keyframes wmrs-shrink {
     from { stroke-dasharray: ${TOT_FULL} 0; }
     to   { stroke-dasharray: ${TOT_SHORT} ${TOT_FULL}; }
   }
   .wmrs-anim-bar {
-    animation: wmrs-shrink 975ms ease-out 1200ms both;
+    animation: wmrs-shrink 1400ms ease-out 2400ms both;
   }
 `;
 
