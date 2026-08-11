@@ -36,7 +36,7 @@ export default function AboutPage() {
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {about.hero.h1}
             </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8">
+            <p className="text-base text-charcoal/70 leading-relaxed mb-8">
               {about.hero.sub}
             </p>
             <div className="space-y-4">
