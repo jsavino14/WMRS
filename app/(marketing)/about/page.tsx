@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { meta, about, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -26,8 +27,15 @@ export default function AboutPage() {
                 {about.hero.sub}
               </p>
             </div>
-            {/* Image slot - replace with <Image> */}
-            <div className="aspect-[4/3] bg-charcoal/6 border border-charcoal/10" />
+            <div className="relative aspect-[4/3]">
+              <Image
+                src="/about.png"
+                alt="Waste invoices spread on a surface"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>
