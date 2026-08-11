@@ -100,7 +100,7 @@ export default function HomePage() {
       {/* ── The Problem ──────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">The Problem</p>
+          <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
             {home.problem.h2}
           </h2>
@@ -117,7 +117,7 @@ export default function HomePage() {
       {/* ── How It Works ─────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">How It Works</p>
+          <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14 max-w-xl">
             Four steps. Zero upfront cost.
           </h2>
@@ -155,11 +155,10 @@ export default function HomePage() {
       {/* ── What It Costs ────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label text-accent mb-6">{home.cost.label}</p>
+          <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
             {home.cost.h2}
           </h2>
-          <div className="w-12 h-px bg-accent mb-8" />
           <p className="text-lg text-white/65 leading-relaxed max-w-2xl">
             {home.cost.body}
           </p>
@@ -169,7 +168,7 @@ export default function HomePage() {
       {/* ── What We Find ─────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">{home.whatWeFind.label}</p>
+          <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.whatWeFind.h2}
           </h2>
@@ -198,7 +197,7 @@ export default function HomePage() {
       {/* ── Proof / Case Studies ─────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">{home.proof.label}</p>
+          <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.proof.h2}
           </h2>
@@ -262,7 +261,7 @@ export default function HomePage() {
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">FAQ</p>
+          <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             Common questions.
           </h2>

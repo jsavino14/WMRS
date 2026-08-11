@@ -42,7 +42,7 @@ export function Nav() {
               href="/contact"
               className="bg-charcoal text-white text-sm font-semibold px-4 py-2 hover:bg-charcoal/85 transition-colors duration-150"
             >
-              Send us an invoice
+              Send us one invoice
             </Link>
           </div>
 
@@ -92,7 +92,7 @@ export function Nav() {
                 className="bg-charcoal text-white text-sm font-semibold px-4 py-3 text-center hover:bg-charcoal/85 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Send us an invoice
+                Send us one invoice
               </Link>
             </div>
           </nav>

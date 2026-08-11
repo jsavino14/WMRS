@@ -18,11 +18,10 @@ export const company = {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export const navLinks = [
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "What We Find", href: "/what-we-find" },
-  { label: "Who We Work With", href: "/who-we-work-with" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "What You're Overpaying", href: "/what-we-find" },
+  { label: "How We Fix It", href: "/how-it-works" },
+  { label: "Who We Do It For", href: "/who-we-work-with" },
+  { label: "Who We Are", href: "/about" },
 ];
 
 // ─── Per-page SEO metadata ────────────────────────────────────────────────────
@@ -73,7 +72,7 @@ export const home = {
   },
 
   trustBar: [
-    "50+ years of industry experience",
+    "Founder: 50+ years in the waste industry",
     "[X] clients",
     "[X] locations under management",
     "$[X]M in savings identified",
@@ -161,7 +160,7 @@ export const faq = [
   },
   {
     q: "What do you need from us?",
-    a: "One invoice to start. If we find savings worth pursuing, we'll ask for a letter of authorisation so we can negotiate on your behalf.",
+    a: "One invoice to start. If we find savings worth pursuing, we'll ask for a letter of authorization so we can negotiate on your behalf.",
   },
   {
     q: "What if you find nothing?",
@@ -398,12 +397,12 @@ export const whoWeWorkWith = {
 export const about = {
   hero: {
     label: "About WMRS",
-    h1: "[Founder Name] started WMRS in [year] after [X] years in the waste industry.",
+    h1: "[Founder Name] started WMRS in 2008 after [X] years in the waste industry.",
     sub: "The work is straightforward: find the overcharges, fix them, and keep them fixed.",
   },
   body: [
     "[Founder Name] spent [X] years on the hauler side — [brief background on role, e.g. in regional operations and contract management for a major carrier]. He saw how billing worked from the inside, which overcharges were intentional and which were just administrative drift, and which rates customers could have negotiated if they'd known to ask.",
-    "He started WMRS in [year] to work on the other side of that relationship. The model is simple: audit the bill, fix what's wrong, and stay on the account to make sure it doesn't drift back. Revenue comes entirely from savings — if we don't find savings, the client pays nothing.",
+    "He started WMRS in 2008 to work on the other side of that relationship. The model is simple: audit the bill, fix what's wrong, and stay on the account to make sure it doesn't drift back. Revenue comes entirely from savings — if we don't find savings, the client pays nothing.",
     "WMRS has worked with [X]+ clients across [X] states, covering [X]+ locations and identifying more than $[X]M in overcharges and savings opportunities.",
     "We are not owned by a hauler, funded by a hauler, or paid by a hauler. Our entire revenue comes from the savings we deliver to you. That alignment is the point.",
   ],
