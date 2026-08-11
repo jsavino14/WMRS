@@ -15,15 +15,20 @@ export default function WhoWeWorkWith() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-20 pb-20 lg:pt-28 lg:pb-24">
+      <section className="bg-white py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label mb-6">{whoWeWorkWith.hero.label}</p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-6 max-w-2xl">
-            {whoWeWorkWith.hero.h1}
-          </h1>
-          <p className="text-lg text-charcoal/60 leading-relaxed max-w-xl">
-            {whoWeWorkWith.hero.sub}
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+                {whoWeWorkWith.hero.h1}
+              </h1>
+              <p className="text-lg text-charcoal/60 leading-relaxed">
+                {whoWeWorkWith.hero.sub}
+              </p>
+            </div>
+            {/* Image slot - replace with <Image> */}
+            <div className="aspect-[4/3] bg-charcoal/6 border border-charcoal/10" />
+          </div>
         </div>
       </section>
 

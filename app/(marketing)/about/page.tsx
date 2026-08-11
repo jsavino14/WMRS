@@ -15,29 +15,21 @@ export default function AboutPage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
-
-        {/* Photo slot - replace div with <Image> when ready */}
-        <div className="absolute top-0 bottom-0 w-[85%] lg:w-[65%] bg-charcoal/5" style={{ right: "-5%" }} />
-
-        {/* Legibility gradient - mobile/tablet only */}
-        <div
-          className="lg:hidden absolute inset-0 z-[5] pointer-events-none"
-          style={{ background: "linear-gradient(to right, white 48%, rgba(255,255,255,0) 80%)" }}
-        />
-
-        {/* Text */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="max-w-[320px] sm:max-w-[420px] lg:max-w-[680px]">
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-              {about.hero.h1}
-            </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
-              {about.hero.sub}
-            </p>
+      <section className="bg-white py-20 lg:py-28">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+                {about.hero.h1}
+              </h1>
+              <p className="text-lg text-charcoal/60 leading-relaxed">
+                {about.hero.sub}
+              </p>
+            </div>
+            {/* Image slot - replace with <Image> */}
+            <div className="aspect-[4/3] bg-charcoal/6 border border-charcoal/10" />
           </div>
         </div>
-
       </section>
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}
