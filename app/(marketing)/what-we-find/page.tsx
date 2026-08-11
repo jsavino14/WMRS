@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { meta, whatWeFind, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -16,8 +17,16 @@ export default function WhatWeFind() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
-        {/* Image slot — replace div with <Image fill> when ready */}
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[40%] bg-charcoal/6 border-l border-charcoal/10" />
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[40%]">
+          <Image
+            src="/what-we-find.png"
+            alt="Commercial dumpster against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="40vw"
+            priority
+          />
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="lg:w-[60%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
@@ -28,7 +37,15 @@ export default function WhatWeFind() {
             </p>
           </div>
         </div>
-        <div className="lg:hidden aspect-[4/3] bg-charcoal/6 border-t border-charcoal/10" />
+        <div className="lg:hidden relative aspect-[4/3]">
+          <Image
+            src="/what-we-find.png"
+            alt="Commercial dumpster against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
       </section>
 
       {/* ── Contract context ─────────────────────────────────────────────── */}
