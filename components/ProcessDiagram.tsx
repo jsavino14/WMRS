@@ -35,7 +35,7 @@ const ANIM_CSS = `
     to   { stroke-dasharray: ${TOT_SHORT} ${TOT_FULL}; }
   }
   .wmrs-anim-bar {
-    animation: wmrs-shrink 650ms ease-out 700ms both;
+    animation: wmrs-shrink 975ms ease-out 700ms both;
   }
 `;
 
