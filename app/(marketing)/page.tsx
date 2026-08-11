@@ -30,7 +30,7 @@ export default function HomePage() {
         </div>
         {/* Text — aligned to same left edge as the nav logo */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="max-w-[520px]">
+          <div className="max-w-[680px]">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-8">
               {home.hero.h1[0]}
               <br />
