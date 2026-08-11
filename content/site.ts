@@ -279,13 +279,14 @@ export const industries = [
 export const howItWorksPage = {
   hero: {
     label: "The Process",
-    h1: ["A free audit.", "A negotiation.", "A fixed bill."],
+    h1: ["One invoice.", "A free audit.", "A negotiation.", "A fixed bill."],
     sub: "No meetings up front, no contracts, no fees until we've saved you money. Here's exactly what happens.",
   },
   steps: [
     {
       number: "01",
       title: "Send us one invoice.",
+      diagramLabel: "Send it",
       body: [
         "One recent waste or recycling bill. That's all we need to start. You don't have to gather your full account history, pull contracts, or set up a call.",
         "We review hundreds of invoices. We know what to look for and where haulers hide margin. Give us the bill and we'll take it from there.",
@@ -294,6 +295,7 @@ export const howItWorksPage = {
     {
       number: "02",
       title: "We audit it.",
+      diagramLabel: "We audit",
       body: [
         "We compare your rates to what haulers in your market are actually accepting for equivalent service - container size, pickup frequency, location type. Not list rates. Actual negotiated rates.",
         "We review every fee on the bill: fuel surcharges, environmental fees, administrative charges, late fees, overage fees. We check whether the contract has an automatic renewal clause, what the escalator language says, and when the next renewal window opens.",
@@ -303,6 +305,7 @@ export const howItWorksPage = {
     {
       number: "03",
       title: "We renegotiate.",
+      diagramLabel: "We renegotiate",
       body: [
         "In almost every case, we work with your existing hauler. Changing haulers is disruptive and rarely necessary. Haulers are motivated to retain accounts - they'll often adjust rates rather than lose the business.",
         "We handle all communication with the hauler. You don't have to be on calls or write letters. We present the audit findings and negotiate from there.",
@@ -312,6 +315,7 @@ export const howItWorksPage = {
     {
       number: "04",
       title: "We take over the billing.",
+      diagramLabel: "We manage it",
       body: [
         "Once the rate is set, every invoice from your hauler comes to us. We review every line every month against the negotiated terms.",
         "Rate increases, new fees, billing for service changes you didn't request - we catch them before you pay them. If there's a legitimate change, we'll flag it. If there isn't, we handle the correction.",
@@ -326,8 +330,8 @@ export const howItWorksPage = {
 export const whatWeFind = {
   hero: {
     label: "What You're Overpaying",
-    h1: "Six things we find on nearly every account.",
-    sub: "These aren't edge cases. They're standard hauler billing practices that go unnoticed because nobody's job is to catch them.",
+    h1: "Haulers bank on you not noticing. Noticing is our whole job.",
+    sub: "Most accounts have some of these. Plenty have all six.",
   },
   contractContext: {
     heading: "How hauler contracts are built.",
@@ -402,8 +406,8 @@ export const whatWeFind = {
 export const whoWeWorkWith = {
   hero: {
     label: "Our Clients",
-    h1: "Multi-location businesses that pay multiple waste bills.",
-    sub: "We work with any organization that has more than one location and hasn't had an independent audit of its waste costs. The more locations, the more we typically find.",
+    h1: "Businesses with waste costs worth looking at.",
+    sub: "We work primarily with multi-location businesses and organizations with significant waste spend. The more locations, vendors, and service complexity involved, the more opportunities we typically find.",
   },
 };
 

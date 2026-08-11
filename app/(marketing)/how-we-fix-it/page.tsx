@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/Container";
+import { ProcessDiagram } from "@/components/ProcessDiagram";
 import { meta, howItWorksPage, home, faq, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -17,38 +17,25 @@ export default function HowItWorksPage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-hidden">
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
-          <Image
-            src="/how-it-works.png"
-            alt="Commercial compactor unit against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="50vw"
-            priority
-          />
-        </div>
-        <Container className="relative py-20 lg:py-28">
-          <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-              {howItWorksPage.hero.h1[0]}<br />
-              {howItWorksPage.hero.h1[1]}<br />
-              {howItWorksPage.hero.h1[2]}
-            </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
-              {howItWorksPage.hero.sub}
-            </p>
+      <section className="bg-white">
+        <Container className="py-20 lg:py-28">
+          <div className="lg:flex lg:items-center lg:gap-14">
+            <div className="lg:w-1/2">
+              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+                {howItWorksPage.hero.h1[0]}<br />
+                {howItWorksPage.hero.h1[1]}<br />
+                {howItWorksPage.hero.h1[2]}<br />
+                {howItWorksPage.hero.h1[3]}
+              </h1>
+              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
+                {howItWorksPage.hero.sub}
+              </p>
+            </div>
+            <div className="mt-14 lg:mt-0 lg:w-1/2">
+              <ProcessDiagram steps={howItWorksPage.steps} />
+            </div>
           </div>
         </Container>
-        <div className="lg:hidden relative aspect-[4/3]">
-          <Image
-            src="/how-it-works.png"
-            alt="Commercial compactor unit against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </div>
       </section>
 
       {/* ── Steps ────────────────────────────────────────────────────────── */}
