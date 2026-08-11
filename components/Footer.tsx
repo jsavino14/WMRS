@@ -12,7 +12,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="text-white">
-              <Logo />
+              <Logo align="start" />
             </div>
             <p className="text-sm leading-relaxed text-white/50">
               {company.legalName}
@@ -62,7 +62,7 @@ export function Footer() {
                 href="/contact"
                 className="inline-block border border-white/20 text-white text-sm font-semibold px-4 py-2 hover:border-white/50 transition-colors"
               >
-                Send us an invoice
+                Send us one invoice
               </Link>
             </div>
           </div>

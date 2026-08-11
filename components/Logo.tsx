@@ -51,14 +51,14 @@ function WmrsMark({ className }: { className?: string }) {
  *
  * No colour props, no fill overrides, no second file.
  */
-export function Logo() {
+export function Logo({ align = "center" }: { align?: "start" | "center" }) {
   return (
     /*
      * Wrapper provides clear space.
      * Mark height at w-[140px]: 140 / 5.71 ≈ 24.5px → clear space = 24.5/3 ≈ 8px (p-2).
      * This keeps nav items and edges at least one-third of the logo height away.
      */
-    <div className="flex flex-col items-center gap-1 p-2 -m-2">
+    <div className={`flex flex-col ${align === "start" ? "items-start" : "items-center"} gap-1 p-2 -m-2`}>
       {/* explicit width, height auto preserves 5.71:1 ratio, prevents layout shift */}
       <WmrsMark className="w-[140px] h-auto" />
       {/* Descriptor hidden below sm so it never truncates on mobile */}
