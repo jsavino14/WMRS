@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "@/components/Container";
 import { customerBaseline, customerAsOf, customerGrowthPerYear } from "@/content/site";
 
@@ -101,26 +101,18 @@ const LOGOS: { name: string; Logo: (p: { height: number }) => React.ReactElement
 export function TrustBar() {
   const count = computeCount(); // floored to nearest 100
   const [displayed, setDisplayed] = useState(count); // SSR renders final value
-  const animatedRef = useRef(false);
 
   useEffect(() => {
-    if (animatedRef.current) return;
-    animatedRef.current = true;
-
-    // prefers-reduced-motion: keep the final value, no animation
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const from = count - 100; // start 100 below the target
+    const from = count - 100;
 
     const id = setTimeout(() => {
       setDisplayed(from);
-
-      let startTime: number | null = null;
+      let t0: number | null = null;
 
       const tick = (now: number) => {
-        if (startTime === null) startTime = now;
-        const p     = Math.min((now - startTime) / 900, 1);
-        const eased = 1 - (1 - p) ** 3; // ease-out cubic
+        if (t0 === null) t0 = now;
+        const p     = Math.min((now - t0) / 900, 1);
+        const eased = 1 - (1 - p) ** 3;
         setDisplayed(Math.round(from + eased * 100));
         if (p < 1) requestAnimationFrame(tick);
       };
