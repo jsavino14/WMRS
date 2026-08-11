@@ -137,10 +137,8 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    const bars = wrapper.querySelectorAll<SVGRectElement>('[data-anim="total-bar"]');
+    const bars = wrapperRef.current?.querySelectorAll<SVGRectElement>('[data-anim="total-bar"]');
+    if (!bars?.length) return;
     if (!bars.length) return;
 
     // Reduced-motion: render final state immediately, no transition
@@ -151,30 +149,16 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
       return;
     }
 
-    // Set initial (wide) state before first paint after hydration
-    bars.forEach((bar) => {
-      bar.style.transform = "scaleX(1)";
-      bar.style.transition = "none";
-    });
+    // Bar renders at TOT_FULL width in the SVG (no CSS transform applied yet).
+    // After 700ms the page has settled and the eye has landed on the diagram.
+    const id = setTimeout(() => {
+      bars.forEach((bar) => {
+        bar.style.transition = "transform 650ms ease-out";
+        bar.style.transform = `scaleX(${ANIM_SCALE})`;
+      });
+    }, 700);
 
-    // Animate once on 50% intersection — never loops, never replays
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          requestAnimationFrame(() => {
-            bars.forEach((bar) => {
-              bar.style.transition = "transform 650ms ease-out";
-              bar.style.transform = `scaleX(${ANIM_SCALE})`;
-            });
-          });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(wrapper);
-    return () => observer.disconnect();
+    return () => clearTimeout(id);
   }, []);
 
   return (
