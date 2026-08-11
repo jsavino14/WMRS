@@ -27,9 +27,26 @@ export default function WhatWeFind() {
         </div>
       </section>
 
-      {/* ── Findings ─────────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-4">
+      {/* ── Contract context ─────────────────────────────────────────────── */}
+      <section className="bg-offwhite py-16 lg:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
+            {whatWeFind.contractContext.heading}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
+            {whatWeFind.contractContext.body.map((para, i) => (
+              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
+                {para}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Findings ─────────────────────────────────────────────────────── */}
+      <section className="bg-white py-4">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="label mb-10 pt-14">The six findings</p>
           {whatWeFind.items.map((item, i) => (
             <div
               key={item.number}
@@ -52,6 +69,7 @@ export default function WhatWeFind() {
               </div>
             </div>
           ))}
+          <div className="pb-14" />
         </div>
       </section>
 

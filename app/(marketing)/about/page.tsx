@@ -27,34 +27,31 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Body ─────────────────────────────────────────────────────────── */}
+      {/* ── Sections ─────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-16 lg:py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-16">
-            {/* Story */}
-            <div className="space-y-6">
-              {about.body.map((para, i) => (
-                <p key={i} className="text-base text-charcoal/70 leading-relaxed">
-                  {para}
-                </p>
-              ))}
-            </div>
-
-            {/* Photo slot + Independence callout */}
-            <div className="space-y-8">
-              {/* Photo placeholder - replace with <Image> when photo is available */}
-              <div className="aspect-[3/4] bg-charcoal/8 border border-charcoal/10 flex items-center justify-center">
-                <p className="text-sm text-charcoal/30 text-center px-6">
-                  Photo
-                  <br />
-                  [Replace with founder photo]
-                </p>
+          <div className="divide-y divide-charcoal/8">
+            {about.sections.map((section, i) => (
+              <div
+                key={i}
+                className="py-12 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-16"
+              >
+                <h2 className="text-xl font-black text-charcoal leading-snug">
+                  {section.heading}
+                </h2>
+                <div className="space-y-4">
+                  {section.body.map((para, j) => (
+                    <p key={j} className="text-base text-charcoal/70 leading-relaxed">
+                      {para}
+                    </p>
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Independence statement */}
-          <div className="mt-16 border-t border-charcoal/10 pt-10">
+          {/* Independence callout */}
+          <div className="mt-12 border-t border-charcoal/10 pt-10">
             <div className="flex gap-6">
               <div className="flex-shrink-0 w-px bg-accent self-stretch" />
               <p className="text-lg font-semibold text-charcoal leading-relaxed">

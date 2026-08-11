@@ -38,9 +38,9 @@ export const meta = {
       "A free invoice audit, a negotiation with your existing hauler, and ongoing billing oversight. Here's exactly what happens when you work with WMRS.",
   },
   whatWeFind: {
-    title: "What We Find | WMRS",
+    title: "What You're Overpaying | WMRS",
     description:
-      "Oversized containers, phantom locations, percentage-based surcharges, and auto-escalating contracts. Six overcharge patterns WMRS finds on nearly every account.",
+      "How hauler contracts are structured, why each overcharge happens, and what an audit checks. Six billing patterns WMRS finds on nearly every multi-location account.",
   },
   whoWeWorkWith: {
     title: "Who We Work With | WMRS",
@@ -50,7 +50,7 @@ export const meta = {
   about: {
     title: "About WMRS",
     description:
-      "WMRS is an independent waste cost consultancy. We are not owned by, affiliated with, or paid by any hauler. Our revenue comes entirely from the savings we deliver.",
+      "WMRS is an independent waste cost consultancy founded in 2008. Not owned by, affiliated with, or paid by any hauler. Revenue comes entirely from savings delivered to clients.",
   },
   contact: {
     title: "Send Us One Invoice | WMRS",
@@ -72,7 +72,7 @@ export const home = {
   },
 
   trustBar: [
-    "Founder: 50+ years in the waste industry",
+    "50+ years of combined industry experience",
     "[X] clients",
     "[X] locations under management",
     "$[X]M in savings identified",
@@ -325,9 +325,18 @@ export const howItWorksPage = {
 
 export const whatWeFind = {
   hero: {
-    label: "The Findings",
+    label: "What You're Overpaying",
     h1: "Six things we find on nearly every account.",
     sub: "These aren't edge cases. They're standard hauler billing practices that go unnoticed because nobody's job is to catch them.",
+  },
+  contractContext: {
+    heading: "How hauler contracts are built.",
+    body: [
+      "Most waste service agreements share the same structure: a base rate for service - covering container size, pickup frequency, and location - plus a stack of line-item surcharges. Fuel, environmental, administrative, and other charges are layered on top, typically as percentages of the base rate or flat fees added per pickup.",
+      "Almost every contract includes an automatic renewal clause. Service continues - and rates hold - unless you cancel within a specific window, often 60 to 90 days before the anniversary date. Haulers rely on that window closing without action. Most clients don't track it.",
+      "Contracts also typically include an annual escalator: a clause allowing rate increases of 3-5% or the CPI rate, whichever is greater. Agreed to once at signing, rarely revisited. Combined with percentage-based surcharges that grow with the base rate and automatic renewal that locks in each year's increase, a rate that was reasonable at signing can be 20-40% above market within a few contract cycles.",
+      "An audit reviews the base rate against what haulers in your market are actually accepting for equivalent service. It checks every surcharge for legitimacy and structure, identifies the renewal window, and looks for service configurations that no longer reflect how you operate.",
+    ],
   },
   items: [
     {
@@ -397,17 +406,32 @@ export const whoWeWorkWith = {
 export const about = {
   hero: {
     label: "About WMRS",
-    h1: "[Founder Name] started WMRS in 2008 after [X] years in the waste industry.",
-    sub: "The work is straightforward: find the overcharges, fix them, and keep them fixed.",
+    h1: "Independent waste cost consultants, in business since 2008.",
+    sub: "We audit waste invoices, renegotiate rates, and stay on accounts to keep costs from drifting back. Our revenue comes entirely from savings we deliver.",
   },
-  body: [
-    "[Founder Name] spent [X] years on the hauler side - [brief background on role, e.g. in regional operations and contract management for a major carrier]. He saw how billing worked from the inside, which overcharges were intentional and which were just administrative drift, and which rates customers could have negotiated if they'd known to ask.",
-    "He started WMRS in 2008 to work on the other side of that relationship. The model is simple: audit the bill, fix what's wrong, and stay on the account to make sure it doesn't drift back. Revenue comes entirely from savings - if we don't find savings, the client pays nothing.",
-    "WMRS has worked with [X]+ clients across [X] states, covering [X]+ locations and identifying more than $[X]M in overcharges and savings opportunities.",
-    "We are not owned by a hauler, funded by a hauler, or paid by a hauler. Our entire revenue comes from the savings we deliver to you. That alignment is the point.",
+  sections: [
+    {
+      heading: "Independent since 2008.",
+      body: [
+        "WMRS was founded by operators who came out of the waste industry and saw the same thing at company after company: businesses paying well above market, not through carelessness, but because waste invoices are genuinely hard to read and nobody's job is to read them.",
+        "Since then we've managed waste programs for [X] businesses across [X] locations. Most of them came from someone who'd worked with us before.",
+      ],
+    },
+    {
+      heading: "We don't work for haulers.",
+      body: [
+        "We're not owned by a hauler, funded by a hauler, or paid by a hauler. Our revenue comes entirely from the savings we deliver to you, which means our incentives point in exactly one direction.",
+      ],
+    },
+    {
+      heading: "You get a person, not a queue.",
+      body: [
+        "Every account has a dedicated manager with a direct line. When a pickup is missed or a charge appears that you don't recognise, you call someone who knows your account - not a 1-800 number.",
+      ],
+    },
   ],
   independence:
-    "We are not owned by a hauler, funded by a hauler, or paid by a hauler. Our entire revenue comes from the savings we deliver to you.",
+    "We're not owned by a hauler, funded by a hauler, or paid by a hauler. Our revenue comes entirely from the savings we deliver to you.",
 };
 
 // ─── Contact page ─────────────────────────────────────────────────────────────
