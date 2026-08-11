@@ -14,28 +14,52 @@ const RULE_Y = 75;
 const TOT_Y  = 82;
 const TOT_H  = 10;
 
-const TOT_FULL  = Math.round(IW * 0.70); // 39 — panels 01, 02
-const TOT_SHORT = Math.round(IW * 0.35); // 20 — panels 03 (final), 04
+const TOT_FULL  = Math.round(IW * 0.70); // 39
+const TOT_SHORT = Math.round(IW * 0.35); // 20
 
 const Y7 = [10, 19, 28, 37, 46, 55, 64];
 const Y5 = [10, 20, 30, 40, 50];
-const W7 = [IW, 44, IW, 38, IW, 36, 48];
+const W7 = [IW, 44, IW, 38, IW, 36, 48]; // widths of 7 bars
 const W5 = [36, IW, 28, 46, 34];
 const ACC_IDX = new Set([1, 3, 5]);
 
-// ── Animation CSS ─────────────────────────────────────────────────────────────
-// stroke-dasharray animation: no CSS transforms, no transform-box, works
-// in every browser. The line runs left→right; animating dasharray from
-// "39 0" to "20 39" shrinks the visible segment from the right edge.
-// animation-fill-mode:both holds the "from" state during the 700ms delay
-// so the bar appears full-width until the animation kicks in.
+// Accent bar widths (indices 1, 3, 5 of W7)
+const ACC_W = { 1: W7[1], 3: W7[3], 5: W7[5] } as Record<number, number>;
+
+// ── Animation sequence ────────────────────────────────────────────────────────
+//
+//  500ms  bar 1 grows (200ms) → done 700ms
+//  700ms  bar 2 grows (200ms) → done 900ms
+//  900ms  bar 3 grows (200ms) → done 1100ms
+//  1200ms panel 03 bar shrinks (975ms)
+//
+// stroke-dasharray animation avoids CSS transform / transform-box issues.
+// animation-fill-mode:both → bars are invisible during their delay (from keyframe
+// = "0 w") then grow in, then stay visible (forwards).
+
 const ANIM_CSS = `
+  @keyframes wmrs-grow-${ACC_W[1]} {
+    from { stroke-dasharray: 0 ${ACC_W[1]}; }
+    to   { stroke-dasharray: ${ACC_W[1]} 0; }
+  }
+  @keyframes wmrs-grow-${ACC_W[3]} {
+    from { stroke-dasharray: 0 ${ACC_W[3]}; }
+    to   { stroke-dasharray: ${ACC_W[3]} 0; }
+  }
+  @keyframes wmrs-grow-${ACC_W[5]} {
+    from { stroke-dasharray: 0 ${ACC_W[5]}; }
+    to   { stroke-dasharray: ${ACC_W[5]} 0; }
+  }
+  .wmrs-acc-1 { animation: wmrs-grow-${ACC_W[1]} 200ms ease-out  500ms both; }
+  .wmrs-acc-3 { animation: wmrs-grow-${ACC_W[3]} 200ms ease-out  700ms both; }
+  .wmrs-acc-5 { animation: wmrs-grow-${ACC_W[5]} 200ms ease-out  900ms both; }
+
   @keyframes wmrs-shrink {
     from { stroke-dasharray: ${TOT_FULL} 0; }
     to   { stroke-dasharray: ${TOT_SHORT} ${TOT_FULL}; }
   }
   .wmrs-anim-bar {
-    animation: wmrs-shrink 975ms ease-out 700ms both;
+    animation: wmrs-shrink 975ms ease-out 1200ms both;
   }
 `;
 
@@ -46,11 +70,8 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
   const yBars   = isWide ? Y7 : Y5;
   const wBars   = isWide ? W7 : W5;
   const offset  = isStack ? 10 : 0;
-
-  // For the animated bar, we draw a thick <line> so stroke-dasharray applies.
-  // For all other panels, a plain <rect>.
   const totalBarW = variant === 3 ? TOT_SHORT : TOT_FULL;
-  const lineY     = TOT_Y + TOT_H / 2; // vertical centre of bar area
+  const lineY     = TOT_Y + TOT_H / 2;
 
   return (
     <svg
@@ -70,13 +91,31 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
 
       {yBars.map((y, i) => {
         const isAcc = variant === 1 && ACC_IDX.has(i);
+
+        if (isAcc) {
+          // Animated highlight: thick line grows left→right via stroke-dasharray
+          return (
+            <line
+              key={i}
+              x1={PAD}
+              y1={y + ACC_H / 2}
+              x2={PAD + wBars[i]}
+              y2={y + ACC_H / 2}
+              stroke={ACCENT}
+              strokeWidth={ACC_H}
+              strokeLinecap="butt"
+              className={`wmrs-acc-${i}`}
+            />
+          );
+        }
+
         return (
           <rect
             key={i}
             x={PAD} y={y}
             width={wBars[i]}
-            height={isAcc ? ACC_H : BAR_H}
-            fill={isAcc ? ACCENT : GREY}
+            height={BAR_H}
+            fill={GREY}
           />
         );
       })}
@@ -87,7 +126,6 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
       />
 
       {variant === 2 ? (
-        // Animated total bar — thick line with dasharray animation
         <line
           x1={PAD}
           y1={lineY}
