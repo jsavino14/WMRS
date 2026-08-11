@@ -92,31 +92,30 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
       {yBars.map((y, i) => {
         const isAcc = variant === 1 && ACC_IDX.has(i);
 
-        if (isAcc) {
-          // Animated highlight: thick line grows left→right via stroke-dasharray
-          return (
-            <line
-              key={i}
-              x1={PAD}
-              y1={y + ACC_H / 2}
-              x2={PAD + wBars[i]}
-              y2={y + ACC_H / 2}
-              stroke={ACCENT}
-              strokeWidth={ACC_H}
-              strokeLinecap="butt"
-              className={`wmrs-acc-${i}`}
-            />
-          );
-        }
-
         return (
-          <rect
-            key={i}
-            x={PAD} y={y}
-            width={wBars[i]}
-            height={BAR_H}
-            fill={GREY}
-          />
+          <g key={i}>
+            {/* Grey bar always present — visible beneath the highlight */}
+            <rect
+              x={PAD} y={y}
+              width={wBars[i]}
+              height={BAR_H}
+              fill={GREY}
+            />
+            {/* Green highlight animates over the grey bar */}
+            {isAcc && (
+              <line
+                x1={PAD}
+                y1={y + BAR_H / 2}
+                x2={PAD + wBars[i]}
+                y2={y + BAR_H / 2}
+                stroke={ACCENT}
+                strokeWidth={BAR_H}
+                strokeLinecap="butt"
+                opacity={0.85}
+                className={`wmrs-acc-${i}`}
+              />
+            )}
+          </g>
         );
       })}
 
