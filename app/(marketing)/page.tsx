@@ -14,9 +14,27 @@ export const metadata: Metadata = {
   },
 };
 
+// Opacity token — adjust here to test: 0.03 | 0.035 | 0.04 | 0.05
+const MARK_OPACITY = 0.035;
+
 export default function HomePage() {
   return (
     <>
+      {/* ── Fixed background watermark (desktop ≥768px only) ──────────────── */}
+      <div
+        aria-hidden="true"
+        className="hidden md:block fixed top-1/2 -translate-y-1/2 pointer-events-none select-none"
+        style={{
+          right: "-120px",
+          width: "clamp(520px, 42vw, 700px)",
+          opacity: MARK_OPACITY,
+          zIndex: 0,
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/wmrs-mark.svg" alt="" style={{ width: "100%", height: "auto", display: "block" }} />
+      </div>
+
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
@@ -126,7 +144,7 @@ export default function HomePage() {
       </section>
 
       {/* ── What It Costs ────────────────────────────────────────────────── */}
-      <section className="bg-charcoal py-20 lg:py-28">
+      <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">

@@ -123,7 +123,7 @@ export function TrustBar() {
   }, []);
 
   return (
-    <section className="bg-charcoal py-10">
+    <section className="bg-charcoal py-10 relative z-[1]">
       <Container>
         {/* Desktop (≥900px): counter + logos centered as a group */}
         <div className="hidden [@media(min-width:900px)]:flex items-center gap-10">
