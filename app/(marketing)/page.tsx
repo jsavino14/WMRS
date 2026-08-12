@@ -280,26 +280,50 @@ export default function HomePage() {
       {/* ── Closing CTA ──────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8 relative z-[1]">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-md">
-            {home.closingCta.h2}
-          </h2>
-          <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
-            {home.closingCta.body}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href={home.closingCta.ctaHref}
-              className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-            >
-              {home.closingCta.cta}
-            </Link>
-            <a
-              href={company.phoneHref}
-              className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-            >
-              Call {company.phone}
-            </a>
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12">
+
+            {/* Left: text + buttons */}
+            <div className="lg:w-[44%] lg:flex-shrink-0">
+              <div className="w-8 h-px bg-accent mb-8" />
+              <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-md">
+                {home.closingCta.h2}
+              </h2>
+              <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
+                {home.closingCta.body}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href={home.closingCta.ctaHref}
+                  className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
+                >
+                  {home.closingCta.cta}
+                </Link>
+                <a
+                  href={company.phoneHref}
+                  className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
+                >
+                  Call {company.phone}
+                </a>
+              </div>
+            </div>
+
+            {/* Right: 50/50 graphic (charcoal tones on white) */}
+            <div className="flex-1 flex items-start justify-end">
+
+              <div className="flex flex-col items-center">
+                <span className="text-[130px] lg:text-[150px] xl:text-[170px] font-thin text-charcoal/[0.08] leading-none tabular-nums select-none">50</span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal/30 mt-3 text-center">You keep 50%</p>
+              </div>
+
+              <span className="text-[90px] lg:text-[105px] xl:text-[120px] font-thin text-charcoal/[0.08] leading-none px-3 lg:px-5 select-none flex-shrink-0">/</span>
+
+              <div className="flex flex-col items-center">
+                <span className="text-[130px] lg:text-[150px] xl:text-[170px] font-thin text-charcoal/[0.08] leading-none tabular-nums select-none">50</span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal/30 mt-3 text-center">WMRS keeps 50%</p>
+              </div>
+
+            </div>
+
           </div>
         </Container>
       </section>
