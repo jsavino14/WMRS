@@ -41,13 +41,13 @@ export default function HomePage() {
         {/* Text */}
         <div className="relative z-10 w-full pt-10 pb-14 lg:py-20">
           <Container>
-            <div className="max-w-[300px] lg:max-w-[680px]">
+            <div className="max-w-[360px] lg:max-w-[680px]">
               <h1 className="text-[2rem] sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
                 {home.hero.h1[0]}
                 <br />
                 {home.hero.h1[1]}
               </h1>
-              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8 max-w-[220px] sm:max-w-none">
+              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8 max-w-[260px] sm:max-w-none">
                 {home.hero.sub}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
