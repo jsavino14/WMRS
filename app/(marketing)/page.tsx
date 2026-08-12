@@ -36,7 +36,7 @@ export default function HomePage() {
       </div>
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
+      <section className="relative z-[1] bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
         {/* Photo - full bleed behind everything, anchored right */}
         <div className="absolute top-0 bottom-0 w-[95%] sm:w-[85%] lg:w-[65%] right-[-6%] sm:right-0 lg:right-[-5%]">
@@ -92,7 +92,7 @@ export default function HomePage() {
       <TrustBar />
 
       {/* ── The Problem ──────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28">
+      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
@@ -157,7 +157,7 @@ export default function HomePage() {
       </section>
 
       {/* ── What We Find ─────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28">
+      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
@@ -186,7 +186,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Proof / Case Studies ─────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28">
+      <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
@@ -231,7 +231,7 @@ export default function HomePage() {
 
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28">
+      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
@@ -249,7 +249,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Closing CTA ──────────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
+      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-md">
