@@ -21,7 +21,7 @@ export default function HomePage() {
       <section className="relative bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
         {/* Photo - full bleed behind everything, anchored right */}
-        <div className="absolute top-0 bottom-0 w-[85%] lg:w-[65%]" style={{ right: "-5%" }}>
+        <div className="absolute top-0 bottom-0 w-[95%] sm:w-[85%] lg:w-[65%] right-0 lg:right-[-5%]">
           <Image
             src="/hero.png"
             alt="Industrial roll-off container"
@@ -39,15 +39,15 @@ export default function HomePage() {
         />
 
         {/* Text */}
-        <div className="relative z-10 w-full py-16 lg:py-20">
+        <div className="relative z-10 w-full pt-10 pb-14 lg:py-20">
           <Container>
             <div className="max-w-[320px] sm:max-w-[420px] lg:max-w-[680px]">
-              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+              <h1 className="text-3xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
                 {home.hero.h1[0]}
                 <br />
                 {home.hero.h1[1]}
               </h1>
-              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8">
+              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8 max-w-[260px] sm:max-w-none">
                 {home.hero.sub}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
