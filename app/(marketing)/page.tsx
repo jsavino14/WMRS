@@ -146,13 +146,34 @@ export default function HomePage() {
       {/* ── What It Costs ────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
-            {home.cost.h2}
-          </h2>
-          <p className="text-lg text-white/65 leading-relaxed max-w-2xl">
-            {home.cost.body}
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            {/* Left: text */}
+            <div>
+              <div className="w-8 h-px bg-accent mb-8" />
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 leading-tight">
+                {home.cost.h2}
+              </h2>
+              <p className="text-base text-white/55 leading-relaxed">
+                {home.cost.body}
+              </p>
+            </div>
+
+            {/* Right: 50/50 graphic */}
+            <div>
+              <div className="flex items-baseline">
+                <span className="text-[130px] lg:text-[150px] xl:text-[170px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+                <span className="text-[90px] lg:text-[105px] xl:text-[120px] font-thin text-white/[0.18] leading-none px-3 lg:px-5 select-none">/</span>
+                <span className="text-[130px] lg:text-[150px] xl:text-[170px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+              </div>
+              <div className="flex items-center mt-3">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 flex-1">You keep 50%</p>
+                <div className="w-px h-3 bg-white/20 mx-4 flex-shrink-0" />
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 flex-1">WMRS keeps 50%</p>
+              </div>
+            </div>
+
+          </div>
         </Container>
       </section>
 
