@@ -160,17 +160,25 @@ export default function HomePage() {
             </div>
 
             {/* Right: 50/50 graphic */}
-            <div>
-              <div className="flex items-baseline">
+            <div className="flex items-start gap-0">
+
+              {/* Left 50 + label */}
+              <div className="flex flex-col items-center">
                 <span className="text-[130px] lg:text-[150px] xl:text-[170px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-                <span className="text-[90px] lg:text-[105px] xl:text-[120px] font-thin text-white/[0.18] leading-none px-3 lg:px-5 select-none">/</span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-3 text-center">You keep 50%</p>
+              </div>
+
+              {/* Slash */}
+              <span className="text-[90px] lg:text-[105px] xl:text-[120px] font-thin text-white/[0.18] leading-none px-3 lg:px-5 select-none flex-shrink-0">
+                /
+              </span>
+
+              {/* Right 50 + label */}
+              <div className="flex flex-col items-center">
                 <span className="text-[130px] lg:text-[150px] xl:text-[170px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-3 text-center">WMRS keeps 50%</p>
               </div>
-              <div className="flex items-center mt-3">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 flex-1">You keep 50%</p>
-                <div className="w-px h-3 bg-white/20 mx-4 flex-shrink-0" />
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 flex-1">WMRS keeps 50%</p>
-              </div>
+
             </div>
 
           </div>
