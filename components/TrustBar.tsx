@@ -125,10 +125,9 @@ export function TrustBar() {
   return (
     <section className="bg-charcoal py-10">
       <Container>
-        {/* Desktop (≥900px): counter left, logos spread right */}
-        <div className="hidden [@media(min-width:900px)]:flex items-center gap-10">
+        {/* Desktop (≥900px): counter + logos centered as a group */}
+        <div className="hidden [@media(min-width:900px)]:flex items-center justify-center gap-10">
 
-          {/* Counter */}
           <p
             className="text-sm font-medium text-white/55 whitespace-nowrap flex-shrink-0"
             aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
@@ -140,9 +139,7 @@ export function TrustBar() {
             + clients
           </p>
 
-          {/* Logos: fill remaining space, distributed evenly, capped so they
-              don't stretch too wide when only 3 of 5 slots are filled */}
-          <div className="flex flex-1 items-center justify-evenly max-w-2xl">
+          <div className="flex items-center gap-x-12">
             {LOGOS.map(({ name, Logo, height }) => (
               <span
                 key={name}
@@ -156,8 +153,8 @@ export function TrustBar() {
 
         </div>
 
-        {/* Mobile / tablet (<900px): counter on top, logos below */}
-        <div className="[@media(min-width:900px)]:hidden flex flex-col gap-6">
+        {/* Mobile / tablet (<900px): counter + logos centered, stacked */}
+        <div className="[@media(min-width:900px)]:hidden flex flex-col items-center gap-6 text-center">
           <p
             className="text-sm font-medium text-white/55"
             aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
@@ -168,7 +165,7 @@ export function TrustBar() {
             </span>
             + clients
           </p>
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
             {LOGOS.map(({ name, Logo, height }) => (
               <span
                 key={name}
