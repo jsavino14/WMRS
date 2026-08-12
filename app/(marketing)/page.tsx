@@ -146,10 +146,10 @@ export default function HomePage() {
       {/* ── What It Costs ────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12">
 
             {/* Left: text */}
-            <div>
+            <div className="lg:w-[44%] lg:flex-shrink-0">
               <div className="w-8 h-px bg-accent mb-8" />
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 leading-tight">
                 {home.cost.h2}
@@ -160,7 +160,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: 50/50 graphic */}
-            <div className="flex items-start gap-0 lg:justify-end">
+            <div className="flex-1 flex items-start justify-end">
 
               {/* Left 50 + label */}
               <div className="flex flex-col items-center">
