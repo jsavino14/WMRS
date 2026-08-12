@@ -17,6 +17,25 @@ export const metadata: Metadata = {
 // Opacity token — adjust here to test: 0.03 | 0.035 | 0.04 | 0.05
 const MARK_OPACITY = 0.035;
 
+const OVERCHARGE_CARDS = [
+  { icon: "/icons/wrong-container-size.svg",   iconH: 56, title: "Wrong container size",    body: "Containers sized for a business you no longer are." },
+  { icon: "/icons/too-many-pickups.svg",        iconH: 52, title: "Too many pickups",         body: "Pickups scheduled more often than you generate waste." },
+  { icon: "/icons/hidden-surcharges.svg",       iconH: 72, title: "Hidden surcharges",        body: "Fuel and environmental surcharges billed as a percentage of the total." },
+  { icon: "/icons/closed-location.svg",         iconH: 56, title: "Closed locations billed",  body: "Billing for closed locations and containers already hauled away." },
+  { icon: "/icons/auto-renewing-contracts.svg", iconH: 52, title: "Auto-renewing contracts",  body: "Auto-renewing contracts with annual escalators nobody agreed to." },
+  { icon: "/icons/recyclables-as-trash.svg",    iconH: 44, title: "Recyclables as trash",     body: "Recyclables going out as trash, at trash prices." },
+];
+
+// Interior grid borders per item (3-col desktop / 2-col tablet / 1-col mobile)
+const ITEM_BORDERS = [
+  "border-b border-charcoal/8 sm:border-r",
+  "border-b border-charcoal/8 lg:border-r",
+  "border-b border-charcoal/8 sm:border-r lg:border-r-0",
+  "border-b border-charcoal/8 lg:border-r lg:border-b-0",
+  "border-b border-charcoal/8 sm:border-b-0 sm:border-r",
+  "",
+];
+
 export default function HomePage() {
   return (
     <>
@@ -26,7 +45,7 @@ export default function HomePage() {
         className="hidden md:block fixed top-1/2 -translate-y-1/2 pointer-events-none select-none"
         style={{
           right: "-120px",
-          width: "clamp(520px, 42vw, 700px)",
+          width: "clamp(416px, 34vw, 560px)",
           opacity: MARK_OPACITY,
           zIndex: 0,
         }}
@@ -192,14 +211,20 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.whatWeFind.h2}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 divide-y divide-charcoal/8 sm:divide-y-0 max-w-3xl">
-            {home.whatWeFind.items.map((item, i) => (
-              <div
-                key={i}
-                className="flex gap-4 py-5 sm:py-0 sm:pb-8 sm:border-b sm:border-charcoal/8 sm:odd:border-r sm:odd:pr-8 sm:even:pl-8"
-              >
-                <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-accent" />
-                <p className="text-base text-charcoal/75 leading-snug">{item}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {OVERCHARGE_CARDS.map((card, i) => (
+              <div key={i} className={`p-8 ${ITEM_BORDERS[i]}`}>
+                <div className="h-20 flex items-start mb-6">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={card.icon}
+                    alt=""
+                    aria-hidden="true"
+                    style={{ height: card.iconH, width: "auto", display: "block" }}
+                  />
+                </div>
+                <h3 className="text-base font-bold text-charcoal mb-2">{card.title}</h3>
+                <p className="text-sm text-charcoal/60 leading-relaxed">{card.body}</p>
               </div>
             ))}
           </div>
