@@ -160,7 +160,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: 50/50 graphic */}
-            <div className="flex items-start gap-0">
+            <div className="flex items-start gap-0 lg:justify-end">
 
               {/* Left 50 + label */}
               <div className="flex flex-col items-center">
