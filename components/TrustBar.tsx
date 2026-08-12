@@ -126,7 +126,7 @@ export function TrustBar() {
     <section className="bg-charcoal py-10">
       <Container>
         {/* Desktop (≥900px): counter + logos centered as a group */}
-        <div className="hidden [@media(min-width:900px)]:flex items-center justify-center gap-10">
+        <div className="hidden [@media(min-width:900px)]:flex items-center gap-10">
 
           <p
             className="text-sm font-medium text-white/55 whitespace-nowrap flex-shrink-0"
@@ -139,7 +139,7 @@ export function TrustBar() {
             + clients
           </p>
 
-          <div className="flex items-center gap-x-12">
+          <div className="flex-1 flex items-center justify-evenly">
             {LOGOS.map(({ name, Logo, height }) => (
               <span
                 key={name}
