@@ -47,7 +47,7 @@ export default function HomePage() {
                 <br />
                 {home.hero.h1[1]}
               </h1>
-              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8 max-w-[260px] sm:max-w-none">
+              <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-8 max-w-[230px] sm:max-w-none">
                 {home.hero.sub}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
