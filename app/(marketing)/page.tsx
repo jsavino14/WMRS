@@ -198,24 +198,34 @@ export default function HomePage() {
       {/* ── Cost / 50-50 ─────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 leading-tight max-w-xl">
-            {home.cost.h2}
-          </h2>
-          <p className="text-base text-white/55 leading-relaxed max-w-2xl mb-14">
-            {home.cost.body}
-          </p>
-          {/* 50/50 numerals */}
-          <div className="flex items-start">
-            <div className="flex flex-col items-center">
-              <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">You keep 50%</p>
+          <div className="lg:flex lg:items-center lg:gap-16">
+
+            {/* Left: text */}
+            <div className="lg:w-1/2">
+              <div className="w-8 h-px bg-accent mb-8" />
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 leading-tight max-w-xl">
+                {home.cost.h2}
+              </h2>
+              <p className="text-base text-white/55 leading-relaxed">
+                {home.cost.body}
+              </p>
             </div>
-            <span className="text-[70px] lg:text-[85px] font-thin text-white/[0.18] leading-none px-3 select-none flex-shrink-0">/</span>
-            <div className="flex flex-col items-center">
-              <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">WMRS keeps 50%</p>
+
+            {/* Right: 50/50 numerals */}
+            <div className="mt-14 lg:mt-0 lg:w-1/2 flex justify-center lg:justify-end items-start">
+              <div className="flex items-start">
+                <div className="flex flex-col items-center">
+                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">You keep 50%</p>
+                </div>
+                <span className="text-[70px] lg:text-[85px] font-thin text-white/[0.18] leading-none px-3 select-none flex-shrink-0">/</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">WMRS keeps 50%</p>
+                </div>
+              </div>
             </div>
+
           </div>
         </Container>
       </section>
