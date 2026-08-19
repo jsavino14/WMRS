@@ -111,7 +111,7 @@ export default function HomePage() {
       <TrustBar />
 
       {/* ── The Problem ──────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
+      <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
@@ -128,7 +128,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Person Section ───────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 relative z-[1]">
+      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
 
@@ -147,12 +147,12 @@ export default function HomePage() {
             <div className="flex-1 flex flex-col items-start lg:items-center">
               <a
                 href={company.phoneHref}
-                className="text-[48px] sm:text-[52px] lg:text-[60px] xl:text-[72px] font-thin text-charcoal/[0.18] leading-none tabular-nums hover:text-charcoal/30 transition-colors"
+                className="text-[48px] sm:text-[52px] lg:text-[60px] xl:text-[72px] font-thin text-charcoal/[0.40] leading-none tabular-nums hover:text-charcoal/60 transition-colors"
               >
                 {company.phone}
               </a>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal/35 mt-3">
-                One number. No menu. A person.
+                They&apos;ll already know your account.
               </p>
             </div>
 

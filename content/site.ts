@@ -165,8 +165,8 @@ export const home = {
   },
 
   personSection: {
-    h2: "You get a person, not a phone tree.",
-    body: "Every account has a dedicated manager with a direct line. When a pickup is missed, a container doesn't arrive, or a charge appears that you don't recognize, you call someone who knows your account. Not an 800 number and six menu options.",
+    h2: "The same person. Every time.",
+    body: "Every account has a dedicated manager who knows your sites, your haulers, and your contracts. When a pickup is missed or a charge shows up that you don't recognize, you're talking to someone who already knows the account. Not starting over with whoever answers.",
   },
 
   closingCta: {
