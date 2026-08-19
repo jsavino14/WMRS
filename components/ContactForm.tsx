@@ -166,6 +166,29 @@ export function ContactForm() {
         </select>
       </div>
 
+      {/* What are you looking for? */}
+      <fieldset>
+        <legend className="block text-sm font-medium text-charcoal mb-3">
+          {form.fields.lookingFor.label} <span className="text-charcoal/40">*</span>
+        </legend>
+        <div className="flex flex-col sm:flex-row gap-3">
+          {form.fields.lookingFor.options.map((opt) => (
+            <label key={opt} className="flex items-center gap-2.5 cursor-pointer group">
+              <input
+                type="radio"
+                name="lookingFor"
+                value={opt}
+                required
+                className="w-4 h-4 accent-charcoal cursor-pointer"
+              />
+              <span className="text-sm text-charcoal/70 group-hover:text-charcoal transition-colors">
+                {opt}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       {/* File upload */}
       <div>
         <label htmlFor="file" className="block text-sm font-medium text-charcoal mb-1.5">

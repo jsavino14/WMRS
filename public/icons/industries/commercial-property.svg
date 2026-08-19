@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs><style>
+    .cp0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .cp1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Key ring -->
+  <circle class="cp0" cx="16" cy="18" r="10"/>
+  <!-- Key shaft -->
+  <line class="cp0" x1="24" y1="21" x2="44" y2="38"/>
+  <!-- Key teeth -->
+  <polyline class="cp0" points="34,29 37,32 34,35"/>
+  <polyline class="cp0" points="38,33 41,36 38,39"/>
+  <!-- Accent: keyhole -->
+  <circle class="cp1" cx="16" cy="18" r="3.5"/>
+  <line class="cp1" x1="16" y1="21.5" x2="16" y2="26"/>
+</svg>

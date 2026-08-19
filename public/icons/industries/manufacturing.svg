@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs><style>
+    .mf0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .mf1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- 8-tooth gear polygon -->
+  <polygon class="mf0" points="24,6 29,12 36.7,11.3 36,19 42,24 36,29 36.7,36.7 29,36 24,42 19,36 11.3,36.7 12,29 6,24 12,19 11.3,11.3 19,12"/>
+  <!-- Hub circle (accent) -->
+  <circle class="mf1" cx="24" cy="24" r="6"/>
+</svg>

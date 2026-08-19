@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 56">
+  <defs><style>
+    .rg0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .rg1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Fork (charcoal) -->
+  <line class="rg0" x1="10" y1="5" x2="10" y2="22"/>
+  <line class="rg0" x1="15" y1="5" x2="15" y2="22"/>
+  <line class="rg0" x1="20" y1="5" x2="20" y2="22"/>
+  <path class="rg0" d="M10,22 Q15,28 20,22"/>
+  <line class="rg0" x1="15" y1="28" x2="15" y2="51"/>
+  <!-- Knife (accent green) -->
+  <line class="rg1" x1="30" y1="5" x2="30" y2="51"/>
+  <path class="rg1" d="M30,5 C35,8 36,18 30,24"/>
+</svg>

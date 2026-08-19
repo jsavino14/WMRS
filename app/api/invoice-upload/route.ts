@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
   const email = (formData.get("email") as string | null)?.trim() ?? "";
   const phone = (formData.get("phone") as string | null)?.trim() ?? "";
   const locations = (formData.get("locations") as string | null) ?? "";
+  const lookingFor = (formData.get("lookingFor") as string | null) ?? "";
   const file = formData.get("file") as File | null;
 
   if (!name || !companyName || !email) {
@@ -151,6 +152,7 @@ export async function POST(request: NextRequest) {
           <div style="font-family:sans-serif;max-width:600px;color:#1E2428">
             <h2 style="margin-bottom:24px">New Invoice Submission</h2>
             <table style="width:100%;border-collapse:collapse">
+              <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600;width:140px">Looking for</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(lookingFor) || "—"}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600;width:140px">Name</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(name)}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Company</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(companyName)}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Email</td><td style="padding:8px 0;border-bottom:1px solid #eee"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>

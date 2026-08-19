@@ -18,9 +18,9 @@ export const company = {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export const navLinks = [
-  { label: "What You're Overpaying", href: "/overpaying" },
-  { label: "How We Fix It", href: "/how-we-fix-it" },
-  { label: "Who We Do It For", href: "/who-we-do-it-for" },
+  { label: "The Audit", href: "/overpaying" },
+  { label: "How It Works", href: "/how-we-fix-it" },
+  { label: "Industries", href: "/who-we-do-it-for" },
   { label: "Who We Are", href: "/who-we-are" },
 ];
 
@@ -33,29 +33,34 @@ export const meta = {
       "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost - you keep 50% of what we save.",
   },
   howItWorks: {
-    title: "How It Works | WMRS",
+    title: "How It Works",
     description:
       "A free invoice audit, a negotiation with your existing hauler, and ongoing billing oversight. Here's exactly what happens when you work with WMRS.",
   },
   whatWeFind: {
-    title: "What You're Overpaying | WMRS",
+    title: "The Audit",
     description:
       "How hauler contracts are structured, why each overcharge happens, and what an audit checks. Six billing patterns WMRS finds on nearly every multi-location account.",
   },
   whoWeWorkWith: {
-    title: "Who We Work With | WMRS",
+    title: "Industries",
     description:
       "WMRS works with multi-location businesses - restaurants, retail chains, property managers, hotels, and more. If you pay multiple waste bills, we can help.",
   },
   about: {
-    title: "About WMRS",
+    title: "Who We Are",
     description:
       "WMRS is an independent waste cost consultancy founded in 2008. Not owned by, affiliated with, or paid by any hauler. Revenue comes entirely from savings delivered to clients.",
   },
   contact: {
-    title: "Send Us One Invoice | WMRS",
+    title: "Send Us One Invoice",
     description:
       "Start with one invoice. No commitment, no contract, no meeting. WMRS will audit it and tell you what we find.",
+  },
+  faq: {
+    title: "FAQ",
+    description:
+      "Common questions about how WMRS works, what the audit covers, cost, contracts, and what happens after we renegotiate.",
   },
 };
 
@@ -99,7 +104,7 @@ export const home = {
   steps: [
     {
       number: "01",
-      title: "Send us an invoice.",
+      title: "Send us one invoice.",
       body: "One recent bill. No meeting, no contract, no commitment. We'll take it from here.",
     },
     {
@@ -143,6 +148,11 @@ export const home = {
     h2: "What clients have found.",
   },
 
+  personSection: {
+    h2: "You get a person, not a phone tree.",
+    body: "Every account has a dedicated manager with a direct line. When a pickup is missed, a container doesn't arrive, or a charge appears that you don't recognize, you call someone who knows your account — not an 800 number and six menu options.",
+  },
+
   closingCta: {
     h2: "Send us one invoice.",
     body: "Start with one recent bill. We'll audit it and tell you exactly what we find.",
@@ -165,6 +175,10 @@ export const faq = [
   {
     q: "We already negotiated our rate.",
     a: "Then the audit costs nothing and confirms it. If you negotiated well, we'll tell you that and walk away.",
+  },
+  {
+    q: "We handle our own vendor negotiations.",
+    a: "Plenty of our clients did, and did it well. The rate is the easy part — it's the twelve months afterward that erode it. Fuel surcharges creep, escalators trigger, a location closes and stays on the bill. We watch that so nobody on your team has to.",
   },
   {
     q: "What do you need from us?",
@@ -465,6 +479,14 @@ export const contact = {
       locations: {
         label: "Number of locations",
         options: ["1", "2–10", "11–50", "50+"],
+      },
+      lookingFor: {
+        label: "What are you looking for?",
+        options: [
+          "Reducing our waste costs",
+          "Ongoing site management",
+          "Not sure yet",
+        ],
       },
       file: {
         label: "Invoice",

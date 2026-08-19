@@ -120,6 +120,14 @@ export default function HowItWorksPage() {
               </div>
             ))}
           </div>
+          <div className="mt-10">
+            <Link
+              href="/faq"
+              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
+            >
+              See all questions →
+            </Link>
+          </div>
         </Container>
       </section>
 

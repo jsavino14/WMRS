@@ -63,7 +63,7 @@ export default function HomePage() {
             src="/hero.png"
             alt="Industrial roll-off container"
             fill
-            className="object-cover object-left"
+            className="object-cover object-left-top"
             priority
             sizes="65vw"
           />
@@ -158,6 +158,21 @@ export default function HomePage() {
             >
               Full process detail →
             </Link>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Person Section ───────────────────────────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
+        <Container>
+          <div className="max-w-2xl">
+            <div className="w-8 h-px bg-accent mb-8" />
+            <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-6">
+              {home.personSection.h2}
+            </h2>
+            <p className="text-lg text-charcoal/60 leading-relaxed">
+              {home.personSection.body}
+            </p>
           </div>
         </Container>
       </section>
@@ -298,6 +313,14 @@ export default function HomePage() {
                 <p className="text-base text-charcoal/60 leading-relaxed">{item.a}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/faq"
+              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
+            >
+              See all questions →
+            </Link>
           </div>
         </Container>
       </section>

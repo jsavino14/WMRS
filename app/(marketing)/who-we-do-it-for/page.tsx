@@ -4,6 +4,19 @@ import Image from "next/image";
 import { Container } from "@/components/Container";
 import { meta, whoWeWorkWith, industries, caseStudies, company } from "@/content/site";
 
+const INDUSTRY_ICONS: Record<string, string> = {
+  "Restaurant Groups":              "/icons/industries/restaurant-groups.svg",
+  "Hotel & Hospitality":            "/icons/industries/hotel-hospitality.svg",
+  "Retail Chains":                  "/icons/industries/retail-chains.svg",
+  "Commercial Property Management": "/icons/industries/commercial-property.svg",
+  "Healthcare Facilities":          "/icons/industries/healthcare.svg",
+  "Grocery & Food Service":         "/icons/industries/grocery-food.svg",
+  "Office Buildings":               "/icons/industries/office-buildings.svg",
+  "Manufacturing":                  "/icons/industries/manufacturing.svg",
+  "Entertainment Venues":           "/icons/industries/entertainment.svg",
+  "Educational Institutions":       "/icons/industries/education.svg",
+};
+
 export const metadata: Metadata = {
   title: meta.whoWeWorkWith.title,
   description: meta.whoWeWorkWith.description,
@@ -59,6 +72,17 @@ export default function WhoWeWorkWith() {
                 key={i}
                 className={`py-7 ${i % 2 === 0 ? "sm:border-r sm:border-charcoal/8 sm:pr-10" : "sm:pl-10"}`}
               >
+                {INDUSTRY_ICONS[industry.name] && (
+                  <div className="h-12 flex items-end mb-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={INDUSTRY_ICONS[industry.name]}
+                      alt=""
+                      aria-hidden="true"
+                      style={{ height: 40, width: "auto", display: "block" }}
+                    />
+                  </div>
+                )}
                 <h3 className="text-base font-bold text-charcoal mb-2">
                   {industry.name}
                 </h3>

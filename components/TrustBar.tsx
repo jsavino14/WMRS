@@ -130,13 +130,12 @@ export function TrustBar() {
 
           <p
             className="text-sm font-medium text-white/55 whitespace-nowrap flex-shrink-0"
-            aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
+            aria-label={`${count.toLocaleString()}+ sites managed`}
           >
-            Trusted by{" "}
             <span className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
-            + clients
+            + sites managed
           </p>
 
           <div className="flex-1 flex items-center justify-evenly">
@@ -157,13 +156,12 @@ export function TrustBar() {
         <div className="[@media(min-width:900px)]:hidden flex flex-col items-center gap-6 text-center">
           <p
             className="text-sm font-medium text-white/55"
-            aria-label={`Trusted by ${count.toLocaleString()}+ clients`}
+            aria-label={`${count.toLocaleString()}+ sites managed`}
           >
-            Trusted by{" "}
             <span className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
-            + clients
+            + sites managed
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
             {LOGOS.map(({ name, Logo, height }) => (

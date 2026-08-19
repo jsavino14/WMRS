@@ -38,6 +38,12 @@ export function Footer() {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href="/faq"
+                className="text-sm text-white/60 hover:text-white transition-colors"
+              >
+                FAQ
+              </Link>
             </nav>
           </div>
 

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 48">
+  <defs><style>
+    .ed0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ed1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Mortarboard flat top (diamond viewed from slight angle) -->
+  <polygon class="ed0" points="28,6 52,18 28,24 4,18"/>
+  <!-- Cap sides -->
+  <polyline class="ed0" points="28,24 28,38"/>
+  <!-- Left side drop -->
+  <polyline class="ed0" points="14,22 14,34 20,38 28,38"/>
+  <!-- Right side -->
+  <polyline class="ed0" points="42,22 42,34 36,38 28,38"/>
+  <!-- Tassel (accent green) — hanging from top right -->
+  <line class="ed1" x1="52" y1="18" x2="52" y2="34"/>
+  <circle class="ed1" cx="52" cy="37" r="3"/>
+</svg>

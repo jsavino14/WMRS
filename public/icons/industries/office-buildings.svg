@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 56">
+  <defs><style>
+    .ob0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ob1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Building outline -->
+  <rect class="ob0" x="4" y="4" width="32" height="48"/>
+  <!-- Window grid: 3 rows x 2 cols -->
+  <rect class="ob0" x="10" y="10" width="7" height="7"/>
+  <rect class="ob0" x="23" y="10" width="7" height="7"/>
+  <rect class="ob0" x="10" y="22" width="7" height="7"/>
+  <rect class="ob0" x="23" y="22" width="7" height="7"/>
+  <rect class="ob0" x="10" y="34" width="7" height="7"/>
+  <!-- Accent: one lit window -->
+  <rect class="ob1" x="23" y="34" width="7" height="7"/>
+  <!-- Door -->
+  <rect class="ob0" x="15" y="44" width="10" height="8"/>
+</svg>
