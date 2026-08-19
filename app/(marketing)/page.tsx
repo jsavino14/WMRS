@@ -231,16 +231,10 @@ export default function HomePage() {
       </section>
 
       {/* ── Site Management ───────────────────────────────────────────────── */}
-      {/*
-        Intentional layout reversal: image left / copy right.
-        This is the only section that breaks the left-anchored grid — it marks
-        the pivot from cost savings to service management. Everything else stays
-        on the standard left gutter.
-      */}
       <section className="relative bg-white overflow-hidden z-[1]">
 
-        {/* Desktop: image bleeds to viewport left edge, fills full height */}
-        <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2">
+        {/* Desktop: image bleeds to viewport right edge, fills full height */}
+        <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2">
           <Image
             src="/dumpsters-alt.jpg"
             alt="Four commercial dumpsters against a concrete wall"
@@ -250,28 +244,26 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Copy: right half on desktop, full width on mobile */}
+        {/* Copy: left half on desktop, full width on mobile */}
         <Container className="relative">
-          <div className="lg:flex lg:justify-end">
-            <div className="py-20 lg:py-28 lg:w-1/2 lg:pl-16">
-              <div className="w-8 h-px bg-accent mb-8" />
-              <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
-                {home.siteManagementSection.h2}
-              </h2>
-              <div className="space-y-5 mb-10">
-                {home.siteManagementSection.paragraphs.map((para, i) => (
-                  <p key={i} className="text-base text-charcoal/65 leading-relaxed">
-                    {para}
-                  </p>
-                ))}
-              </div>
-              <Link
-                href={home.siteManagementSection.linkHref}
-                className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
-              >
-                {home.siteManagementSection.link}
-              </Link>
+          <div className="lg:w-1/2 lg:pr-16 py-20 lg:py-28">
+            <div className="w-8 h-px bg-accent mb-8" />
+            <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
+              {home.siteManagementSection.h2}
+            </h2>
+            <div className="space-y-5 mb-10">
+              {home.siteManagementSection.paragraphs.map((para, i) => (
+                <p key={i} className="text-base text-charcoal/65 leading-relaxed">
+                  {para}
+                </p>
+              ))}
             </div>
+            <Link
+              href={home.siteManagementSection.linkHref}
+              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
+            >
+              {home.siteManagementSection.link}
+            </Link>
           </div>
         </Container>
 
