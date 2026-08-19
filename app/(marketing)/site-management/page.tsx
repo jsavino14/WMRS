@@ -55,6 +55,9 @@ export default function SiteManagementPage() {
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
+            {siteManagement.rateSection.h2}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
             {siteManagement.rateSection.paragraphs.map((para, i) => (
               <p key={i} className="text-base text-charcoal/65 leading-relaxed">
@@ -96,15 +99,16 @@ export default function SiteManagementPage() {
       <section className="bg-charcoal py-20 lg:py-28">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 max-w-xl leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-12 max-w-xl leading-tight">
             {siteManagement.howWeGetPaid.h2}
           </h2>
-          <div className="max-w-2xl space-y-5">
-            {siteManagement.howWeGetPaid.body.map((para, i) => (
-              <p key={i} className="text-base text-white/55 leading-relaxed">
-                {para}
-              </p>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:divide-x md:divide-white/10">
+            <p className="text-base text-white/55 leading-relaxed">
+              {siteManagement.howWeGetPaid.body[0]}
+            </p>
+            <p className="text-base text-white/55 leading-relaxed md:pl-16">
+              {siteManagement.howWeGetPaid.body[1]}
+            </p>
           </div>
         </Container>
       </section>
@@ -116,7 +120,7 @@ export default function SiteManagementPage() {
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {siteManagement.whereToStart.h2}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-charcoal/8 max-w-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-charcoal/8 max-w-5xl">
             <div className="py-8 md:py-0 md:pr-12">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50 mb-4">
                 {siteManagement.whereToStart.auditIf.label}
@@ -148,8 +152,7 @@ export default function SiteManagementPage() {
             Send us one invoice.
           </h2>
           <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
-            Start with the audit or tell us you already know your rates are fair.
-            Either way, we&apos;ll tell you what we think fits after we&apos;ve seen a bill.
+            Send one recent bill. We&apos;ll tell you what we find and what we think fits, whether that&apos;s an audit, ongoing management, or both.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link

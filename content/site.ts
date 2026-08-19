@@ -484,10 +484,10 @@ export const about = {
 export const siteManagement = {
   hero: {
     h1: "The rate is the easy part.",
-    sub: "Anyone can get a number down once. Holding it takes someone reading every invoice, chasing every missed pickup, and watching every renewal window.",
+    sub: "Anyone can get a number down once. Holding it is the work.",
   },
   rateSection: {
-    h2: "The rate is the easy part.",
+    h2: "Somebody has to deal with it.",
     paragraphs: [
       "A pickup gets missed. Someone has to notice, call the hauler, sit on hold, explain the account, and follow up when it happens again the next week.",
       "A container doesn't arrive, or arrives in the wrong size. That's a chain of calls and a service ticket nobody has time to chase.",
@@ -508,7 +508,7 @@ export const siteManagement = {
   howWeGetPaid: {
     h2: "How we get paid is negotiable. The work isn't.",
     body: [
-      "Most clients start with the audit and split the savings. Some clients, usually larger operations with a lot of sites, would rather keep the savings and pay a flat monthly fee to have the whole thing managed. Others land somewhere in between.",
+      "Most clients start with the audit and share the savings. Some clients, usually larger operations with a lot of sites, would rather pay a flat monthly fee to have the whole thing managed. Others land somewhere in between.",
       "We'll tell you what we think fits after we've seen a bill. Either way the work is the same: every invoice checked, every service issue handled, every renewal tracked.",
     ],
     placeholder: "[PLACEHOLDER: fee range and whether it's per site or per account — to be added once decided.]",
@@ -520,8 +520,8 @@ export const siteManagement = {
       body: "You've never had your invoices reviewed, you suspect your rates are high, or you want to know what's on the table before committing to anything. It's free and it costs you one email.",
     },
     hereIf: {
-      label: "Start here if:",
-      body: "You already know your rates are fair, or you've done the negotiating yourself and the problem is the workload. [PLACEHOLDER: site-count threshold]",
+      label: "Start with management if:",
+      body: "You already know your rates are fair, or you've done the negotiating yourself and the problem is the workload.",
     },
     closing: "Plenty of clients do both.",
   },
