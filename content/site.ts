@@ -18,7 +18,7 @@ export const company = {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export const navLinks = [
-  { label: "The Audit",       href: "/audit" },
+  { label: "What We Find",    href: "/what-we-find" },
   { label: "Site Management", href: "/site-management" },
   { label: "How We Work",     href: "/how-we-work" },
   { label: "Industries",      href: "/industries" },
@@ -41,10 +41,10 @@ export const meta = {
   siteManagement: {
     title: "Site Management",
     description:
-      "WMRS manages your waste accounts end-to-end: invoices reviewed every month, service issues handled, renewals tracked. A flat monthly fee. No surprises.",
+      "WMRS manages your waste accounts end-to-end: every invoice reviewed, every service issue handled, every renewal tracked. Free audit, 50/50 shared savings, no upfront cost.",
   },
   whatWeFind: {
-    title: "The Audit",
+    title: "What We Find",
     description:
       "How hauler contracts are structured, why each overcharge happens, and what an audit checks. Six billing patterns WMRS finds on nearly every multi-location account.",
   },
@@ -91,7 +91,7 @@ export const clientLogos = [
 export const home = {
   hero: {
     h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
-    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing and the service issues from there. Most clients keep their hauler. We only move you when the numbers clearly justify it. What it costs depends on the account. Finding out costs nothing.",
+    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing and the service issues from there. Most clients keep their hauler. We only move you when the numbers clearly justify it. We split what we save you, 50/50. If we find nothing, you owe us nothing.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
     ctaSecondary: "Call 914-485-1500",
@@ -140,7 +140,6 @@ export const home = {
     paragraphs: [
       "Most clients don't call because they've read their invoices. They call because nobody has time to. Missed pickups. Containers that never arrive. Service changes nobody requested. Renewal windows closing while everyone's busy with their actual job.",
       "We take that on. Every site, every hauler, every month. You report it once and we handle it from there.",
-      "For clients who want that and nothing else, it's a flat monthly fee per site.",
     ],
     link: "More on site management →",
     linkHref: "/site-management",
@@ -165,8 +164,8 @@ export const home = {
   },
 
   personSection: {
-    h2: "The same person. Every time.",
-    body: "Every account has a dedicated manager who knows your sites, your haulers, and your contracts. When a pickup is missed or a charge shows up that you don't recognize, you're talking to someone who already knows the account. Not starting over with whoever answers.",
+    h2: "You get a person, not a queue.",
+    body: "Every account has a dedicated manager who knows your sites, your haulers, and your contracts. When a pickup is missed or a charge shows up that you don't recognize, you're talking to someone who already knows the account.",
   },
 
   closingCta: {
@@ -332,7 +331,7 @@ export const howItWorksPage = {
       title: "We audit it.",
       diagramLabel: "We audit",
       body: [
-        "We compare your rates to what haulers in your market are actually accepting for equivalent service - container size, pickup frequency, location type. Not list rates. Actual negotiated rates.",
+        "We compare against the rates haulers are actually accepting for equivalent service - container size, pickup frequency, location type, not their published list rates.",
         "We review every fee on the bill: fuel surcharges, environmental fees, administrative charges, late fees, overage fees. We check whether the contract has an automatic renewal clause, what the escalator language says, and when the next renewal window opens.",
         "We look at your pickup frequency against typical generation patterns for businesses like yours. We check whether all locations and containers on the bill are active. We check how your recyclables are classified.",
       ],
@@ -452,7 +451,7 @@ export const about = {
   hero: {
     label: "About WMRS",
     h1: "Independent waste cost consultants, in business since 2008.",
-    sub: "We audit waste invoices, renegotiate rates, and stay on accounts to keep costs from drifting back. Our revenue comes entirely from savings we deliver.",
+    sub: "We audit waste invoices, renegotiate rates, and stay on accounts to keep costs from drifting back.",
   },
   sections: [
     {
@@ -471,7 +470,7 @@ export const about = {
     {
       heading: "You get a person, not a queue.",
       body: [
-        "Every account has a dedicated manager with a direct line. When a pickup is missed or a charge appears that you don't recognize, you call someone who knows your account - not an 800 number.",
+        "Every account has a dedicated manager who knows your sites, your haulers, and your contracts. When a pickup is missed or a charge shows up that you don't recognize, you're talking to someone who already knows the account.",
       ],
     },
   ],
@@ -508,8 +507,7 @@ export const siteManagement = {
   howWeGetPaid: {
     h2: "How we get paid is negotiable. The work isn't.",
     body: [
-      "Most clients start with the audit and share the savings. Some clients, usually larger operations with a lot of sites, would rather pay a flat monthly fee to have the whole thing managed. Others land somewhere in between.",
-      "We'll tell you what we think fits after we've seen a bill. Either way the work is the same: every invoice checked, every service issue handled, every renewal tracked.",
+      "The audit is free. When we lower your bill, we keep 50% of the savings and you keep 50%. No setup fee, no monthly fee, no retainer. If we can't find savings, we don't send you a bill.",
     ],
     placeholder: "[PLACEHOLDER: fee range and whether it's per site or per account — to be added once decided.]",
   },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, siteManagement, company } from "@/content/site";
+import { meta, siteManagement, home, company } from "@/content/site";
 
 export const metadata: Metadata = {
   title: meta.siteManagement.title,
@@ -95,51 +95,15 @@ export default function SiteManagementPage() {
         </Container>
       </section>
 
-      {/* ── How we get paid ───────────────────────────────────────────────── */}
+      {/* ── Pricing ───────────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-12 max-w-xl leading-tight">
-            {siteManagement.howWeGetPaid.h2}
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 max-w-xl leading-tight">
+            {home.cost.h2}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 md:divide-x md:divide-white/10">
-            <p className="text-base text-white/55 leading-relaxed">
-              {siteManagement.howWeGetPaid.body[0]}
-            </p>
-            <p className="text-base text-white/55 leading-relaxed md:pl-16">
-              {siteManagement.howWeGetPaid.body[1]}
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Where to start ────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28">
-        <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
-            {siteManagement.whereToStart.h2}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-charcoal/8 max-w-5xl">
-            <div className="py-8 md:py-0 md:pr-12">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50 mb-4">
-                {siteManagement.whereToStart.auditIf.label}
-              </p>
-              <p className="text-base text-charcoal/65 leading-relaxed">
-                {siteManagement.whereToStart.auditIf.body}
-              </p>
-            </div>
-            <div className="py-8 md:py-0 md:pl-12">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50 mb-4">
-                {siteManagement.whereToStart.hereIf.label}
-              </p>
-              <p className="text-base text-charcoal/65 leading-relaxed">
-                {siteManagement.whereToStart.hereIf.body}
-              </p>
-            </div>
-          </div>
-          <p className="mt-10 text-sm text-charcoal/50 italic">
-            {siteManagement.whereToStart.closing}
+          <p className="text-base text-white/55 leading-relaxed max-w-2xl">
+            {home.cost.body}
           </p>
         </Container>
       </section>
@@ -152,7 +116,7 @@ export default function SiteManagementPage() {
             Send us one invoice.
           </h2>
           <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
-            Send one recent bill. We&apos;ll tell you what we find and what we think fits, whether that&apos;s an audit, ongoing management, or both.
+            Send one recent bill. We&apos;ll tell you exactly what we find.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link

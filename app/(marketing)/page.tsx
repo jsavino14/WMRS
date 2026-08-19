@@ -306,7 +306,7 @@ export default function HomePage() {
           </div>
           <div className="mt-10">
             <Link
-              href="/audit"
+              href="/what-we-find"
               className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
             >
               Detail on each overcharge →

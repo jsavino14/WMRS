@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // ── Historical routes → final destinations (no chains) ─────────────────
-      { source: "/what-we-find",    destination: "/audit",       permanent: true },
-      { source: "/overpaying",      destination: "/audit",       permanent: true },
+      { source: "/audit",           destination: "/what-we-find", permanent: true },
+      { source: "/overpaying",      destination: "/what-we-find", permanent: true },
       { source: "/how-it-works",    destination: "/how-we-work", permanent: true },
       { source: "/how-we-fix-it",   destination: "/how-we-work", permanent: true },
       { source: "/who-we-work-with",destination: "/industries",  permanent: true },
