@@ -127,6 +127,39 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* ── Person Section ───────────────────────────────────────────────── */}
+      <section className="bg-white py-20 lg:py-28 relative z-[1]">
+        <Container>
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+
+            {/* Left: text */}
+            <div className="lg:w-[44%] lg:flex-shrink-0">
+              <div className="w-8 h-px bg-accent mb-8" />
+              <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-6">
+                {home.personSection.h2}
+              </h2>
+              <p className="text-lg text-charcoal/60 leading-relaxed">
+                {home.personSection.body}
+              </p>
+            </div>
+
+            {/* Right: oversized phone number */}
+            <div className="flex-1 flex flex-col items-start lg:items-center">
+              <a
+                href={company.phoneHref}
+                className="text-[48px] sm:text-[52px] lg:text-[60px] xl:text-[72px] font-thin text-charcoal/[0.18] leading-none tabular-nums hover:text-charcoal/30 transition-colors"
+              >
+                {company.phone}
+              </a>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal/35 mt-3">
+                One number. No menu. A person.
+              </p>
+            </div>
+
+          </div>
+        </Container>
+      </section>
+
       {/* ── How It Works ─────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
         <Container>
@@ -158,21 +191,6 @@ export default function HomePage() {
             >
               Full process detail →
             </Link>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Person Section ───────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
-        <Container>
-          <div className="max-w-2xl">
-            <div className="w-8 h-px bg-accent mb-8" />
-            <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-6">
-              {home.personSection.h2}
-            </h2>
-            <p className="text-lg text-charcoal/60 leading-relaxed">
-              {home.personSection.body}
-            </p>
           </div>
         </Container>
       </section>

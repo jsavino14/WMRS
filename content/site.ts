@@ -41,7 +41,7 @@ export const meta = {
   siteManagement: {
     title: "Site Management",
     description:
-      "WMRS manages your waste accounts end-to-end — invoices reviewed every month, service issues handled, renewals tracked. A flat monthly fee. No surprises.",
+      "WMRS manages your waste accounts end-to-end: invoices reviewed every month, service issues handled, renewals tracked. A flat monthly fee. No surprises.",
   },
   whatWeFind: {
     title: "The Audit",
@@ -91,7 +91,7 @@ export const clientLogos = [
 export const home = {
   hero: {
     h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
-    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing so it stays fixed. You keep your hauler. Your service doesn't change. We split what we save you, 50/50 - and if we find nothing, you owe us nothing. Or skip the split entirely and pay a flat fee to have your sites managed.",
+    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing and the service issues from there. Most clients keep their hauler. We only move you when the numbers clearly justify it. What it costs depends on the account. Finding out costs nothing.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
     ctaSecondary: "Call 914-485-1500",
@@ -138,7 +138,7 @@ export const home = {
     },
     managedSites: {
       label: "Managed sites",
-      body: "A flat monthly fee and we run the account — invoices, service issues, renewals, hauler communication. Structured around how many sites you have and how complex the service is.",
+      body: "A flat monthly fee and we run the account: invoices, service issues, renewals, hauler communication. Structured around how many sites you have and how complex the service is.",
       link: "More on site management →",
       linkHref: "/site-management",
     },
@@ -165,7 +165,7 @@ export const home = {
 
   personSection: {
     h2: "You get a person, not a phone tree.",
-    body: "Every account has a dedicated manager with a direct line. When a pickup is missed, a container doesn't arrive, or a charge appears that you don't recognize, you call someone who knows your account — not an 800 number and six menu options.",
+    body: "Every account has a dedicated manager with a direct line. When a pickup is missed, a container doesn't arrive, or a charge appears that you don't recognize, you call someone who knows your account. Not an 800 number and six menu options.",
   },
 
   closingCta: {
@@ -193,7 +193,7 @@ export const faq = [
   },
   {
     q: "We handle our own vendor negotiations.",
-    a: "Plenty of our clients did, and did it well. The rate is the easy part — it's the twelve months afterward that erode it. Fuel surcharges creep, escalators trigger, a location closes and stays on the bill. We watch that so nobody on your team has to.",
+    a: "Plenty of our clients did, and did it well. The rate is the easy part. It's the twelve months afterward that erode it. Fuel surcharges creep, escalators trigger, a location closes and stays on the bill. We watch that so nobody on your team has to.",
   },
   {
     q: "What do you need from us?",
@@ -497,7 +497,7 @@ export const siteManagement = {
     h2: "You report it once. We handle the rest.",
     items: [
       "Every invoice reviewed against your contracted terms, every month",
-      "Service issues taken directly to the hauler — you report it once, we chase it",
+      "Service issues taken directly to the hauler. You report it once, we chase it.",
       "Container sizing and pickup frequency adjusted as your volume changes",
       "Contract renewal windows tracked so none close without a decision",
       "Consolidated billing across every location",
@@ -507,7 +507,7 @@ export const siteManagement = {
   howWeGetPaid: {
     h2: "How we get paid is negotiable. The work isn't.",
     body: [
-      "Most clients start with the audit and split the savings. Some — usually larger operations with a lot of sites — would rather keep the savings and pay a flat monthly fee to have the whole thing managed. Others land somewhere in between.",
+      "Most clients start with the audit and split the savings. Some clients, usually larger operations with a lot of sites, would rather keep the savings and pay a flat monthly fee to have the whole thing managed. Others land somewhere in between.",
       "We'll tell you what we think fits after we've seen a bill. Either way the work is the same: every invoice checked, every service issue handled, every renewal tracked.",
     ],
     placeholder: "[PLACEHOLDER: fee range and whether it's per site or per account — to be added once decided.]",
@@ -515,11 +515,11 @@ export const siteManagement = {
   whereToStart: {
     h2: "Where to start.",
     auditIf: {
-      label: "Start with the audit if —",
+      label: "Start with the audit if:",
       body: "You've never had your invoices reviewed, you suspect your rates are high, or you want to know what's on the table before committing to anything. It's free and it costs you one email.",
     },
     hereIf: {
-      label: "Start here if —",
+      label: "Start here if:",
       body: "You already know your rates are fair, or you've done the negotiating yourself and the problem is the workload. [PLACEHOLDER: site-count threshold]",
     },
     closing: "Plenty of clients do both.",
