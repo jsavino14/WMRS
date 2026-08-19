@@ -482,8 +482,8 @@ export const about = {
 
 export const siteManagement = {
   hero: {
-    h1: "Some clients want the savings. Some just want it off their desk.",
-    sub: "Not every waste problem is a pricing problem. Sometimes the rate is fine and the work is the burden.",
+    h1: "The rate is the easy part.",
+    sub: "Anyone can get a number down once. Holding it takes someone reading every invoice, chasing every missed pickup, and watching every renewal window.",
   },
   rateSection: {
     h2: "The rate is the easy part.",

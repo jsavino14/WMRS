@@ -18,18 +18,19 @@ export default function SiteManagementPage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
+        {/* Desktop: image takes right 60%, text left 40% */}
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[60%]">
           <Image
-            src="/compacter.png"
-            alt="Commercial compactor unit at a loading dock"
+            src="/four-containers.jpg"
+            alt="Four commercial waste containers in a row against a concrete wall"
             fill
-            className="object-cover object-center"
-            sizes="50vw"
+            className="object-cover object-[left_35%]"
+            sizes="60vw"
             priority
           />
         </div>
         <Container className="relative py-20 lg:py-28">
-          <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
+          <div className="lg:w-[40%] lg:pr-12">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {siteManagement.hero.h1}
             </h1>
@@ -38,24 +39,22 @@ export default function SiteManagementPage() {
             </p>
           </div>
         </Container>
-        <div className="lg:hidden relative aspect-[4/3]">
+        {/* Mobile: full-width 16:9 below headline */}
+        <div className="lg:hidden relative aspect-video">
           <Image
-            src="/compacter.png"
-            alt="Commercial compactor unit at a loading dock"
+            src="/four-containers.jpg"
+            alt="Four commercial waste containers in a row against a concrete wall"
             fill
-            className="object-cover object-center"
+            className="object-cover object-[left_35%]"
             sizes="100vw"
           />
         </div>
       </section>
 
-      {/* ── The rate is the easy part ─────────────────────────────────────── */}
+      {/* ── Supporting examples ───────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
-            {siteManagement.rateSection.h2}
-          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
             {siteManagement.rateSection.paragraphs.map((para, i) => (
               <p key={i} className="text-base text-charcoal/65 leading-relaxed">
