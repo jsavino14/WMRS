@@ -18,10 +18,11 @@ export const company = {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export const navLinks = [
-  { label: "The Audit", href: "/overpaying" },
-  { label: "How It Works", href: "/how-we-fix-it" },
-  { label: "Industries", href: "/who-we-do-it-for" },
-  { label: "Who We Are", href: "/who-we-are" },
+  { label: "The Audit",       href: "/audit" },
+  { label: "Site Management", href: "/site-management" },
+  { label: "How We Work",     href: "/how-we-work" },
+  { label: "Industries",      href: "/industries" },
+  { label: "Who We Are",      href: "/who-we-are" },
 ];
 
 // ─── Per-page SEO metadata ────────────────────────────────────────────────────
@@ -33,9 +34,14 @@ export const meta = {
       "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost - you keep 50% of what we save.",
   },
   howItWorks: {
-    title: "How It Works",
+    title: "How We Work",
     description:
       "A free invoice audit, a negotiation with your existing hauler, and ongoing billing oversight. Here's exactly what happens when you work with WMRS.",
+  },
+  siteManagement: {
+    title: "Site Management",
+    description:
+      "WMRS manages your waste accounts end-to-end — invoices reviewed every month, service issues handled, renewals tracked. A flat monthly fee. No surprises.",
   },
   whatWeFind: {
     title: "The Audit",
@@ -85,7 +91,7 @@ export const clientLogos = [
 export const home = {
   hero: {
     h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
-    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing so it stays fixed. You keep your hauler. Your service doesn't change. We split what we save you, 50/50 - and if we find nothing, you owe us nothing.",
+    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing so it stays fixed. You keep your hauler. Your service doesn't change. We split what we save you, 50/50 - and if we find nothing, you owe us nothing. Or skip the split entirely and pay a flat fee to have your sites managed.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
     ctaSecondary: "Call 914-485-1500",
@@ -125,9 +131,18 @@ export const home = {
   ],
 
   cost: {
-    label: "What it costs",
-    h2: "You pay us out of your savings. Never out of your budget.",
-    body: "The audit is free. No setup fee, no monthly fee, no retainer. When we lower your bill we keep 50% of the savings and you keep 50%. If we can't find savings, we don't send you a bill.",
+    h2: "Two ways to work with us.",
+    sharedSavings: {
+      label: "Shared savings",
+      body: "The audit is free. When we lower your bill, we keep 50% of the savings and you keep 50%. No setup fee, no monthly fee, no retainer. If we can't find savings, we don't send you a bill.",
+    },
+    managedSites: {
+      label: "Managed sites",
+      body: "A flat monthly fee and we run the account — invoices, service issues, renewals, hauler communication. Structured around how many sites you have and how complex the service is.",
+      link: "More on site management →",
+      linkHref: "/site-management",
+    },
+    closing: "Not sure which fits? Send us an invoice. We'll tell you what we find and what we'd recommend.",
   },
 
   whatWeFind: {
@@ -461,6 +476,54 @@ export const about = {
   ],
   independence:
     "We're not owned by a hauler, funded by a hauler, or paid by a hauler. Our revenue comes entirely from the savings we deliver to you.",
+};
+
+// ─── Site Management page ─────────────────────────────────────────────────────
+
+export const siteManagement = {
+  hero: {
+    h1: "Some clients want the savings. Some just want it off their desk.",
+    sub: "Not every waste problem is a pricing problem. Sometimes the rate is fine and the work is the burden.",
+  },
+  rateSection: {
+    h2: "The rate is the easy part.",
+    paragraphs: [
+      "A pickup gets missed. Someone has to notice, call the hauler, sit on hold, explain the account, and follow up when it happens again the next week.",
+      "A container doesn't arrive, or arrives in the wrong size. That's a chain of calls and a service ticket nobody has time to chase.",
+      "An invoice doesn't match the contract. Catching it means having the contract open, knowing what the rate should be, and having time to compare. Nobody does.",
+    ],
+  },
+  whatWeDoSection: {
+    h2: "You report it once. We handle the rest.",
+    items: [
+      "Every invoice reviewed against your contracted terms, every month",
+      "Service issues taken directly to the hauler — you report it once, we chase it",
+      "Container sizing and pickup frequency adjusted as your volume changes",
+      "Contract renewal windows tracked so none close without a decision",
+      "Consolidated billing across every location",
+      "One dedicated contact with a direct line",
+    ],
+  },
+  howWeGetPaid: {
+    h2: "How we get paid is negotiable. The work isn't.",
+    body: [
+      "Most clients start with the audit and split the savings. Some — usually larger operations with a lot of sites — would rather keep the savings and pay a flat monthly fee to have the whole thing managed. Others land somewhere in between.",
+      "We'll tell you what we think fits after we've seen a bill. Either way the work is the same: every invoice checked, every service issue handled, every renewal tracked.",
+    ],
+    placeholder: "[PLACEHOLDER: fee range and whether it's per site or per account — to be added once decided.]",
+  },
+  whereToStart: {
+    h2: "Where to start.",
+    auditIf: {
+      label: "Start with the audit if —",
+      body: "You've never had your invoices reviewed, you suspect your rates are high, or you want to know what's on the table before committing to anything. It's free and it costs you one email.",
+    },
+    hereIf: {
+      label: "Start here if —",
+      body: "You already know your rates are fair, or you've done the negotiating yourself and the problem is the workload. [PLACEHOLDER: site-count threshold]",
+    },
+    closing: "Plenty of clients do both.",
+  },
 };
 
 // ─── Contact page ─────────────────────────────────────────────────────────────

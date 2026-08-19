@@ -83,11 +83,11 @@ export default function HowItWorksPage() {
         <Container className="relative py-20 lg:py-28">
           <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
-              {home.cost.h2}
+              You pay us out of your savings. Never out of your budget.
             </h2>
             <div className="w-12 h-px bg-accent mb-8" />
             <p className="text-lg text-white/65 leading-relaxed">
-              {home.cost.body}
+              {home.cost.sharedSavings.body}
             </p>
           </div>
         </Container>

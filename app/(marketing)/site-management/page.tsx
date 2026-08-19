@@ -1,0 +1,173 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { Container } from "@/components/Container";
+import { meta, siteManagement, company } from "@/content/site";
+
+export const metadata: Metadata = {
+  title: meta.siteManagement.title,
+  description: meta.siteManagement.description,
+  openGraph: {
+    title: meta.siteManagement.title,
+    description: meta.siteManagement.description,
+  },
+};
+
+export default function SiteManagementPage() {
+  return (
+    <>
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="relative bg-white overflow-hidden">
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
+          <Image
+            src="/compacter.png"
+            alt="Commercial compactor unit at a loading dock"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+            priority
+          />
+        </div>
+        <Container className="relative py-20 lg:py-28">
+          <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+              {siteManagement.hero.h1}
+            </h1>
+            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
+              {siteManagement.hero.sub}
+            </p>
+          </div>
+        </Container>
+        <div className="lg:hidden relative aspect-[4/3]">
+          <Image
+            src="/compacter.png"
+            alt="Commercial compactor unit at a loading dock"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+      </section>
+
+      {/* ── The rate is the easy part ─────────────────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28">
+        <Container>
+          <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
+            {siteManagement.rateSection.h2}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
+            {siteManagement.rateSection.paragraphs.map((para, i) => (
+              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
+                {para}
+              </p>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── What we take on ───────────────────────────────────────────────── */}
+      <section className="bg-white py-20 lg:py-28">
+        <Container>
+          <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
+            {siteManagement.whatWeDoSection.h2}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl">
+            {siteManagement.whatWeDoSection.items.map((item, i) => (
+              <div
+                key={i}
+                className={`p-8 border-charcoal/8 ${
+                  i < siteManagement.whatWeDoSection.items.length - 3 || i < 3
+                    ? "border-b"
+                    : ""
+                } ${i % 3 !== 2 ? "lg:border-r" : ""} ${
+                  i % 2 === 0 ? "sm:border-r lg:border-r-0" : ""
+                } ${i % 2 === 0 && i % 3 === 2 ? "sm:border-r-0" : ""}`}
+              >
+                <div className="w-4 h-px bg-accent mb-4" />
+                <p className="text-sm text-charcoal/70 leading-relaxed">{item}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── How we get paid ───────────────────────────────────────────────── */}
+      <section className="bg-charcoal py-20 lg:py-28">
+        <Container>
+          <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 max-w-xl leading-tight">
+            {siteManagement.howWeGetPaid.h2}
+          </h2>
+          <div className="max-w-2xl space-y-5">
+            {siteManagement.howWeGetPaid.body.map((para, i) => (
+              <p key={i} className="text-base text-white/55 leading-relaxed">
+                {para}
+              </p>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Where to start ────────────────────────────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28">
+        <Container>
+          <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
+            {siteManagement.whereToStart.h2}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-charcoal/8 max-w-3xl">
+            <div className="py-8 md:py-0 md:pr-12">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50 mb-4">
+                {siteManagement.whereToStart.auditIf.label}
+              </p>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                {siteManagement.whereToStart.auditIf.body}
+              </p>
+            </div>
+            <div className="py-8 md:py-0 md:pl-12">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50 mb-4">
+                {siteManagement.whereToStart.hereIf.label}
+              </p>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                {siteManagement.whereToStart.hereIf.body}
+              </p>
+            </div>
+          </div>
+          <p className="mt-10 text-sm text-charcoal/50 italic">
+            {siteManagement.whereToStart.closing}
+          </p>
+        </Container>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
+        <Container>
+          <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
+            Send us one invoice.
+          </h2>
+          <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
+            Start with the audit or tell us you already know your rates are fair.
+            Either way, we&apos;ll tell you what we think fits after we&apos;ve seen a bill.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/contact"
+              className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
+            >
+              Send us one invoice
+            </Link>
+            <a
+              href={company.phoneHref}
+              className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
+            >
+              Call {company.phone}
+            </a>
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}
