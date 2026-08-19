@@ -87,7 +87,7 @@ export default function HowItWorksPage() {
             </h2>
             <div className="w-12 h-px bg-accent mb-8" />
             <p className="text-lg text-white/65 leading-relaxed">
-              {home.cost.sharedSavings.body}
+              {home.cost.body}
             </p>
           </div>
         </Container>

@@ -195,55 +195,51 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── Two Ways to Work ─────────────────────────────────────────────── */}
+      {/* ── Cost / 50-50 ─────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-12 leading-tight max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 leading-tight max-w-xl">
             {home.cost.h2}
           </h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:divide-x lg:divide-white/10">
-
-            {/* Column 1: Shared savings */}
-            <div>
-              <p className="label text-white/40 mb-4">{home.cost.sharedSavings.label}</p>
-              <p className="text-base text-white/55 leading-relaxed mb-10">
-                {home.cost.sharedSavings.body}
-              </p>
-              {/* 50/50 numerals */}
-              <div className="flex items-start">
-                <div className="flex flex-col items-center">
-                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">You keep 50%</p>
-                </div>
-                <span className="text-[70px] lg:text-[85px] font-thin text-white/[0.18] leading-none px-3 select-none flex-shrink-0">/</span>
-                <div className="flex flex-col items-center">
-                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">WMRS keeps 50%</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 2: Managed sites */}
-            <div className="lg:pl-12">
-              <p className="label text-white/40 mb-4">{home.cost.managedSites.label}</p>
-              <p className="text-base text-white/55 leading-relaxed mb-8">
-                {home.cost.managedSites.body}
-              </p>
-              <Link
-                href={home.cost.managedSites.linkHref}
-                className="text-sm font-semibold text-white/50 hover:text-white transition-colors underline-offset-4 hover:underline"
-              >
-                {home.cost.managedSites.link}
-              </Link>
-            </div>
-
-          </div>
-
-          <p className="mt-12 text-sm text-white/40 leading-relaxed max-w-2xl">
-            {home.cost.closing}
+          <p className="text-base text-white/55 leading-relaxed max-w-2xl mb-14">
+            {home.cost.body}
           </p>
+          {/* 50/50 numerals */}
+          <div className="flex items-start">
+            <div className="flex flex-col items-center">
+              <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">You keep 50%</p>
+            </div>
+            <span className="text-[70px] lg:text-[85px] font-thin text-white/[0.18] leading-none px-3 select-none flex-shrink-0">/</span>
+            <div className="flex flex-col items-center">
+              <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">WMRS keeps 50%</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Site Management ───────────────────────────────────────────────── */}
+      <section className="bg-white py-20 lg:py-28 relative z-[1]">
+        <Container>
+          <div className="w-8 h-px bg-accent mb-8" />
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
+            {home.siteManagementSection.h2}
+          </h2>
+          <div className="max-w-2xl space-y-5 mb-10">
+            {home.siteManagementSection.paragraphs.map((para, i) => (
+              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
+                {para}
+              </p>
+            ))}
+          </div>
+          <Link
+            href={home.siteManagementSection.linkHref}
+            className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
+          >
+            {home.siteManagementSection.link}
+          </Link>
         </Container>
       </section>
 

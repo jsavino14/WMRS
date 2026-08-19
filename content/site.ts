@@ -131,18 +131,19 @@ export const home = {
   ],
 
   cost: {
-    h2: "Two ways to work with us.",
-    sharedSavings: {
-      label: "Shared savings",
-      body: "The audit is free. When we lower your bill, we keep 50% of the savings and you keep 50%. No setup fee, no monthly fee, no retainer. If we can't find savings, we don't send you a bill.",
-    },
-    managedSites: {
-      label: "Managed sites",
-      body: "A flat monthly fee and we run the account: invoices, service issues, renewals, hauler communication. Structured around how many sites you have and how complex the service is.",
-      link: "More on site management →",
-      linkHref: "/site-management",
-    },
-    closing: "Not sure which fits? Send us an invoice. We'll tell you what we find and what we'd recommend.",
+    h2: "You pay us out of your savings. Never out of your budget.",
+    body: "The audit is free. When we lower your bill, we keep 50% of the savings and you keep 50%. No setup fee, no monthly fee, no retainer. If we can't find savings, we don't send you a bill.",
+  },
+
+  siteManagementSection: {
+    h2: "Finding the savings is the first half.",
+    paragraphs: [
+      "Most clients don't call because they've read their invoices. They call because nobody has time to. Missed pickups. Containers that never arrive. Service changes nobody requested. Renewal windows closing while everyone's busy with their actual job.",
+      "We take that on. Every site, every hauler, every month. You report it once and we handle it from there.",
+      "For clients who want that and nothing else, it's a flat monthly fee per site.",
+    ],
+    link: "More on site management →",
+    linkHref: "/site-management",
   },
 
   whatWeFind: {
