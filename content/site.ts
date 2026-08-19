@@ -136,7 +136,7 @@ export const home = {
   },
 
   siteManagementSection: {
-    h2: "Finding the savings is the first half.",
+    h2: "Someone has to chase the hauler.",
     paragraphs: [
       "Most clients don't call because they've read their invoices. They call because nobody has time to. Missed pickups. Containers that never arrive. Service changes nobody requested. Renewal windows closing while everyone's busy with their actual job.",
       "We take that on. Every site, every hauler, every month. You report it once and we handle it from there.",
