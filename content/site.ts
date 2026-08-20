@@ -91,7 +91,7 @@ export const clientLogos = [
 export const home = {
   hero: {
     h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
-    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing and the service issues from there. Most clients keep their hauler. We only move you when the numbers clearly justify it. We split what we save you, 50/50. If we find nothing, you owe us nothing.",
+    sub: "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing and the service issues. Most clients keep their hauler. We only move you when the numbers clearly justify it. We split what we save you, 50/50. If we find nothing, you owe us nothing.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
     ctaSecondary: "Call 914-485-1500",
@@ -138,7 +138,7 @@ export const home = {
   siteManagementSection: {
     h2: "Every missed pickup is somebody's afternoon.",
     paragraphs: [
-      "Missed pickups. Containers that never arrive. Service changes nobody asked for. Each one is a phone call, a hold, an explanation, and another call when it happens again the following week.",
+      "Containers that never arrive. Service changes nobody asked for. Pickups that just don't happen. Each one is a phone call, a hold, an explanation, and another call when it happens again the following week.",
       "We take it on. Every site, every hauler, every month. You report it once and it's ours.",
     ],
     link: "Learn more about our site management services →",
@@ -169,7 +169,7 @@ export const home = {
   },
 
   closingCta: {
-    h2: "Send us one invoice.",
+    h2: "Start with one bill.",
     body: "Start with one recent bill. We'll audit it and tell you exactly what we find.",
     cta: "Send us one invoice",
     ctaHref: "/contact",
@@ -470,7 +470,7 @@ export const about = {
     {
       heading: "You get a person, not a queue.",
       body: [
-        "Every account has a dedicated manager who knows your sites, your haulers, and your contracts. When a pickup is missed or a charge shows up that you don't recognize, you're talking to someone who already knows the account.",
+        "One manager owns your account. They know your sites, your haulers, your contract terms, and the history of every issue you've raised. That's not a service level we advertise — it's just how a company this size works, and it's the part clients tell us they'd miss most.",
       ],
     },
   ],
@@ -486,7 +486,7 @@ export const siteManagement = {
     sub: "Anyone can get a number down once. Holding it is the work.",
   },
   rateSection: {
-    h2: "Somebody has to deal with it.",
+    h2: "It's never one phone call.",
     paragraphs: [
       "A pickup gets missed. Someone has to notice, call the hauler, sit on hold, explain the account, and follow up when it happens again the next week.",
       "A container doesn't arrive, or arrives in the wrong size. That's a chain of calls and a service ticket nobody has time to chase.",

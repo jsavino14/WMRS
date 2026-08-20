@@ -1,15 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { whatWeFind } from "@/content/site";
 
-const OVERCHARGE_CARDS = [
-  { icon: "/icons/wrong-container-size.svg",   iconH: 56, title: "Wrong container size",    body: "Containers sized for a business you no longer are." },
-  { icon: "/icons/too-many-pickups.svg",        iconH: 52, title: "Too many pickups",         body: "Pickups scheduled more often than you generate waste." },
-  { icon: "/icons/hidden-surcharges.svg",       iconH: 72, title: "Hidden surcharges",        body: "Fuel and environmental surcharges billed as a percentage of the total." },
-  { icon: "/icons/closed-location.svg",         iconH: 56, title: "Closed locations billed",  body: "Billing for closed locations and containers already hauled away." },
-  { icon: "/icons/auto-renewing-contracts.svg", iconH: 52, title: "Auto-renewing contracts",  body: "Auto-renewing contracts with annual escalators nobody agreed to." },
-  { icon: "/icons/recyclables-as-trash.svg",    iconH: 44, title: "Recyclables as trash",     body: "Recyclables going out as trash, at trash prices." },
-];
+// Icon config keyed by canonical label (order follows whatWeFind.items)
+const ICON_CONFIG: Record<string, { src: string; h: number }> = {
+  "Oversized containers":   { src: "/icons/wrong-container-size.svg",   h: 56 },
+  "Unneeded pickups":       { src: "/icons/too-many-pickups.svg",        h: 52 },
+  "Compounding surcharges": { src: "/icons/hidden-surcharges.svg",       h: 72 },
+  "Buried escalators":      { src: "/icons/auto-renewing-contracts.svg", h: 52 },
+  "Ghost locations":        { src: "/icons/closed-location.svg",         h: 56 },
+  "Mispriced recyclables":  { src: "/icons/recyclables-as-trash.svg",    h: 44 },
+};
+
+const OVERCHARGE_CARDS = whatWeFind.items.map((item) => ({
+  icon: ICON_CONFIG[item.label].src,
+  iconH: ICON_CONFIG[item.label].h,
+  title: item.label,
+  body: item.title,
+}));
 
 const ITEM_BORDERS = [
   "border-b border-charcoal/8 sm:border-r",
