@@ -94,25 +94,80 @@ export default function HomePage() {
       {/* ── Trust bar ────────────────────────────────────────────────────── */}
       <TrustBar />
 
-      {/* ── The Problem ──────────────────────────────────────────────────── */}
+      {/* ── Nobody's job / What We Find (merged) ─────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-10 max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-xl">
             {home.problem.h2}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
-            {home.problem.paragraphs.map((para, i) => (
-              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
-                {para}
-              </p>
-            ))}
+          <p className="text-base text-charcoal/65 leading-relaxed mb-12 max-w-2xl">
+            Which is how costs drift 20–40% above market without anyone noticing. The same six things turn up on almost every account.
+          </p>
+          <OverchargeCards />
+          <div className="mt-10">
+            <Link
+              href="/what-we-find"
+              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
+            >
+              Detail on each overcharge →
+            </Link>
           </div>
         </Container>
       </section>
 
+      {/* ── Site Management ───────────────────────────────────────────────── */}
+      <section className="relative bg-offwhite overflow-hidden z-[1]">
+
+        {/* Desktop: image bleeds to viewport right edge, fills full height */}
+        <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2">
+          <Image
+            src="/dumpsters-alt.jpg"
+            alt="Four commercial dumpsters against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+          />
+        </div>
+
+        {/* Copy: left half on desktop, full width on mobile */}
+        <Container className="relative">
+          <div className="lg:w-1/2 lg:pr-16 py-20 lg:py-28">
+            <div className="w-8 h-px bg-accent mb-8" />
+            <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
+              {home.siteManagementSection.h2}
+            </h2>
+            <div className="space-y-5 mb-10">
+              {home.siteManagementSection.paragraphs.map((para, i) => (
+                <p key={i} className="text-base text-charcoal/65 leading-relaxed">
+                  {para}
+                </p>
+              ))}
+            </div>
+            <Link
+              href={home.siteManagementSection.linkHref}
+              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
+            >
+              {home.siteManagementSection.link}
+            </Link>
+          </div>
+        </Container>
+
+        {/* Mobile: image below copy at 4:3 */}
+        <div className="lg:hidden relative aspect-[4/3]">
+          <Image
+            src="/dumpsters-alt.jpg"
+            alt="Four commercial dumpsters against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+
+      </section>
+
       {/* ── Person Section ───────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
+      <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
 
@@ -145,7 +200,7 @@ export default function HomePage() {
       </section>
 
       {/* ── How It Works ─────────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28">
+      <section className="bg-offwhite py-20 lg:py-28">
         <Container>
           <div className="w-8 h-px bg-accent mb-8" />
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14 max-w-xl">
@@ -210,75 +265,6 @@ export default function HomePage() {
               </div>
             </div>
 
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Site Management ───────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-hidden z-[1]">
-
-        {/* Desktop: image bleeds to viewport right edge, fills full height */}
-        <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2">
-          <Image
-            src="/dumpsters-alt.jpg"
-            alt="Four commercial dumpsters against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="50vw"
-          />
-        </div>
-
-        {/* Copy: left half on desktop, full width on mobile */}
-        <Container className="relative">
-          <div className="lg:w-1/2 lg:pr-16 py-20 lg:py-28">
-            <div className="w-8 h-px bg-accent mb-8" />
-            <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
-              {home.siteManagementSection.h2}
-            </h2>
-            <div className="space-y-5 mb-10">
-              {home.siteManagementSection.paragraphs.map((para, i) => (
-                <p key={i} className="text-base text-charcoal/65 leading-relaxed">
-                  {para}
-                </p>
-              ))}
-            </div>
-            <Link
-              href={home.siteManagementSection.linkHref}
-              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
-            >
-              {home.siteManagementSection.link}
-            </Link>
-          </div>
-        </Container>
-
-        {/* Mobile: image below copy at 4:3 */}
-        <div className="lg:hidden relative aspect-[4/3]">
-          <Image
-            src="/dumpsters-alt.jpg"
-            alt="Four commercial dumpsters against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </div>
-
-      </section>
-
-      {/* ── What We Find ─────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
-        <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
-            {home.whatWeFind.h2}
-          </h2>
-          <OverchargeCards />
-          <div className="mt-10">
-            <Link
-              href="/what-we-find"
-              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
-            >
-              Detail on each overcharge →
-            </Link>
           </div>
         </Container>
       </section>
