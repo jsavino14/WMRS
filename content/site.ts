@@ -99,7 +99,7 @@ export const home = {
   },
 
   problem: {
-    h2: "Nobody's job is to read the trash bill.",
+    h2: "We've read this bill before.",
     paragraphs: [
       "Waste invoices are designed to be processed, not read. The line items are vague, the fees have official-sounding names, and the total is close enough to last month's that no one flags it. That's the point.",
       "The fees that look standard - fuel surcharges, environmental fees, administrative charges - are negotiable. They are added by haulers precisely because most customers treat them as fixed. They are not.",

@@ -102,7 +102,7 @@ export default function HomePage() {
             {home.problem.h2}
           </h2>
           <p className="text-base text-charcoal/65 leading-relaxed mb-12 max-w-2xl">
-            Which is how costs drift 20–40% above market without anyone noticing. The same six things turn up on almost every account.
+            The same six things turn up on almost every account. Together they&apos;re how costs drift 20–40% above market without anyone noticing.
           </p>
           <OverchargeCards />
           <div className="mt-10">
