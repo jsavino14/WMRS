@@ -86,7 +86,7 @@ export default function AboutPage() {
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 border-t border-charcoal/8">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
             Ready to find out what you're paying?
           </h2>

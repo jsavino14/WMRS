@@ -116,7 +116,7 @@ export default function WhatWeFind() {
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
             Find out what's on your bill.
           </h2>

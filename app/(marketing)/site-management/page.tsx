@@ -54,7 +54,7 @@ export default function SiteManagementPage() {
       {/* ── Supporting examples ───────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {siteManagement.rateSection.h2}
           </h2>
@@ -71,7 +71,7 @@ export default function SiteManagementPage() {
       {/* ── What we take on ───────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {siteManagement.whatWeDoSection.h2}
           </h2>
@@ -98,7 +98,7 @@ export default function SiteManagementPage() {
       {/* ── Pricing ───────────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 max-w-xl leading-tight">
             {home.cost.h2}
           </h2>
@@ -111,7 +111,7 @@ export default function SiteManagementPage() {
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
             Send us one invoice.
           </h2>

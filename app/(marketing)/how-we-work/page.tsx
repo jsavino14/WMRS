@@ -85,7 +85,7 @@ export default function HowItWorksPage() {
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 max-w-xl leading-tight">
               You pay us out of your savings. Never out of your budget.
             </h2>
-            <div className="w-12 h-px bg-accent mb-8" />
+
             <p className="text-lg text-white/65 leading-relaxed">
               {home.cost.body}
             </p>

@@ -18,7 +18,7 @@ export default function ContactPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white pt-20 pb-16 lg:pt-28 lg:pb-20">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-6 max-w-xl">
             {contact.hero.h1}
           </h1>

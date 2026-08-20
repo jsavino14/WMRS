@@ -136,10 +136,10 @@ export const home = {
   },
 
   siteManagementSection: {
-    h2: "Someone has to chase the hauler.",
+    h2: "Every missed pickup is somebody's afternoon.",
     paragraphs: [
-      "Most clients don't call because they've read their invoices. They call because nobody has time to. Missed pickups. Containers that never arrive. Service changes nobody requested. Renewal windows closing while everyone's busy with their actual job.",
-      "We take that on. Every site, every hauler, every month. You report it once and we handle it from there.",
+      "Missed pickups. Containers that never arrive. Service changes nobody asked for. Each one is a phone call, a hold, an explanation, and another call when it happens again the following week.",
+      "We take it on. Every site, every hauler, every month. You report it once and it's ours.",
     ],
     link: "Learn more about our site management services →",
     linkHref: "/site-management",

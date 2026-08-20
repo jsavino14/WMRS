@@ -18,7 +18,7 @@ export default function FaqPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h1 className="text-4xl sm:text-5xl font-black text-charcoal mb-4 max-w-xl leading-tight">
             Common questions.
           </h1>

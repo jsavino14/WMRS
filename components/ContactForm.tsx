@@ -66,7 +66,7 @@ export function ContactForm() {
   if (state === "success") {
     return (
       <div className="border border-accent/30 bg-accent/5 p-8">
-        <div className="w-8 h-px bg-accent mb-4" />
+
         <p className="text-base font-medium text-charcoal">{form.success}</p>
       </div>
     );

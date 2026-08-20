@@ -97,7 +97,7 @@ export default function HomePage() {
       {/* ── Nobody's job / What We Find (merged) ─────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-xl">
             {home.problem.h2}
           </h2>
@@ -133,7 +133,7 @@ export default function HomePage() {
         {/* Copy: left half on desktop, full width on mobile */}
         <Container className="relative">
           <div className="lg:w-1/2 lg:pr-16 py-20 lg:py-28">
-            <div className="w-8 h-px bg-accent mb-8" />
+  
             <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
               {home.siteManagementSection.h2}
             </h2>
@@ -173,7 +173,7 @@ export default function HomePage() {
 
             {/* Left: text */}
             <div className="lg:w-[44%] lg:flex-shrink-0">
-              <div className="w-8 h-px bg-accent mb-8" />
+    
               <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-6">
                 {home.personSection.h2}
               </h2>
@@ -202,7 +202,7 @@ export default function HomePage() {
       {/* ── How It Works ─────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14 max-w-xl">
             Four steps. Zero upfront cost.
           </h2>
@@ -241,7 +241,7 @@ export default function HomePage() {
 
             {/* Left: text */}
             <div className="lg:w-1/2">
-              <div className="w-8 h-px bg-accent mb-8" />
+    
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 leading-tight max-w-xl">
                 {home.cost.h2}
               </h2>
@@ -272,7 +272,7 @@ export default function HomePage() {
       {/* ── Proof / Case Studies ─────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.proof.h2}
           </h2>
@@ -317,7 +317,7 @@ export default function HomePage() {
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             Common questions.
           </h2>
@@ -343,7 +343,7 @@ export default function HomePage() {
       {/* ── Closing CTA ──────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
-          <div className="w-8 h-px bg-accent mb-8" />
+
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-md">
             {home.closingCta.h2}
           </h2>
