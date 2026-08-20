@@ -186,12 +186,13 @@ export default function HomePage() {
             <div className="flex-1 flex flex-col items-start lg:items-center">
               <a
                 href={company.phoneHref}
-                className="text-[48px] sm:text-[52px] lg:text-[60px] xl:text-[72px] font-thin text-charcoal/[0.40] leading-none tabular-nums hover:text-charcoal/60 transition-colors"
+                className="text-[48px] sm:text-[52px] lg:text-[60px] xl:text-[72px] font-thin text-charcoal/[0.40] leading-none tabular-nums tracking-[0.02em] hover:text-charcoal/60 transition-colors"
               >
                 {company.phone}
               </a>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal/35 mt-3">
-                They&apos;ll already know your account.
+              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-charcoal/35 mt-3">
+                <span className="inline-block">A REAL NUMBER.</span>{" "}
+                <span className="inline-block">SOMEONE YOU&apos;LL GET TO KNOW BY NAME.</span>
               </p>
             </div>
 
