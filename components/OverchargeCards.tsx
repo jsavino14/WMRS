@@ -96,13 +96,15 @@ export function OverchargeCards() {
               {AnimatedIcon ? (
                 <AnimatedIcon hovered={isHovered} />
               ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={card.icon}
-                  alt=""
-                  aria-hidden="true"
-                  style={{ height: card.iconH, width: "auto", display: "block" }}
-                />
+                <div style={{ display: "inline-block", transform: isHovered ? "translateY(-4px)" : "translateY(0)", transition: TRANSITION }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={card.icon}
+                    alt=""
+                    aria-hidden="true"
+                    style={{ height: card.iconH, width: "auto", display: "block" }}
+                  />
+                </div>
               )}
             </div>
             <h3 className="text-base font-bold text-charcoal mb-2">{card.title}</h3>
