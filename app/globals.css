@@ -18,3 +18,21 @@
   }
 }
 
+/* ── Overcharge card icon hover animations ─────────────────────────────────── */
+.wmrs-pickup-arrow,
+.wmrs-location-arrow,
+.wmrs-recycling-arrow {
+  transition: transform 200ms ease-out;
+}
+.wmrs-card:hover .wmrs-pickup-arrow   { transform: translateY(-3px); }
+.wmrs-card:hover .wmrs-location-arrow { transform: translate(2px, -2px); }
+.wmrs-card:hover .wmrs-recycling-arrow { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+  .wmrs-pickup-arrow,
+  .wmrs-location-arrow,
+  .wmrs-recycling-arrow { transition: none; }
+  .wmrs-card:hover .wmrs-pickup-arrow,
+  .wmrs-card:hover .wmrs-location-arrow,
+  .wmrs-card:hover .wmrs-recycling-arrow { transform: none; }
+}
+

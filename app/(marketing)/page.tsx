@@ -39,18 +39,10 @@ const ITEM_BORDERS = [
 
 // ── Animated icon components ──────────────────────────────────────────────────
 // Inlined as JSX so CSS can target individual paths.
-// Uses raw CSS (same pattern as ProcessDiagram) — Tailwind group-hover: with
-// CSS custom property transforms is unreliable on SVG path elements.
-const ICON_HOVER_CSS = `
-  .wmrs-pickup-arrow,.wmrs-location-arrow,.wmrs-recycling-arrow{transition:transform 200ms ease-out;}
-  .wmrs-card:hover .wmrs-pickup-arrow{transform:translateY(-3px);}
-  .wmrs-card:hover .wmrs-location-arrow{transform:translate(2px,-2px);}
-  .wmrs-card:hover .wmrs-recycling-arrow{transform:translateX(3px);}
-  @media(prefers-reduced-motion:reduce){
-    .wmrs-pickup-arrow,.wmrs-location-arrow,.wmrs-recycling-arrow{transition:none;}
-    .wmrs-card:hover .wmrs-pickup-arrow,.wmrs-card:hover .wmrs-location-arrow,.wmrs-card:hover .wmrs-recycling-arrow{transform:none;}
-  }
-`;
+// Hover styles live in globals.css (.wmrs-card, .wmrs-pickup-arrow, etc.)
+// — Tailwind group-hover: with CSS custom property transforms is unreliable
+// on SVG path elements; dangerouslySetInnerHTML in server components is also
+// unreliable. globals.css is the guaranteed approach.
 
 /** Green centre arrow rises 3px on card hover */
 function TooManyPickupsIcon() {
@@ -355,8 +347,6 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.whatWeFind.h2}
           </h2>
-          {/* eslint-disable-next-line react/no-danger */}
-          <style dangerouslySetInnerHTML={{ __html: ICON_HOVER_CSS }} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {OVERCHARGE_CARDS.map((card, i) => {
               const AnimatedIcon = ANIMATED_ICONS[card.icon];
