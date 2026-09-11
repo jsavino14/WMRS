@@ -18,24 +18,15 @@
   }
 }
 
-/* ── Consolidation diagram: float animation ─────────────────────────────────── */
-/* Keyframes live here (not in a component <style> tag) so they are guaranteed  */
-/* to be parsed before the SVG elements that reference them are rendered.        */
-/* Pure translateY — no rotation — avoids any transform-box/transform-origin     */
-/* dependency on SVG elements across browsers.                                   */
-@keyframes wmrs-float-1 { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-3px); } }
-@keyframes wmrs-float-2 { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-2px); } }
-@keyframes wmrs-float-3 { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-4px); } }
-@keyframes wmrs-float-4 { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-2.5px); } }
-@keyframes wmrs-float-5 { 0%, 100% { transform: translateY(0); }   50% { transform: translateY(-3.5px); } }
-.wmrs-f1 { animation: wmrs-float-1 7s   ease-in-out 0s   infinite; }
-.wmrs-f2 { animation: wmrs-float-2 9s   ease-in-out -3s  infinite; }
-.wmrs-f3 { animation: wmrs-float-3 8s   ease-in-out -5s  infinite; }
-.wmrs-f4 { animation: wmrs-float-4 10s  ease-in-out -2s  infinite; }
-.wmrs-f5 { animation: wmrs-float-5 7.5s ease-in-out -7s  infinite; }
-@media (prefers-reduced-motion: reduce) {
-  .wmrs-f1, .wmrs-f2, .wmrs-f3, .wmrs-f4, .wmrs-f5 { animation: none !important; }
-}
+/* ── Consolidation diagram: float animation keyframes ──────────────────────── */
+/* from/to + alternate-direction in the component gives smooth up-down drift.   */
+/* Animation is attached via inline style in ConsolidationDiagram.tsx — not via */
+/* CSS class rules — so Tailwind content-scanning cannot purge the attachment.  */
+@keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-2px); } }
+@keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+@keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
+@keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
 
 /* ── Overcharge card icon hover animations ─────────────────────────────────── */
 .wmrs-pickup-arrow,

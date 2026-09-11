@@ -21,17 +21,25 @@ const AX1 = 118;
 const AX2 = 162;
 const AY  = 60;
 
-// Float animation classes wmrs-f1…f5 are defined in globals.css.
-// Keeping keyframes in the static CSS bundle guarantees they are parsed before
-// the SVG elements that reference them appear in the DOM.
-//
-// Each animated shape uses two nested <g> elements:
+// Float animation helper — returns inline animation style.
+// Uses keyframes wmrs-float-1..5 from globals.css.
+// Gated in JS because inline styles can't be overridden by CSS media queries.
+function a(
+  name: string,
+  duration: string,
+  delay: string,
+  prefersReduced: boolean,
+): React.CSSProperties {
+  if (prefersReduced) return {};
+  return { animation: `${name} ${duration} ease-in-out ${delay} infinite alternate` };
+}
+
+// Float animation: keyframes wmrs-float-1..5 are defined in globals.css.
+// Animation is applied via inline style (bypasses Tailwind CSS purging).
+// Each shape uses two nested <g> elements:
 //   Outer <g transform="…">  — SVG attribute: positions and tilts the shape
-//   Inner <g className="wmrs-fN">  — CSS class: applies the float animation
-//
-// The animated <g> has NO SVG transform attribute of its own, so CSS
-// transform (translateY) applies cleanly without any conflict.
-// prefers-reduced-motion is handled entirely in globals.css via @media.
+//   Inner <g style={a(…)}>   — inline style: animation property
+// prefers-reduced-motion is gated in JS (inline styles can't be overridden by CSS media queries).
 
 // ── Mini shapes — drawn at local origin (0,0) ─────────────────────────────────
 
@@ -88,47 +96,53 @@ function MR() {
 
 // ── Clusters ──────────────────────────────────────────────────────────────────
 
-function InvoiceCluster() {
+// Y translations are shifted so each cluster's visual centre aligns with AY=60
+// (same axis as the arrow and right-side consolidated shape).
+// MI/MR are 36×50 → half-height 25 → base Y = 60-25 = 35, stack offset -4..+9
+// MC is 28×38 → half-height 19 → base Y = 60-19 = 41, stack offset -4..+9
+// MP is 18×30 → half-height 15 → base Y = 60-15 = 45, stack offset -4..+9
+
+function InvoiceCluster({ pr }: { pr: boolean }) {
   return (
     <>
-      <g transform="translate(72,8) rotate(-8,18,25)"><g className="wmrs-f3"><MI /></g></g>
-      <g transform="translate(48,4) rotate(6,18,25)"><g className="wmrs-f1"><MI /></g></g>
-      <g transform="translate(20,12) rotate(-4,18,25)"><g className="wmrs-f4"><MI /></g></g>
-      <g transform="translate(38,20) rotate(0,18,25)"><g className="wmrs-f2"><MI /></g></g>
+      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s",pr)}><MI /></g></g>
+      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s",pr)}><MI /></g></g>
+      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s",pr)}><MI /></g></g>
+      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s",pr)}><MI /></g></g>
     </>
   );
 }
 
-function CalendarCluster() {
+function CalendarCluster({ pr }: { pr: boolean }) {
   return (
     <>
-      <g transform="translate(76,10) rotate(-7,14,19)"><g className="wmrs-f2"><MC /></g></g>
-      <g transform="translate(52,6) rotate(5,14,19)"><g className="wmrs-f4"><MC /></g></g>
-      <g transform="translate(24,14) rotate(-3,14,19)"><g className="wmrs-f1"><MC /></g></g>
-      <g transform="translate(44,22) rotate(0,14,19)"><g className="wmrs-f3"><MC /></g></g>
+      <g transform="translate(76,37) rotate(-7,14,19)"><g style={a("wmrs-float-2","9s","-4s",pr)}><MC /></g></g>
+      <g transform="translate(52,33) rotate(5,14,19)"><g style={a("wmrs-float-4","7s","-1s",pr)}><MC /></g></g>
+      <g transform="translate(24,41) rotate(-3,14,19)"><g style={a("wmrs-float-1","8s","-6s",pr)}><MC /></g></g>
+      <g transform="translate(44,49) rotate(0,14,19)"><g style={a("wmrs-float-3","10s","-2s",pr)}><MC /></g></g>
     </>
   );
 }
 
-function PhoneCluster() {
+function PhoneCluster({ pr }: { pr: boolean }) {
   return (
     <>
-      <g transform="translate(82,8) rotate(-7,9,15)"><g className="wmrs-f5"><MP /></g></g>
-      <g transform="translate(60,4) rotate(5,9,15)"><g className="wmrs-f3"><MP /></g></g>
-      <g transform="translate(38,12) rotate(-4,9,15)"><g className="wmrs-f1"><MP /></g></g>
-      <g transform="translate(62,20) rotate(3,9,15)"><g className="wmrs-f4"><MP /></g></g>
-      <g transform="translate(18,8) rotate(-2,9,15)"><g className="wmrs-f2"><MP /></g></g>
+      <g transform="translate(82,41) rotate(-7,9,15)"><g style={a("wmrs-float-5","7s","-3s",pr)}><MP /></g></g>
+      <g transform="translate(60,37) rotate(5,9,15)"><g style={a("wmrs-float-3","9s","0s",pr)}><MP /></g></g>
+      <g transform="translate(38,45) rotate(-4,9,15)"><g style={a("wmrs-float-1","8s","-5s",pr)}><MP /></g></g>
+      <g transform="translate(62,53) rotate(3,9,15)"><g style={a("wmrs-float-4","10s","-1s",pr)}><MP /></g></g>
+      <g transform="translate(18,41) rotate(-2,9,15)"><g style={a("wmrs-float-2","6s","-4s",pr)}><MP /></g></g>
     </>
   );
 }
 
-function ReportCluster() {
+function ReportCluster({ pr }: { pr: boolean }) {
   return (
     <>
-      <g transform="translate(72,8) rotate(-8,18,25)"><g className="wmrs-f3"><MR /></g></g>
-      <g transform="translate(48,4) rotate(6,18,25)"><g className="wmrs-f1"><MR /></g></g>
-      <g transform="translate(20,12) rotate(-4,18,25)"><g className="wmrs-f4"><MR /></g></g>
-      <g transform="translate(38,20) rotate(0,18,25)"><g className="wmrs-f2"><MR /></g></g>
+      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s",pr)}><MR /></g></g>
+      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s",pr)}><MR /></g></g>
+      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s",pr)}><MR /></g></g>
+      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s",pr)}><MR /></g></g>
     </>
   );
 }
@@ -214,9 +228,9 @@ function Arrow() {
 
 const SHAPE_MAP = {
   invoice:  { Cluster: InvoiceCluster,  Single: RightInvoice  },
-  calendar: { Cluster: CalendarCluster, Single: RightCalendar  },
-  phone:    { Cluster: PhoneCluster,    Single: RightPhone     },
-  report:   { Cluster: ReportCluster,   Single: RightReport    },
+  calendar: { Cluster: CalendarCluster, Single: RightCalendar },
+  phone:    { Cluster: PhoneCluster,    Single: RightPhone    },
+  report:   { Cluster: ReportCluster,   Single: RightReport   },
 };
 
 type Row = { shape: keyof typeof SHAPE_MAP; leftLabel: string; rightLabel: string };
@@ -259,7 +273,7 @@ function DiagramCell({
     <div>
       <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" aria-hidden="true" style={{ overflow: "visible" }}>
         <g style={clusterStyle}>
-          <Cluster />
+          <Cluster pr={prefersReduced} />
         </g>
         <Arrow />
         <Single />
