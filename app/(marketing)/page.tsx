@@ -80,12 +80,9 @@ export default function HomePage() {
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {home.problem.h2}
           </h2>
-          <p className="text-base text-charcoal/65 leading-relaxed mb-12 max-w-2xl">
-            The same six things turn up on almost every account. Together they&apos;re how costs drift 20–40% above market without anyone noticing.
-          </p>
           <OverchargeCards />
           <div className="mt-10">
             <Link
