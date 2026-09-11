@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { siteManagement } from "@/content/site";
+
 // Six line-art icons for the site management "You report it once" grid.
 // Style: thin charcoal strokes, single green accent, no filled shapes.
 // Same visual family as the homepage overcharge icons.
@@ -132,3 +137,52 @@ export const SITE_MGMT_ICONS: Record<string, () => React.ReactElement> = {
   "multi-location":   MultiLocationIcon,
   "direct-contact":   DirectContactIcon,
 };
+
+// ── Hover grid — matches OverchargeCards hover behaviour exactly ───────────────
+
+const ITEM_BORDERS = [
+  "border-b border-charcoal/8 sm:border-r",
+  "border-b border-charcoal/8 lg:border-r",
+  "border-b border-charcoal/8 sm:border-r lg:border-r-0",
+  "border-b border-charcoal/8 lg:border-r lg:border-b-0",
+  "border-b border-charcoal/8 sm:border-b-0 sm:border-r",
+  "",
+];
+
+const TRANSITION = "transform 200ms ease-out";
+
+export function SiteManagementIconGrid() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {siteManagement.whatWeDoSection.items.map((item, i) => {
+        const Icon = SITE_MGMT_ICONS[item.icon];
+        const isHovered = hoveredCard === i;
+        return (
+          <div
+            key={i}
+            className={`p-8 ${ITEM_BORDERS[i]}`}
+            onMouseEnter={() => setHoveredCard(i)}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="h-20 flex items-start mb-6">
+              {Icon && (
+                <div
+                  style={{
+                    display: "inline-block",
+                    transform: isHovered ? "translateY(-4px)" : "translateY(0)",
+                    transition: TRANSITION,
+                  }}
+                >
+                  <Icon />
+                </div>
+              )}
+            </div>
+            <p className="text-sm text-charcoal/70 leading-relaxed">{item.text}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

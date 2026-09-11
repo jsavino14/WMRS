@@ -482,7 +482,7 @@ export const about = {
 
 export const siteManagement = {
   hero: {
-    h1: "It's never one phone call.",
+    h1: "It's never just one phone call.",
     listItems: [
       "A pickup gets missed.",
       "A container doesn't arrive, or shows up the wrong size.",
@@ -530,6 +530,11 @@ export const siteManagement = {
       shape: "phone"    as const,
       leftLabel: "A different number for every vendor",
       rightLabel: "One direct line",
+    },
+    {
+      shape: "report"   as const,
+      leftLabel: "Tonnage and diversion data from every hauler",
+      rightLabel: "One set of numbers",
     },
   ],
   howWeGetPaid: {

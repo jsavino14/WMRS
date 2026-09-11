@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { ConsolidationDiagram } from "@/components/ConsolidationDiagram";
-import { SITE_MGMT_ICONS } from "@/components/SiteManagementIcons";
+import { SiteManagementIconGrid } from "@/components/SiteManagementIcons";
 import { meta, siteManagement, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -15,15 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Border classes for a 6-item 1/2/3-col grid (interior borders only)
-const ITEM_BORDERS = [
-  "border-b border-charcoal/8 sm:border-r",
-  "border-b border-charcoal/8 lg:border-r",
-  "border-b border-charcoal/8 sm:border-r lg:border-r-0",
-  "border-b border-charcoal/8 lg:border-r lg:border-b-0",
-  "border-b border-charcoal/8 sm:border-b-0 sm:border-r",
-  "",
-];
 
 export default function SiteManagementPage() {
   return (
@@ -77,7 +68,7 @@ export default function SiteManagementPage() {
       {/* ── Consolidation ─────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
         <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
+          <h2 className="text-4xl sm:text-5xl xl:text-6xl font-black text-white mb-4 leading-tight">
             {siteManagement.consolidationSection.h2}
           </h2>
           <p className="text-base text-white/55 leading-relaxed mb-14">
@@ -93,19 +84,7 @@ export default function SiteManagementPage() {
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12">
             {siteManagement.whatWeDoSection.h2}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {siteManagement.whatWeDoSection.items.map((item, i) => {
-              const Icon = SITE_MGMT_ICONS[item.icon];
-              return (
-                <div key={i} className={`p-8 ${ITEM_BORDERS[i]}`}>
-                  <div className="h-20 flex items-start mb-6">
-                    {Icon && <Icon />}
-                  </div>
-                  <p className="text-sm text-charcoal/70 leading-relaxed">{item.text}</p>
-                </div>
-              );
-            })}
-          </div>
+          <SiteManagementIconGrid />
         </Container>
       </section>
 
