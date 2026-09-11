@@ -15,30 +15,12 @@ export const metadata: Metadata = {
   },
 };
 
-// Opacity token — adjust here to test: 0.03 | 0.035 | 0.04 | 0.05
-const MARK_OPACITY = 0.035;
-
 
 
 export default function HomePage() {
   return (
     <>
-      {/* ── Fixed background watermark (desktop ≥768px only) ──────────────── */}
-      <div
-        aria-hidden="true"
-        className="hidden md:block fixed top-1/2 -translate-y-1/2 pointer-events-none select-none"
-        style={{
-          right: "-120px",
-          width: "clamp(416px, 34vw, 560px)",
-          opacity: MARK_OPACITY,
-          zIndex: 0,
-        }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/wmrs-mark.svg" alt="" style={{ width: "100%", height: "auto", display: "block" }} />
-      </div>
-
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+{/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative z-[1] bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
 
         {/* Photo - full bleed behind everything, anchored right */}
