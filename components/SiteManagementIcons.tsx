@@ -104,25 +104,21 @@ export function MultiLocationIcon() {
 }
 
 export function DirectContactIcon() {
-  // Classic telephone handset (two rect blocks + side rails) + green signal lines
+  // Mobile phone outline + green signal bars (reads unmistakably as a phone)
   return (
     <svg viewBox="0 0 44 46" fill="none" style={{ height: 46, width: "auto", display: "block" }}>
-      {/* Earpiece */}
-      <rect x="9" y="2"  width="16" height="10" stroke={C} strokeWidth={SW} />
-      {/* Mouthpiece */}
-      <rect x="9" y="34" width="16" height="10" stroke={C} strokeWidth={SW} />
-      {/* Left rail */}
-      <line x1="9"  y1="7"  x2="3"  y2="7"  stroke={C} strokeWidth={SW} />
-      <line x1="3"  y1="7"  x2="3"  y2="39" stroke={C} strokeWidth={SW} />
-      <line x1="3"  y1="39" x2="9"  y2="39" stroke={C} strokeWidth={SW} />
-      {/* Right rail */}
-      <line x1="25" y1="7"  x2="31" y2="7"  stroke={C} strokeWidth={SW} />
-      <line x1="31" y1="7"  x2="31" y2="39" stroke={C} strokeWidth={SW} />
-      <line x1="31" y1="39" x2="25" y2="39" stroke={C} strokeWidth={SW} />
-      {/* Green: signal / direct line accent */}
-      <line x1="34" y1="18" x2="38" y2="18" stroke={G} strokeWidth={SW} />
-      <line x1="34" y1="23" x2="40" y2="23" stroke={G} strokeWidth={SW} />
-      <line x1="34" y1="28" x2="38" y2="28" stroke={G} strokeWidth={SW} />
+      {/* Phone body */}
+      <rect x="8" y="2" width="20" height="36" stroke={C} strokeWidth={SW} />
+      {/* Speaker slot */}
+      <line x1="14" y1="7" x2="22" y2="7" stroke={C} strokeWidth={1.2} />
+      {/* Screen area */}
+      <rect x="11" y="11" width="14" height="16" stroke={C} strokeWidth={0.75} opacity={0.45} />
+      {/* Home bar */}
+      <line x1="14" y1="33" x2="22" y2="33" stroke={C} strokeWidth={1.2} />
+      {/* Green signal bars (outside, top-right) */}
+      <rect x="31" y="20" width="3" height="6"  fill={G} />
+      <rect x="36" y="15" width="3" height="11" fill={G} />
+      <rect x="31" y="10" width="3" height="3"  fill={G} opacity={0.35} />
     </svg>
   );
 }

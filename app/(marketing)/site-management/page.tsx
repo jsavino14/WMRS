@@ -42,7 +42,7 @@ export default function SiteManagementPage() {
           />
         </div>
 
-        <Container className="relative py-20 lg:py-28">
+        <Container className="relative py-14 lg:py-16">
           <div className="lg:w-[50%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08]">
               {siteManagement.hero.h1}
@@ -74,6 +74,19 @@ export default function SiteManagementPage() {
         </div>
       </section>
 
+      {/* ── Consolidation ─────────────────────────────────────────────────── */}
+      <section className="bg-charcoal py-20 lg:py-28">
+        <Container>
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
+            {siteManagement.consolidationSection.h2}
+          </h2>
+          <p className="text-base text-white/55 leading-relaxed mb-14">
+            {siteManagement.consolidationSection.sub}
+          </p>
+          <ConsolidationDiagram />
+        </Container>
+      </section>
+
       {/* ── You report it once ─────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
@@ -96,51 +109,8 @@ export default function SiteManagementPage() {
         </Container>
       </section>
 
-      {/* ── Consolidation ─────────────────────────────────────────────────── */}
-      <section className="bg-charcoal py-20 lg:py-28">
-        <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
-            {siteManagement.consolidationSection.h2}
-          </h2>
-          <p className="text-base text-white/55 leading-relaxed mb-14">
-            {siteManagement.consolidationSection.sub}
-          </p>
-          <ConsolidationDiagram />
-        </Container>
-      </section>
-
-      {/* ── Where to start ────────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28">
-        <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12">
-            {siteManagement.whereToStart.h2}
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent mb-4">
-                {siteManagement.whereToStart.auditIf.label}
-              </p>
-              <p className="text-base text-charcoal/65 leading-relaxed">
-                {siteManagement.whereToStart.auditIf.body}
-              </p>
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent mb-4">
-                {siteManagement.whereToStart.hereIf.label}
-              </p>
-              <p className="text-base text-charcoal/65 leading-relaxed">
-                {siteManagement.whereToStart.hereIf.body}
-              </p>
-            </div>
-          </div>
-          <p className="mt-10 text-base text-charcoal/65 leading-relaxed">
-            {siteManagement.whereToStart.closing}
-          </p>
-        </Container>
-      </section>
-
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28 border-t border-charcoal/8">
+      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
           <h2 className="text-3xl font-black text-charcoal mb-4">
             Send us one invoice.
