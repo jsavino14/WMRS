@@ -21,25 +21,27 @@ const AX1 = 118;
 const AX2 = 162;
 const AY  = 60;
 
-// Float animation helper — returns inline animation style.
-// Uses keyframes wmrs-float-1..5 from globals.css.
-// Gated in JS because inline styles can't be overridden by CSS media queries.
-function a(
-  name: string,
-  duration: string,
-  delay: string,
-  prefersReduced: boolean,
-): React.CSSProperties {
-  if (prefersReduced) return {};
+// Float CSS — keyframes + reduced-motion suppression — injected at runtime (same mechanism
+// as ProcessDiagram). Inline styles on each shape can't be purged by Tailwind.
+// @media !important overrides inline animation for accessibility without a JS gate
+// (a JS gate would remove the style from the DOM after mount, making it unverifiable).
+const FLOAT_CSS = `
+  @keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+  @keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-2px); } }
+  @keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+  @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
+  @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .wmrs-consolidation * { animation: none !important; }
+  }
+`;
+
+// Float animation helper — always returns animation inline style.
+// Reduced motion is handled by the CSS above, not by JS, so the style is
+// always present in the DOM and verifiable with getComputedStyle.
+function a(name: string, duration: string, delay: string): React.CSSProperties {
   return { animation: `${name} ${duration} ease-in-out ${delay} infinite alternate` };
 }
-
-// Float animation: keyframes wmrs-float-1..5 are defined in globals.css.
-// Animation is applied via inline style (bypasses Tailwind CSS purging).
-// Each shape uses two nested <g> elements:
-//   Outer <g transform="…">  — SVG attribute: positions and tilts the shape
-//   Inner <g style={a(…)}>   — inline style: animation property
-// prefers-reduced-motion is gated in JS (inline styles can't be overridden by CSS media queries).
 
 // ── Mini shapes — drawn at local origin (0,0) ─────────────────────────────────
 
@@ -102,47 +104,47 @@ function MR() {
 // MC is 28×38 → half-height 19 → base Y = 60-19 = 41, stack offset -4..+9
 // MP is 18×30 → half-height 15 → base Y = 60-15 = 45, stack offset -4..+9
 
-function InvoiceCluster({ pr }: { pr: boolean }) {
+function InvoiceCluster() {
   return (
     <>
-      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s",pr)}><MI /></g></g>
-      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s",pr)}><MI /></g></g>
-      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s",pr)}><MI /></g></g>
-      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s",pr)}><MI /></g></g>
+      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s")}><MI /></g></g>
+      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s")}><MI /></g></g>
+      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s")}><MI /></g></g>
+      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s")}><MI /></g></g>
     </>
   );
 }
 
-function CalendarCluster({ pr }: { pr: boolean }) {
+function CalendarCluster() {
   return (
     <>
-      <g transform="translate(76,37) rotate(-7,14,19)"><g style={a("wmrs-float-2","9s","-4s",pr)}><MC /></g></g>
-      <g transform="translate(52,33) rotate(5,14,19)"><g style={a("wmrs-float-4","7s","-1s",pr)}><MC /></g></g>
-      <g transform="translate(24,41) rotate(-3,14,19)"><g style={a("wmrs-float-1","8s","-6s",pr)}><MC /></g></g>
-      <g transform="translate(44,49) rotate(0,14,19)"><g style={a("wmrs-float-3","10s","-2s",pr)}><MC /></g></g>
+      <g transform="translate(76,37) rotate(-7,14,19)"><g style={a("wmrs-float-2","9s","-4s")}><MC /></g></g>
+      <g transform="translate(52,33) rotate(5,14,19)"><g style={a("wmrs-float-4","7s","-1s")}><MC /></g></g>
+      <g transform="translate(24,41) rotate(-3,14,19)"><g style={a("wmrs-float-1","8s","-6s")}><MC /></g></g>
+      <g transform="translate(44,49) rotate(0,14,19)"><g style={a("wmrs-float-3","10s","-2s")}><MC /></g></g>
     </>
   );
 }
 
-function PhoneCluster({ pr }: { pr: boolean }) {
+function PhoneCluster() {
   return (
     <>
-      <g transform="translate(82,41) rotate(-7,9,15)"><g style={a("wmrs-float-5","7s","-3s",pr)}><MP /></g></g>
-      <g transform="translate(60,37) rotate(5,9,15)"><g style={a("wmrs-float-3","9s","0s",pr)}><MP /></g></g>
-      <g transform="translate(38,45) rotate(-4,9,15)"><g style={a("wmrs-float-1","8s","-5s",pr)}><MP /></g></g>
-      <g transform="translate(62,53) rotate(3,9,15)"><g style={a("wmrs-float-4","10s","-1s",pr)}><MP /></g></g>
-      <g transform="translate(18,41) rotate(-2,9,15)"><g style={a("wmrs-float-2","6s","-4s",pr)}><MP /></g></g>
+      <g transform="translate(82,41) rotate(-7,9,15)"><g style={a("wmrs-float-5","7s","-3s")}><MP /></g></g>
+      <g transform="translate(60,37) rotate(5,9,15)"><g style={a("wmrs-float-3","9s","0s")}><MP /></g></g>
+      <g transform="translate(38,45) rotate(-4,9,15)"><g style={a("wmrs-float-1","8s","-5s")}><MP /></g></g>
+      <g transform="translate(62,53) rotate(3,9,15)"><g style={a("wmrs-float-4","10s","-1s")}><MP /></g></g>
+      <g transform="translate(18,41) rotate(-2,9,15)"><g style={a("wmrs-float-2","6s","-4s")}><MP /></g></g>
     </>
   );
 }
 
-function ReportCluster({ pr }: { pr: boolean }) {
+function ReportCluster() {
   return (
     <>
-      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s",pr)}><MR /></g></g>
-      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s",pr)}><MR /></g></g>
-      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s",pr)}><MR /></g></g>
-      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s",pr)}><MR /></g></g>
+      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s")}><MR /></g></g>
+      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s")}><MR /></g></g>
+      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s")}><MR /></g></g>
+      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s")}><MR /></g></g>
     </>
   );
 }
@@ -273,7 +275,7 @@ function DiagramCell({
     <div>
       <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" aria-hidden="true" style={{ overflow: "visible" }}>
         <g style={clusterStyle}>
-          <Cluster pr={prefersReduced} />
+          <Cluster />
         </g>
         <Arrow />
         <Single />
@@ -323,7 +325,10 @@ export function ConsolidationDiagram() {
   }, []);
 
   return (
-    <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
+    <>
+    {/* eslint-disable-next-line react/no-danger */}
+    <style dangerouslySetInnerHTML={{ __html: FLOAT_CSS }} />
+    <div ref={ref} className="wmrs-consolidation grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
       {siteManagement.consolidationRows.map((row, i) => (
         <DiagramCell
           key={i}
@@ -333,5 +338,6 @@ export function ConsolidationDiagram() {
         />
       ))}
     </div>
+    </>
   );
 }
