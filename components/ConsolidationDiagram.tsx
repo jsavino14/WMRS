@@ -21,27 +21,21 @@ const AX1 = 118;
 const AX2 = 162;
 const AY  = 60;
 
-// Float CSS — keyframes + reduced-motion suppression — injected at runtime (same mechanism
-// as ProcessDiagram). Inline styles on each shape can't be purged by Tailwind.
-// @media !important overrides inline animation for accessibility without a JS gate
-// (a JS gate would remove the style from the DOM after mount, making it unverifiable).
+// Float CSS — keyframes + class rules injected at runtime, same mechanism as ProcessDiagram.
+// Classes defined inside dangerouslySetInnerHTML are never seen by Tailwind's build scanner
+// and cannot be purged. No prefers-reduced-motion check (matches ProcessDiagram behaviour).
 const FLOAT_CSS = `
   @keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-3px); } }
   @keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-2px); } }
   @keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-4px); } }
   @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
   @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
-  @media (prefers-reduced-motion: reduce) {
-    .wmrs-consolidation * { animation: none !important; }
-  }
+  .wmrs-f1 { animation: wmrs-float-1  7s ease-in-out  0s infinite alternate; }
+  .wmrs-f2 { animation: wmrs-float-2  9s ease-in-out -3s infinite alternate; }
+  .wmrs-f3 { animation: wmrs-float-3  8s ease-in-out -5s infinite alternate; }
+  .wmrs-f4 { animation: wmrs-float-4 10s ease-in-out -2s infinite alternate; }
+  .wmrs-f5 { animation: wmrs-float-5  6s ease-in-out -4s infinite alternate; }
 `;
-
-// Float animation helper — always returns animation inline style.
-// Reduced motion is handled by the CSS above, not by JS, so the style is
-// always present in the DOM and verifiable with getComputedStyle.
-function a(name: string, duration: string, delay: string): React.CSSProperties {
-  return { animation: `${name} ${duration} ease-in-out ${delay} infinite alternate` };
-}
 
 // ── Mini shapes — drawn at local origin (0,0) ─────────────────────────────────
 
@@ -107,10 +101,10 @@ function MR() {
 function InvoiceCluster() {
   return (
     <>
-      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s")}><MI /></g></g>
-      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s")}><MI /></g></g>
-      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s")}><MI /></g></g>
-      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s")}><MI /></g></g>
+      <g transform="translate(72,31) rotate(-8,18,25)"><g className="wmrs-f3"><MI /></g></g>
+      <g transform="translate(48,27) rotate(6,18,25)"><g className="wmrs-f1"><MI /></g></g>
+      <g transform="translate(20,35) rotate(-4,18,25)"><g className="wmrs-f4"><MI /></g></g>
+      <g transform="translate(38,43) rotate(0,18,25)"><g className="wmrs-f2"><MI /></g></g>
     </>
   );
 }
@@ -118,10 +112,10 @@ function InvoiceCluster() {
 function CalendarCluster() {
   return (
     <>
-      <g transform="translate(76,37) rotate(-7,14,19)"><g style={a("wmrs-float-2","9s","-4s")}><MC /></g></g>
-      <g transform="translate(52,33) rotate(5,14,19)"><g style={a("wmrs-float-4","7s","-1s")}><MC /></g></g>
-      <g transform="translate(24,41) rotate(-3,14,19)"><g style={a("wmrs-float-1","8s","-6s")}><MC /></g></g>
-      <g transform="translate(44,49) rotate(0,14,19)"><g style={a("wmrs-float-3","10s","-2s")}><MC /></g></g>
+      <g transform="translate(76,37) rotate(-7,14,19)"><g className="wmrs-f2"><MC /></g></g>
+      <g transform="translate(52,33) rotate(5,14,19)"><g className="wmrs-f4"><MC /></g></g>
+      <g transform="translate(24,41) rotate(-3,14,19)"><g className="wmrs-f1"><MC /></g></g>
+      <g transform="translate(44,49) rotate(0,14,19)"><g className="wmrs-f3"><MC /></g></g>
     </>
   );
 }
@@ -129,11 +123,11 @@ function CalendarCluster() {
 function PhoneCluster() {
   return (
     <>
-      <g transform="translate(82,41) rotate(-7,9,15)"><g style={a("wmrs-float-5","7s","-3s")}><MP /></g></g>
-      <g transform="translate(60,37) rotate(5,9,15)"><g style={a("wmrs-float-3","9s","0s")}><MP /></g></g>
-      <g transform="translate(38,45) rotate(-4,9,15)"><g style={a("wmrs-float-1","8s","-5s")}><MP /></g></g>
-      <g transform="translate(62,53) rotate(3,9,15)"><g style={a("wmrs-float-4","10s","-1s")}><MP /></g></g>
-      <g transform="translate(18,41) rotate(-2,9,15)"><g style={a("wmrs-float-2","6s","-4s")}><MP /></g></g>
+      <g transform="translate(82,41) rotate(-7,9,15)"><g className="wmrs-f5"><MP /></g></g>
+      <g transform="translate(60,37) rotate(5,9,15)"><g className="wmrs-f3"><MP /></g></g>
+      <g transform="translate(38,45) rotate(-4,9,15)"><g className="wmrs-f1"><MP /></g></g>
+      <g transform="translate(62,53) rotate(3,9,15)"><g className="wmrs-f4"><MP /></g></g>
+      <g transform="translate(18,41) rotate(-2,9,15)"><g className="wmrs-f2"><MP /></g></g>
     </>
   );
 }
@@ -141,10 +135,10 @@ function PhoneCluster() {
 function ReportCluster() {
   return (
     <>
-      <g transform="translate(72,31) rotate(-8,18,25)"><g style={a("wmrs-float-3","8s","-5s")}><MR /></g></g>
-      <g transform="translate(48,27) rotate(6,18,25)"><g style={a("wmrs-float-1","7s","0s")}><MR /></g></g>
-      <g transform="translate(20,35) rotate(-4,18,25)"><g style={a("wmrs-float-4","10s","-2s")}><MR /></g></g>
-      <g transform="translate(38,43) rotate(0,18,25)"><g style={a("wmrs-float-2","9s","-3s")}><MR /></g></g>
+      <g transform="translate(72,31) rotate(-8,18,25)"><g className="wmrs-f3"><MR /></g></g>
+      <g transform="translate(48,27) rotate(6,18,25)"><g className="wmrs-f1"><MR /></g></g>
+      <g transform="translate(20,35) rotate(-4,18,25)"><g className="wmrs-f4"><MR /></g></g>
+      <g transform="translate(38,43) rotate(0,18,25)"><g className="wmrs-f2"><MR /></g></g>
     </>
   );
 }
@@ -328,7 +322,7 @@ export function ConsolidationDiagram() {
     <>
     {/* eslint-disable-next-line react/no-danger */}
     <style dangerouslySetInnerHTML={{ __html: FLOAT_CSS }} />
-    <div ref={ref} className="wmrs-consolidation grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
+    <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
       {siteManagement.consolidationRows.map((row, i) => (
         <DiagramCell
           key={i}
