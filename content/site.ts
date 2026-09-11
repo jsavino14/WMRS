@@ -482,8 +482,15 @@ export const about = {
 
 export const siteManagement = {
   hero: {
-    h1: "The rate is the easy part.",
-    sub: "Anyone can get a number down once. Holding it is the work.",
+    h1: "It's never one phone call.",
+    listItems: [
+      "A pickup gets missed.",
+      "A container doesn't arrive, or shows up the wrong size.",
+      "An invoice doesn't match the contract.",
+      "A renewal window closes while nobody's watching.",
+      "A location opens or closes and nobody tells the hauler.",
+    ],
+    closing: "Ditch the multiple calls, hold queues, and numerous follow ups.",
   },
   rateSection: {
     h2: "It's never one phone call.",
@@ -505,19 +512,22 @@ export const siteManagement = {
     ],
   },
   consolidationSection: {
-    h2: "Now it is.",
+    h2: "Now it can be.",
     sub: "However many sites you have, everything comes through one place.",
   },
   consolidationRows: [
     {
+      shape: "invoice"  as const,
       leftLabel: "Invoices from every hauler",
       rightLabel: "One consolidated bill",
     },
     {
+      shape: "calendar" as const,
       leftLabel: "Contracts and renewal dates across every site",
       rightLabel: "One tracked calendar",
     },
     {
+      shape: "phone"    as const,
       leftLabel: "A different number for every vendor",
       rightLabel: "One direct line",
     },

@@ -30,62 +30,57 @@ export default function SiteManagementPage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
-        {/* Desktop: image takes right 60%, text left 40% */}
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[60%]">
+        {/* Desktop: image fills right 50% absolutely */}
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[50%]">
           <Image
-            src="/four-containers.jpg"
-            alt="Four commercial waste containers in a row against a concrete wall"
+            src="/site-management-hero.jpg"
+            alt="Four commercial waste containers against a concrete wall"
             fill
-            className="object-cover object-[left_35%]"
-            sizes="60vw"
+            className="object-cover object-[center_38%]"
+            sizes="50vw"
             priority
           />
         </div>
+
         <Container className="relative py-20 lg:py-28">
-          <div className="lg:w-[40%] lg:pr-12">
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
+          <div className="lg:w-[50%] lg:pr-16">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08]">
               {siteManagement.hero.h1}
             </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed">
-              {siteManagement.hero.sub}
+
+            <ul className="mt-10 space-y-4 list-none p-0">
+              {siteManagement.hero.listItems.map((item, i) => (
+                <li key={i} className="text-[15px] lg:text-base text-charcoal leading-relaxed">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-8 text-base text-charcoal/60 leading-relaxed">
+              {siteManagement.hero.closing}
             </p>
           </div>
         </Container>
-        {/* Mobile: full-width 16:9 below headline */}
-        <div className="lg:hidden relative aspect-video">
+
+        {/* Mobile: image below content */}
+        <div className="lg:hidden relative aspect-[4/3]">
           <Image
-            src="/four-containers.jpg"
-            alt="Four commercial waste containers in a row against a concrete wall"
+            src="/site-management-hero.jpg"
+            alt="Four commercial waste containers against a concrete wall"
             fill
-            className="object-cover object-[left_35%]"
+            className="object-cover object-[center_38%]"
             sizes="100vw"
           />
         </div>
       </section>
 
-      {/* ── Supporting examples ───────────────────────────────────────────── */}
+      {/* ── You report it once ─────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
-            {siteManagement.rateSection.h2}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
-            {siteManagement.rateSection.paragraphs.map((para, i) => (
-              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
-                {para}
-              </p>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ── What we take on ───────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28">
-        <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12">
             {siteManagement.whatWeDoSection.h2}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {siteManagement.whatWeDoSection.items.map((item, i) => {
               const Icon = SITE_MGMT_ICONS[item.icon];
               return (
@@ -104,24 +99,55 @@ export default function SiteManagementPage() {
       {/* ── Consolidation ─────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
         <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 max-w-xl leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
             {siteManagement.consolidationSection.h2}
           </h2>
-          <p className="text-base text-white/55 leading-relaxed max-w-xl mb-14">
+          <p className="text-base text-white/55 leading-relaxed mb-14">
             {siteManagement.consolidationSection.sub}
           </p>
           <ConsolidationDiagram />
         </Container>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
+      {/* ── Where to start ────────────────────────────────────────────────── */}
+      <section className="bg-white py-20 lg:py-28">
         <Container>
-          <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12">
+            {siteManagement.whereToStart.h2}
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent mb-4">
+                {siteManagement.whereToStart.auditIf.label}
+              </p>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                {siteManagement.whereToStart.auditIf.body}
+              </p>
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent mb-4">
+                {siteManagement.whereToStart.hereIf.label}
+              </p>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                {siteManagement.whereToStart.hereIf.body}
+              </p>
+            </div>
+          </div>
+          <p className="mt-10 text-base text-charcoal/65 leading-relaxed">
+            {siteManagement.whereToStart.closing}
+          </p>
+        </Container>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28 border-t border-charcoal/8">
+        <Container>
+          <h2 className="text-3xl font-black text-charcoal mb-4">
             Send us one invoice.
           </h2>
-          <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
-            Send one recent bill. We&apos;ll tell you exactly what we find.
+          <p className="text-lg text-charcoal/60 mb-10 max-w-2xl">
+            Send one recent bill. We&apos;ll tell you what we find and what we think fits,
+            whether that&apos;s an audit, ongoing management, or both.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
