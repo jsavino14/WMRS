@@ -16,51 +16,25 @@ const TA  = 0.85;
 const VW = 300;
 const VH = 120;
 
-// Arrow — horizontal, pointing right
+// Arrow
 const AX1 = 118;
 const AX2 = 162;
 const AY  = 60;
 
-// ── Float animation ───────────────────────────────────────────────────────────
-// @keyframes only — no class rules here.
-// Animation is applied via inline `style` on each individual shape wrapper <g>
-// so it is guaranteed to reach the element (not subject to CSS injection or
-// class-selector resolution uncertainty).
+// Float animation classes wmrs-f1…f5 are defined in globals.css.
+// Keeping keyframes in the static CSS bundle guarantees they are parsed before
+// the SVG elements that reference them appear in the DOM.
 //
-// prefers-reduced-motion is gated in JS (prefersReduced prop) because a CSS
-// media query cannot override an inline style declaration.
+// Each animated shape uses two nested <g> elements:
+//   Outer <g transform="…">  — SVG attribute: positions and tilts the shape
+//   Inner <g className="wmrs-fN">  — CSS class: applies the float animation
 //
-// transform-box:fill-box makes transform-origin:center relative to each
-// shape's own bounding box, not the SVG viewport origin. Having the animated
-// <g> directly wrap the shape content (with no SVG transform attribute of its
-// own) avoids any conflict between CSS and SVG transforms on the same element.
-
-const KEYFRAMES_CSS = `
-@keyframes wmrs-float-1{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-3px) rotate(.15deg)}}
-@keyframes wmrs-float-2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2px) rotate(-.2deg)}}
-@keyframes wmrs-float-3{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-4px) rotate(.25deg)}}
-@keyframes wmrs-float-4{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2.5px) rotate(-.15deg)}}
-@keyframes wmrs-float-5{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-3.5px) rotate(.2deg)}}
-`;
-
-function floatStyle(
-  name: string,
-  duration: string,
-  delay: string,
-  prefersReduced: boolean,
-): React.CSSProperties {
-  if (prefersReduced) return {};
-  return {
-    animation: `${name} ${duration} ease-in-out ${delay} infinite`,
-    transformBox: "fill-box",
-    transformOrigin: "center",
-  };
-}
+// The animated <g> has NO SVG transform attribute of its own, so CSS
+// transform (translateY) applies cleanly without any conflict.
+// prefers-reduced-motion is handled entirely in globals.css via @media.
 
 // ── Mini shapes — drawn at local origin (0,0) ─────────────────────────────────
-// fill=BG on the outer rect so stacked shapes occlude each other.
 
-// Mini invoice: 36×50
 function MI() {
   return (
     <>
@@ -74,7 +48,6 @@ function MI() {
   );
 }
 
-// Mini calendar: 28×38
 function MC() {
   return (
     <>
@@ -89,7 +62,6 @@ function MC() {
   );
 }
 
-// Mini mobile phone: 18×30
 function MP() {
   return (
     <>
@@ -100,14 +72,12 @@ function MP() {
   );
 }
 
-// Mini report/chart: 36×50 (document + bar chart)
 function MR() {
   return (
     <>
       <rect x={0.5} y={0.5} width={35} height={49} stroke={W} strokeWidth={SL} fill={BG} />
       <rect x={4} y={8}  width={20} height={3} fill={W} opacity={BA} />
       <rect x={4} y={14} width={14} height={3} fill={W} opacity={BA} />
-      {/* bar chart — baseline at y=41 */}
       <rect x={4}  y={28} width={5} height={13} fill={W} opacity={BA} />
       <rect x={11} y={24} width={5} height={17} fill={W} opacity={TA} />
       <rect x={18} y={26} width={5} height={15} fill={W} opacity={BA} />
@@ -117,102 +87,54 @@ function MR() {
 }
 
 // ── Clusters ──────────────────────────────────────────────────────────────────
-// Two-level <g> per shape:
-//   Outer <g transform="...">  — SVG attribute for position + tilt
-//   Inner <g style={floatStyle(...)}>  — CSS animation, no SVG transform attr
-//
-// Keeping the animation on the inner <g> (which has no SVG transform of its
-// own) means CSS transform and SVG transform never compete on the same element.
-// transform-box:fill-box on the inner <g> calculates the bounding box from the
-// shape content directly inside it, giving the correct rotation pivot.
 
-type ClusterProps = { prefersReduced: boolean };
-
-function InvoiceCluster({ prefersReduced }: ClusterProps) {
-  const f = (n: string, d: string, de: string) => floatStyle(n, d, de, prefersReduced);
+function InvoiceCluster() {
   return (
     <>
-      <g transform="translate(72,8) rotate(-8,18,25)">
-        <g style={f("wmrs-float-3", "8s",   "-5s")}><MI /></g>
-      </g>
-      <g transform="translate(48,4) rotate(6,18,25)">
-        <g style={f("wmrs-float-1", "7s",   "0s")}><MI /></g>
-      </g>
-      <g transform="translate(20,12) rotate(-4,18,25)">
-        <g style={f("wmrs-float-4", "10s",  "-2s")}><MI /></g>
-      </g>
-      <g transform="translate(38,20) rotate(0,18,25)">
-        <g style={f("wmrs-float-2", "9s",   "-3s")}><MI /></g>
-      </g>
+      <g transform="translate(72,8) rotate(-8,18,25)"><g className="wmrs-f3"><MI /></g></g>
+      <g transform="translate(48,4) rotate(6,18,25)"><g className="wmrs-f1"><MI /></g></g>
+      <g transform="translate(20,12) rotate(-4,18,25)"><g className="wmrs-f4"><MI /></g></g>
+      <g transform="translate(38,20) rotate(0,18,25)"><g className="wmrs-f2"><MI /></g></g>
     </>
   );
 }
 
-function CalendarCluster({ prefersReduced }: ClusterProps) {
-  const f = (n: string, d: string, de: string) => floatStyle(n, d, de, prefersReduced);
+function CalendarCluster() {
   return (
     <>
-      <g transform="translate(76,10) rotate(-7,14,19)">
-        <g style={f("wmrs-float-2", "9s",   "-3s")}><MC /></g>
-      </g>
-      <g transform="translate(52,6) rotate(5,14,19)">
-        <g style={f("wmrs-float-4", "10s",  "-2s")}><MC /></g>
-      </g>
-      <g transform="translate(24,14) rotate(-3,14,19)">
-        <g style={f("wmrs-float-1", "7s",   "0s")}><MC /></g>
-      </g>
-      <g transform="translate(44,22) rotate(0,14,19)">
-        <g style={f("wmrs-float-3", "8s",   "-5s")}><MC /></g>
-      </g>
+      <g transform="translate(76,10) rotate(-7,14,19)"><g className="wmrs-f2"><MC /></g></g>
+      <g transform="translate(52,6) rotate(5,14,19)"><g className="wmrs-f4"><MC /></g></g>
+      <g transform="translate(24,14) rotate(-3,14,19)"><g className="wmrs-f1"><MC /></g></g>
+      <g transform="translate(44,22) rotate(0,14,19)"><g className="wmrs-f3"><MC /></g></g>
     </>
   );
 }
 
-function PhoneCluster({ prefersReduced }: ClusterProps) {
-  const f = (n: string, d: string, de: string) => floatStyle(n, d, de, prefersReduced);
+function PhoneCluster() {
   return (
     <>
-      <g transform="translate(82,8) rotate(-7,9,15)">
-        <g style={f("wmrs-float-5", "7.5s", "-7s")}><MP /></g>
-      </g>
-      <g transform="translate(60,4) rotate(5,9,15)">
-        <g style={f("wmrs-float-3", "8s",   "-5s")}><MP /></g>
-      </g>
-      <g transform="translate(38,12) rotate(-4,9,15)">
-        <g style={f("wmrs-float-1", "7s",   "0s")}><MP /></g>
-      </g>
-      <g transform="translate(62,20) rotate(3,9,15)">
-        <g style={f("wmrs-float-4", "10s",  "-2s")}><MP /></g>
-      </g>
-      <g transform="translate(18,8) rotate(-2,9,15)">
-        <g style={f("wmrs-float-2", "9s",   "-3s")}><MP /></g>
-      </g>
+      <g transform="translate(82,8) rotate(-7,9,15)"><g className="wmrs-f5"><MP /></g></g>
+      <g transform="translate(60,4) rotate(5,9,15)"><g className="wmrs-f3"><MP /></g></g>
+      <g transform="translate(38,12) rotate(-4,9,15)"><g className="wmrs-f1"><MP /></g></g>
+      <g transform="translate(62,20) rotate(3,9,15)"><g className="wmrs-f4"><MP /></g></g>
+      <g transform="translate(18,8) rotate(-2,9,15)"><g className="wmrs-f2"><MP /></g></g>
     </>
   );
 }
 
-function ReportCluster({ prefersReduced }: ClusterProps) {
-  const f = (n: string, d: string, de: string) => floatStyle(n, d, de, prefersReduced);
+function ReportCluster() {
   return (
     <>
-      <g transform="translate(72,8) rotate(-8,18,25)">
-        <g style={f("wmrs-float-3", "8s",   "-5s")}><MR /></g>
-      </g>
-      <g transform="translate(48,4) rotate(6,18,25)">
-        <g style={f("wmrs-float-1", "7s",   "0s")}><MR /></g>
-      </g>
-      <g transform="translate(20,12) rotate(-4,18,25)">
-        <g style={f("wmrs-float-4", "10s",  "-2s")}><MR /></g>
-      </g>
-      <g transform="translate(38,20) rotate(0,18,25)">
-        <g style={f("wmrs-float-2", "9s",   "-3s")}><MR /></g>
-      </g>
+      <g transform="translate(72,8) rotate(-8,18,25)"><g className="wmrs-f3"><MR /></g></g>
+      <g transform="translate(48,4) rotate(6,18,25)"><g className="wmrs-f1"><MR /></g></g>
+      <g transform="translate(20,12) rotate(-4,18,25)"><g className="wmrs-f4"><MR /></g></g>
+      <g transform="translate(38,20) rotate(0,18,25)"><g className="wmrs-f2"><MR /></g></g>
     </>
   );
 }
 
-// ── Consolidated shapes — right of arrow, static (no float) ───────────────────
-// Portrait invoice: 80×100
+// ── Consolidated shapes — right of arrow, static ──────────────────────────────
+
 function RightInvoice() {
   const X = 168, Y = 10;
   return (
@@ -229,7 +151,6 @@ function RightInvoice() {
   );
 }
 
-// Square calendar: 96×96
 function RightCalendar() {
   const X = 168, Y = 12;
   return (
@@ -247,8 +168,6 @@ function RightCalendar() {
   );
 }
 
-// Single large phone — matches the MP() mini shape vocabulary, ~3× size (54×90)
-// X=184 centres the shape at 184+27=211 = 70% of VW, matching the label column.
 function RightPhone() {
   const X = 184, Y = 15;
   return (
@@ -260,7 +179,6 @@ function RightPhone() {
   );
 }
 
-// Portrait report with bar chart: 80×100
 function RightReport() {
   const X = 168, Y = 10;
   return (
@@ -268,7 +186,6 @@ function RightReport() {
       <rect x={X + 0.5} y={Y + 0.5} width={79} height={99} stroke={W} strokeWidth={SB} fill="none" />
       <rect x={X + 6}  y={Y + 12} width={55} height={4} fill={W} opacity={BA} />
       <rect x={X + 6}  y={Y + 20} width={38} height={4} fill={W} opacity={BA} />
-      {/* 4 bars, baseline at Y+90 */}
       <rect x={X + 6}  y={Y + 52} width={14} height={38} fill={W} opacity={BA} />
       <rect x={X + 24} y={Y + 42} width={14} height={48} fill={W} opacity={TA} />
       <rect x={X + 42} y={Y + 48} width={14} height={42} fill={W} opacity={BA} />
@@ -278,6 +195,7 @@ function RightReport() {
 }
 
 // ── Arrow ──────────────────────────────────────────────────────────────────────
+
 function Arrow() {
   return (
     <>
@@ -293,6 +211,7 @@ function Arrow() {
 }
 
 // ── Shape map ──────────────────────────────────────────────────────────────────
+
 const SHAPE_MAP = {
   invoice:  { Cluster: InvoiceCluster,  Single: RightInvoice  },
   calendar: { Cluster: CalendarCluster, Single: RightCalendar  },
@@ -303,16 +222,11 @@ const SHAPE_MAP = {
 type Row = { shape: keyof typeof SHAPE_MAP; leftLabel: string; rightLabel: string };
 
 // ── Label layout ───────────────────────────────────────────────────────────────
-// Column percentages derived from the SVG coordinate system (VW=300):
-//   Left cluster visual center  ≈ x=66  → 22% of VW
-//   Right shape visual center   ≈ x=211 → 70% of VW (both phone and invoice pairs)
-//
-// Grid columns: [44% left-label | 9% arrow-spacer | 34% right-label | 13% trailing]
-//   Left label  centres at 0+22=22%  ✓
-//   Right label centres at 44+9+17=70% ✓
-//
-// alignItems:start means the top edge of both labels is flush — a two-line
-// label on one side doesn't push the row's height and misalign the other.
+// Grid columns derived from SVG coordinates (VW=300):
+//   Cluster centre ≈ x=66 → 22% of VW  →  left column centres at 0+22=22% ✓
+//   Right-shape centre ≈ x=211 → 70% of VW  →  right column centres at 44+9+17=70% ✓
+// alignItems:start keeps both labels top-aligned so two-line labels don't
+// shift the row height.
 
 const LABEL_STYLE: React.CSSProperties = {
   fontSize: "10px",
@@ -345,13 +259,12 @@ function DiagramCell({
     <div>
       <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" aria-hidden="true" style={{ overflow: "visible" }}>
         <g style={clusterStyle}>
-          <Cluster prefersReduced={prefersReduced} />
+          <Cluster />
         </g>
         <Arrow />
         <Single />
       </svg>
 
-      {/* Labels centred under their respective shapes */}
       <div
         style={{
           display: "grid",
@@ -361,7 +274,7 @@ function DiagramCell({
         }}
       >
         <span style={LABEL_STYLE}>{row.leftLabel}</span>
-        <span /> {/* arrow-region spacer */}
+        <span />
         <span style={LABEL_STYLE}>{row.rightLabel}</span>
       </div>
     </div>
@@ -396,20 +309,15 @@ export function ConsolidationDiagram() {
   }, []);
 
   return (
-    <>
-      {/* eslint-disable-next-line react/no-danger */}
-      <style dangerouslySetInnerHTML={{ __html: KEYFRAMES_CSS }} />
-      {/* gap-x-20 (80px) between the two column pairs; gap-y-14 between rows */}
-      <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
-        {siteManagement.consolidationRows.map((row, i) => (
-          <DiagramCell
-            key={i}
-            row={row}
-            animated={animated}
-            prefersReduced={prefersReduced}
-          />
-        ))}
-      </div>
-    </>
+    <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
+      {siteManagement.consolidationRows.map((row, i) => (
+        <DiagramCell
+          key={i}
+          row={row}
+          animated={animated}
+          prefersReduced={prefersReduced}
+        />
+      ))}
+    </div>
   );
 }
