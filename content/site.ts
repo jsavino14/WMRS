@@ -496,14 +496,32 @@ export const siteManagement = {
   whatWeDoSection: {
     h2: "You report it once. We handle the rest.",
     items: [
-      "Every invoice reviewed against your contracted terms, every month",
-      "Service issues taken directly to the hauler. You report it once, we chase it.",
-      "Container sizing and pickup frequency adjusted as your volume changes",
-      "Contract renewal windows tracked so none close without a decision",
-      "Consolidated billing across every location",
-      "One dedicated contact with a direct line",
+      { icon: "invoice-review",   text: "Every invoice reviewed against your contracted terms, every month" },
+      { icon: "service-chase",    text: "Service issues taken directly to the hauler. You report it once, we chase it." },
+      { icon: "container-sizing", text: "Container sizing and pickup frequency adjusted as your volume changes" },
+      { icon: "renewal-tracking", text: "Contract renewal windows tracked so none close without a decision" },
+      { icon: "multi-location",   text: "Consolidated billing across every location" },
+      { icon: "direct-contact",   text: "One dedicated contact with a direct line" },
     ],
   },
+  consolidationSection: {
+    h2: "Now it is.",
+    sub: "However many sites you have, everything comes through one place.",
+  },
+  consolidationRows: [
+    {
+      leftLabel: "Invoices from every hauler",
+      rightLabel: "One consolidated bill",
+    },
+    {
+      leftLabel: "Contracts and renewal dates across every site",
+      rightLabel: "One tracked calendar",
+    },
+    {
+      leftLabel: "A different number for every vendor",
+      rightLabel: "One direct line",
+    },
+  ],
   howWeGetPaid: {
     h2: "How we get paid is negotiable. The work isn't.",
     body: [

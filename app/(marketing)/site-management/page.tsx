@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, siteManagement, home, company } from "@/content/site";
+import { ConsolidationDiagram } from "@/components/ConsolidationDiagram";
+import { SITE_MGMT_ICONS } from "@/components/SiteManagementIcons";
+import { meta, siteManagement, company } from "@/content/site";
 
 export const metadata: Metadata = {
   title: meta.siteManagement.title,
@@ -12,6 +14,16 @@ export const metadata: Metadata = {
     description: meta.siteManagement.description,
   },
 };
+
+// Border classes for a 6-item 1/2/3-col grid (interior borders only)
+const ITEM_BORDERS = [
+  "border-b border-charcoal/8 sm:border-r",
+  "border-b border-charcoal/8 lg:border-r",
+  "border-b border-charcoal/8 sm:border-r lg:border-r-0",
+  "border-b border-charcoal/8 lg:border-r lg:border-b-0",
+  "border-b border-charcoal/8 sm:border-b-0 sm:border-r",
+  "",
+];
 
 export default function SiteManagementPage() {
   return (
@@ -54,7 +66,6 @@ export default function SiteManagementPage() {
       {/* ── Supporting examples ───────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {siteManagement.rateSection.h2}
           </h2>
@@ -71,47 +82,41 @@ export default function SiteManagementPage() {
       {/* ── What we take on ───────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28">
         <Container>
-
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             {siteManagement.whatWeDoSection.h2}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl">
-            {siteManagement.whatWeDoSection.items.map((item, i) => (
-              <div
-                key={i}
-                className={`p-8 border-charcoal/8 ${
-                  i < siteManagement.whatWeDoSection.items.length - 3 || i < 3
-                    ? "border-b"
-                    : ""
-                } ${i % 3 !== 2 ? "lg:border-r" : ""} ${
-                  i % 2 === 0 ? "sm:border-r lg:border-r-0" : ""
-                } ${i % 2 === 0 && i % 3 === 2 ? "sm:border-r-0" : ""}`}
-              >
-                <div className="w-4 h-px bg-accent mb-4" />
-                <p className="text-sm text-charcoal/70 leading-relaxed">{item}</p>
-              </div>
-            ))}
+            {siteManagement.whatWeDoSection.items.map((item, i) => {
+              const Icon = SITE_MGMT_ICONS[item.icon];
+              return (
+                <div key={i} className={`p-8 ${ITEM_BORDERS[i]}`}>
+                  <div className="h-20 flex items-start mb-6">
+                    {Icon && <Icon />}
+                  </div>
+                  <p className="text-sm text-charcoal/70 leading-relaxed">{item.text}</p>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
 
-      {/* ── Pricing ───────────────────────────────────────────────────────── */}
+      {/* ── Consolidation ─────────────────────────────────────────────────── */}
       <section className="bg-charcoal py-20 lg:py-28">
         <Container>
-
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 max-w-xl leading-tight">
-            {home.cost.h2}
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 max-w-xl leading-tight">
+            {siteManagement.consolidationSection.h2}
           </h2>
-          <p className="text-base text-white/55 leading-relaxed max-w-2xl">
-            {home.cost.body}
+          <p className="text-base text-white/55 leading-relaxed max-w-xl mb-14">
+            {siteManagement.consolidationSection.sub}
           </p>
+          <ConsolidationDiagram />
         </Container>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
-
           <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
             Send us one invoice.
           </h2>
