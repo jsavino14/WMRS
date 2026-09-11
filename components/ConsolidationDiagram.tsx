@@ -25,16 +25,16 @@ const AY  = 60;
 // Classes defined inside dangerouslySetInnerHTML are never seen by Tailwind's build scanner
 // and cannot be purged. No prefers-reduced-motion check (matches ProcessDiagram behaviour).
 const FLOAT_CSS = `
-  @keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-3px); } }
-  @keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-2px); } }
-  @keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-4px); } }
-  @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
-  @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
-  .wmrs-f1 { animation: wmrs-float-1  7s ease-in-out  0s infinite alternate; }
-  .wmrs-f2 { animation: wmrs-float-2  9s ease-in-out -3s infinite alternate; }
-  .wmrs-f3 { animation: wmrs-float-3  8s ease-in-out -5s infinite alternate; }
-  .wmrs-f4 { animation: wmrs-float-4 10s ease-in-out -2s infinite alternate; }
-  .wmrs-f5 { animation: wmrs-float-5  6s ease-in-out -4s infinite alternate; }
+  @keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+  @keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+  @keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+  @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-7px); } }
+  @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-9px); } }
+  .wmrs-f1 { animation: wmrs-float-1 3.5s ease-in-out  0s infinite alternate; }
+  .wmrs-f2 { animation: wmrs-float-2 4.5s ease-in-out -1.5s infinite alternate; }
+  .wmrs-f3 { animation: wmrs-float-3 4.0s ease-in-out -2.5s infinite alternate; }
+  .wmrs-f4 { animation: wmrs-float-4 5.0s ease-in-out -1.0s infinite alternate; }
+  .wmrs-f5 { animation: wmrs-float-5 3.0s ease-in-out -2.0s infinite alternate; }
 `;
 
 // ── Mini shapes — drawn at local origin (0,0) ─────────────────────────────────
