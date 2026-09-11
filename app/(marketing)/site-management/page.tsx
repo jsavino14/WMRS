@@ -66,7 +66,7 @@ export default function SiteManagementPage() {
       </section>
 
       {/* ── Consolidation ─────────────────────────────────────────────────── */}
-      <section className="bg-charcoal py-20 lg:py-28">
+      <section className="bg-charcoal pt-20 pb-12 lg:pt-28 lg:pb-16">
         <Container>
           <h2 className="text-4xl sm:text-5xl xl:text-6xl font-black text-white mb-4 leading-tight">
             {siteManagement.consolidationSection.h2}
