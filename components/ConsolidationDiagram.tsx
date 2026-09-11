@@ -25,16 +25,16 @@ const AY  = 60;
 // Classes defined inside dangerouslySetInnerHTML are never seen by Tailwind's build scanner
 // and cannot be purged. No prefers-reduced-motion check (matches ProcessDiagram behaviour).
 const FLOAT_CSS = `
-  @keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-8px); } }
-  @keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-6px); } }
-  @keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-10px); } }
-  @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-7px); } }
-  @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-9px); } }
-  .wmrs-f1 { animation: wmrs-float-1 3.5s ease-in-out  0s infinite alternate; }
-  .wmrs-f2 { animation: wmrs-float-2 4.5s ease-in-out -1.5s infinite alternate; }
-  .wmrs-f3 { animation: wmrs-float-3 4.0s ease-in-out -2.5s infinite alternate; }
-  .wmrs-f4 { animation: wmrs-float-4 5.0s ease-in-out -1.0s infinite alternate; }
-  .wmrs-f5 { animation: wmrs-float-5 3.0s ease-in-out -2.0s infinite alternate; }
+  @keyframes wmrs-float-1 { from { transform: translateY(0); } to { transform: translateY(-16px); } }
+  @keyframes wmrs-float-2 { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+  @keyframes wmrs-float-3 { from { transform: translateY(0); } to { transform: translateY(-20px); } }
+  @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+  @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-18px); } }
+  .wmrs-f1 { animation: wmrs-float-1 2.5s ease-in-out  0s infinite alternate; }
+  .wmrs-f2 { animation: wmrs-float-2 3.2s ease-in-out -1.2s infinite alternate; }
+  .wmrs-f3 { animation: wmrs-float-3 2.8s ease-in-out -2.0s infinite alternate; }
+  .wmrs-f4 { animation: wmrs-float-4 3.5s ease-in-out -0.8s infinite alternate; }
+  .wmrs-f5 { animation: wmrs-float-5 2.2s ease-in-out -1.6s infinite alternate; }
 `;
 
 // ── Mini shapes — drawn at local origin (0,0) ─────────────────────────────────
