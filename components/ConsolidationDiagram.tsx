@@ -252,23 +252,16 @@ const LABEL_STYLE: React.CSSProperties = {
 function DiagramCell({
   row,
   animated,
-  prefersReduced,
 }: {
   row: Row;
   animated: boolean;
-  prefersReduced: boolean;
 }) {
   const { Cluster, Single } = SHAPE_MAP[row.shape];
-
-  const clusterStyle: React.CSSProperties = {
-    transform: animated && !prefersReduced ? "translateX(14px)" : "translateX(0)",
-    transition: !prefersReduced ? "transform 600ms ease-out" : "none",
-  };
 
   return (
     <div>
       <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" aria-hidden="true" style={{ overflow: "visible" }}>
-        <g style={clusterStyle}>
+        <g>
           <Cluster />
         </g>
         <Arrow />
@@ -296,11 +289,6 @@ function DiagramCell({
 export function ConsolidationDiagram() {
   const ref = useRef<HTMLDivElement>(null);
   const [animated, setAnimated] = useState(false);
-  const [prefersReduced, setPrefersReduced] = useState(false);
-
-  useEffect(() => {
-    setPrefersReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -328,7 +316,6 @@ export function ConsolidationDiagram() {
           key={i}
           row={row}
           animated={animated}
-          prefersReduced={prefersReduced}
         />
       ))}
     </div>
