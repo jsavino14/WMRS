@@ -33,7 +33,18 @@ export default function SiteManagementPage() {
           />
         </div>
 
-        <Container className="relative py-14 lg:py-16">
+        {/* Mobile: image above content, shallow band */}
+        <div className="lg:hidden relative h-[210px]">
+          <Image
+            src="/site-management-hero.jpg"
+            alt="Four commercial waste containers against a concrete wall"
+            fill
+            className="object-cover object-[center_38%]"
+            sizes="100vw"
+          />
+        </div>
+
+        <Container className="relative pt-10 pb-14 lg:py-16">
           <div className="lg:w-[50%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08]">
               {siteManagement.hero.h1}
@@ -55,17 +66,6 @@ export default function SiteManagementPage() {
             </div>
           </div>
         </Container>
-
-        {/* Mobile: image below content */}
-        <div className="lg:hidden relative aspect-[4/3]">
-          <Image
-            src="/site-management-hero.jpg"
-            alt="Four commercial waste containers against a concrete wall"
-            fill
-            className="object-cover object-[center_38%]"
-            sizes="100vw"
-          />
-        </div>
       </section>
 
       {/* ── Consolidation ─────────────────────────────────────────────────── */}

@@ -31,8 +31,19 @@ export default function AboutPage() {
           />
         </div>
 
+        {/* Mobile: image above content, shallow band */}
+        <div className="lg:hidden relative h-[250px]">
+          <Image
+            src="/about.png"
+            alt="Waste invoices spread on a surface"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+
         {/* Left column */}
-        <Container className="relative py-20 lg:py-28">
+        <Container className="relative pt-10 pb-16 lg:py-28">
           <div className="lg:w-[60%] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {about.hero.h1}
@@ -49,17 +60,6 @@ export default function AboutPage() {
             </div>
           </div>
         </Container>
-
-        {/* Mobile image: below copy, 4:3 */}
-        <div className="lg:hidden relative aspect-[4/3]">
-          <Image
-            src="/about.png"
-            alt="Waste invoices spread on a surface"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </div>
 
       </section>
 

@@ -28,7 +28,18 @@ export default function WhatWeFind() {
             priority
           />
         </div>
-        <Container className="relative py-20 lg:py-28">
+        {/* Mobile: image above content, shallow band */}
+        <div className="lg:hidden relative h-[250px]">
+          <Image
+            src="/what-we-find.png"
+            alt="Commercial dumpster against a concrete wall"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+
+        <Container className="relative pt-10 pb-16 lg:py-28">
           <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {whatWeFind.hero.h1}
@@ -51,15 +62,6 @@ export default function WhatWeFind() {
             </div>
           </div>
         </Container>
-        <div className="lg:hidden relative aspect-[4/3]">
-          <Image
-            src="/what-we-find.png"
-            alt="Commercial dumpster against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </div>
       </section>
 
       {/* ── Findings ─────────────────────────────────────────────────────── */}
