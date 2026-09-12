@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { meta, home, faq, caseStudies, company } from "@/content/site";
 import { TrustBar } from "@/components/TrustBar";
 import { OverchargeCards } from "@/components/OverchargeCards";
+import { HomeSteps } from "@/components/HomeSteps";
 
 export const metadata: Metadata = {
   title: meta.home.title,
@@ -185,28 +186,11 @@ export default function HomePage() {
       {/* ── How It Works ─────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14 max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14">
             Four steps. Zero upfront cost.
           </h2>
-          <div className="divide-y divide-charcoal/8 max-w-3xl">
-            {home.steps.map((step) => (
-              <div key={step.number} className="grid grid-cols-[48px_1fr] gap-8 py-8">
-                <div className="text-3xl font-black text-charcoal/10 leading-none pt-1">
-                  {step.number}
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-charcoal mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-base text-charcoal/60 leading-relaxed">
-                    {step.body}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 max-w-3xl">
+          <HomeSteps />
+          <div className="mt-10">
             <Link
               href="/how-we-work"
               className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"

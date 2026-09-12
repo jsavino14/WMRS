@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const CHARCOAL = "#1E2428";
 const ACCENT   = "#2E7D4F";
@@ -37,7 +39,7 @@ const ACC_W = { 1: W7[1], 3: W7[3], 5: W7[5] } as Record<number, number>;
 // animation-fill-mode:both → bars are invisible during their delay (from keyframe
 // = "0 w") then grow in, then stay visible (forwards).
 
-const ANIM_CSS = `
+export const ANIM_CSS = `
   @keyframes wmrs-grow-${ACC_W[1]} {
     from { stroke-dasharray: 0 ${ACC_W[1]}; }
     to   { stroke-dasharray: ${ACC_W[1]} 0; }
@@ -73,10 +75,17 @@ const ANIM_CSS = `
     to   { stroke-dasharray: 14 0; }
   }
   .wmrs-check { animation: wmrs-check 500ms ease-out 3300ms both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wmrs-acc-1, .wmrs-acc-3, .wmrs-acc-5 { animation: none; }
+    .wmrs-anim-bar { animation: none; stroke-dasharray: ${TOT_SHORT} ${TOT_FULL}; }
+    .wmrs-badge { animation: none; opacity: 1; }
+    .wmrs-check { animation: none; stroke-dasharray: 14 0; }
+  }
 `;
 
 // ── Invoice panel ─────────────────────────────────────────────────────────────
-function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
+export function Panel({ variant, started = true }: { variant: 0 | 1 | 2 | 3; started?: boolean }) {
   const isWide  = variant <= 1;
   const isStack = variant === 3;
   const yBars   = isWide ? Y7 : Y5;
@@ -125,6 +134,7 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
                 strokeLinecap="butt"
                 opacity={0.85}
                 className={`wmrs-acc-${i}`}
+                style={!started ? { visibility: "hidden" } : undefined}
               />
             )}
           </g>
@@ -146,6 +156,7 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
           strokeWidth={TOT_H}
           strokeLinecap="butt"
           className="wmrs-anim-bar"
+          style={!started ? { visibility: "hidden" } : undefined}
         />
       ) : (
         <rect
@@ -158,7 +169,7 @@ function Panel({ variant }: { variant: 0 | 1 | 2 | 3 }) {
 
       {/* ── Checkmark badge (panel 04 only) ──────────────────────────────── */}
       {variant === 3 && (
-        <g>
+        <g style={!started ? { visibility: "hidden" } : undefined}>
           <circle cx={56} cy={90} r={7} fill={ACCENT} className="wmrs-badge" />
           <polyline
             points="52,90 55,93 61,87"
@@ -198,10 +209,33 @@ function DownArrow() {
 type Step = { number: string; diagramLabel: string };
 
 export function ProcessDiagram({ steps }: { steps: Step[] }) {
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setStarted(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setStarted(true), 500);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div>
+    <div ref={ref}>
       {/* eslint-disable-next-line react/no-danger */}
-      <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
+      {started && <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />}
 
       {/* ── Mobile: vertical stack (< 640px) ─────────────────────────────── */}
       <div className="flex flex-col sm:hidden">
@@ -209,7 +243,7 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
           <div key={step.number}>
             <div className="flex gap-4 items-start">
               <div className="flex-shrink-0 w-24">
-                <Panel variant={i as 0 | 1 | 2 | 3} />
+                <Panel variant={i as 0 | 1 | 2 | 3} started={started} />
               </div>
               <div className="flex flex-col gap-1 pt-2">
                 <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ACCENT }}>
@@ -239,7 +273,7 @@ export function ProcessDiagram({ steps }: { steps: Step[] }) {
 
         {steps.map((_step, i) => [
           <div key={`p-${i}`} style={{ gridColumn: `${i * 2 + 1}`, gridRow: "2" }}>
-            <Panel variant={i as 0 | 1 | 2 | 3} />
+            <Panel variant={i as 0 | 1 | 2 | 3} started={started} />
           </div>,
           i < 3 && (
             <div key={`a-${i}`} style={{ gridColumn: `${i * 2 + 2}`, gridRow: "2" }} className="flex items-center justify-center">
