@@ -2,20 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, whoWeWorkWith, industries, caseStudies, company } from "@/content/site";
-
-const INDUSTRY_ICONS: Record<string, string> = {
-  "Restaurant Groups":              "/icons/industries/restaurant-groups.svg",
-  "Hotel & Hospitality":            "/icons/industries/hotel-hospitality.svg",
-  "Retail Chains":                  "/icons/industries/retail-chains.svg",
-  "Commercial Property Management": "/icons/industries/commercial-property.svg",
-  "Healthcare Facilities":          "/icons/industries/healthcare.svg",
-  "Grocery & Food Service":         "/icons/industries/grocery-food.svg",
-  "Office Buildings":               "/icons/industries/office-buildings.svg",
-  "Manufacturing":                  "/icons/industries/manufacturing.svg",
-  "Entertainment Venues":           "/icons/industries/entertainment.svg",
-  "Educational Institutions":       "/icons/industries/education.svg",
-};
+import { meta, whoWeWorkWith, caseStudies, company } from "@/content/site";
+import { IndustriesGrid } from "@/components/IndustriesGrid";
 
 export const metadata: Metadata = {
   title: meta.whoWeWorkWith.title,
@@ -65,31 +53,7 @@ export default function WhoWeWorkWith() {
       {/* ── Industries grid ───────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-charcoal/10">
-            {industries
-              .filter((industry) => industry.name !== "Office Buildings")
-              .map((industry, i) => (
-                <div key={i} className="bg-offwhite py-7 md:px-8">
-                  {INDUSTRY_ICONS[industry.name] && (
-                    <div className="h-12 flex items-end mb-4">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={INDUSTRY_ICONS[industry.name]}
-                        alt=""
-                        aria-hidden="true"
-                        style={{ height: 40, width: "auto", display: "block" }}
-                      />
-                    </div>
-                  )}
-                  <h3 className="text-base font-bold text-charcoal mb-2">
-                    {industry.name}
-                  </h3>
-                  <p className="text-sm text-charcoal/55 leading-relaxed">
-                    {industry.note}
-                  </p>
-                </div>
-              ))}
-          </div>
+          <IndustriesGrid />
         </Container>
       </section>
 
