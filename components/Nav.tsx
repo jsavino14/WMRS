@@ -108,7 +108,7 @@ export function Nav() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[32px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
+                  className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[28px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
                   onClick={close}
                 >
                   {link.label}
