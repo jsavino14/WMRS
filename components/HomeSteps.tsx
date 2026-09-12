@@ -50,7 +50,7 @@ export function HomeSteps() {
           observer.disconnect();
         }
       },
-      { threshold: 0.5 },
+      { threshold: 0.1 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -63,7 +63,9 @@ export function HomeSteps() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {STEPS.map(({ variant, number, title, body }) => (
           <div key={number} className="flex flex-col gap-5">
-            <Panel variant={variant} started={started} />
+            <div style={{ maxWidth: 150, height: 227, overflow: "hidden" }}>
+              <Panel variant={variant} started={started} showBadge={false} />
+            </div>
             <div className="space-y-1">
               <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ACCENT }}>
                 {number}

@@ -75,17 +75,13 @@ export const ANIM_CSS = `
     to   { stroke-dasharray: 14 0; }
   }
   .wmrs-check { animation: wmrs-check 500ms ease-out 3300ms both; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .wmrs-acc-1, .wmrs-acc-3, .wmrs-acc-5 { animation: none; }
-    .wmrs-anim-bar { animation: none; stroke-dasharray: ${TOT_SHORT} ${TOT_FULL}; }
-    .wmrs-badge { animation: none; opacity: 1; }
-    .wmrs-check { animation: none; stroke-dasharray: 14 0; }
-  }
 `;
+// Note: no @media (prefers-reduced-motion) block — same as the float animation fix.
+// A @media rule inside dangerouslySetInnerHTML suppresses animations when Reduce Motion
+// is on, including for users who want to verify the animation works.
 
 // ── Invoice panel ─────────────────────────────────────────────────────────────
-export function Panel({ variant, started = true }: { variant: 0 | 1 | 2 | 3; started?: boolean }) {
+export function Panel({ variant, started = true, showBadge = true }: { variant: 0 | 1 | 2 | 3; started?: boolean; showBadge?: boolean }) {
   const isWide  = variant <= 1;
   const isStack = variant === 3;
   const yBars   = isWide ? Y7 : Y5;
@@ -168,7 +164,7 @@ export function Panel({ variant, started = true }: { variant: 0 | 1 | 2 | 3; sta
       )}
 
       {/* ── Checkmark badge (panel 04 only) ──────────────────────────────── */}
-      {variant === 3 && (
+      {variant === 3 && showBadge && (
         <g style={!started ? { visibility: "hidden" } : undefined}>
           <circle cx={56} cy={90} r={7} fill={ACCENT} className="wmrs-badge" />
           <polyline
