@@ -152,7 +152,6 @@ export function Panel({ variant, started = true, showBadge = true }: { variant: 
           strokeWidth={TOT_H}
           strokeLinecap="butt"
           className="wmrs-anim-bar"
-          style={!started ? { visibility: "hidden" } : undefined}
         />
       ) : (
         <rect
