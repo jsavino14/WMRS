@@ -321,7 +321,7 @@ export function ConsolidationDiagram() {
   return (
     <>
     {/* eslint-disable-next-line react/no-danger */}
-    <style dangerouslySetInnerHTML={{ __html: FLOAT_CSS }} />
+    {animated && <style dangerouslySetInnerHTML={{ __html: FLOAT_CSS }} />}
     <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-14">
       {siteManagement.consolidationRows.map((row, i) => (
         <DiagramCell

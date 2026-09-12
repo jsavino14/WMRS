@@ -62,34 +62,17 @@ export default function WhatWeFind() {
         </div>
       </section>
 
-      {/* ── Contract context ─────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-16 lg:py-20">
-        <Container>
-          <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
-            {whatWeFind.contractContext.heading}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 max-w-5xl">
-            {whatWeFind.contractContext.body.map((para, i) => (
-              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
-                {para}
-              </p>
-            ))}
-          </div>
-        </Container>
-      </section>
-
       {/* ── Findings ─────────────────────────────────────────────────────── */}
-      <section className="bg-white py-4">
+      <section className="bg-[#F7F8F7] py-16 lg:py-20">
         <Container>
-          <p className="label mb-10 pt-14">The six findings</p>
           <div>
             {whatWeFind.items.map((item, i) => (
               <div
                 key={item.number}
-                className={`grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-12 md:py-16 lg:py-24 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+                className={`grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14 border-b border-charcoal/10 ${i === 0 ? "border-t" : ""}`}
               >
                 {/* Numeral — stacked above content on mobile, own column on md+ */}
-                <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.08] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
+                <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
                   {item.number}
                 </div>
                 <div>
@@ -110,7 +93,22 @@ export default function WhatWeFind() {
               </div>
             ))}
           </div>
-          <div className="pb-14" />
+        </Container>
+      </section>
+
+      {/* ── Contract context ─────────────────────────────────────────────── */}
+      <section className="bg-white py-16 lg:py-20">
+        <Container>
+          <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
+            {whatWeFind.contractContext.heading}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 max-w-5xl">
+            {whatWeFind.contractContext.body.map((para, i) => (
+              <p key={i} className="text-base text-charcoal/65 leading-relaxed">
+                {para}
+              </p>
+            ))}
+          </div>
         </Container>
       </section>
 
