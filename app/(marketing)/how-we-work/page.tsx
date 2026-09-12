@@ -40,15 +40,15 @@ export default function HowItWorksPage() {
       </section>
 
       {/* ── Steps ────────────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-16 lg:py-24">
+      <section className="bg-offwhite py-16 lg:py-20">
         <Container>
-          <div className="max-w-3xl">
+          <div>
             {howItWorksPage.steps.map((step, i) => (
               <div
                 key={step.number}
-                className={`grid grid-cols-[48px_1fr] gap-8 py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+                className={`grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14 ${i < howItWorksPage.steps.length - 1 ? "border-b border-charcoal/10" : ""}`}
               >
-                <div className="text-4xl font-black text-charcoal/10 leading-none pt-1">
+                <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-4 lg:pt-6 tabular-nums select-none">
                   {step.number}
                 </div>
                 <div>
