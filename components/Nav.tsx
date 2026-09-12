@@ -108,7 +108,7 @@ export function Nav() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[32px] text-charcoal/80 hover:text-charcoal transition-colors"
+                  className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[32px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
                   onClick={close}
                 >
                   {link.label}
@@ -116,7 +116,7 @@ export function Nav() {
               ))}
               <a
                 href={company.phoneHref}
-                className="flex items-center w-full min-h-[56px] py-3 border-b border-charcoal/10 text-lg text-charcoal/60 hover:text-charcoal transition-colors"
+                className="flex items-center w-full min-h-[56px] py-3 border-b border-charcoal/10 text-[22px] text-charcoal/60 hover:text-charcoal transition-colors"
                 onClick={close}
               >
                 {company.phone}
