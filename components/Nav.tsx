@@ -104,6 +104,7 @@ export function Nav() {
           {/* Nav items — scrollable so very short phones don't clip the button */}
           <div className="flex-1 overflow-y-auto">
             <Container>
+              {/* Nav group */}
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -114,21 +115,32 @@ export function Nav() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href={company.phoneHref}
-                className="flex items-center w-full min-h-[56px] py-3 border-b border-charcoal/10 text-[22px] text-charcoal/60 hover:text-charcoal transition-colors"
-                onClick={close}
-              >
-                {company.phone}
-              </a>
-              <div className="pt-6 pb-8">
-                <Link
-                  href="/contact"
-                  className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
+
+              {/* Contact block — more space above, no rules between items */}
+              <div className="pt-10 pb-8 flex flex-col gap-1">
+                <a
+                  href={company.phoneHref}
+                  className="flex items-center w-full min-h-[44px] text-[18px] text-charcoal/70 hover:text-charcoal transition-colors"
                   onClick={close}
                 >
-                  Send us one invoice
-                </Link>
+                  {company.phone}
+                </a>
+                <a
+                  href={`mailto:${company.email}?subject=Invoice%20for%20review`}
+                  className="flex items-center w-full min-h-[44px] text-[18px] text-charcoal/70 hover:text-charcoal transition-colors"
+                  onClick={close}
+                >
+                  {company.email}
+                </a>
+                <div className="pt-4">
+                  <Link
+                    href="/contact"
+                    className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
+                    onClick={close}
+                  >
+                    Send us one invoice
+                  </Link>
+                </div>
               </div>
             </Container>
           </div>
