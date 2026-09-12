@@ -80,9 +80,12 @@ export default function HomePage() {
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-3 max-w-xl">
             {home.problem.h2}
           </h2>
+          <p className="text-base text-charcoal/65 leading-relaxed mb-12">
+            Here&apos;s what was in them:
+          </p>
           <OverchargeCards />
           <div className="mt-10">
             <Link
