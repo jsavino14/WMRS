@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { siteManagement } from "@/content/site";
 
 // Six line-art icons for the site management "You report it once" grid.
@@ -152,34 +152,65 @@ const ITEM_BORDERS = [
 const TRANSITION = "transform 200ms ease-out";
 
 export function SiteManagementIconGrid() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(false);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(hover: none)").matches);
+    setPrefersReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (!isTouch || prefersReduced) return;
+    const observers: IntersectionObserver[] = [];
+    cardRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => setActiveCard(prev =>
+          entry.isIntersecting ? i : prev === i ? null : prev
+        ),
+        { rootMargin: "-45% 0px -45% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach(o => o.disconnect());
+  }, [isTouch, prefersReduced]);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {siteManagement.whatWeDoSection.items.map((item, i) => {
         const Icon = SITE_MGMT_ICONS[item.icon];
-        const isHovered = hoveredCard === i;
+        const isActive = !prefersReduced && activeCard === i;
+        const t = prefersReduced ? "none" : TRANSITION;
+
+        const iconEl = Icon ? (
+          <div style={{ display: "inline-block", transform: isActive ? "translateY(-4px)" : "translateY(0)", transition: t }}>
+            <Icon />
+          </div>
+        ) : null;
+
         return (
           <div
             key={i}
+            ref={el => { cardRefs.current[i] = el; }}
             className={`p-8 ${ITEM_BORDERS[i]}`}
-            onMouseEnter={() => setHoveredCard(i)}
-            onMouseLeave={() => setHoveredCard(null)}
+            onMouseEnter={() => { if (!isTouch && !prefersReduced) setActiveCard(i); }}
+            onMouseLeave={() => { if (!isTouch && !prefersReduced) setActiveCard(null); }}
           >
-            <div className="h-20 flex items-start mb-6">
-              {Icon && (
-                <div
-                  style={{
-                    display: "inline-block",
-                    transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-                    transition: TRANSITION,
-                  }}
-                >
-                  <Icon />
-                </div>
-              )}
+            {/* Mobile: icon + text inline (< md) */}
+            <div className="flex items-start gap-4 md:hidden">
+              <div className="flex-shrink-0 mt-1">{iconEl}</div>
+              <p className="text-sm text-charcoal/70 leading-relaxed">{item.text}</p>
             </div>
-            <p className="text-sm text-charcoal/70 leading-relaxed">{item.text}</p>
+
+            {/* Desktop: stacked layout (md+) */}
+            <div className="hidden md:block">
+              <div className="h-20 flex items-start mb-6">{iconEl}</div>
+              <p className="text-sm text-charcoal/70 leading-relaxed">{item.text}</p>
+            </div>
           </div>
         );
       })}

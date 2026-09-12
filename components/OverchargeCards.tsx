@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { whatWeFind } from "@/content/site";
 
 // Icon config keyed by canonical label (order follows whatWeFind.items)
@@ -87,37 +87,70 @@ const ANIMATED_ICONS: Record<string, ((props: { hovered: boolean }) => React.Rea
 };
 
 export function OverchargeCards() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(false);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(hover: none)").matches);
+    setPrefersReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (!isTouch || prefersReduced) return;
+    const observers: IntersectionObserver[] = [];
+    cardRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => setActiveCard(prev =>
+          entry.isIntersecting ? i : prev === i ? null : prev
+        ),
+        { rootMargin: "-45% 0px -45% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach(o => o.disconnect());
+  }, [isTouch, prefersReduced]);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {OVERCHARGE_CARDS.map((card, i) => {
         const AnimatedIcon = ANIMATED_ICONS[card.icon];
-        const isHovered = hoveredCard === i;
+        const isActive = !prefersReduced && activeCard === i;
+        const t = prefersReduced ? "none" : TRANSITION;
+
+        const iconEl = AnimatedIcon ? (
+          <AnimatedIcon hovered={isActive} />
+        ) : (
+          <div style={{ display: "inline-block", transform: isActive ? "translateY(-4px)" : "translateY(0)", transition: t }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={card.icon} alt="" aria-hidden="true" style={{ height: card.iconH, width: "auto", display: "block" }} />
+          </div>
+        );
+
         return (
           <div
             key={i}
+            ref={el => { cardRefs.current[i] = el; }}
             className={`p-8 ${ITEM_BORDERS[i]}`}
-            onMouseEnter={() => setHoveredCard(i)}
-            onMouseLeave={() => setHoveredCard(null)}
+            onMouseEnter={() => { if (!isTouch && !prefersReduced) setActiveCard(i); }}
+            onMouseLeave={() => { if (!isTouch && !prefersReduced) setActiveCard(null); }}
           >
-            <div className="h-20 flex items-start mb-6">
-              {AnimatedIcon ? (
-                <AnimatedIcon hovered={isHovered} />
-              ) : (
-                <div style={{ display: "inline-block", transform: isHovered ? "translateY(-4px)" : "translateY(0)", transition: TRANSITION }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={card.icon}
-                    alt=""
-                    aria-hidden="true"
-                    style={{ height: card.iconH, width: "auto", display: "block" }}
-                  />
-                </div>
-              )}
+            {/* Mobile: icon + title inline, description below (< md) */}
+            <div className="flex items-center gap-4 mb-3 md:hidden">
+              <div className="flex-shrink-0">{iconEl}</div>
+              <h3 className="text-base font-bold text-charcoal leading-snug">{card.title}</h3>
             </div>
-            <h3 className="text-base font-bold text-charcoal mb-2">{card.title}</h3>
-            <p className="text-sm text-charcoal/60 leading-relaxed">{card.body}</p>
+            <p className="text-sm text-charcoal/60 leading-relaxed md:hidden">{card.body}</p>
+
+            {/* Desktop: stacked layout (md+) */}
+            <div className="hidden md:block">
+              <div className="h-20 flex items-start mb-6">{iconEl}</div>
+              <h3 className="text-base font-bold text-charcoal mb-2">{card.title}</h3>
+              <p className="text-sm text-charcoal/60 leading-relaxed">{card.body}</p>
+            </div>
           </div>
         );
       })}
