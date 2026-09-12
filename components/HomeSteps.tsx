@@ -37,10 +37,6 @@ export function HomeSteps() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setStarted(true);
-      return;
-    }
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -64,7 +60,7 @@ export function HomeSteps() {
         {STEPS.map(({ variant, number, title, body }) => (
           <div key={number} className="flex flex-col gap-5">
             <div style={{ maxWidth: 150, height: 227, overflow: "hidden" }}>
-              <Panel variant={variant} started={started} showBadge={false} />
+              <Panel variant={variant} started={started} />
             </div>
             <div className="space-y-1">
               <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ACCENT }}>
