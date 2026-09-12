@@ -101,35 +101,37 @@ export function Nav() {
             </Container>
           </div>
 
-          {/* Nav items */}
-          <Container className="flex flex-col">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center min-h-[44px] border-b border-charcoal/10 text-base text-charcoal/70 hover:text-charcoal transition-colors"
+          {/* Nav items — scrollable so very short phones don't clip the button */}
+          <div className="flex-1 overflow-y-auto">
+            <Container>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[32px] text-charcoal/80 hover:text-charcoal transition-colors"
+                  onClick={close}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <a
+                href={company.phoneHref}
+                className="flex items-center w-full min-h-[56px] py-3 border-b border-charcoal/10 text-lg text-charcoal/60 hover:text-charcoal transition-colors"
                 onClick={close}
               >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href={company.phoneHref}
-              className="flex items-center min-h-[44px] border-b border-charcoal/10 text-base text-charcoal/70 hover:text-charcoal transition-colors"
-              onClick={close}
-            >
-              {company.phone}
-            </a>
-            <div className="pt-6">
-              <Link
-                href="/contact"
-                className="block bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
-                onClick={close}
-              >
-                Send us one invoice
-              </Link>
-            </div>
-          </Container>
+                {company.phone}
+              </a>
+              <div className="pt-6 pb-8">
+                <Link
+                  href="/contact"
+                  className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
+                  onClick={close}
+                >
+                  Send us one invoice
+                </Link>
+              </div>
+            </Container>
+          </div>
         </div>
       )}
     </>
