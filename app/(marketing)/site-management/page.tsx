@@ -39,7 +39,7 @@ export default function SiteManagementPage() {
               {siteManagement.hero.h1}
             </h1>
 
-            <ul className="mt-10 space-y-4 list-none p-0">
+            <ul className="mt-10 space-y-2 list-none p-0">
               {siteManagement.hero.listItems.map((item, i) => (
                 <li key={i} className="text-[15px] lg:text-base text-charcoal leading-relaxed">
                   {item}
@@ -47,9 +47,12 @@ export default function SiteManagementPage() {
               ))}
             </ul>
 
-            <p className="mt-8 text-base text-charcoal/60 leading-relaxed">
-              {siteManagement.hero.closing}
-            </p>
+            <div className="mt-8">
+              <div className="w-6 h-px bg-accent mb-4" />
+              <p className="text-base font-semibold text-charcoal leading-relaxed">
+                {siteManagement.hero.closing}
+              </p>
+            </div>
           </div>
         </Container>
 
