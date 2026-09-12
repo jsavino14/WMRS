@@ -65,32 +65,30 @@ export default function WhoWeWorkWith() {
       {/* ── Industries grid ───────────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28">
         <Container>
-          <p className="label mb-10">Industries</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 divide-y divide-charcoal/8 max-w-4xl">
-            {industries.map((industry, i) => (
-              <div
-                key={i}
-                className={`py-7 ${i % 2 === 0 ? "sm:border-r sm:border-charcoal/8 sm:pr-10" : "sm:pl-10"}`}
-              >
-                {INDUSTRY_ICONS[industry.name] && (
-                  <div className="h-12 flex items-end mb-4">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={INDUSTRY_ICONS[industry.name]}
-                      alt=""
-                      aria-hidden="true"
-                      style={{ height: 40, width: "auto", display: "block" }}
-                    />
-                  </div>
-                )}
-                <h3 className="text-base font-bold text-charcoal mb-2">
-                  {industry.name}
-                </h3>
-                <p className="text-sm text-charcoal/55 leading-relaxed">
-                  {industry.note}
-                </p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-charcoal/10">
+            {industries
+              .filter((industry) => industry.name !== "Office Buildings")
+              .map((industry, i) => (
+                <div key={i} className="bg-offwhite py-7 md:px-8">
+                  {INDUSTRY_ICONS[industry.name] && (
+                    <div className="h-12 flex items-end mb-4">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={INDUSTRY_ICONS[industry.name]}
+                        alt=""
+                        aria-hidden="true"
+                        style={{ height: 40, width: "auto", display: "block" }}
+                      />
+                    </div>
+                  )}
+                  <h3 className="text-base font-bold text-charcoal mb-2">
+                    {industry.name}
+                  </h3>
+                  <p className="text-sm text-charcoal/55 leading-relaxed">
+                    {industry.note}
+                  </p>
+                </div>
+              ))}
           </div>
         </Container>
       </section>
