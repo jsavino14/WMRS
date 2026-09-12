@@ -82,20 +82,21 @@ export default function WhatWeFind() {
       <section className="bg-white py-4">
         <Container>
           <p className="label mb-10 pt-14">The six findings</p>
-          <div className="max-w-3xl">
+          <div>
             {whatWeFind.items.map((item, i) => (
               <div
                 key={item.number}
-                className={`grid grid-cols-[48px_1fr] gap-8 py-14 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
+                className={`grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-12 md:py-16 lg:py-24 border-b border-charcoal/8 ${i === 0 ? "border-t" : ""}`}
               >
-                <div className="text-4xl font-black text-charcoal/10 leading-none pt-1">
+                {/* Numeral — stacked above content on mobile, own column on md+ */}
+                <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.08] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
                   {item.number}
                 </div>
                 <div>
                   <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-charcoal/50 mb-3">
                     {item.label}
                   </p>
-                  <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-6 max-w-xl">
+                  <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-6">
                     {item.title}
                   </h2>
                   <div className="space-y-4">
