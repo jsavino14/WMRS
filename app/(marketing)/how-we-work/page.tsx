@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { ProcessDiagram } from "@/components/ProcessDiagram";
+import { ProcessDiagram, MobilePanelStrip } from "@/components/ProcessDiagram";
 import { meta, howItWorksPage, home, faq, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -17,9 +17,14 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
   return (
     <>
+      {/* ── Mobile panel strip — graphic motif, above headline ──────────── */}
+      <div className="md:hidden bg-[#F7F8F7]">
+        <MobilePanelStrip steps={howItWorksPage.steps} />
+      </div>
+
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white">
-        <Container className="py-20 lg:py-28">
+        <Container className="py-10 lg:py-28">
           <div className="lg:flex lg:items-center lg:gap-14">
             <div className="lg:w-1/2">
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
@@ -32,7 +37,7 @@ export default function HowItWorksPage() {
                 {howItWorksPage.hero.sub}
               </p>
             </div>
-            <div className="mt-14 lg:mt-0 lg:w-1/2">
+            <div className="hidden md:block mt-14 lg:mt-0 lg:w-1/2">
               <ProcessDiagram steps={howItWorksPage.steps} />
             </div>
           </div>

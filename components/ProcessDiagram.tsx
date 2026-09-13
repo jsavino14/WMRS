@@ -203,6 +203,63 @@ function DownArrow() {
   );
 }
 
+// ── Mobile panel strip ────────────────────────────────────────────────────────
+// A compact horizontal row of the four panels used as a graphic motif at the
+// top of the How We Work page on mobile (< md). No numbers, no labels.
+// Per-panel IO observers so each animates as it enters the viewport.
+
+export function MobilePanelStrip({ steps }: { steps: Step[] }) {
+  const [startedPanels, setStartedPanels] = useState<boolean[]>([false, false, false, false]);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    panelRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              setStartedPanels(prev => {
+                const next = [...prev];
+                next[i] = true;
+                return next;
+              });
+            }, 500);
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.5 },
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach(o => o.disconnect());
+  }, []);
+
+  return (
+    <>
+      {/* eslint-disable-next-line react/no-danger */}
+      {startedPanels.some(Boolean) && <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />}
+      <div
+        className="px-4 py-4"
+        style={{ display: "grid", gridTemplateColumns: "1fr 24px 1fr 24px 1fr 24px 1fr", alignItems: "center" }}
+      >
+        {steps.map((_step, i) => [
+          <div key={`p-${i}`} ref={el => { panelRefs.current[i] = el; }}>
+            <Panel variant={i as 0 | 1 | 2 | 3} started={startedPanels[i]} />
+          </div>,
+          i < 3 && (
+            <div key={`a-${i}`} className="flex items-center justify-center">
+              <HorizArrow />
+            </div>
+          ),
+        ])}
+      </div>
+    </>
+  );
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 type Step = { number: string; diagramLabel: string };
 
