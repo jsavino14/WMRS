@@ -130,7 +130,7 @@ export function Panel({ variant, started = true, showBadge = true }: { variant: 
                 strokeLinecap="butt"
                 opacity={0.85}
                 className={`wmrs-acc-${i}`}
-                style={!started ? { visibility: "hidden" } : undefined}
+                style={started ? { animationPlayState: "running" } : { visibility: "hidden", animationPlayState: "paused" }}
               />
             )}
           </g>
@@ -152,6 +152,7 @@ export function Panel({ variant, started = true, showBadge = true }: { variant: 
           strokeWidth={TOT_H}
           strokeLinecap="butt"
           className="wmrs-anim-bar"
+          style={{ animationPlayState: started ? "running" : "paused" }}
         />
       ) : (
         <rect
@@ -164,8 +165,9 @@ export function Panel({ variant, started = true, showBadge = true }: { variant: 
 
       {/* ── Checkmark badge (panel 04 only) ──────────────────────────────── */}
       {variant === 3 && showBadge && (
-        <g style={!started ? { visibility: "hidden" } : undefined}>
-          <circle cx={56} cy={90} r={7} fill={ACCENT} className="wmrs-badge" />
+        <g>
+          <circle cx={56} cy={90} r={7} fill={ACCENT} className="wmrs-badge"
+            style={started ? { animationPlayState: "running" } : { visibility: "hidden", animationPlayState: "paused" }} />
           <polyline
             points="52,90 55,93 61,87"
             stroke="white"
@@ -174,6 +176,7 @@ export function Panel({ variant, started = true, showBadge = true }: { variant: 
             strokeLinecap="round"
             strokeLinejoin="round"
             className="wmrs-check"
+            style={started ? { animationPlayState: "running" } : { visibility: "hidden", animationPlayState: "paused" }}
           />
         </g>
       )}
