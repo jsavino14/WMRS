@@ -33,34 +33,46 @@ const STEPS: { variant: 0 | 1 | 2 | 3; number: string; title: string; body: stri
 ];
 
 export function HomeSteps() {
-  const [started, setStarted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [startedPanels, setStartedPanels] = useState<boolean[]>([false, false, false, false]);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setStarted(true), 500);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    const observers: IntersectionObserver[] = [];
+    panelRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              setStartedPanels(prev => {
+                const next = [...prev];
+                next[i] = true;
+                return next;
+              });
+            }, 500);
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.5 },
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach(o => o.disconnect());
   }, []);
 
   return (
-    <div ref={ref}>
+    <div>
       {/* eslint-disable-next-line react/no-danger */}
-      {started && <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />}
+      {startedPanels.some(Boolean) && <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-        {STEPS.map(({ variant, number, title, body }) => (
+        {STEPS.map(({ variant, number, title, body }, i) => (
           <div key={number} className="flex flex-col gap-5">
-            <div style={{ maxWidth: 150, height: 227, overflow: "hidden" }}>
-              <Panel variant={variant} started={started} />
+            <div
+              ref={el => { panelRefs.current[i] = el; }}
+              style={{ maxWidth: 150, height: 227, overflow: "hidden" }}
+            >
+              <Panel variant={variant} started={startedPanels[i]} />
             </div>
             <div className="space-y-1">
               <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: ACCENT }}>
