@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { company, navLinks } from "@/content/site";
+import { company, footerPages } from "@/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -23,13 +23,16 @@ export function Footer() {
               <br />
               Not affiliated with any hauler.
             </p>
+            <p className="text-sm text-white/35 leading-relaxed">
+              {company.geography}
+            </p>
           </div>
 
           {/* Navigation */}
           <div>
             <p className="label text-white/40 mb-4">Pages</p>
             <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
+              {footerPages.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -38,12 +41,6 @@ export function Footer() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/faq"
-                className="text-sm text-white/60 hover:text-white transition-colors"
-              >
-                FAQ
-              </Link>
             </nav>
           </div>
 
@@ -64,12 +61,18 @@ export function Footer() {
                 {company.email}
               </a>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col gap-3">
               <Link
                 href="/contact"
-                className="inline-block border border-white/20 text-white text-sm font-semibold px-4 py-2 hover:border-white/50 transition-colors"
+                className="inline-block bg-white text-charcoal text-sm font-semibold px-4 py-2.5 hover:bg-white/90 transition-colors text-center"
               >
                 Send us one invoice
+              </Link>
+              <Link
+                href="/services/temp-containers"
+                className="inline-block border border-white/25 text-white text-sm font-semibold px-4 py-2.5 hover:border-white/50 transition-colors text-center"
+              >
+                Request a container
               </Link>
             </div>
           </div>

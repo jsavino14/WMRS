@@ -11,19 +11,75 @@ export const company = {
   phone: "914-485-1500",
   phoneHref: "tel:9144851500",
   email: "Info@WMRService.com",
-  /** Where form submissions are forwarded via Resend */
+  /** Where invoice form submissions are forwarded via Resend */
   notificationEmail: "[alerts@wmrservice.com]",
+  /** Where temp container requests are forwarded via Resend */
+  containerNotificationEmail: process.env.CONTAINER_NOTIFICATION_EMAIL ?? "[containers@wmrservice.com]",
+  geography: "WMRS serves the United States and parts of Canada. [PLACEHOLDER - exact wording to be confirmed]",
 };
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
-export const navLinks = [
-  { label: "What We Find",    href: "/what-we-find" },
+export type NavDropdownItem = { label: string; href: string };
+export type NavTopItem = {
+  label: string;
+  href: string | null;   // null = no link on the label (Industries)
+  dropdown?: NavDropdownItem[];
+};
+
+export const nav: NavTopItem[] = [
+  {
+    label: "Services",
+    href: "/services",
+    dropdown: [
+      { label: "Waste Cost Savings",   href: "/services/waste-cost-savings" },
+      { label: "Temporary Containers", href: "/services/temp-containers" },
+      { label: "International Waste",  href: "/services/international-waste" },
+      { label: "Equipment",            href: "/services#equipment" },
+      { label: "ESG Reporting",        href: "/services#esg-reporting" },
+      { label: "Environmental",        href: "/services#environmental" },
+      { label: "Portable Restrooms",   href: "/services#portable-restrooms" },
+    ],
+  },
+  {
+    label: "Industries",
+    href: null,
+    dropdown: [
+      { label: "Food Service & Distribution", href: "/industries/food-service" },
+      { label: "Manufacturing & Warehousing", href: "/industries/manufacturing" },
+      { label: "Aviation & Transit",          href: "/industries/aviation" },
+      { label: "Healthcare",                  href: "/industries/healthcare" },
+      { label: "Construction",                href: "/industries/construction" },
+      { label: "Commercial & Retail",         href: "/industries/commercial-retail" },
+    ],
+  },
   { label: "Site Management", href: "/site-management" },
-  { label: "How We Work",     href: "/how-we-work" },
-  { label: "Industries",      href: "/industries" },
   { label: "Who We Are",      href: "/who-we-are" },
 ];
+
+// Footer "Pages" column - top-level navigable pages only
+export const footerPages = [
+  { label: "Services",        href: "/services" },
+  { label: "Site Management", href: "/site-management" },
+  { label: "Who We Are",      href: "/who-we-are" },
+  { label: "FAQ",             href: "/faq" },
+  { label: "Contact",         href: "/contact" },
+];
+
+// ─── Industry pages ───────────────────────────────────────────────────────────
+// Single source of truth for all six industry page slugs and tab labels.
+// Tab strip, static params, and nav all read from this array.
+
+export const industryPages = [
+  { slug: "food-service",      label: "Food Service & Distribution" },
+  { slug: "manufacturing",     label: "Manufacturing & Warehousing" },
+  { slug: "aviation",          label: "Aviation & Transit" },
+  { slug: "healthcare",        label: "Healthcare" },
+  { slug: "construction",      label: "Construction" },
+  { slug: "commercial-retail", label: "Commercial & Retail" },
+] as const;
+
+export type IndustrySlug = typeof industryPages[number]["slug"];
 
 // ─── Per-page SEO metadata ────────────────────────────────────────────────────
 
@@ -33,20 +89,34 @@ export const meta = {
     description:
       "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost - you keep 50% of what we save.",
   },
-  howItWorks: {
-    title: "How We Work",
+  services: {
+    title: "Services",
     description:
-      "A free invoice audit, a negotiation with your existing hauler, and ongoing billing oversight. Here's exactly what happens when you work with WMRS.",
+      "[META DESCRIPTION - to be supplied]",
   },
+  wasteCostSavings: {
+    title: "Waste Cost Savings",
+    description:
+      "Six billing patterns WMRS finds on nearly every multi-location account. Free audit, no upfront cost.",
+  },
+  tempContainers: {
+    title: "Temporary Containers",
+    description:
+      "[META DESCRIPTION - to be supplied]",
+  },
+  internationalWaste: {
+    title: "International Waste",
+    description:
+      "[META DESCRIPTION - to be supplied]",
+  },
+  industryPage: (label: string) => ({
+    title: label,
+    description: `[META DESCRIPTION FOR ${label.toUpperCase()} - to be supplied]`,
+  }),
   siteManagement: {
     title: "Site Management",
     description:
       "WMRS manages your waste accounts end-to-end: every invoice reviewed, every service issue handled, every renewal tracked. Free audit, 50/50 shared savings, no upfront cost.",
-  },
-  whatWeFind: {
-    title: "What We Find",
-    description:
-      "How hauler contracts are structured, why each overcharge happens, and what an audit checks. Six billing patterns WMRS finds on nearly every multi-location account.",
   },
   whoWeWorkWith: {
     title: "Industries",
@@ -103,7 +173,7 @@ export const home = {
     paragraphs: [
       "Waste invoices are designed to be processed, not read. The line items are vague, the fees have official-sounding names, and the total is close enough to last month's that no one flags it. That's the point.",
       "The fees that look standard - fuel surcharges, environmental fees, administrative charges - are negotiable. They are added by haulers precisely because most customers treat them as fixed. They are not.",
-      "Costs drift 20–40% above market over years of auto-renewing contracts that nobody has reread. By the time a business notices, the rate is locked in for another term.",
+      "Costs drift 20-40% above market over years of auto-renewing contracts that nobody has reread. By the time a business notices, the rate is locked in for another term.",
     ],
   },
 
@@ -141,7 +211,7 @@ export const home = {
       "Containers that never arrive. Service changes nobody asked for. Pickups that just don't happen. Each one is a phone call, a hold, an explanation, and another call when it happens again the following week.",
       "We take it on. Every site, every hauler, every month. You report it once and it's ours.",
     ],
-    link: "Learn more about our site management services →",
+    link: "Learn more about our site management services",
     linkHref: "/site-management",
   },
 
@@ -261,9 +331,7 @@ export const caseStudies = [
   },
 ];
 
-// clientLogos is defined above, near customerBaseline.
-
-// ─── Industries (used on Who We Work With) ───────────────────────────────────
+// ─── Industries (used on homepage OverchargeCards and old industries grid) ────
 
 export const industries = [
   {
@@ -308,58 +376,92 @@ export const industries = [
   },
 ];
 
-// ─── How It Works page (expanded steps) ──────────────────────────────────────
+// ─── Services overview page ───────────────────────────────────────────────────
 
-export const howItWorksPage = {
+export const servicesOverview = {
   hero: {
-    label: "The Process",
-    h1: ["One invoice.", "A free audit.", "A negotiation.", "A fixed bill."],
-    sub: "No meetings up front, no contracts, no fees until we've saved you money. Here's exactly what happens.",
+    h1: "[HEADLINE]",
+    sub: "[INTRO PARAGRAPH]",
   },
-  steps: [
+  services: [
     {
-      number: "01",
-      title: "Send us one invoice.",
-      diagramLabel: "Send it",
-      body: [
-        "One recent waste or recycling bill. That's all we need to start. You don't have to gather your full account history, pull contracts, or set up a call.",
-        "We review hundreds of invoices. We know what to look for and where haulers hide margin. Give us the bill and we'll take it from there.",
-      ],
+      id: "waste-cost-savings",
+      label: "Waste Cost Savings",
+      href: "/services/waste-cost-savings",
+      hasPage: true as const,
+      body: "[SERVICE DESCRIPTION]",
     },
     {
-      number: "02",
-      title: "We audit it.",
-      diagramLabel: "We audit",
-      body: [
-        "We compare against the rates haulers are actually accepting for equivalent service - container size, pickup frequency, location type, not their published list rates.",
-        "We review every fee on the bill: fuel surcharges, environmental fees, administrative charges, late fees, overage fees. We check whether the contract has an automatic renewal clause, what the escalator language says, and when the next renewal window opens.",
-        "We look at your pickup frequency against typical generation patterns for businesses like yours. We check whether all locations and containers on the bill are active. We check how your recyclables are classified.",
-      ],
+      id: "temp-containers",
+      label: "Temporary Containers",
+      href: "/services/temp-containers",
+      hasPage: true as const,
+      body: "[SERVICE DESCRIPTION]",
     },
     {
-      number: "03",
-      title: "We renegotiate.",
-      diagramLabel: "We renegotiate",
-      body: [
-        "In almost every case, we work with your existing hauler. Changing haulers is disruptive and rarely necessary. Haulers are motivated to retain accounts - they'll often adjust rates rather than lose the business.",
-        "We handle all communication with the hauler. You don't have to be on calls or write letters. We present the audit findings and negotiate from there.",
-        "In cases where the existing hauler won't move, we'll tell you what competing haulers would offer. The decision on whether to switch is always yours.",
-      ],
+      id: "international-waste",
+      label: "International Waste",
+      href: "/services/international-waste",
+      hasPage: true as const,
+      body: "[SERVICE DESCRIPTION]",
     },
     {
-      number: "04",
-      title: "We take over the billing.",
-      diagramLabel: "We manage it",
-      body: [
-        "Once the rate is set, every invoice from your hauler comes to us. We review every line every month against the negotiated terms.",
-        "Rate increases, new fees, billing for service changes you didn't request - we catch them before you pay them. If there's a legitimate change, we'll flag it. If there isn't, we handle the correction.",
-        "Your operations team doesn't have to manage waste billing anymore. We do it.",
-      ],
+      id: "equipment",
+      label: "Equipment",
+      anchor: "equipment",
+      hasPage: false as const,
+      body: "[SERVICE DESCRIPTION]",
+    },
+    {
+      id: "esg-reporting",
+      label: "ESG Reporting",
+      anchor: "esg-reporting",
+      hasPage: false as const,
+      body: "[SERVICE DESCRIPTION]",
+    },
+    {
+      id: "environmental",
+      label: "Environmental",
+      anchor: "environmental",
+      hasPage: false as const,
+      body: "[SERVICE DESCRIPTION]",
+    },
+    {
+      id: "portable-restrooms",
+      label: "Portable Restrooms",
+      anchor: "portable-restrooms",
+      hasPage: false as const,
+      body: "[SERVICE DESCRIPTION]",
     },
   ],
 };
 
-// ─── What We Find page (expanded detail) ─────────────────────────────────────
+// ─── Temporary container request form ─────────────────────────────────────────
+
+export const tempContainerForm = {
+  hero: {
+    h1: "Request a Temporary Container.",
+    sub: "Fill out the form below and we will follow up within one business day.",
+  },
+  form: {
+    fields: {
+      name:            { label: "Name",                 placeholder: "Your name" },
+      company:         { label: "Company",              placeholder: "Company name" },
+      email:           { label: "Email",                placeholder: "you@company.com" },
+      phone:           { label: "Phone",                placeholder: "Optional" },
+      deliveryAddress: { label: "Delivery Address",     placeholder: "Street address, city, state, zip" },
+      containerSize:   { label: "Container Size",       placeholder: "e.g. 10 yard, 20 yard, 30 yard" },
+      materialType:    { label: "Material Type",        placeholder: "e.g. Construction debris, mixed waste" },
+      deliveryDate:    { label: "Delivery Date Needed", placeholder: "MM/DD/YYYY" },
+    },
+    submit: "Submit request",
+    success: "Request received. We will follow up within one business day.",
+    errorRequired: "Name, company, email, and delivery address are required.",
+    errorGeneric: "Something went wrong. Please try again or call us directly.",
+  },
+};
+
+// ─── Waste Cost Savings page (moved from /what-we-find) ───────────────────────
 
 export const whatWeFind = {
   hero: {
@@ -409,8 +511,8 @@ export const whatWeFind = {
       label: "Buried escalators",
       title: "Auto-renewing contracts with annual escalators nobody agreed to.",
       detail: [
-        "The escalator language is usually in the original agreement - often a clause allowing annual increases of 3–5% or the CPI, whichever is greater. Clients agree to it once and then forget it exists.",
-        "Auto-renewal is the mechanism. The combination of auto-renewal and an escalator means a rate that was competitive in year one can be 20–40% above market by year five. We see this constantly.",
+        "The escalator language is usually in the original agreement - often a clause allowing annual increases of 3-5% or the CPI, whichever is greater. Clients agree to it once and then forget it exists.",
+        "Auto-renewal is the mechanism. The combination of auto-renewal and an escalator means a rate that was competitive in year one can be 20-40% above market by year five. We see this constantly.",
         "The best time to address it is before the next renewal window closes. The second best time is now.",
       ],
     },
@@ -470,7 +572,7 @@ export const about = {
     {
       heading: "You get a person, not a queue.",
       body: [
-        "One manager owns your account. They know your sites, your haulers, your contract terms, and the history of every issue you've raised. That's not a service level we advertise — it's just how a company this size works, and it's the part clients tell us they'd miss most.",
+        "One manager owns your account. They know your sites, your haulers, your contract terms, and the history of every issue you've raised. That's not a service level we advertise - it's just how a company this size works, and it's the part clients tell us they'd miss most.",
       ],
     },
   ],
@@ -542,7 +644,7 @@ export const siteManagement = {
     body: [
       "The audit is free. When we lower your bill, we keep 50% of the savings and you keep 50%. No setup fee, no monthly fee, no retainer. If we can't find savings, we don't send you a bill.",
     ],
-    placeholder: "[PLACEHOLDER: fee range and whether it's per site or per account — to be added once decided.]",
+    placeholder: "[PLACEHOLDER: fee range and whether it's per site or per account - to be added once decided.]",
   },
   whereToStart: {
     h2: "Where to start.",
@@ -573,7 +675,7 @@ export const contact = {
       phone: { label: "Phone", placeholder: "Optional" },
       locations: {
         label: "Number of locations",
-        options: ["1", "2–10", "11–50", "50+"],
+        options: ["1", "2-10", "11-50", "50+"],
       },
       lookingFor: {
         label: "What are you looking for?",
@@ -603,4 +705,55 @@ export const contact = {
     phoneHref: "tel:9144851500",
     email: "Info@WMRService.com",
   },
+};
+
+// ─── How It Works page (kept for backward compat - page now redirects to /services) ─
+
+export const howItWorksPage = {
+  hero: {
+    label: "The Process",
+    h1: ["One invoice.", "A free audit.", "A negotiation.", "A fixed bill."],
+    sub: "No meetings up front, no contracts, no fees until we've saved you money. Here's exactly what happens.",
+  },
+  steps: [
+    {
+      number: "01",
+      title: "Send us one invoice.",
+      diagramLabel: "Send it",
+      body: [
+        "One recent waste or recycling bill. That's all we need to start. You don't have to gather your full account history, pull contracts, or set up a call.",
+        "We review hundreds of invoices. We know what to look for and where haulers hide margin. Give us the bill and we'll take it from there.",
+      ],
+    },
+    {
+      number: "02",
+      title: "We audit it.",
+      diagramLabel: "We audit",
+      body: [
+        "We compare against the rates haulers are actually accepting for equivalent service - container size, pickup frequency, location type, not their published list rates.",
+        "We review every fee on the bill: fuel surcharges, environmental fees, administrative charges, late fees, overage fees. We check whether the contract has an automatic renewal clause, what the escalator language says, and when the next renewal window opens.",
+        "We look at your pickup frequency against typical generation patterns for businesses like yours. We check whether all locations and containers on the bill are active. We check how your recyclables are classified.",
+      ],
+    },
+    {
+      number: "03",
+      title: "We renegotiate.",
+      diagramLabel: "We renegotiate",
+      body: [
+        "In almost every case, we work with your existing hauler. Changing haulers is disruptive and rarely necessary. Haulers are motivated to retain accounts - they'll often adjust rates rather than lose the business.",
+        "We handle all communication with the hauler. You don't have to be on calls or write letters. We present the audit findings and negotiate from there.",
+        "In cases where the existing hauler won't move, we'll tell you what competing haulers would offer. The decision on whether to switch is always yours.",
+      ],
+    },
+    {
+      number: "04",
+      title: "We take over the billing.",
+      diagramLabel: "We manage it",
+      body: [
+        "Once the rate is set, every invoice from your hauler comes to us. We review every line every month against the negotiated terms.",
+        "Rate increases, new fees, billing for service changes you didn't request - we catch them before you pay them. If there's a legitimate change, we'll flag it. If there isn't, we handle the correction.",
+        "Your operations team doesn't have to manage waste billing anymore. We do it.",
+      ],
+    },
+  ],
 };

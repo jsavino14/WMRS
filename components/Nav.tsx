@@ -4,12 +4,29 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { navLinks, company } from "@/content/site";
+import { nav, company } from "@/content/site";
+
+function ChevronDown({ style }: { style?: React.CSSProperties }) {
+  return (
+    <svg
+      width="11" height="11" viewBox="0 0 11 11" fill="none"
+      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true"
+      style={style}
+    >
+      <path d="M2 4l3.5 3.5L9 4" />
+    </svg>
+  );
+}
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
-  const close = useCallback(() => setMobileOpen(false), []);
+  const close = useCallback(() => {
+    setMobileOpen(false);
+    setExpandedItem(null);
+  }, []);
 
   // Lock body scroll while menu is open
   useEffect(() => {
@@ -36,16 +53,57 @@ export function Nav() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-7">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="hidden md:flex items-center gap-0">
+              {nav.map((item) => {
+                if (item.dropdown) {
+                  return (
+                    <div key={item.label} className="relative group">
+                      {item.href ? (
+                        <Link
+                          href={item.href}
+                          className="flex items-center gap-1.5 h-16 px-3 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                        >
+                          {item.label}
+                          <ChevronDown />
+                        </Link>
+                      ) : (
+                        <button
+                          className="flex items-center gap-1.5 h-16 px-3 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                          aria-haspopup="true"
+                        >
+                          {item.label}
+                          <ChevronDown />
+                        </button>
+                      )}
+                      {/* Dropdown panel — appears on group hover */}
+                      <div
+                        className="absolute left-0 top-full z-40 pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100 transition-opacity duration-150"
+                      >
+                        <div className="bg-white shadow-lg border border-charcoal/10 py-1.5 min-w-[210px]">
+                          {item.dropdown.map((d) => (
+                            <Link
+                              key={d.href}
+                              href={d.href}
+                              className="block px-4 py-2.5 text-sm text-charcoal/65 hover:text-charcoal hover:bg-charcoal/[0.04] transition-colors"
+                            >
+                              {d.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href!}
+                    className="flex items-center h-16 px-3 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Desktop CTA */}
@@ -81,7 +139,7 @@ export function Nav() {
       {/* Full-screen mobile menu */}
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col">
-          {/* Header row — same height and gutter as the collapsed header */}
+          {/* Header row */}
           <div className="flex-shrink-0 border-b border-charcoal/10">
             <Container>
               <div className="flex items-center justify-between h-16">
@@ -101,44 +159,129 @@ export function Nav() {
             </Container>
           </div>
 
-          {/* Nav items — scrollable so very short phones don't clip the button */}
+          {/* Nav items - scrollable */}
           <div className="flex-1 overflow-y-auto">
             <Container>
-              {/* Nav group */}
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[28px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
-                  onClick={close}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {nav.map((item) => {
+                const isExpanded = expandedItem === item.label;
 
-              {/* Contact block — more space above, no rules between items */}
+                if (item.dropdown && item.href) {
+                  // Services: label links to /services, chevron tap expands submenu
+                  return (
+                    <div key={item.label}>
+                      <div className="flex items-stretch border-b border-charcoal/10">
+                        <Link
+                          href={item.href}
+                          onClick={close}
+                          className="flex-1 flex items-center min-h-[64px] py-4 text-[30px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                        <button
+                          onClick={() => setExpandedItem((prev) => prev === item.label ? null : item.label)}
+                          aria-label={isExpanded ? "Collapse" : "Expand"}
+                          className="flex items-center justify-center w-12 flex-shrink-0 text-charcoal/50 hover:text-charcoal"
+                        >
+                          <ChevronDown style={{ transform: isExpanded ? "rotate(180deg)" : undefined, transition: "transform 200ms ease" }} />
+                        </button>
+                      </div>
+                      {isExpanded && (
+                        <div className="bg-charcoal/[0.03] border-b border-charcoal/10">
+                          {item.dropdown.map((d) => (
+                            <Link
+                              key={d.href}
+                              href={d.href}
+                              onClick={close}
+                              className="flex items-center min-h-[48px] px-4 py-3 text-base text-charcoal/70 hover:text-charcoal border-b border-charcoal/5 last:border-0 transition-colors"
+                            >
+                              {d.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                if (item.dropdown && !item.href) {
+                  // Industries: whole row is expander, no link
+                  return (
+                    <div key={item.label}>
+                      <button
+                        onClick={() => setExpandedItem((prev) => prev === item.label ? null : item.label)}
+                        className="flex items-center justify-between w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[30px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          style={{
+                            transform: isExpanded ? "rotate(180deg)" : undefined,
+                            transition: "transform 200ms ease",
+                            flexShrink: 0,
+                            marginRight: "2px",
+                          }}
+                        />
+                      </button>
+                      {isExpanded && (
+                        <div className="bg-charcoal/[0.03] border-b border-charcoal/10">
+                          {item.dropdown.map((d) => (
+                            <Link
+                              key={d.href}
+                              href={d.href}
+                              onClick={close}
+                              className="flex items-center min-h-[48px] px-4 py-3 text-base text-charcoal/70 hover:text-charcoal border-b border-charcoal/5 last:border-0 transition-colors"
+                            >
+                              {d.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                // Direct link (Site Management, Who We Are)
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href!}
+                    onClick={close}
+                    className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[30px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              {/* Contact block */}
               <div className="pt-10 pb-8 flex flex-col gap-1">
                 <a
                   href={company.phoneHref}
-                  className="flex items-center w-full min-h-[44px] text-[18px] text-charcoal/70 hover:text-charcoal transition-colors"
                   onClick={close}
+                  className="flex items-center w-full min-h-[44px] text-[18px] text-charcoal/70 hover:text-charcoal transition-colors"
                 >
                   {company.phone}
                 </a>
                 <a
                   href={`mailto:${company.email}?subject=Invoice%20for%20review`}
-                  className="flex items-center w-full min-h-[44px] text-[18px] text-charcoal/70 hover:text-charcoal transition-colors"
                   onClick={close}
+                  className="flex items-center w-full min-h-[44px] text-[18px] text-charcoal/70 hover:text-charcoal transition-colors"
                 >
                   {company.email}
                 </a>
-                <div className="pt-4">
+                <div className="pt-4 flex flex-col gap-3">
                   <Link
                     href="/contact"
-                    className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
                     onClick={close}
+                    className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
                   >
                     Send us one invoice
+                  </Link>
+                  <Link
+                    href="/services/temp-containers"
+                    onClick={close}
+                    className="block w-full border border-charcoal/30 text-charcoal text-sm font-semibold px-4 py-4 text-center hover:border-charcoal transition-colors"
+                  >
+                    Request a container
                   </Link>
                 </div>
               </div>

@@ -28,6 +28,32 @@
 @keyframes wmrs-float-4 { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
 @keyframes wmrs-float-5 { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
 
+/* ── Industry tab view transitions ─────────────────────────────────────────── */
+/* view-transition-name applied via class to avoid TypeScript CSSProperties gap */
+.vt-industry-content {
+  view-transition-name: industry-content;
+}
+
+@keyframes vt-slide-out-left  { to   { transform: translateX(-40px); opacity: 0; } }
+@keyframes vt-slide-out-right { to   { transform: translateX( 40px); opacity: 0; } }
+@keyframes vt-slide-in-right  { from { transform: translateX( 40px); opacity: 0; } }
+@keyframes vt-slide-in-left   { from { transform: translateX(-40px); opacity: 0; } }
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(industry-content) {
+    animation: 320ms ease-out both vt-slide-out-left;
+  }
+  ::view-transition-new(industry-content) {
+    animation: 320ms ease-out both vt-slide-in-right;
+  }
+  html[data-vt-direction="back"] ::view-transition-old(industry-content) {
+    animation-name: vt-slide-out-right;
+  }
+  html[data-vt-direction="back"] ::view-transition-new(industry-content) {
+    animation-name: vt-slide-in-left;
+  }
+}
+
 /* ── Overcharge card icon hover animations ─────────────────────────────────── */
 .wmrs-pickup-arrow,
 .wmrs-location-arrow,
