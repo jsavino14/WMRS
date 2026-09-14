@@ -65,10 +65,10 @@ export function Nav() {
             <nav className="hidden md:flex items-center gap-1">
               {nav.map((item) => {
                 const active = isNavItemActive(item, pathname);
-                const baseClass = `flex items-center h-16 px-4 transition-colors duration-150 ${
+                const baseClass = `flex items-center h-16 px-5 transition-colors duration-150 ${
                   active
                     ? "text-charcoal font-semibold"
-                    : "text-charcoal/70 font-medium hover:text-charcoal"
+                    : "text-charcoal/75 font-medium hover:text-charcoal"
                 }`;
 
                 if (item.dropdown) {
@@ -76,7 +76,7 @@ export function Nav() {
                     <div key={item.label} className="relative group">
                       <button
                         className={`${baseClass} gap-1.5 cursor-default`}
-                        style={{ fontSize: "15px" }}
+                        style={{ fontSize: "16px" }}
                         aria-haspopup="true"
                       >
                         {item.label}
@@ -105,7 +105,7 @@ export function Nav() {
                     key={item.label}
                     href={item.href!}
                     className={baseClass}
-                    style={{ fontSize: "15px" }}
+                    style={{ fontSize: "16px" }}
                   >
                     {item.label}
                   </Link>

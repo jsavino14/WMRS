@@ -6,8 +6,7 @@ import { startTransition, useEffect, useRef, useState } from "react";
 type Page = { readonly slug: string; readonly label: string };
 type DocWithVT = Document & { startViewTransition?: (cb: () => void) => unknown };
 
-const STRIP_BG = "#F7F8F7";
-const STRIP_BORDER = "#E5E8E6";
+const STRIP_BG = "#F1F3F1";
 
 export function SectionTabStrip({
   pages,
@@ -109,7 +108,7 @@ export function SectionTabStrip({
   return (
     <div
       className="relative"
-      style={{ background: STRIP_BG, borderBottom: `1px solid ${STRIP_BORDER}` }}
+      style={{ background: STRIP_BG }}
     >
       {/* Left fade — shown once scrolled away from start */}
       {showLeft && (
@@ -140,10 +139,10 @@ export function SectionTabStrip({
                 key={page.slug}
                 ref={(el) => { tabRefs.current[i] = el; }}
                 onClick={() => handleTabClick(i, page.slug)}
-                className={`whitespace-nowrap flex-shrink-0 px-4 py-[13px] text-[13px] font-medium border-b-2 transition-colors duration-150 ${
+                className={`whitespace-nowrap flex-shrink-0 px-[13px] py-3 text-[12.5px] font-medium border-b-2 transition-colors duration-150 ${
                   isActive
                     ? "border-accent text-charcoal font-semibold"
-                    : "border-transparent text-charcoal/55 hover:text-charcoal"
+                    : "border-transparent text-charcoal/50 hover:text-charcoal"
                 }`}
               >
                 {page.label}
