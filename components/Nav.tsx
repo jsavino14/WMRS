@@ -53,7 +53,7 @@ export function Nav() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-0">
+            <nav className="hidden md:flex items-center gap-1">
               {nav.map((item) => {
                 if (item.dropdown) {
                   return (
@@ -61,14 +61,14 @@ export function Nav() {
                       {item.href ? (
                         <Link
                           href={item.href}
-                          className="flex items-center gap-1.5 h-16 px-3 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                          className="flex items-center gap-1.5 h-16 px-4 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
                         >
                           {item.label}
                           <ChevronDown />
                         </Link>
                       ) : (
                         <button
-                          className="flex items-center gap-1.5 h-16 px-3 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                          className="flex items-center gap-1.5 h-16 px-4 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
                           aria-haspopup="true"
                         >
                           {item.label}
@@ -98,7 +98,7 @@ export function Nav() {
                   <Link
                     key={item.label}
                     href={item.href!}
-                    className="flex items-center h-16 px-3 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                    className="flex items-center h-16 px-4 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
                   >
                     {item.label}
                   </Link>

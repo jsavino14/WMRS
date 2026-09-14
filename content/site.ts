@@ -57,13 +57,16 @@ export const nav: NavTopItem[] = [
   { label: "Who We Are",      href: "/who-we-are" },
 ];
 
-// Footer "Pages" column - top-level navigable pages only
+// Footer "Pages" column
 export const footerPages = [
-  { label: "Services",        href: "/services" },
-  { label: "Site Management", href: "/site-management" },
-  { label: "Who We Are",      href: "/who-we-are" },
-  { label: "FAQ",             href: "/faq" },
-  { label: "Contact",         href: "/contact" },
+  { label: "Services",              href: "/services" },
+  { label: "Waste Cost Savings",    href: "/services/waste-cost-savings" },
+  { label: "Temporary Containers",  href: "/services/temp-containers" },
+  { label: "International Waste",   href: "/services/international-waste" },
+  { label: "Site Management",       href: "/site-management" },
+  { label: "Who We Are",            href: "/who-we-are" },
+  { label: "FAQ",                   href: "/faq" },
+  { label: "Contact",               href: "/contact" },
 ];
 
 // ─── Industry pages ───────────────────────────────────────────────────────────
