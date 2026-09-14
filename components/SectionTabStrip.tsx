@@ -2,11 +2,18 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { startTransition, useEffect, useRef, useState } from "react";
+import { useNavHover } from "./NavHoverContext";
+import { servicePages, industryPages } from "@/content/site";
 
 type Page = { readonly slug: string; readonly label: string };
 type DocWithVT = Document & { startViewTransition?: (cb: () => void) => unknown };
 
 const STRIP_BG = "#F1F3F1";
+
+const SECTION_PAGES: Record<string, readonly Page[]> = {
+  services: servicePages,
+  industries: industryPages,
+};
 
 export function SectionTabStrip({
   pages,
@@ -17,18 +24,54 @@ export function SectionTabStrip({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { hoveredSection, cancelClose, closeSection } = useNavHover();
 
-  const activeIndex = pages.findIndex(
-    (p) => pathname === `${basePath}/${p.slug}`
-  );
+  const ownSection = basePath.slice(1); // "/services" → "services"
 
-  // Track previous index for popstate direction detection
+  // ── Crossfade when hoveredSection changes to a different section ─────────
+  const [displayedSection, setDisplayedSection] = useState<string | null>(null);
+  const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    const targetSection = hoveredSection ?? ownSection;
+    const currentSection = displayedSection ?? ownSection;
+    if (targetSection === currentSection) return;
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      setDisplayedSection(hoveredSection);
+      return;
+    }
+
+    setFading(true);
+    const t = setTimeout(() => {
+      setDisplayedSection(hoveredSection);
+      setFading(false);
+    }, 70);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hoveredSection]);
+
+  const displaySection = displayedSection ?? ownSection;
+  const displayPages = SECTION_PAGES[displaySection] ?? pages;
+  const displayBasePath = `/${displaySection}`;
+
+  // Active underline only when showing own section and not in hover-preview mode
+  const showActive = displaySection === ownSection && hoveredSection === null;
+  const activeIndex = showActive
+    ? displayPages.findIndex((p) => pathname === `${displayBasePath}/${p.slug}`)
+    : -1;
+
+  // ── Track previous index for popstate direction detection ─────────────────
   const prevIndexRef = useRef(activeIndex);
   useEffect(() => {
     prevIndexRef.current = activeIndex;
   }, [activeIndex]);
 
-  // Per-tab refs so we can scrollIntoView on the active one
+  // ── Per-tab refs for scrollIntoView ──────────────────────────────────────
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Scroll active tab into view on mount and when route changes
@@ -40,7 +83,7 @@ export function SectionTabStrip({
     });
   }, [activeIndex]);
 
-  // Fade mask visibility
+  // ── Fade masks ────────────────────────────────────────────────────────────
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
@@ -66,10 +109,10 @@ export function SectionTabStrip({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Re-check fades after active tab changes (scroll position may have shifted)
-  useEffect(() => { updateFades(); }, [activeIndex]);
+  // Re-check fades after active tab or displayed pages change
+  useEffect(() => { updateFades(); }, [activeIndex, displaySection]);
 
-  // Set direction attribute for browser back/forward
+  // ── Popstate direction ────────────────────────────────────────────────────
   useEffect(() => {
     function handlePopState() {
       const newPath = window.location.pathname;
@@ -82,6 +125,7 @@ export function SectionTabStrip({
     return () => window.removeEventListener("popstate", handlePopState);
   }, [basePath, pages]);
 
+  // ── View transitions ──────────────────────────────────────────────────────
   function canTransition(): boolean {
     if (typeof document === "undefined" || typeof window === "undefined") return false;
     return (
@@ -92,14 +136,19 @@ export function SectionTabStrip({
   }
 
   function handleTabClick(toIndex: number, slug: string) {
-    if (toIndex === activeIndex) return;
-    const href = `${basePath}/${slug}`;
+    const href = `${displayBasePath}/${slug}`;
+    if (pathname === href) return;
     if (!canTransition()) {
       router.push(href);
       return;
     }
-    document.documentElement.dataset.vtDirection =
-      toIndex < activeIndex ? "back" : "forward";
+    // Set direction only for same-section navigation
+    if (displaySection === ownSection) {
+      document.documentElement.dataset.vtDirection =
+        toIndex < activeIndex ? "back" : "forward";
+    } else {
+      delete document.documentElement.dataset.vtDirection;
+    }
     (document as DocWithVT).startViewTransition!(() => {
       startTransition(() => router.push(href));
     });
@@ -108,16 +157,22 @@ export function SectionTabStrip({
   return (
     <div
       className="relative"
-      style={{ background: STRIP_BG }}
+      style={{
+        background: STRIP_BG,
+        opacity: fading ? 0 : 1,
+        transition: "opacity 70ms ease",
+      }}
+      onMouseEnter={cancelClose}
+      onMouseLeave={closeSection}
     >
-      {/* Left fade — shown once scrolled away from start */}
+      {/* Left fade */}
       {showLeft && (
         <div
           className="pointer-events-none absolute inset-y-0 left-0 w-10 z-10"
           style={{ background: `linear-gradient(to right, ${STRIP_BG}, transparent)` }}
         />
       )}
-      {/* Right fade — shown when more tabs are off-screen to the right */}
+      {/* Right fade */}
       {showRight && (
         <div
           className="pointer-events-none absolute inset-y-0 right-0 w-10 z-10"
@@ -125,14 +180,13 @@ export function SectionTabStrip({
         />
       )}
 
-      {/* Scrollable row — full-bleed bg already on parent, no inner bg needed */}
       <div
         ref={scrollRef}
         className="hide-scrollbar overflow-x-auto"
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          {pages.map((page, i) => {
+          {displayPages.map((page, i) => {
             const isActive = i === activeIndex;
             return (
               <button

@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { nav, company } from "@/content/site";
+import { nav, company, servicePages, industryPages } from "@/content/site";
 import type { NavTopItem } from "@/content/site";
+import { useNavHover } from "./NavHoverContext";
+
+const STRIP_BG = "#F1F3F1";
+
+const SECTION_PAGES: Record<string, readonly { slug: string; label: string }[]> = {
+  services: servicePages,
+  industries: industryPages,
+};
 
 function ChevronDown({ style }: { style?: React.CSSProperties }) {
   return (
@@ -29,21 +37,46 @@ function isNavItemActive(item: NavTopItem, pathname: string): boolean {
 
 export function Nav() {
   const pathname = usePathname();
+  const {
+    hoveredSection,
+    openSection,
+    openImmediate,
+    closeSection,
+    cancelClose,
+    closeImmediate,
+  } = useNavHover();
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+
+  const isOnSectionPage =
+    pathname.startsWith("/services") || pathname.startsWith("/industries");
+
+  // Remember last hovered section so the overlay content persists during fade-out
+  const lastSectionRef = useRef<string | null>(null);
+  if (hoveredSection !== null) lastSectionRef.current = hoveredSection;
+  const overlaySection = hoveredSection ?? lastSectionRef.current;
+
+  // Refs for focus restoration after Escape
+  const sectionBtnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const close = useCallback(() => {
     setMobileOpen(false);
     setExpandedItem(null);
   }, []);
 
-  // Lock body scroll while menu is open
+  // Close hover on route change
+  useEffect(() => {
+    closeImmediate();
+  }, [pathname, closeImmediate]);
+
+  // Lock body scroll while mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Close on Escape
+  // Close mobile menu on Escape
   useEffect(() => {
     if (!mobileOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
@@ -51,13 +84,34 @@ export function Nav() {
     return () => document.removeEventListener("keydown", onKey);
   }, [mobileOpen, close]);
 
+  // Close hover strip on Escape and restore focus
+  useEffect(() => {
+    if (!hoveredSection) return;
+    const section = hoveredSection;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeImmediate();
+        sectionBtnRefs.current[section]?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [hoveredSection, closeImmediate]);
+
+  const overlayOpen = !!hoveredSection && !isOnSectionPage;
+
   return (
     <>
       <header className="sticky top-0 z-50 bg-white border-b border-charcoal/10">
         <Container>
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0" onClick={close}>
+            <Link
+              href="/"
+              className="flex-shrink-0"
+              onClick={close}
+              onMouseEnter={() => closeImmediate()}
+            >
               <Logo />
             </Link>
 
@@ -72,31 +126,31 @@ export function Nav() {
                 }`;
 
                 if (item.dropdown) {
+                  const sectionKey = item.activePrefix!.slice(1); // "/services" → "services"
+                  const isOpen = hoveredSection === sectionKey;
                   return (
-                    <div key={item.label} className="relative group">
-                      <button
-                        className={`${baseClass} gap-1.5 cursor-default`}
-                        style={{ fontSize: "16px" }}
-                        aria-haspopup="true"
-                      >
-                        {item.label}
-                        <ChevronDown />
-                      </button>
-                      {/* Dropdown panel — appears on group hover */}
-                      <div className="absolute left-0 top-full z-40 pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100 transition-opacity duration-150">
-                        <div className="bg-white shadow-lg border border-charcoal/10 py-1.5 min-w-[210px]">
-                          {item.dropdown.map((d) => (
-                            <Link
-                              key={d.href}
-                              href={d.href}
-                              className="block px-4 py-2.5 text-sm text-charcoal/65 hover:text-charcoal hover:bg-charcoal/[0.04] transition-colors"
-                            >
-                              {d.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                    <button
+                      key={item.label}
+                      ref={(el) => { sectionBtnRefs.current[sectionKey] = el; }}
+                      className={`${baseClass} gap-1.5`}
+                      style={{ fontSize: "16px" }}
+                      aria-expanded={isOpen}
+                      aria-controls="nav-section-strip"
+                      onMouseEnter={() => openSection(sectionKey)}
+                      onMouseLeave={() => closeSection()}
+                      onClick={() => {
+                        if (isOpen) closeImmediate();
+                        else openImmediate(sectionKey);
+                      }}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        style={{
+                          transform: isOpen ? "rotate(180deg)" : undefined,
+                          transition: "transform 150ms ease",
+                        }}
+                      />
+                    </button>
                   );
                 }
 
@@ -106,6 +160,7 @@ export function Nav() {
                     href={item.href!}
                     className={baseClass}
                     style={{ fontSize: "16px" }}
+                    onMouseEnter={() => closeImmediate()}
                   >
                     {item.label}
                   </Link>
@@ -114,7 +169,10 @@ export function Nav() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-4">
+            <div
+              className="hidden md:flex items-center gap-4"
+              onMouseEnter={() => closeImmediate()}
+            >
               <a
                 href={company.phoneHref}
                 className="text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
@@ -143,6 +201,45 @@ export function Nav() {
         </Container>
       </header>
 
+      {/* State C: overlay strip — desktop only, slides down below header on non-section pages */}
+      <div className="hidden md:block">
+        <div
+          id="nav-section-strip"
+          style={{
+            position: "fixed",
+            top: "4rem", // h-16 = 64px
+            left: 0,
+            right: 0,
+            zIndex: 49,
+            background: STRIP_BG,
+            boxShadow: overlayOpen ? "0 6px 16px rgba(30,36,40,0.07)" : "none",
+            opacity: overlayOpen ? 1 : 0,
+            transform: overlayOpen ? "translateY(0)" : "translateY(-100%)",
+            transition: overlayOpen
+              ? "opacity 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out"
+              : "opacity 140ms ease-in, transform 140ms ease-in, box-shadow 140ms ease-in",
+            pointerEvents: overlayOpen ? "auto" : "none",
+          }}
+          onMouseEnter={cancelClose}
+          onMouseLeave={closeSection}
+        >
+          <div className="overflow-x-auto hide-scrollbar" style={{ scrollbarWidth: "none" }}>
+            <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+              {overlaySection &&
+                SECTION_PAGES[overlaySection]?.map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/${overlaySection}/${page.slug}`}
+                    className="whitespace-nowrap flex-shrink-0 px-[13px] py-3 text-[12.5px] font-medium border-b-2 border-transparent text-charcoal/50 hover:text-charcoal transition-colors duration-150"
+                  >
+                    {page.label}
+                  </Link>
+                ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Full-screen mobile menu */}
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col">
@@ -166,7 +263,7 @@ export function Nav() {
             </Container>
           </div>
 
-          {/* Nav items - scrollable */}
+          {/* Nav items — scrollable */}
           <div className="flex-1 overflow-y-auto">
             <Container>
               {nav.map((item) => {
@@ -177,11 +274,14 @@ export function Nav() {
                 }`;
 
                 if (item.dropdown) {
-                  // All dropdown items: expand-only button (no nav link for either)
                   return (
                     <div key={item.label}>
                       <button
-                        onClick={() => setExpandedItem((prev) => prev === item.label ? null : item.label)}
+                        onClick={() =>
+                          setExpandedItem((prev) =>
+                            prev === item.label ? null : item.label
+                          )
+                        }
                         className={`flex items-center justify-between w-full min-h-[64px] py-4 border-b border-charcoal/10 ${itemClass}`}
                       >
                         <span>{item.label}</span>
@@ -212,7 +312,6 @@ export function Nav() {
                   );
                 }
 
-                // Direct link (Site Management, Who We Are)
                 return (
                   <Link
                     key={item.label}
