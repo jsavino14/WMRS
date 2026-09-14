@@ -29,7 +29,7 @@ export default async function IndustryPage({ params }: Props) {
   if (!page) notFound();
 
   return (
-    <div className="vt-industry-content">
+    <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 lg:py-24">
         <Container>

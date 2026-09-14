@@ -18,60 +18,9 @@ export const company = {
   geography: "WMRS serves the United States and parts of Canada. [PLACEHOLDER - exact wording to be confirmed]",
 };
 
-// ─── Navigation ───────────────────────────────────────────────────────────────
-
-export type NavDropdownItem = { label: string; href: string };
-export type NavTopItem = {
-  label: string;
-  href: string | null;   // null = no link on the label (Industries)
-  dropdown?: NavDropdownItem[];
-};
-
-export const nav: NavTopItem[] = [
-  {
-    label: "Services",
-    href: "/services",
-    dropdown: [
-      { label: "Waste Cost Savings",   href: "/services/waste-cost-savings" },
-      { label: "Temporary Containers", href: "/services/temp-containers" },
-      { label: "International Waste",  href: "/services/international-waste" },
-      { label: "Equipment",            href: "/services#equipment" },
-      { label: "ESG Reporting",        href: "/services#esg-reporting" },
-      { label: "Environmental",        href: "/services#environmental" },
-      { label: "Portable Restrooms",   href: "/services#portable-restrooms" },
-    ],
-  },
-  {
-    label: "Industries",
-    href: null,
-    dropdown: [
-      { label: "Food Service & Distribution", href: "/industries/food-service" },
-      { label: "Manufacturing & Warehousing", href: "/industries/manufacturing" },
-      { label: "Aviation & Transit",          href: "/industries/aviation" },
-      { label: "Healthcare",                  href: "/industries/healthcare" },
-      { label: "Construction",                href: "/industries/construction" },
-      { label: "Commercial & Retail",         href: "/industries/commercial-retail" },
-    ],
-  },
-  { label: "Site Management", href: "/site-management" },
-  { label: "Who We Are",      href: "/who-we-are" },
-];
-
-// Footer "Pages" column
-export const footerPages = [
-  { label: "Services",              href: "/services" },
-  { label: "Waste Cost Savings",    href: "/services/waste-cost-savings" },
-  { label: "Temporary Containers",  href: "/services/temp-containers" },
-  { label: "International Waste",   href: "/services/international-waste" },
-  { label: "Site Management",       href: "/site-management" },
-  { label: "Who We Are",            href: "/who-we-are" },
-  { label: "FAQ",                   href: "/faq" },
-  { label: "Contact",               href: "/contact" },
-];
-
-// ─── Industry pages ───────────────────────────────────────────────────────────
-// Single source of truth for all six industry page slugs and tab labels.
-// Tab strip, static params, and nav all read from this array.
+// ─── Section page arrays ──────────────────────────────────────────────────────
+// Single source of truth for slugs and labels. Nav dropdowns, tab strips,
+// generateStaticParams, and footer all read from these — they cannot desync.
 
 export const industryPages = [
   { slug: "food-service",      label: "Food Service & Distribution" },
@@ -81,8 +30,54 @@ export const industryPages = [
   { slug: "construction",      label: "Construction" },
   { slug: "commercial-retail", label: "Commercial & Retail" },
 ] as const;
-
 export type IndustrySlug = typeof industryPages[number]["slug"];
+
+export const servicePages = [
+  { slug: "waste-cost-savings",  label: "Waste Cost Savings" },
+  { slug: "temp-containers",     label: "Temporary Containers" },
+  { slug: "international-waste", label: "International Waste" },
+  { slug: "equipment",           label: "Equipment" },
+  { slug: "esg-reporting",       label: "ESG Reporting" },
+  { slug: "environmental",       label: "Environmental" },
+  { slug: "portable-restrooms",  label: "Portable Restrooms" },
+] as const;
+export type ServiceSlug = typeof servicePages[number]["slug"];
+
+// ─── Navigation ───────────────────────────────────────────────────────────────
+
+export type NavDropdownItem = { label: string; href: string };
+export type NavTopItem = {
+  label: string;
+  href: string | null;
+  /** Pathname prefix used to determine the active top-nav item */
+  activePrefix?: string;
+  dropdown?: NavDropdownItem[];
+};
+
+export const nav: NavTopItem[] = [
+  {
+    label: "Services",
+    href: null,
+    activePrefix: "/services",
+    dropdown: servicePages.map((p) => ({ label: p.label, href: `/services/${p.slug}` })),
+  },
+  {
+    label: "Industries",
+    href: null,
+    activePrefix: "/industries",
+    dropdown: industryPages.map((p) => ({ label: p.label, href: `/industries/${p.slug}` })),
+  },
+  { label: "Site Management", href: "/site-management" },
+  { label: "Who We Are",      href: "/who-we-are" },
+];
+
+// Footer company links column
+export const companyPages = [
+  { label: "Site Management", href: "/site-management" },
+  { label: "Who We Are",      href: "/who-we-are" },
+  { label: "FAQ",             href: "/faq" },
+  { label: "Contact",         href: "/contact" },
+];
 
 // ─── Per-page SEO metadata ────────────────────────────────────────────────────
 
@@ -92,11 +87,10 @@ export const meta = {
     description:
       "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost - you keep 50% of what we save.",
   },
-  services: {
-    title: "Services",
-    description:
-      "[META DESCRIPTION - to be supplied]",
-  },
+  servicePage: (label: string) => ({
+    title: label,
+    description: `[META DESCRIPTION FOR ${label.toUpperCase()} - to be supplied]`,
+  }),
   wasteCostSavings: {
     title: "Waste Cost Savings",
     description:
@@ -380,64 +374,6 @@ export const industries = [
 ];
 
 // ─── Services overview page ───────────────────────────────────────────────────
-
-export const servicesOverview = {
-  hero: {
-    h1: "[HEADLINE]",
-    sub: "[INTRO PARAGRAPH]",
-  },
-  services: [
-    {
-      id: "waste-cost-savings",
-      label: "Waste Cost Savings",
-      href: "/services/waste-cost-savings",
-      hasPage: true as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-    {
-      id: "temp-containers",
-      label: "Temporary Containers",
-      href: "/services/temp-containers",
-      hasPage: true as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-    {
-      id: "international-waste",
-      label: "International Waste",
-      href: "/services/international-waste",
-      hasPage: true as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-    {
-      id: "equipment",
-      label: "Equipment",
-      anchor: "equipment",
-      hasPage: false as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-    {
-      id: "esg-reporting",
-      label: "ESG Reporting",
-      anchor: "esg-reporting",
-      hasPage: false as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-    {
-      id: "environmental",
-      label: "Environmental",
-      anchor: "environmental",
-      hasPage: false as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-    {
-      id: "portable-restrooms",
-      label: "Portable Restrooms",
-      anchor: "portable-restrooms",
-      hasPage: false as const,
-      body: "[SERVICE DESCRIPTION]",
-    },
-  ],
-};
 
 // ─── Temporary container request form ─────────────────────────────────────────
 

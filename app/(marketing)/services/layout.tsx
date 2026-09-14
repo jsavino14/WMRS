@@ -1,14 +1,14 @@
 import { SectionTabStrip } from "@/components/SectionTabStrip";
-import { industryPages } from "@/content/site";
+import { servicePages } from "@/content/site";
 
-export default function IndustrySlugLayout({
+export default function ServicesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <SectionTabStrip pages={industryPages} basePath="/industries" />
+      <SectionTabStrip pages={servicePages} basePath="/services" />
       {children}
     </>
   );

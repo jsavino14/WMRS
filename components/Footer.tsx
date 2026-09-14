@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { company, footerPages } from "@/content/site";
+import { company, companyPages, servicePages, industryPages } from "@/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -9,9 +9,11 @@ export function Footer() {
   return (
     <footer className="bg-charcoal text-white/70">
       <Container className="py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Brand */}
-          <div className="space-y-4">
+        {/* Main grid: brand + 4 link columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-10">
+
+          {/* Brand — spans full width on md */}
+          <div className="md:col-span-2 lg:col-span-1 space-y-4">
             <div className="text-white">
               <Logo align="start" />
             </div>
@@ -28,11 +30,43 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* Services column — heading is a plain label, not a link */}
           <div>
-            <p className="label text-white/40 mb-4">Pages</p>
+            <p className="label text-white/40 mb-4">Services</p>
             <nav className="flex flex-col gap-2">
-              {footerPages.map((link) => (
+              {servicePages.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/services/${p.slug}`}
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  {p.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Industries column — heading is a plain label, not a link */}
+          <div>
+            <p className="label text-white/40 mb-4">Industries</p>
+            <nav className="flex flex-col gap-2">
+              {industryPages.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/industries/${p.slug}`}
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  {p.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Company column */}
+          <div>
+            <p className="label text-white/40 mb-4">Company</p>
+            <nav className="flex flex-col gap-2">
+              {companyPages.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -44,7 +78,7 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Contact */}
+          {/* Contact column */}
           <div>
             <p className="label text-white/40 mb-4">Contact</p>
             <div className="space-y-2">

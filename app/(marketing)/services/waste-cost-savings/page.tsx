@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function WasteCostSavingsPage() {
   return (
-    <>
+    <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
         <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
@@ -138,6 +138,6 @@ export default function WasteCostSavingsPage() {
           </div>
         </Container>
       </section>
-    </>
+    </div>
   );
 }

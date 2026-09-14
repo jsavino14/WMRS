@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
 import { nav, company } from "@/content/site";
+import type { NavTopItem } from "@/content/site";
 
 function ChevronDown({ style }: { style?: React.CSSProperties }) {
   return (
@@ -19,7 +21,14 @@ function ChevronDown({ style }: { style?: React.CSSProperties }) {
   );
 }
 
+function isNavItemActive(item: NavTopItem, pathname: string): boolean {
+  if (item.activePrefix) return pathname.startsWith(item.activePrefix);
+  if (item.href) return pathname.startsWith(item.href);
+  return false;
+}
+
 export function Nav() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
@@ -55,30 +64,26 @@ export function Nav() {
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-1">
               {nav.map((item) => {
+                const active = isNavItemActive(item, pathname);
+                const baseClass = `flex items-center h-16 px-4 transition-colors duration-150 ${
+                  active
+                    ? "text-charcoal font-semibold"
+                    : "text-charcoal/70 font-medium hover:text-charcoal"
+                }`;
+
                 if (item.dropdown) {
                   return (
                     <div key={item.label} className="relative group">
-                      {item.href ? (
-                        <Link
-                          href={item.href}
-                          className="flex items-center gap-1.5 h-16 px-4 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
-                        >
-                          {item.label}
-                          <ChevronDown />
-                        </Link>
-                      ) : (
-                        <button
-                          className="flex items-center gap-1.5 h-16 px-4 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
-                          aria-haspopup="true"
-                        >
-                          {item.label}
-                          <ChevronDown />
-                        </button>
-                      )}
-                      {/* Dropdown panel — appears on group hover */}
-                      <div
-                        className="absolute left-0 top-full z-40 pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100 transition-opacity duration-150"
+                      <button
+                        className={`${baseClass} gap-1.5 cursor-default`}
+                        style={{ fontSize: "15px" }}
+                        aria-haspopup="true"
                       >
+                        {item.label}
+                        <ChevronDown />
+                      </button>
+                      {/* Dropdown panel — appears on group hover */}
+                      <div className="absolute left-0 top-full z-40 pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100 transition-opacity duration-150">
                         <div className="bg-white shadow-lg border border-charcoal/10 py-1.5 min-w-[210px]">
                           {item.dropdown.map((d) => (
                             <Link
@@ -94,11 +99,13 @@ export function Nav() {
                     </div>
                   );
                 }
+
                 return (
                   <Link
                     key={item.label}
                     href={item.href!}
-                    className="flex items-center h-16 px-4 text-sm text-charcoal/60 hover:text-charcoal transition-colors duration-150"
+                    className={baseClass}
+                    style={{ fontSize: "15px" }}
                   >
                     {item.label}
                   </Link>
@@ -164,52 +171,18 @@ export function Nav() {
             <Container>
               {nav.map((item) => {
                 const isExpanded = expandedItem === item.label;
+                const active = isNavItemActive(item, pathname);
+                const itemClass = `text-[30px] font-black tracking-tight transition-colors ${
+                  active ? "text-charcoal" : "text-charcoal/70 hover:text-charcoal"
+                }`;
 
-                if (item.dropdown && item.href) {
-                  // Services: label links to /services, chevron tap expands submenu
-                  return (
-                    <div key={item.label}>
-                      <div className="flex items-stretch border-b border-charcoal/10">
-                        <Link
-                          href={item.href}
-                          onClick={close}
-                          className="flex-1 flex items-center min-h-[64px] py-4 text-[30px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
-                        >
-                          {item.label}
-                        </Link>
-                        <button
-                          onClick={() => setExpandedItem((prev) => prev === item.label ? null : item.label)}
-                          aria-label={isExpanded ? "Collapse" : "Expand"}
-                          className="flex items-center justify-center w-12 flex-shrink-0 text-charcoal/50 hover:text-charcoal"
-                        >
-                          <ChevronDown style={{ transform: isExpanded ? "rotate(180deg)" : undefined, transition: "transform 200ms ease" }} />
-                        </button>
-                      </div>
-                      {isExpanded && (
-                        <div className="bg-charcoal/[0.03] border-b border-charcoal/10">
-                          {item.dropdown.map((d) => (
-                            <Link
-                              key={d.href}
-                              href={d.href}
-                              onClick={close}
-                              className="flex items-center min-h-[48px] px-4 py-3 text-base text-charcoal/70 hover:text-charcoal border-b border-charcoal/5 last:border-0 transition-colors"
-                            >
-                              {d.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                if (item.dropdown && !item.href) {
-                  // Industries: whole row is expander, no link
+                if (item.dropdown) {
+                  // All dropdown items: expand-only button (no nav link for either)
                   return (
                     <div key={item.label}>
                       <button
                         onClick={() => setExpandedItem((prev) => prev === item.label ? null : item.label)}
-                        className="flex items-center justify-between w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[30px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
+                        className={`flex items-center justify-between w-full min-h-[64px] py-4 border-b border-charcoal/10 ${itemClass}`}
                       >
                         <span>{item.label}</span>
                         <ChevronDown
@@ -245,7 +218,7 @@ export function Nav() {
                     key={item.label}
                     href={item.href!}
                     onClick={close}
-                    className="flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 text-[30px] font-black tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
+                    className={`flex items-center w-full min-h-[64px] py-4 border-b border-charcoal/10 ${itemClass}`}
                   >
                     {item.label}
                   </Link>

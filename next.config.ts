@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
     return [
       // ── All 308 permanent redirects, one hop, no chains ───────────────────────
       { source: "/what-we-find",     destination: "/services/waste-cost-savings", permanent: true },
-      { source: "/how-we-work",      destination: "/services",                    permanent: true },
+      { source: "/services",          destination: "/services/waste-cost-savings", permanent: true },
+      { source: "/how-we-work",      destination: "/services/waste-cost-savings", permanent: true },
       { source: "/overpaying",       destination: "/services/waste-cost-savings", permanent: true },
       { source: "/how-we-fix-it",    destination: "/services",                    permanent: true },
       { source: "/who-we-do-it-for", destination: "/services",                    permanent: true },
