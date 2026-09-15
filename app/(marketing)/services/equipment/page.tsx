@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
+import { ServiceHero } from "@/components/ServiceHero";
 import { meta, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "equipment")!;
@@ -18,20 +19,12 @@ export default function EquipmentPage() {
   return (
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 lg:py-24">
-        <Container>
-          <p className="label mb-4">{page.label}</p>
-          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-            Nobody budgets for a compactor until it stops.
-          </h1>
-          <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed max-w-2xl">
-            Balers, compactors, and autoclaves are capital purchases that tend to arrive
-            as emergencies. We finance them directly, rent them when a site&apos;s volume
-            isn&apos;t settled yet, and repair the ones you already have, whoever sold them
-            to you.
-          </p>
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow={page.label}
+        headline="Nobody budgets for a compactor until it stops."
+        intro="Balers, compactors, and autoclaves are capital purchases that tend to arrive as emergencies. We finance them directly, rent them when a site's volume isn't settled yet, and repair the ones you already have, whoever sold them to you."
+        image={null}
+      />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-16 lg:py-20">

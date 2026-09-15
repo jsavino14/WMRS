@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
+import { ServiceHero } from "@/components/ServiceHero";
 import { meta, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "environmental")!;
@@ -15,17 +16,12 @@ export const metadata: Metadata = {
 export default function EnvironmentalPage() {
   return (
     <div className="vt-section-content">
-      <section className="bg-white py-16 lg:py-24">
-        <Container>
-          <p className="label mb-4">{page.label}</p>
-          <h1 className="text-4xl sm:text-5xl font-black text-charcoal leading-tight mb-6">
-            [HEADLINE]
-          </h1>
-          <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed max-w-2xl">
-            [INTRO PARAGRAPH]
-          </p>
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow={page.label}
+        headline="[HEADLINE]"
+        intro="[INTRO PARAGRAPH]"
+        image={null}
+      />
 
       <section className="bg-offwhite py-16 lg:py-20">
         <Container>

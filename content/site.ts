@@ -195,9 +195,19 @@ export const meta = {
       "[META DESCRIPTION - to be supplied]",
   },
   internationalWaste: {
-    title: "International Waste",
+    title: "International Catering Waste | WMRS",
     description:
-      "[META DESCRIPTION - to be supplied]",
+      "Regulated waste from aircraft and vessels arriving from outside the country requires sealed handling and disposal at an approved facility. WMRS manages the segregation, the transfer, and the records.",
+  },
+  esgReporting: {
+    title: "ESG & Waste Diversion Reporting | WMRS",
+    description:
+      "Tonnage and diversion data standardized across every site and every hauler, auditable back to the invoice, and ready for corporate sustainability reporting.",
+  },
+  portableRestrooms: {
+    title: "Portable Restrooms | WMRS",
+    description:
+      "Portable restrooms for job sites, events, and temporary operations, delivered and serviced on the same account as the rest of your waste program.",
   },
   equipment: {
     title: "Equipment Financing & Servicing | WMRS",

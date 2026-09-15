@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/Container";
+import { ServiceHero } from "@/components/ServiceHero";
 import { meta, whatWeFind, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "waste-cost-savings")!;
@@ -19,53 +19,13 @@ export default function WasteCostSavingsPage() {
   return (
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-white overflow-hidden">
-        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2">
-          <Image
-            src="/what-we-find.png"
-            alt="Commercial dumpster against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="50vw"
-            priority
-          />
-        </div>
-        {/* Mobile: image above content */}
-        <div className="lg:hidden relative h-[250px]">
-          <Image
-            src="/what-we-find.png"
-            alt="Commercial dumpster against a concrete wall"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </div>
-
-        <Container className="relative pt-10 pb-16 lg:py-28">
-          <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
-            <p className="label mb-4">{page.label}</p>
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-              {whatWeFind.hero.h1}
-            </h1>
-            <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed mb-6">
-              {whatWeFind.hero.sub}
-            </p>
-            {/* Condensed findings list */}
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              {whatWeFind.items.map((item, i) => (
-                <span key={item.number} className="flex items-center gap-x-2">
-                  <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-charcoal/70">
-                    {item.label}
-                  </span>
-                  {i < whatWeFind.items.length - 1 && (
-                    <span className="text-charcoal/40 select-none leading-none">·</span>
-                  )}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow={page.label}
+        headline={whatWeFind.hero.h1}
+        intro={whatWeFind.hero.sub}
+        items={whatWeFind.items.map((item) => item.label)}
+        image={{ src: "/what-we-find.png", alt: "Commercial dumpster against a concrete wall" }}
+      />
 
       {/* ── Findings ─────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8F7] py-16 lg:py-20">
