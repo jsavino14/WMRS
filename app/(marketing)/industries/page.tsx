@@ -104,15 +104,15 @@ export default function IndustriesPage() {
                       <div className="flex flex-wrap gap-y-1 items-center">
                         {relServices.map((s, idx) => (
                           <span key={s.slug} className="flex items-center">
-                            {idx > 0 && (
-                              <span className="mx-2 text-charcoal/25 select-none">|</span>
-                            )}
                             <Link
                               href={`/services/${s.slug}`}
                               className="text-sm text-charcoal/65 hover:text-charcoal underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal transition-colors"
                             >
                               {s.fullName}
                             </Link>
+                            {idx < relServices.length - 1 && (
+                              <span className="mx-2 text-charcoal/25 select-none">|</span>
+                            )}
                           </span>
                         ))}
                       </div>
