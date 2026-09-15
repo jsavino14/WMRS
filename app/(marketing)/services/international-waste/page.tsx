@@ -21,7 +21,7 @@ export default function InternationalWastePage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow="International Catering Waste"
-        headline="Waste off an international flight can't go in a landfill."
+        headline="Some food waste is a quarantine problem."
         intro="Food waste from aircraft and vessels arriving from outside the country is regulated by the USDA, not treated as ordinary garbage. It has to be segregated, sealed, and destroyed at an approved facility, and when something goes wrong the liability lands on the operator rather than the hauler."
         items={["Segregation at Source", "Sealed Transfer", "Approved Facilities", "Chain of Custody", "Retained Records"]}
         image={null}

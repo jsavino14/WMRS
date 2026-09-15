@@ -195,32 +195,32 @@ export const meta = {
       "[META DESCRIPTION - to be supplied]",
   },
   internationalWaste: {
-    title: "International Catering Waste | WMRS",
+    title: "International Catering Waste",
     description:
       "Regulated waste from aircraft and vessels arriving from outside the country requires sealed handling and disposal at an approved facility. WMRS manages the segregation, the transfer, and the records.",
   },
   esgReporting: {
-    title: "ESG & Waste Diversion Reporting | WMRS",
+    title: "ESG & Waste Diversion Reporting",
     description:
       "Tonnage and diversion data standardized across every site and every hauler, auditable back to the invoice, and ready for corporate sustainability reporting.",
   },
   portableRestrooms: {
-    title: "Portable Restrooms | WMRS",
+    title: "Portable Restrooms",
     description:
       "Portable restrooms for job sites, events, and temporary operations, delivered and serviced on the same account as the rest of your waste program.",
   },
   environmental: {
-    title: "Tank Removal & Site Remediation | WMRS",
+    title: "Tank Removal & Site Remediation",
     description:
       "Phase II assessments, underground tank removal, and soil and groundwater cleanup, managed to a written closure determination.",
   },
   equipment: {
-    title: "Equipment Financing & Servicing | WMRS",
+    title: "Equipment Financing & Servicing",
     description:
       "WMRS finances, rents, and services cardboard balers, self-contained compactors, and autoclaves, and repairs and welds equipment you already own.",
   },
   industries: {
-    title: "Industries We Serve | WMRS",
+    title: "Industries We Serve",
     description:
       "WMRS reduces waste and recycling costs for multi-location businesses across food service, healthcare, manufacturing, retail, construction, and more.",
     // introP (removed from page, kept here): "The container sizes change, the streams change,

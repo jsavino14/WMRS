@@ -18,7 +18,7 @@ export default function EsgReportingPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow={page.label}
-        headline="Your diversion rate is only as good as the hauler data behind it."
+        headline="Somebody will ask where that number came from."
         intro="A sustainability report needs tonnage by stream, by site, for the year. Haulers report in different formats on different cycles, some estimate rather than weigh, and some do not report at all unless you ask every month."
         items={["Tonnage by Stream", "Diversion Rates", "Site Level Detail", "Annual Rollups", "Auditable Back to Invoice"]}
         image={null}

@@ -18,8 +18,8 @@ export default function EnvironmentalPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow="Tank Removal & Site Remediation"
-        headline="A deal doesn't close with an open environmental question."
-        intro="Phase II assessments, tank removals, and cleanups are almost always on somebody else's timeline: a buyer, a lender, a regulator, or a closing date. The work is technical. The pressure is scheduling."
+        headline="The soil has a say in the closing date."
+        intro="Phase II assessments, tank removals, and cleanups are almost always on somebody else's timeline: a buyer, a lender, a regulator, or a deadline you did not set. The work is technical. The pressure is scheduling."
         items={["Phase II Assessments", "Soil and Groundwater Sampling", "Tank Removal", "Soil Remediation", "Closure Documentation"]}
         image={null}
       />
