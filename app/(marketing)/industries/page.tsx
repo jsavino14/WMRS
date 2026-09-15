@@ -101,15 +101,19 @@ export default function IndustriesPage() {
                   {relServices.length > 0 && (
                     <>
                       <p className="label mb-1.5">{LABEL_WHAT_WE_DO_HERE}</p>
-                      <div className="flex flex-wrap gap-x-4 gap-y-1">
-                        {relServices.map((s) => (
-                          <Link
-                            key={s.slug}
-                            href={`/services/${s.slug}`}
-                            className="text-sm text-charcoal/65 hover:text-charcoal underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal transition-colors"
-                          >
-                            {s.fullName}
-                          </Link>
+                      <div className="flex flex-wrap gap-y-1 items-center">
+                        {relServices.map((s, idx) => (
+                          <span key={s.slug} className="flex items-center">
+                            {idx > 0 && (
+                              <span className="mx-2 text-charcoal/25 select-none">|</span>
+                            )}
+                            <Link
+                              href={`/services/${s.slug}`}
+                              className="text-sm text-charcoal/65 hover:text-charcoal underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal transition-colors"
+                            >
+                              {s.fullName}
+                            </Link>
+                          </span>
                         ))}
                       </div>
                     </>

@@ -134,8 +134,8 @@ export const servicePages = [
   { slug: "waste-cost-savings",  navLabel: "Waste Cost Savings",   fullName: "Waste Cost Savings" },
   { slug: "temp-containers",     navLabel: "Temporary Containers", fullName: "Temporary Containers" },
   { slug: "international-waste", navLabel: "International Waste",  fullName: "International Catering Waste" },
-  { slug: "equipment",           navLabel: "Equipment Financing",  fullName: "Equipment Financing, Rentals, and Repairs" },
-  { slug: "esg-reporting",       navLabel: "ESG Reporting",        fullName: "ESG and Diversion Reporting" },
+  { slug: "equipment",           navLabel: "Equipment Financing",  fullName: "Equipment Financing, Rentals & Repairs" },
+  { slug: "esg-reporting",       navLabel: "ESG Reporting",        fullName: "ESG & Diversion Reporting" },
   { slug: "environmental",       navLabel: "Environmental",        fullName: "Tank Removal & Site Remediation" },
   { slug: "portable-restrooms",  navLabel: "Portable Restrooms",   fullName: "Portable Restrooms" },
 ] as const;
