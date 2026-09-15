@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { meta, company } from "@/content/site";
+import { meta, company, servicePages } from "@/content/site";
+
+const page = servicePages.find((p) => p.slug === "international-waste")!;
 
 export const metadata: Metadata = {
   title: meta.internationalWaste.title,
@@ -18,6 +20,7 @@ export default function InternationalWastePage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 lg:py-24">
         <Container>
+          <p className="label mb-4">{page.label}</p>
           <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
             [HEADLINE]
           </h1>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { industries } from "@/content/site";
+import { industriesGrid as industries } from "@/content/site";
 
 const INDUSTRY_ICONS: Record<string, string> = {
   "Restaurant Groups":              "/icons/industries/restaurant-groups.svg",

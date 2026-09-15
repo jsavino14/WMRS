@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ContainerForm } from "@/components/ContainerForm";
-import { meta, tempContainerForm } from "@/content/site";
+import { meta, tempContainerForm, servicePages } from "@/content/site";
+
+const page = servicePages.find((p) => p.slug === "temp-containers")!;
 
 export const metadata: Metadata = {
   title: meta.tempContainers.title,
@@ -18,6 +20,7 @@ export default function TempContainersPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 lg:py-24">
         <Container>
+          <p className="label mb-4">{page.label}</p>
           <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
             {tempContainerForm.hero.h1}
           </h1>

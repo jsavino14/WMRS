@@ -1,10 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 44">
   <defs><style>
-    .mf0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .mf1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .mw0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .mw1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
-  <!-- 8-tooth gear polygon -->
-  <polygon class="mf0" points="24,6 29,12 36.7,11.3 36,19 42,24 36,29 36.7,36.7 29,36 24,42 19,36 11.3,36.7 12,29 6,24 12,19 11.3,11.3 19,12"/>
-  <!-- Hub circle (accent) -->
-  <circle class="mf1" cx="24" cy="24" r="6"/>
+  <!-- Factory walls and sawtooth roofline (3 bays) -->
+  <polyline class="mw0" points="4,40 4,8 20,24 20,8 38,24 38,8 54,24 54,40 4,40"/>
+  <!-- Skylights on sloped sections -->
+  <line class="mw0" x1="9" y1="12" x2="14" y2="18"/>
+  <line class="mw1" x1="27" y1="12" x2="32" y2="18"/>
+  <line class="mw0" x1="45" y1="12" x2="50" y2="18"/>
+  <!-- Ground-level door -->
+  <rect class="mw0" x="22" y="28" width="10" height="12"/>
 </svg>

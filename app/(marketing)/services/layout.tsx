@@ -8,7 +8,9 @@ export default function ServicesLayout({
 }) {
   return (
     <>
-      <SectionTabStrip pages={servicePages} basePath="/services" />
+      <div className="hidden md:block">
+        <SectionTabStrip pages={servicePages} basePath="/services" />
+      </div>
       {children}
     </>
   );

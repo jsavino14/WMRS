@@ -5,15 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { nav, company, servicePages, industryPages } from "@/content/site";
+import { nav, company, servicePages } from "@/content/site";
 import type { NavTopItem } from "@/content/site";
 import { useNavHover } from "./NavHoverContext";
 
 const STRIP_BG = "#F1F3F1";
 
+// Services is the only section with a hover strip
 const SECTION_PAGES: Record<string, readonly { slug: string; label: string }[]> = {
   services: servicePages,
-  industries: industryPages,
 };
 
 function ChevronDown({ style }: { style?: React.CSSProperties }) {
@@ -48,9 +48,10 @@ export function Nav() {
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  const isOnSectionPage =
-    pathname.startsWith("/services") || pathname.startsWith("/industries");
+  // Services is the only section with a tab strip in-flow
+  const isOnSectionPage = pathname.startsWith("/services");
 
   // Remember last hovered section so the overlay content persists during fade-out
   const lastSectionRef = useRef<string | null>(null);
@@ -63,6 +64,14 @@ export function Nav() {
   const close = useCallback(() => {
     setMobileOpen(false);
     setExpandedItem(null);
+  }, []);
+
+  // Scroll tracking for header border
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll(); // initialise
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // Close hover on route change
@@ -100,9 +109,19 @@ export function Nav() {
 
   const overlayOpen = !!hoveredSection && !isOnSectionPage;
 
+  // Header border:
+  // - When scrolled: always show border on mobile
+  // - When scrolled on desktop section pages: suppress (strip provides separation)
+  // - On section pages below 768px: strip is hidden, so border shows normally
+  const borderClass = scrolled
+    ? isOnSectionPage
+      ? "border-b border-charcoal/10 md:border-b-0"
+      : "border-b border-charcoal/10"
+    : "";
+
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white border-b border-charcoal/10">
+      <header className={`sticky top-0 z-50 bg-white transition-[border-color] duration-150 ${borderClass}`}>
         <Container>
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -126,7 +145,7 @@ export function Nav() {
                 }`;
 
                 if (item.dropdown) {
-                  const sectionKey = item.activePrefix!.slice(1); // "/services" → "services"
+                  const sectionKey = item.activePrefix!.slice(1);
                   const isOpen = hoveredSection === sectionKey;
                   return (
                     <button
@@ -207,7 +226,7 @@ export function Nav() {
           id="nav-section-strip"
           style={{
             position: "fixed",
-            top: "4rem", // h-16 = 64px
+            top: "4rem",
             left: 0,
             right: 0,
             zIndex: 49,
@@ -274,6 +293,7 @@ export function Nav() {
                 }`;
 
                 if (item.dropdown) {
+                  // Services: mobile accordion
                   return (
                     <div key={item.label}>
                       <button
@@ -312,6 +332,7 @@ export function Nav() {
                   );
                 }
 
+                // Plain link (Industries, Site Management, Who We Are)
                 return (
                   <Link
                     key={item.label}

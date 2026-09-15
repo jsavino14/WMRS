@@ -22,15 +22,113 @@ export const company = {
 // Single source of truth for slugs and labels. Nav dropdowns, tab strips,
 // generateStaticParams, and footer all read from these — they cannot desync.
 
-export const industryPages = [
-  { slug: "food-service",      label: "Food Service & Distribution" },
-  { slug: "manufacturing",     label: "Manufacturing & Warehousing" },
-  { slug: "aviation",          label: "Aviation & Transit" },
-  { slug: "healthcare",        label: "Healthcare" },
-  { slug: "construction",      label: "Construction" },
-  { slug: "commercial-retail", label: "Commercial & Retail" },
+export type Industry = {
+  readonly slug: string;
+  readonly name: string;
+  readonly icon: string; // SVG filename without extension, in /public/icons/industries/
+  readonly paragraph: string;
+  readonly includes: string;
+  readonly relatedServices: readonly ServiceSlug[];
+};
+
+export const industries: readonly Industry[] = [
+  {
+    slug: "food-service",
+    name: "Food Service & Distribution",
+    icon: "food-service",
+    paragraph: "Distribution operations run high cardboard volume alongside organics and cold chain waste, and compactor hauls are often billed at a flat rate no matter what the load actually weighs. Cardboard at that volume is a commodity with real value, and it frequently leaves the building priced as trash.",
+    includes: "Foodservice distributors, produce and protein distribution, cold storage, commissaries, catering operations",
+    relatedServices: ["equipment", "esg-reporting"],
+  },
+  {
+    slug: "restaurant-groups",
+    name: "Restaurant Groups",
+    icon: "restaurant-groups",
+    paragraph: "Rates get negotiated one store at a time as locations open, so a forty unit group can end up with forty different agreements and no one holding the portfolio view. Waste volume is high relative to footprint, which makes every pricing error larger than it looks on a single bill.",
+    includes: "Quick service, fast casual, full service groups, franchisees, multi brand operators",
+    relatedServices: ["equipment"],
+  },
+  {
+    slug: "grocery",
+    name: "Grocery & Supermarkets",
+    icon: "grocery-food",
+    paragraph: "Few businesses generate more waste per square foot, across more separate streams: organics, cardboard at scale, mixed recycling, and general waste. More streams means more places for pricing to drift, and compactor haul billing is where it drifts furthest.",
+    includes: "Supermarket chains, independent grocers, specialty food retail, convenience and forecourt",
+    relatedServices: ["equipment", "environmental"],
+  },
+  {
+    slug: "hotel-hospitality",
+    name: "Hotel & Hospitality",
+    icon: "hotel-hospitality",
+    paragraph: "Occupancy swings hard by season while the pickup schedule stays fixed, so half the year is spent paying for capacity that goes out empty. Rates are usually set property by property rather than across the portfolio, which is where the spread between comparable sites opens up.",
+    includes: "Hotel groups, resorts, conference properties, management companies, extended stay",
+    relatedServices: ["esg-reporting"],
+  },
+  {
+    slug: "retail-chains",
+    name: "Retail Chains",
+    icon: "retail-chains",
+    paragraph: "Cardboard and packaging arrive in volume and leave misclassified as general waste, at general waste prices. Locations open and close regularly, and closed stores have a way of staying on the bill long after the container is gone.",
+    includes: "Specialty retail, big box, mall and strip center tenants, franchise networks",
+    relatedServices: ["esg-reporting"],
+  },
+  {
+    slug: "commercial-property",
+    name: "Commercial Property Management",
+    icon: "commercial-property",
+    paragraph: "Waste costs are passed through to tenants and rarely audited by anyone, which means billing errors flow straight to the people paying them without ever being questioned. Equipment charges for compactors removed years earlier are common on these accounts.",
+    includes: "Office portfolios, mixed use, industrial parks, REITs, third party managers",
+    relatedServices: ["equipment"],
+  },
+  {
+    slug: "healthcare",
+    name: "Healthcare",
+    icon: "healthcare",
+    paragraph: "Regulated and general waste run side by side, and vendors price on that complexity rather than in spite of it. Regulated waste is often billed per container regardless of how full it is, so separating the streams properly is usually worth more than negotiating the rate.",
+    includes: "Hospital systems, surgical centers, physician networks, dental and veterinary groups, long term care",
+    relatedServices: ["environmental", "equipment"],
+  },
+  {
+    slug: "manufacturing",
+    name: "Manufacturing & Warehousing",
+    icon: "manufacturing",
+    paragraph: "Scrap metal, plastics, and clean cardboard have commodity value and routinely go out classified as general waste. Production volume moves year to year while container sizing and pickup frequency stay wherever they were set at contract inception.",
+    includes: "Light and heavy manufacturing, 3PL and fulfillment, distribution centers, cold and dry storage",
+    relatedServices: ["equipment", "esg-reporting"],
+  },
+  {
+    slug: "aviation",
+    name: "Aviation & Transit",
+    icon: "aviation",
+    paragraph: "Passenger volume generates waste continuously, and multiple operators share one site with no one entirely clear on who is paying for which container. International catering waste carries separate regulated handling requirements and separate pricing to go with it.",
+    includes: "Airports, ground handlers, in flight catering, rail and bus terminals, transit authorities",
+    relatedServices: ["international-waste", "environmental"],
+  },
+  {
+    slug: "construction",
+    name: "Construction",
+    icon: "construction",
+    paragraph: "Temporary containers get ordered site by site at whatever rate is quoted that day, with no reference to what the same container costs across the rest of your projects. Mixed debris is billed as general waste when a large share of it is divertible at a lower rate.",
+    includes: "General contractors, demolition, restoration, roofing, civil and infrastructure",
+    relatedServices: ["temp-containers", "portable-restrooms", "equipment"],
+  },
+  {
+    slug: "entertainment",
+    name: "Entertainment & Venues",
+    icon: "entertainment",
+    paragraph: "Volume arrives in spikes that a fixed schedule contract was never built to absorb, so event days generate overage fees and quiet weeks generate pickups of empty containers. Both are paid for in full.",
+    includes: "Arenas and stadiums, theaters, casinos, amusement and water parks, festivals",
+    relatedServices: ["temp-containers", "portable-restrooms"],
+  },
+  {
+    slug: "education",
+    name: "Education",
+    icon: "education",
+    paragraph: "Contracts run long with little competitive pressure applied at renewal, and recycling programs are set up once and rarely revisited. Volume falls to almost nothing over the summer while the billing continues at full schedule.",
+    includes: "K-12 districts, private schools, colleges and universities, student housing",
+    relatedServices: ["esg-reporting", "temp-containers"],
+  },
 ] as const;
-export type IndustrySlug = typeof industryPages[number]["slug"];
 
 export const servicePages = [
   { slug: "waste-cost-savings",  label: "Waste Cost Savings" },
@@ -61,12 +159,7 @@ export const nav: NavTopItem[] = [
     activePrefix: "/services",
     dropdown: servicePages.map((p) => ({ label: p.label, href: `/services/${p.slug}` })),
   },
-  {
-    label: "Industries",
-    href: null,
-    activePrefix: "/industries",
-    dropdown: industryPages.map((p) => ({ label: p.label, href: `/industries/${p.slug}` })),
-  },
+  { label: "Industries", href: "/industries", activePrefix: "/industries" },
   { label: "Site Management", href: "/site-management" },
   { label: "Who We Are",      href: "/who-we-are" },
 ];
@@ -106,10 +199,11 @@ export const meta = {
     description:
       "[META DESCRIPTION - to be supplied]",
   },
-  industryPage: (label: string) => ({
-    title: label,
-    description: `[META DESCRIPTION FOR ${label.toUpperCase()} - to be supplied]`,
-  }),
+  industries: {
+    title: "Industries We Serve | WMRS",
+    description:
+      "WMRS reduces waste and recycling costs for multi-location businesses across food service, healthcare, manufacturing, retail, construction, and more.",
+  },
   siteManagement: {
     title: "Site Management",
     description:
@@ -328,9 +422,9 @@ export const caseStudies = [
   },
 ];
 
-// ─── Industries (used on homepage OverchargeCards and old industries grid) ────
+// ─── Industries grid (homepage/overcharge card component — simple name+note shape) ────
 
-export const industries = [
+export const industriesGrid = [
   {
     name: "Restaurant Groups",
     note: "High waste volume, frequent pickups, and rates often set location by location rather than across the portfolio.",

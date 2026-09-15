@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { meta, company } from "@/content/site";
+import { meta, company, servicePages } from "@/content/site";
 
-const m = meta.servicePage("Portable Restrooms");
+const page = servicePages.find((p) => p.slug === "portable-restrooms")!;
+const m = meta.servicePage(page.label);
 
 export const metadata: Metadata = {
   title: m.title,
@@ -16,6 +17,7 @@ export default function PortableRestroomsPage() {
     <div className="vt-section-content">
       <section className="bg-white py-16 lg:py-24">
         <Container>
+          <p className="label mb-4">{page.label}</p>
           <h1 className="text-4xl sm:text-5xl font-black text-charcoal leading-tight mb-6">
             [HEADLINE]
           </h1>

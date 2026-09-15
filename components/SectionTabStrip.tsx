@@ -3,16 +3,16 @@
 import { usePathname, useRouter } from "next/navigation";
 import { startTransition, useEffect, useRef, useState } from "react";
 import { useNavHover } from "./NavHoverContext";
-import { servicePages, industryPages } from "@/content/site";
+import { servicePages } from "@/content/site";
 
 type Page = { readonly slug: string; readonly label: string };
 type DocWithVT = Document & { startViewTransition?: (cb: () => void) => unknown };
 
 const STRIP_BG = "#F1F3F1";
 
+// Only services uses the hover strip now
 const SECTION_PAGES: Record<string, readonly Page[]> = {
   services: servicePages,
-  industries: industryPages,
 };
 
 export function SectionTabStrip({
@@ -59,7 +59,7 @@ export function SectionTabStrip({
   const displayPages = SECTION_PAGES[displaySection] ?? pages;
   const displayBasePath = `/${displaySection}`;
 
-  // Active underline only when showing own section and not in hover-preview mode
+  // Active underline only when showing own content and not in hover-preview
   const showActive = displaySection === ownSection && hoveredSection === null;
   const activeIndex = showActive
     ? displayPages.findIndex((p) => pathname === `${displayBasePath}/${p.slug}`)
@@ -70,47 +70,6 @@ export function SectionTabStrip({
   useEffect(() => {
     prevIndexRef.current = activeIndex;
   }, [activeIndex]);
-
-  // ── Per-tab refs for scrollIntoView ──────────────────────────────────────
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  // Scroll active tab into view on mount and when route changes
-  useEffect(() => {
-    tabRefs.current[activeIndex]?.scrollIntoView({
-      behavior: "auto",
-      block: "nearest",
-      inline: "nearest",
-    });
-  }, [activeIndex]);
-
-  // ── Fade masks ────────────────────────────────────────────────────────────
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [showLeft, setShowLeft] = useState(false);
-  const [showRight, setShowRight] = useState(false);
-
-  function updateFades() {
-    const el = scrollRef.current;
-    if (!el) return;
-    setShowLeft(el.scrollLeft > 1);
-    setShowRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
-  }
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    updateFades();
-    el.addEventListener("scroll", updateFades, { passive: true });
-    const ro = new ResizeObserver(updateFades);
-    ro.observe(el);
-    return () => {
-      el.removeEventListener("scroll", updateFades);
-      ro.disconnect();
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Re-check fades after active tab or displayed pages change
-  useEffect(() => { updateFades(); }, [activeIndex, displaySection]);
 
   // ── Popstate direction ────────────────────────────────────────────────────
   useEffect(() => {
@@ -142,7 +101,6 @@ export function SectionTabStrip({
       router.push(href);
       return;
     }
-    // Set direction only for same-section navigation
     if (displaySection === ownSection) {
       document.documentElement.dataset.vtDirection =
         toIndex < activeIndex ? "back" : "forward";
@@ -165,33 +123,13 @@ export function SectionTabStrip({
       onMouseEnter={cancelClose}
       onMouseLeave={closeSection}
     >
-      {/* Left fade */}
-      {showLeft && (
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-10 z-10"
-          style={{ background: `linear-gradient(to right, ${STRIP_BG}, transparent)` }}
-        />
-      )}
-      {/* Right fade */}
-      {showRight && (
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-10 z-10"
-          style={{ background: `linear-gradient(to left, ${STRIP_BG}, transparent)` }}
-        />
-      )}
-
-      <div
-        ref={scrollRef}
-        className="hide-scrollbar overflow-x-auto"
-        style={{ scrollbarWidth: "none" }}
-      >
+      <div className="overflow-x-auto hide-scrollbar" style={{ scrollbarWidth: "none" }}>
         <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {displayPages.map((page, i) => {
             const isActive = i === activeIndex;
             return (
               <button
                 key={page.slug}
-                ref={(el) => { tabRefs.current[i] = el; }}
                 onClick={() => handleTabClick(i, page.slug)}
                 className={`whitespace-nowrap flex-shrink-0 px-[13px] py-3 text-[12.5px] font-medium border-b-2 transition-colors duration-150 ${
                   isActive

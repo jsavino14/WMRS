@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, whatWeFind, company } from "@/content/site";
+import { meta, whatWeFind, company, servicePages } from "@/content/site";
+
+const page = servicePages.find((p) => p.slug === "waste-cost-savings")!;
 
 export const metadata: Metadata = {
   title: meta.wasteCostSavings.title,
@@ -41,6 +43,7 @@ export default function WasteCostSavingsPage() {
 
         <Container className="relative pt-10 pb-16 lg:py-28">
           <div className="lg:w-1/2 lg:max-w-[calc(50%-2rem)] lg:pr-16">
+            <p className="label mb-4">{page.label}</p>
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
               {whatWeFind.hero.h1}
             </h1>
