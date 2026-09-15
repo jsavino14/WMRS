@@ -190,14 +190,6 @@ export default function HomePage() {
             Four steps. Zero upfront cost.
           </h2>
           <HomeSteps />
-          <div className="mt-10">
-            <Link
-              href="/how-we-work"
-              className="text-sm font-semibold text-charcoal/60 hover:text-charcoal transition-colors underline-offset-4 hover:underline"
-            >
-              Full process detail →
-            </Link>
-          </div>
         </Container>
       </section>
 
