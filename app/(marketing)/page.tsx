@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, home, faq, caseStudies, company } from "@/content/site";
+import { meta, home, faq, company } from "@/content/site";
 import { TrustBar } from "@/components/TrustBar";
 import { OverchargeCards } from "@/components/OverchargeCards";
 import { HomeSteps } from "@/components/HomeSteps";
@@ -228,49 +228,6 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── Proof / Case Studies ─────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 relative z-[1]">
-        <Container>
-
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
-            {home.proof.h2}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {caseStudies.map((cs, i) => (
-              <div key={i} className="border border-charcoal/10 p-6 space-y-5">
-                <div>
-                  <p className="label text-accent/80 mb-1">{cs.industry}</p>
-                  <p className="text-xs text-charcoal/40">
-                    {cs.state} · {cs.locationCount} location{cs.locationCount === "1" ? "" : "s"}
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-charcoal/40">
-                    The situation
-                  </p>
-                  <p className="text-sm text-charcoal/70 leading-relaxed">{cs.situation}</p>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-charcoal/40">
-                    What we found
-                  </p>
-                  <p className="text-sm text-charcoal/70 leading-relaxed">{cs.found}</p>
-                </div>
-                <div className="border-t border-charcoal/8 pt-4">
-                  <p className="text-2xl font-black text-charcoal">{cs.result.saved}</p>
-                  <p className="text-sm text-charcoal/50">{cs.result.reduction} reduction</p>
-                </div>
-                <blockquote className="border-l-2 border-accent pl-4">
-                  <p className="text-sm text-charcoal/65 italic leading-relaxed">{cs.quote}</p>
-                  <footer className="mt-2 text-xs text-charcoal/40 font-medium">
-                    - {cs.quoteName}
-                  </footer>
-                </blockquote>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
 
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
