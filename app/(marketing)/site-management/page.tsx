@@ -99,7 +99,7 @@ export default function SiteManagementPage() {
               Send us one invoice.
             </h2>
             <p className="text-base text-charcoal/65 leading-relaxed mb-8">
-              The audit is free. We will follow up within one business day.
+              The audit is free. A person reads every one of these, not a queue.
             </p>
             <InvoiceForm page="/site-management" />
             <p className="mt-6 text-sm text-charcoal/60">

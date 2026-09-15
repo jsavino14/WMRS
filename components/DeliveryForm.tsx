@@ -72,7 +72,7 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
     return (
       <div className="border border-accent/30 bg-accent/5 p-8">
         <p className="text-base font-medium text-charcoal">
-          Request received. We will follow up within one business day.
+          Request received. Someone will be in touch.
         </p>
       </div>
     );

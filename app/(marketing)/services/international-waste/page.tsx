@@ -143,10 +143,10 @@ export default function InternationalWastePage() {
         <Container>
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
-              Tell us what you need.
+              Start with WMRS.
             </h2>
             <p className="text-base text-charcoal/65 leading-relaxed mb-8">
-              We will follow up within one business day.
+              A person reads every one of these, not a queue.
             </p>
             <ProjectForm defaultSelection="International catering waste" page="/services/international-waste" />
             <p className="mt-6 text-sm text-charcoal/60">

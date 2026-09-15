@@ -25,9 +25,6 @@ export function Footer() {
               <br />
               Not affiliated with any hauler.
             </p>
-            <p className="text-sm text-white/35 leading-relaxed">
-              {company.geography}
-            </p>
           </div>
 
           {/* Services column */}
@@ -87,13 +84,13 @@ export function Footer() {
             </div>
             <div className="mt-6 flex flex-col gap-3">
               <Link
-                href="/contact"
+                href="/contact?form=invoice"
                 className="inline-block bg-white text-charcoal text-sm font-semibold px-4 py-2.5 hover:bg-white/90 transition-colors text-center"
               >
                 Send us one invoice
               </Link>
               <Link
-                href="/services/temp-containers"
+                href="/contact?form=delivery"
                 className="inline-block border border-white/25 text-white text-sm font-semibold px-4 py-2.5 hover:border-white/50 transition-colors text-center"
               >
                 Request a container

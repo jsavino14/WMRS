@@ -4,8 +4,31 @@ import { useState, useRef } from "react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
+const WHAT_OPTIONS = [
+  "Equipment financing, rental, or repair",
+  "Tank removal, Phase II, or cleanup",
+  "ESG and diversion reporting",
+  "International catering waste",
+  "Something else",
+] as const;
+
+const TIMELINE_OPTIONS = [
+  "No fixed date",
+  "Within 30 days",
+  "Within 90 days",
+  "Driven by a closing or a deadline",
+] as const;
+
 const inputClass =
   "w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors";
+const selectClass =
+  "w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal focus:outline-none focus:border-charcoal transition-colors appearance-none";
+const selectStyle = {
+  backgroundImage:
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231E2428' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+  backgroundRepeat: "no-repeat" as const,
+  backgroundPosition: "right 12px center",
+};
 const labelClass = "block text-sm font-medium text-charcoal mb-1.5";
 
 interface ProjectFormProps {
@@ -22,7 +45,13 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
     const name = (data.get("name") as string | null)?.trim();
     const comp = (data.get("company") as string | null)?.trim();
     const email = (data.get("email") as string | null)?.trim();
-    if (!name || !comp || !email) return "Name, company, and email are required.";
+    const whatYouNeed = (data.get("whatYouNeed") as string | null)?.trim();
+    const timeline = (data.get("timeline") as string | null)?.trim();
+    const message = (data.get("message") as string | null)?.trim();
+
+    if (!name || !comp || !email || !whatYouNeed || !timeline || !message) {
+      return "Name, company, email, what you need, timeline, and a message are required.";
+    }
 
     const file = data.get("file") as File | null;
     if (file && file.size > 0) {
@@ -72,7 +101,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
     return (
       <div className="border border-accent/30 bg-accent/5 p-8">
         <p className="text-base font-medium text-charcoal">
-          Got it. We will follow up within one business day.
+          Got it. Someone will be in touch.
         </p>
       </div>
     );
@@ -80,7 +109,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-      {/* Honeypot — bots fill this, humans don't see it */}
+      {/* Honeypot */}
       <input
         type="text"
         name="website"
@@ -90,10 +119,9 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
         autoComplete="off"
       />
 
-      {/* Hidden fields */}
-      <input type="hidden" name="whatYouNeed" value={defaultSelection} />
       <input type="hidden" name="page" value={page} />
 
+      {/* Name + Company */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="pf-name" className={labelClass}>
@@ -138,20 +166,75 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
         </div>
       </div>
 
+      {/* What can we help with */}
+      <div>
+        <label htmlFor="pf-whatYouNeed" className={labelClass}>
+          What can we help with <span className="text-charcoal/40">*</span>
+        </label>
+        <select
+          id="pf-whatYouNeed"
+          name="whatYouNeed"
+          required
+          defaultValue={defaultSelection}
+          className={selectClass}
+          style={selectStyle}
+        >
+          <option value="" disabled>Select…</option>
+          {WHAT_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Site or property location */}
+      <div>
+        <label htmlFor="pf-siteLocation" className={labelClass}>
+          Site or property location
+          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+        </label>
+        <input
+          id="pf-siteLocation" name="siteLocation" type="text"
+          placeholder="City, state, or address"
+          className={inputClass}
+        />
+      </div>
+
+      {/* Timeline */}
+      <div>
+        <label htmlFor="pf-timeline" className={labelClass}>
+          Timeline <span className="text-charcoal/40">*</span>
+        </label>
+        <select
+          id="pf-timeline"
+          name="timeline"
+          required
+          defaultValue=""
+          className={selectClass}
+          style={selectStyle}
+        >
+          <option value="" disabled>Select…</option>
+          {TIMELINE_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Tell us what you need */}
       <div>
         <label htmlFor="pf-message" className={labelClass}>
-          Tell us more
-          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+          Tell us what you need <span className="text-charcoal/40">*</span>
         </label>
         <textarea
           id="pf-message"
           name="message"
           rows={4}
-          placeholder="Any details that would help us respond usefully — site, timeline, what you currently have, what you need."
+          required
+          placeholder="Site, timeline, what you currently have, what you need."
           className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
         />
       </div>
 
+      {/* Attachment */}
       <div>
         <label htmlFor="pf-file" className={labelClass}>
           Attachment

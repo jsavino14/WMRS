@@ -31,8 +31,10 @@ const ALLOWED_TYPES = new Set([
   "application/pdf",
   "image/png",
   "image/jpeg",
+  "image/heic",
+  "image/heif",
 ]);
-const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
+const MAX_BYTES = 8 * 1024 * 1024; // 8 MB
 
 // ─── Route handler ────────────────────────────────────────────────────────────
 
@@ -90,14 +92,14 @@ export async function POST(request: NextRequest) {
 
   if (!ALLOWED_TYPES.has(file.type)) {
     return NextResponse.json(
-      { error: "File must be PDF, PNG, or JPG." },
+      { error: "File must be PDF, PNG, JPG, or HEIC." },
       { status: 400 }
     );
   }
 
   if (file.size > MAX_BYTES) {
     return NextResponse.json(
-      { error: "File must be under 10 MB." },
+      { error: "File must be under 8 MB." },
       { status: 400 }
     );
   }

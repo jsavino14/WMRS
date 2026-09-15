@@ -22,7 +22,7 @@ export default function TempContainersPage() {
       <ServiceHero
         eyebrow={page.fullName}
         headline="Tell us where it's going and when."
-        intro="Roll-offs and temporary containers for cleanouts, renovations, and job sites. Send us the address and the date and we will come back within one business day with a price. If you run more than one site, that price gets set against all of them rather than against whatever the local vendor quotes that week."
+        intro="Roll-offs and temporary containers for cleanouts, renovations, and job sites. Send us the address and the date and we'll come back with a price. If you run more than one site, that price gets set against all of them rather than against whatever the local vendor quotes that week."
         items={["Roll-Off Containers", "Cleanouts", "Renovations", "Job Sites", "Events", "Scheduled Swap Outs"]}
         image={{ src: "/temp-containers.jpg", alt: "A roll-off container on a gravel construction site" }}
       />
@@ -35,7 +35,7 @@ export default function TempContainersPage() {
               Request a container.
             </h2>
             <p className="text-base text-charcoal/65 leading-relaxed mb-8">
-              We will follow up within one business day.
+              A person reads every one of these, not a queue.
             </p>
             <DeliveryForm defaultSelection="Temporary container" page="/services/temp-containers" />
             <p className="mt-6 text-sm text-charcoal/60">

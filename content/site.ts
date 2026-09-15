@@ -497,7 +497,7 @@ export const industriesGrid = [
 export const tempContainerForm = {
   hero: {
     h1: "Request a Temporary Container.",
-    sub: "Fill out the form below and we will follow up within one business day.",
+    sub: "Fill out the form below.",
   },
   form: {
     fields: {
@@ -511,7 +511,7 @@ export const tempContainerForm = {
       deliveryDate:    { label: "Delivery Date Needed", placeholder: "MM/DD/YYYY" },
     },
     submit: "Submit request",
-    success: "Request received. We will follow up within one business day.",
+    success: "Request received. Someone will be in touch.",
     errorRequired: "Name, company, email, and delivery address are required.",
     errorGeneric: "Something went wrong. Please try again or call us directly.",
   },
@@ -721,7 +721,7 @@ export const siteManagement = {
 export const contact = {
   hero: {
     h1: "Send us one invoice.",
-    sub: "Attach one recent waste or recycling bill. We'll review it and follow up within one business day.",
+    sub: "Attach one recent waste or recycling bill. We'll review it and tell you what we find.",
   },
   form: {
     fields: {
@@ -743,16 +743,16 @@ export const contact = {
       },
       file: {
         label: "Invoice",
-        hint: "PDF, PNG, or JPG - max 10 MB",
+        hint: "PDF, PNG, JPG, or HEIC — max 8 MB",
       },
     },
     submit: "Send invoice",
     success:
-      "Got it. We'll review your invoice and follow up within one business day.",
+      "Got it. We'll review your invoice and tell you what we find.",
     errorGeneric:
       "Something went wrong. Please try again or call us directly.",
-    errorFileType: "Please attach a PDF, PNG, or JPG file.",
-    errorFileSize: "File must be under 10 MB.",
+    errorFileType: "Please attach a PDF, PNG, JPG, or HEIC file.",
+    errorFileSize: "File must be under 8 MB.",
     errorRequired: "Name, company, and email are required.",
   },
   directContact: {

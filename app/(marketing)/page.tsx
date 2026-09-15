@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
+import { ContactTabs } from "@/components/ContactTabs";
 import { meta, home, faq, company } from "@/content/site";
 import { TrustBar } from "@/components/TrustBar";
 import { OverchargeCards } from "@/components/OverchargeCards";
@@ -256,29 +257,17 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── Closing CTA ──────────────────────────────────────────────────── */}
+      {/* ── Closing form ─────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
-
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-4 max-w-md">
-            {home.closingCta.h2}
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-3 max-w-md">
+            Tell us what you need.
           </h2>
           <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
-            {home.closingCta.body}
+            Three ways in. Pick whichever fits.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href={home.closingCta.ctaHref}
-              className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-            >
-              {home.closingCta.cta}
-            </Link>
-            <a
-              href={company.phoneHref}
-              className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-            >
-              Call {company.phone}
-            </a>
+          <div className="max-w-2xl">
+            <ContactTabs page="/" />
           </div>
         </Container>
       </section>

@@ -57,18 +57,20 @@ export async function POST(request: NextRequest) {
   }
 
   // ── Extract and validate fields ─────────────────────────────────────────────
-  const name        = (formData.get("name")          as string | null)?.trim() ?? "";
-  const companyName = (formData.get("company")        as string | null)?.trim() ?? "";
-  const email       = (formData.get("email")          as string | null)?.trim() ?? "";
-  const phone       = (formData.get("phone")          as string | null)?.trim() ?? "";
-  const whatYouNeed = (formData.get("whatYouNeed")    as string | null)?.trim() ?? "";
-  const message     = (formData.get("message")        as string | null)?.trim() ?? "";
-  const page        = (formData.get("page")           as string | null)?.trim() ?? "";
-  const file        = formData.get("file") as File | null;
+  const name         = (formData.get("name")         as string | null)?.trim() ?? "";
+  const companyName  = (formData.get("company")      as string | null)?.trim() ?? "";
+  const email        = (formData.get("email")        as string | null)?.trim() ?? "";
+  const phone        = (formData.get("phone")        as string | null)?.trim() ?? "";
+  const whatYouNeed  = (formData.get("whatYouNeed")  as string | null)?.trim() ?? "";
+  const siteLocation = (formData.get("siteLocation") as string | null)?.trim() ?? "";
+  const timeline     = (formData.get("timeline")     as string | null)?.trim() ?? "";
+  const message      = (formData.get("message")      as string | null)?.trim() ?? "";
+  const page         = (formData.get("page")         as string | null)?.trim() ?? "";
+  const file         = formData.get("file") as File | null;
 
-  if (!name || !companyName || !email) {
+  if (!name || !companyName || !email || !whatYouNeed || !timeline || !message) {
     return NextResponse.json(
-      { error: "Name, company, and email are required." },
+      { error: "Name, company, email, what you need, timeline, and a message are required." },
       { status: 400 }
     );
   }
@@ -90,7 +92,7 @@ export async function POST(request: NextRequest) {
 
   // ── Log submission ──────────────────────────────────────────────────────────
   console.log("[project-request]", {
-    name, company: companyName, email, phone, whatYouNeed, message,
+    name, company: companyName, email, phone, whatYouNeed, siteLocation, timeline, message,
     hasFile: file && file.size > 0,
     page, ip, timestamp: new Date().toISOString(),
   });
@@ -132,6 +134,8 @@ export async function POST(request: NextRequest) {
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Company</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(companyName)}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Email</td><td style="padding:8px 0;border-bottom:1px solid #eee"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Phone</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(phone) || "—"}</td></tr>
+              <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Site / location</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(siteLocation) || "—"}</td></tr>
+              <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Timeline</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(timeline) || "—"}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Message</td><td style="padding:8px 0;border-bottom:1px solid #eee;white-space:pre-wrap">${escapeHtml(message) || "—"}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Page</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(page) || "—"}</td></tr>
               ${file && file.size > 0 ? `<tr><td style="padding:8px 0;font-weight:600">Attachment</td><td style="padding:8px 0">${fileUrl ? `<a href="${escapeHtml(fileUrl)}">${escapeHtml(file.name)}</a>` : `${escapeHtml(file.name)} (not stored — check logs)`}</td></tr>` : ""}

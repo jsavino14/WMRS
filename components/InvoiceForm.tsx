@@ -27,9 +27,9 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
     const file = data.get("file") as File | null;
     if (!file || file.size === 0) return "Please attach an invoice.";
 
-    const allowed = ["application/pdf", "image/png", "image/jpeg"];
-    if (!allowed.includes(file.type)) return "File must be a PDF, PNG, or JPG.";
-    if (file.size > 10 * 1024 * 1024) return "File must be under 10 MB.";
+    const allowed = ["application/pdf", "image/png", "image/jpeg", "image/heic", "image/heif"];
+    if (!allowed.includes(file.type)) return "File must be a PDF, PNG, JPG, or HEIC.";
+    if (file.size > 8 * 1024 * 1024) return "File must be under 8 MB.";
 
     return null;
   }
@@ -72,7 +72,7 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
     return (
       <div className="border border-accent/30 bg-accent/5 p-8">
         <p className="text-base font-medium text-charcoal">
-          Got it. We&apos;ll review your invoice and follow up within one business day.
+          Got it. We&apos;ll review your invoice and tell you what we find.
         </p>
       </div>
     );
@@ -146,10 +146,10 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
           name="file"
           type="file"
           required
-          accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
+          accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,application/pdf,image/png,image/jpeg,image/heic,image/heif"
           className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal/70 file:mr-4 file:py-0 file:px-4 file:border-0 file:bg-charcoal file:text-white file:text-xs file:font-semibold file:cursor-pointer cursor-pointer focus:outline-none focus:border-charcoal transition-colors"
         />
-        <p className="mt-1.5 text-xs text-charcoal/40">PDF, PNG, or JPG — max 10 MB</p>
+        <p className="mt-1.5 text-xs text-charcoal/40">PDF, PNG, JPG, or HEIC — max 8 MB</p>
       </div>
 
       {state === "error" && errorMsg && (

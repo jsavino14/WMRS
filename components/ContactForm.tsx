@@ -21,9 +21,9 @@ export function ContactForm() {
     if (!name || !company || !email) return form.errorRequired;
 
     if (file && file.size > 0) {
-      const allowed = ["application/pdf", "image/png", "image/jpeg"];
+      const allowed = ["application/pdf", "image/png", "image/jpeg", "image/heic", "image/heif"];
       if (!allowed.includes(file.type)) return form.errorFileType;
-      if (file.size > 10 * 1024 * 1024) return form.errorFileSize;
+      if (file.size > 8 * 1024 * 1024) return form.errorFileSize;
     }
 
     return null;
@@ -198,7 +198,7 @@ export function ContactForm() {
           id="file"
           name="file"
           type="file"
-          accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
+          accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,application/pdf,image/png,image/jpeg,image/heic,image/heif"
           className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal/70 file:mr-4 file:py-0 file:px-4 file:border-0 file:bg-charcoal file:text-white file:text-xs file:font-semibold file:cursor-pointer cursor-pointer focus:outline-none focus:border-charcoal transition-colors"
         />
         <p className="mt-1.5 text-xs text-charcoal/40">{form.fields.file.hint}</p>
