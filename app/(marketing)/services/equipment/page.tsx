@@ -83,14 +83,6 @@ export default function EquipmentPage() {
                 calling the manufacturer, then finding a welder, then calling your hauler to
                 beg an extra pickup while you wait on both. We take all three.
               </p>
-              <p className="text-base text-charcoal/65 leading-relaxed">
-                <Link
-                  href="/site-management"
-                  className="underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal hover:text-charcoal transition-colors"
-                >
-                  This is the same problem site management solves for pickups and billing.
-                </Link>
-              </p>
             </div>
           </div>
         </Container>
