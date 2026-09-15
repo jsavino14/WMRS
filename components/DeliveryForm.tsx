@@ -87,238 +87,100 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7">
       {/* Honeypot — bots fill this, humans don't see it */}
-      <input
-        type="text"
-        name="website"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute opacity-0 pointer-events-none w-0 h-0"
-        autoComplete="off"
-      />
-
-      {/* Hidden page identifier */}
+      <input type="text" name="website" aria-hidden="true" tabIndex={-1} className="absolute opacity-0 pointer-events-none w-0 h-0" autoComplete="off" />
       <input type="hidden" name="page" value={page} />
 
-      {/* Row: Name / Company */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="df-name" className={labelClass}>
-            Name <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="df-name" name="name" type="text" required
-            placeholder="Your name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="df-company" className={labelClass}>
-            Company <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="df-company" name="company" type="text" required
-            placeholder="Company name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="df-email" className={labelClass}>
-            Email <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="df-email" name="email" type="email" required
-            placeholder="you@company.com"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="df-phone" className={labelClass}>
-            Phone
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="df-phone" name="phone" type="tel"
-            placeholder="Optional"
-            className={inputClass}
-          />
-        </div>
-      </div>
-
-      {/* Row: What do you need / Delivery date needed */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="df-whatYouNeed" className={labelClass}>
-            What do you need <span className="text-charcoal/40">*</span>
-          </label>
-          <select
-            id="df-whatYouNeed"
-            name="whatYouNeed"
-            required
-            value={whatYouNeed}
-            onChange={(e) => setWhatYouNeed(e.target.value as WhatYouNeed)}
-            className={selectClass}
-            style={selectStyle}
-          >
-            {(["Temporary container", "Portable restrooms", "Both"] as WhatYouNeed[]).map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="df-deliveryDate" className={labelClass}>
-            Delivery date needed
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="df-deliveryDate" name="deliveryDate" type="text"
-            placeholder="MM/DD/YYYY"
-            className={inputClass}
-          />
-        </div>
-      </div>
-
-      {/* Full: Delivery address */}
       <div>
-        <label htmlFor="df-deliveryAddress" className={labelClass}>
-          Delivery address <span className="text-charcoal/40">*</span>
-        </label>
-        <input
-          id="df-deliveryAddress" name="deliveryAddress" type="text" required
-          placeholder="Street address, city, state, zip"
-          className={inputClass}
-        />
+        <label htmlFor="df-name" className={labelClass}>Name <span className="text-charcoal/40">*</span></label>
+        <input id="df-name" name="name" type="text" required placeholder="Your name" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="df-company" className={labelClass}>Company <span className="text-charcoal/40">*</span></label>
+        <input id="df-company" name="company" type="text" required placeholder="Company name" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="df-phone" className={labelClass}>Phone <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="df-phone" name="phone" type="tel" placeholder="Optional" className={inputClass} />
       </div>
 
-      {/* Container-specific: How long / Container size */}
+      <div>
+        <label htmlFor="df-email" className={labelClass}>Email <span className="text-charcoal/40">*</span></label>
+        <input id="df-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="df-whatYouNeed" className={labelClass}>What do you need <span className="text-charcoal/40">*</span></label>
+        <select
+          id="df-whatYouNeed" name="whatYouNeed" required
+          value={whatYouNeed}
+          onChange={(e) => setWhatYouNeed(e.target.value as WhatYouNeed)}
+          className={selectClass} style={selectStyle}
+        >
+          {(["Temporary container", "Portable restrooms", "Both"] as WhatYouNeed[]).map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="df-deliveryDate" className={labelClass}>Delivery date needed <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="df-deliveryDate" name="deliveryDate" type="text" placeholder="MM/DD/YYYY" className={inputClass} />
+      </div>
+
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="df-deliveryAddress" className={labelClass}>Delivery address <span className="text-charcoal/40">*</span></label>
+        <input id="df-deliveryAddress" name="deliveryAddress" type="text" required placeholder="Street address, city, state, zip" className={inputClass} />
+      </div>
+
       {showContainer && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <>
           <div>
-            <label htmlFor="df-howLong" className={labelClass}>
-              How long do you need it
-              <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-            </label>
-            <input
-              id="df-howLong" name="howLong" type="text"
-              placeholder="e.g. 1 week, 1 month, ongoing"
-              className={inputClass}
-            />
+            <label htmlFor="df-howLong" className={labelClass}>How long do you need it <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+            <input id="df-howLong" name="howLong" type="text" placeholder="e.g. 1 week, 1 month, ongoing" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="df-containerSize" className={labelClass}>
-              Container size
-              <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-            </label>
-            <input
-              id="df-containerSize" name="containerSize" type="text"
-              placeholder="e.g. 10 yard, 20 yard, 30 yard"
-              className={inputClass}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Both: Material type / Number of units (paired — each visible because both selected) */}
-      {showContainer && showRestrooms && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="df-materialType" className={labelClass}>
-              Material type
-              <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-            </label>
-            <input
-              id="df-materialType" name="materialType" type="text"
-              placeholder="e.g. Construction debris, mixed waste"
-              className={inputClass}
-            />
+            <label htmlFor="df-containerSize" className={labelClass}>Container size <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+            <input id="df-containerSize" name="containerSize" type="text" placeholder="e.g. 10 yard, 20 yard, 30 yard" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="df-numberOfUnits" className={labelClass}>
-              Number of units
-              <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-            </label>
-            <input
-              id="df-numberOfUnits" name="numberOfUnits" type="number" min="1"
-              placeholder="e.g. 4"
-              className={inputClass}
-            />
+            <label htmlFor="df-materialType" className={labelClass}>Material type <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+            <input id="df-materialType" name="materialType" type="text" placeholder="e.g. Construction debris, mixed waste" className={inputClass} />
           </div>
-        </div>
+        </>
       )}
 
-      {/* Container only: Material type full-width */}
-      {showContainer && !showRestrooms && (
-        <div>
-          <label htmlFor="df-materialType" className={labelClass}>
-            Material type
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="df-materialType" name="materialType" type="text"
-            placeholder="e.g. Construction debris, mixed waste"
-            className={inputClass}
-          />
-        </div>
-      )}
-
-      {/* Restrooms only: Number of units full-width */}
-      {!showContainer && showRestrooms && (
-        <div>
-          <label htmlFor="df-numberOfUnits" className={labelClass}>
-            Number of units
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="df-numberOfUnits" name="numberOfUnits" type="number" min="1"
-            placeholder="e.g. 4"
-            className={inputClass}
-          />
-        </div>
-      )}
-
-      {/* Restrooms: ADA — always full-width when visible */}
       {showRestrooms && (
-        <div>
-          <label className={labelClass}>
-            ADA accessible units needed?
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <div className="flex gap-6 pt-1">
-            {["Yes", "No"].map((opt) => (
-              <label key={opt} className="flex items-center gap-2 cursor-pointer group">
-                <input
-                  type="radio"
-                  name="adaUnits"
-                  value={opt}
-                  className="w-4 h-4 accent-charcoal cursor-pointer"
-                />
-                <span className="text-sm text-charcoal/70 group-hover:text-charcoal transition-colors">
-                  {opt}
-                </span>
-              </label>
-            ))}
+        <>
+          <div>
+            <label htmlFor="df-numberOfUnits" className={labelClass}>Number of units <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+            <input id="df-numberOfUnits" name="numberOfUnits" type="number" min="1" placeholder="e.g. 4" className={inputClass} />
           </div>
-        </div>
+          <div>
+            <label className={labelClass}>ADA accessible units needed? <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+            <div className="flex gap-6 pt-1">
+              {["Yes", "No"].map((opt) => (
+                <label key={opt} className="flex items-center gap-2 cursor-pointer group">
+                  <input type="radio" name="adaUnits" value={opt} className="w-4 h-4 accent-charcoal cursor-pointer" />
+                  <span className="text-sm text-charcoal/70 group-hover:text-charcoal transition-colors">{opt}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </>
       )}
 
-      {/* Full: Site access notes */}
-      <div>
-        <label htmlFor="df-notes" className={labelClass}>
-          Site access notes or anything else
-          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-        </label>
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="df-notes" className={labelClass}>Site access notes or anything else <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
         <textarea
-          id="df-notes"
-          name="notes"
-          rows={3}
+          id="df-notes" name="notes" rows={3}
           placeholder="Gate codes, site hours, contact on site, anything else we should know."
-          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
+          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none overflow-hidden"
+          onInput={(e) => { const el = e.currentTarget; el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }}
         />
       </div>
 
       {state === "error" && errorMsg && (
-        <div className="border border-red-200 bg-red-50 px-4 py-3">
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 border border-red-200 bg-red-50 px-4 py-3">
           <p className="text-sm text-red-700">{errorMsg}</p>
         </div>
       )}
@@ -326,7 +188,7 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="justify-self-start bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === "loading" ? "Sending…" : "Submit request"}
       </button>

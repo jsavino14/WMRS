@@ -108,142 +108,66 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7">
       {/* Honeypot */}
-      <input
-        type="text"
-        name="website"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute opacity-0 pointer-events-none w-0 h-0"
-        autoComplete="off"
-      />
-
+      <input type="text" name="website" aria-hidden="true" tabIndex={-1} className="absolute opacity-0 pointer-events-none w-0 h-0" autoComplete="off" />
       <input type="hidden" name="page" value={page} />
 
-      {/* Name + Company */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="pf-name" className={labelClass}>
-            Name <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="pf-name" name="name" type="text" required
-            placeholder="Your name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="pf-company" className={labelClass}>
-            Company <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="pf-company" name="company" type="text" required
-            placeholder="Company name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="pf-email" className={labelClass}>
-            Email <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="pf-email" name="email" type="email" required
-            placeholder="you@company.com"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="pf-phone" className={labelClass}>
-            Phone
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="pf-phone" name="phone" type="tel"
-            placeholder="Optional"
-            className={inputClass}
-          />
-        </div>
-      </div>
-
-      {/* Row: What can we help with / Timeline */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="pf-whatYouNeed" className={labelClass}>
-            What can we help with <span className="text-charcoal/40">*</span>
-          </label>
-          <select
-            id="pf-whatYouNeed"
-            name="whatYouNeed"
-            required
-            defaultValue={defaultSelection}
-            className={selectClass}
-            style={selectStyle}
-          >
-            <option value="" disabled>Select…</option>
-            {WHAT_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="pf-timeline" className={labelClass}>
-            Timeline <span className="text-charcoal/40">*</span>
-          </label>
-          <select
-            id="pf-timeline"
-            name="timeline"
-            required
-            defaultValue=""
-            className={selectClass}
-            style={selectStyle}
-          >
-            <option value="" disabled>Select…</option>
-            {TIMELINE_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Site or property location */}
       <div>
-        <label htmlFor="pf-siteLocation" className={labelClass}>
-          Site or property location
-          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-        </label>
-        <input
-          id="pf-siteLocation" name="siteLocation" type="text"
-          placeholder="City, state, or address"
-          className={inputClass}
-        />
+        <label htmlFor="pf-name" className={labelClass}>Name <span className="text-charcoal/40">*</span></label>
+        <input id="pf-name" name="name" type="text" required placeholder="Your name" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="pf-company" className={labelClass}>Company <span className="text-charcoal/40">*</span></label>
+        <input id="pf-company" name="company" type="text" required placeholder="Company name" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="pf-phone" className={labelClass}>Phone <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="pf-phone" name="phone" type="tel" placeholder="Optional" className={inputClass} />
       </div>
 
-      {/* Tell us what you need */}
       <div>
-        <label htmlFor="pf-message" className={labelClass}>
-          Tell us what you need <span className="text-charcoal/40">*</span>
-        </label>
+        <label htmlFor="pf-email" className={labelClass}>Email <span className="text-charcoal/40">*</span></label>
+        <input id="pf-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="pf-whatYouNeed" className={labelClass}>What can we help with <span className="text-charcoal/40">*</span></label>
+        <select id="pf-whatYouNeed" name="whatYouNeed" required defaultValue={defaultSelection} className={selectClass} style={selectStyle}>
+          <option value="" disabled>Select…</option>
+          {WHAT_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="pf-timeline" className={labelClass}>Timeline <span className="text-charcoal/40">*</span></label>
+        <select id="pf-timeline" name="timeline" required defaultValue="" className={selectClass} style={selectStyle}>
+          <option value="" disabled>Select…</option>
+          {TIMELINE_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="pf-siteLocation" className={labelClass}>Site or property location <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="pf-siteLocation" name="siteLocation" type="text" placeholder="City, state, or address" className={inputClass} />
+      </div>
+
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="pf-message" className={labelClass}>Tell us what you need <span className="text-charcoal/40">*</span></label>
         <textarea
-          id="pf-message"
-          name="message"
-          rows={4}
-          required
+          id="pf-message" name="message" rows={3} required
           placeholder="Site, timeline, what you currently have, what you need."
-          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
+          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none overflow-hidden"
+          onInput={(e) => { const el = e.currentTarget; el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }}
         />
       </div>
 
-      {/* Attachment */}
-      <div>
-        <label htmlFor="pf-file" className={labelClass}>
-          Attachment
-          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-        </label>
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="pf-file" className={labelClass}>Attachment <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
         <input
-          id="pf-file"
-          name="file"
-          type="file"
+          id="pf-file" name="file" type="file"
           accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
           className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal/70 file:mr-4 file:py-0 file:px-4 file:border-0 file:bg-charcoal file:text-white file:text-xs file:font-semibold file:cursor-pointer cursor-pointer focus:outline-none focus:border-charcoal transition-colors"
         />
@@ -251,7 +175,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
       </div>
 
       {state === "error" && errorMsg && (
-        <div className="border border-red-200 bg-red-50 px-4 py-3">
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 border border-red-200 bg-red-50 px-4 py-3">
           <p className="text-sm text-red-700">{errorMsg}</p>
         </div>
       )}
@@ -259,7 +183,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="justify-self-start bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === "loading" ? "Sending…" : "Send message"}
       </button>

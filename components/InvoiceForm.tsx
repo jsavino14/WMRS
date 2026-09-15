@@ -78,112 +78,51 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7">
       {/* Honeypot — bots fill this, humans don't see it */}
-      <input
-        type="text"
-        name="website"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute opacity-0 pointer-events-none w-0 h-0"
-        autoComplete="off"
-      />
-
-      {/* Hidden page identifier */}
+      <input type="text" name="website" aria-hidden="true" tabIndex={-1} className="absolute opacity-0 pointer-events-none w-0 h-0" autoComplete="off" />
       <input type="hidden" name="page" value={page} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="if-name" className={labelClass}>
-            Name <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="if-name" name="name" type="text" required
-            placeholder="Your name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="if-company" className={labelClass}>
-            Company <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="if-company" name="company" type="text" required
-            placeholder="Company name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="if-email" className={labelClass}>
-            Email <span className="text-charcoal/40">*</span>
-          </label>
-          <input
-            id="if-email" name="email" type="email" required
-            placeholder="you@company.com"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="if-phone" className={labelClass}>
-            Phone
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="if-phone" name="phone" type="tel"
-            placeholder="Optional"
-            className={inputClass}
-          />
-        </div>
+      <div>
+        <label htmlFor="if-name" className={labelClass}>Name <span className="text-charcoal/40">*</span></label>
+        <input id="if-name" name="name" type="text" required placeholder="Your name" className={inputClass} />
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="if-locations" className={labelClass}>
-            Number of locations
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="if-locations" name="locations" type="text"
-            placeholder="e.g. 1, 5, 20+"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="if-lookingFor" className={labelClass}>
-            What are you looking for
-            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-          </label>
-          <input
-            id="if-lookingFor" name="lookingFor" type="text"
-            placeholder="e.g. Cost reduction, billing audit, ESG data"
-            className={inputClass}
-          />
-        </div>
+      <div>
+        <label htmlFor="if-company" className={labelClass}>Company <span className="text-charcoal/40">*</span></label>
+        <input id="if-company" name="company" type="text" required placeholder="Company name" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="if-phone" className={labelClass}>Phone <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="if-phone" name="phone" type="tel" placeholder="Optional" className={inputClass} />
       </div>
 
       <div>
-        <label htmlFor="if-notes" className={labelClass}>
-          Anything else we should know
-          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-        </label>
+        <label htmlFor="if-email" className={labelClass}>Email <span className="text-charcoal/40">*</span></label>
+        <input id="if-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="if-locations" className={labelClass}>Number of locations <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="if-locations" name="locations" type="text" placeholder="e.g. 1, 5, 20+" className={inputClass} />
+      </div>
+      <div>
+        <label htmlFor="if-lookingFor" className={labelClass}>What are you looking for <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
+        <input id="if-lookingFor" name="lookingFor" type="text" placeholder="e.g. Cost reduction, billing audit, ESG data" className={inputClass} />
+      </div>
+
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="if-notes" className={labelClass}>Anything else we should know <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
         <textarea
-          id="if-notes"
-          name="notes"
-          rows={3}
+          id="if-notes" name="notes" rows={3}
           placeholder="Any context that would help us."
-          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
+          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none overflow-hidden"
+          onInput={(e) => { const el = e.currentTarget; el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }}
         />
       </div>
 
-      <div>
-        <label htmlFor="if-file" className={labelClass}>
-          Invoice <span className="text-charcoal/40">*</span>
-        </label>
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <label htmlFor="if-file" className={labelClass}>Invoice <span className="text-charcoal/40">*</span></label>
         <input
-          id="if-file"
-          name="file"
-          type="file"
-          required
+          id="if-file" name="file" type="file" required
           accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,application/pdf,image/png,image/jpeg,image/heic,image/heif"
           className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal/70 file:mr-4 file:py-0 file:px-4 file:border-0 file:bg-charcoal file:text-white file:text-xs file:font-semibold file:cursor-pointer cursor-pointer focus:outline-none focus:border-charcoal transition-colors"
         />
@@ -191,7 +130,7 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
       </div>
 
       {state === "error" && errorMsg && (
-        <div className="border border-red-200 bg-red-50 px-4 py-3">
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 border border-red-200 bg-red-50 px-4 py-3">
           <p className="text-sm text-red-700">{errorMsg}</p>
         </div>
       )}
@@ -199,7 +138,7 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="justify-self-start bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === "loading" ? "Sending…" : "Send invoice"}
       </button>
