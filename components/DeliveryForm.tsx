@@ -7,6 +7,14 @@ type WhatYouNeed = "Temporary container" | "Portable restrooms" | "Both";
 
 const inputClass =
   "w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors";
+const selectClass =
+  "w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal focus:outline-none focus:border-charcoal transition-colors appearance-none";
+const selectStyle = {
+  backgroundImage:
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231E2428' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+  backgroundRepeat: "no-repeat" as const,
+  backgroundPosition: "right 12px center",
+};
 const labelClass = "block text-sm font-medium text-charcoal mb-1.5";
 
 interface DeliveryFormProps {
@@ -93,30 +101,7 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
       {/* Hidden page identifier */}
       <input type="hidden" name="page" value={page} />
 
-      {/* What do you need? */}
-      <fieldset>
-        <legend className={labelClass}>
-          What do you need?
-        </legend>
-        <div className="flex flex-col sm:flex-row gap-3">
-          {(["Temporary container", "Portable restrooms", "Both"] as WhatYouNeed[]).map((opt) => (
-            <label key={opt} className="flex items-center gap-2.5 cursor-pointer group">
-              <input
-                type="radio"
-                name="whatYouNeed"
-                value={opt}
-                checked={whatYouNeed === opt}
-                onChange={() => setWhatYouNeed(opt)}
-                className="w-4 h-4 accent-charcoal cursor-pointer"
-              />
-              <span className="text-sm text-charcoal/70 group-hover:text-charcoal transition-colors">
-                {opt}
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
+      {/* Row: Name / Company */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="df-name" className={labelClass}>
@@ -161,9 +146,43 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
         </div>
       </div>
 
+      {/* Row: What do you need / Delivery date needed */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="df-whatYouNeed" className={labelClass}>
+            What do you need <span className="text-charcoal/40">*</span>
+          </label>
+          <select
+            id="df-whatYouNeed"
+            name="whatYouNeed"
+            required
+            value={whatYouNeed}
+            onChange={(e) => setWhatYouNeed(e.target.value as WhatYouNeed)}
+            className={selectClass}
+            style={selectStyle}
+          >
+            {(["Temporary container", "Portable restrooms", "Both"] as WhatYouNeed[]).map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="df-deliveryDate" className={labelClass}>
+            Delivery date needed
+            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+          </label>
+          <input
+            id="df-deliveryDate" name="deliveryDate" type="text"
+            placeholder="MM/DD/YYYY"
+            className={inputClass}
+          />
+        </div>
+      </div>
+
+      {/* Full: Delivery address */}
       <div>
         <label htmlFor="df-deliveryAddress" className={labelClass}>
-          Delivery Address <span className="text-charcoal/40">*</span>
+          Delivery address <span className="text-charcoal/40">*</span>
         </label>
         <input
           id="df-deliveryAddress" name="deliveryAddress" type="text" required
@@ -172,24 +191,23 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
         />
       </div>
 
-      <div>
-        <label htmlFor="df-deliveryDate" className={labelClass}>
-          Delivery Date Needed
-          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-        </label>
-        <input
-          id="df-deliveryDate" name="deliveryDate" type="text"
-          placeholder="MM/DD/YYYY"
-          className={inputClass}
-        />
-      </div>
-
-      {/* Container-specific fields */}
+      {/* Container-specific: How long / Container size */}
       {showContainer && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
+            <label htmlFor="df-howLong" className={labelClass}>
+              How long do you need it
+              <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+            </label>
+            <input
+              id="df-howLong" name="howLong" type="text"
+              placeholder="e.g. 1 week, 1 month, ongoing"
+              className={inputClass}
+            />
+          </div>
+          <div>
             <label htmlFor="df-containerSize" className={labelClass}>
-              Container Size
+              Container size
               <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
             </label>
             <input
@@ -198,9 +216,15 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
               className={inputClass}
             />
           </div>
+        </div>
+      )}
+
+      {/* Both: Material type / Number of units (paired — each visible because both selected) */}
+      {showContainer && showRestrooms && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label htmlFor="df-materialType" className={labelClass}>
-              Material Type
+              Material type
               <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
             </label>
             <input
@@ -209,15 +233,9 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
               className={inputClass}
             />
           </div>
-        </div>
-      )}
-
-      {/* Restroom-specific fields */}
-      {showRestrooms && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label htmlFor="df-numberOfUnits" className={labelClass}>
-              Number of Units
+              Number of units
               <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
             </label>
             <input
@@ -226,30 +244,65 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
               className={inputClass}
             />
           </div>
-          <div>
-            <label className={labelClass}>
-              ADA Accessible Units Needed?
-              <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
-            </label>
-            <div className="flex gap-6 pt-2">
-              {["Yes", "No"].map((opt) => (
-                <label key={opt} className="flex items-center gap-2 cursor-pointer group">
-                  <input
-                    type="radio"
-                    name="adaUnits"
-                    value={opt}
-                    className="w-4 h-4 accent-charcoal cursor-pointer"
-                  />
-                  <span className="text-sm text-charcoal/70 group-hover:text-charcoal transition-colors">
-                    {opt}
-                  </span>
-                </label>
-              ))}
-            </div>
+        </div>
+      )}
+
+      {/* Container only: Material type full-width */}
+      {showContainer && !showRestrooms && (
+        <div>
+          <label htmlFor="df-materialType" className={labelClass}>
+            Material type
+            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+          </label>
+          <input
+            id="df-materialType" name="materialType" type="text"
+            placeholder="e.g. Construction debris, mixed waste"
+            className={inputClass}
+          />
+        </div>
+      )}
+
+      {/* Restrooms only: Number of units full-width */}
+      {!showContainer && showRestrooms && (
+        <div>
+          <label htmlFor="df-numberOfUnits" className={labelClass}>
+            Number of units
+            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+          </label>
+          <input
+            id="df-numberOfUnits" name="numberOfUnits" type="number" min="1"
+            placeholder="e.g. 4"
+            className={inputClass}
+          />
+        </div>
+      )}
+
+      {/* Restrooms: ADA — always full-width when visible */}
+      {showRestrooms && (
+        <div>
+          <label className={labelClass}>
+            ADA accessible units needed?
+            <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+          </label>
+          <div className="flex gap-6 pt-1">
+            {["Yes", "No"].map((opt) => (
+              <label key={opt} className="flex items-center gap-2 cursor-pointer group">
+                <input
+                  type="radio"
+                  name="adaUnits"
+                  value={opt}
+                  className="w-4 h-4 accent-charcoal cursor-pointer"
+                />
+                <span className="text-sm text-charcoal/70 group-hover:text-charcoal transition-colors">
+                  {opt}
+                </span>
+              </label>
+            ))}
           </div>
         </div>
       )}
 
+      {/* Full: Site access notes */}
       <div>
         <label htmlFor="df-notes" className={labelClass}>
           Site access notes or anything else

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { ContactTabs } from "@/components/ContactTabs";
-import { DirectContact } from "@/components/DirectContact";
+import { FormSidebar } from "@/components/FormSidebar";
 import { meta, home, faq, company } from "@/content/site";
 import { TrustBar } from "@/components/TrustBar";
 import { OverchargeCards } from "@/components/OverchargeCards";
@@ -261,8 +261,8 @@ export default function HomePage() {
       {/* ── Closing form ─────────────────────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
-          <div className="lg:flex lg:items-start lg:gap-16">
-            <div className="lg:flex-1">
+          <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">
+            <div>
               <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-3 max-w-md">
                 Tell us what you need.
               </h2>
@@ -270,14 +270,14 @@ export default function HomePage() {
                 A bill to audit, a container to drop, or a project to scope.
               </p>
               <div className="mt-6 lg:hidden">
-                <DirectContact />
+                <FormSidebar />
               </div>
-              <div className="max-w-2xl mt-6 lg:mt-10">
+              <div className="mt-6 lg:mt-10">
                 <ContactTabs page="/" />
               </div>
             </div>
-            <div className="hidden lg:block flex-shrink-0 mt-1">
-              <DirectContact />
+            <div className="hidden lg:block mt-1">
+              <FormSidebar />
             </div>
           </div>
         </Container>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ContactTabs } from "@/components/ContactTabs";
-import { DirectContact } from "@/components/DirectContact";
+import { FormSidebar } from "@/components/FormSidebar";
 import { meta } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -25,34 +25,32 @@ export default async function ContactPage({
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-white pt-20 pb-6 lg:pt-28 lg:pb-10">
         <Container>
-          <div className="lg:flex lg:items-start lg:gap-16">
-            <div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-4 max-w-xl">
-                Tell us what you need.
-              </h1>
-              <p className="text-lg text-charcoal/60 leading-relaxed max-w-xl">
-                A bill to audit, a container to drop, or a project to scope.
-              </p>
-              <div className="mt-6 lg:hidden">
-                <DirectContact />
-              </div>
-            </div>
-            <div className="hidden lg:block flex-shrink-0 mt-1">
-              <DirectContact />
-            </div>
-          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal leading-[1.08] mb-4 max-w-xl">
+            Tell us what you need.
+          </h1>
+          <p className="text-lg text-charcoal/60 leading-relaxed max-w-xl">
+            A bill to audit, a container to drop, or a project to scope.
+          </p>
         </Container>
       </section>
 
       {/* ── Tabs + form ───────────────────────────────────────────────────── */}
       <section className="bg-offwhite py-10 lg:py-14">
         <Container>
-          <div className="max-w-2xl">
-            <ContactTabs
-              initialTab={form}
-              page="/contact"
-              updateUrl
-            />
+          <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">
+            <div>
+              <div className="mb-8 lg:hidden">
+                <FormSidebar />
+              </div>
+              <ContactTabs
+                initialTab={form}
+                page="/contact"
+                updateUrl
+              />
+            </div>
+            <div className="hidden lg:block">
+              <FormSidebar />
+            </div>
           </div>
         </Container>
       </section>

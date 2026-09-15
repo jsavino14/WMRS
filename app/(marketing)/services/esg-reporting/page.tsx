@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { ProjectForm } from "@/components/ProjectForm";
-import { DirectContact } from "@/components/DirectContact";
+import { FormSidebar } from "@/components/FormSidebar";
 import { meta, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "esg-reporting")!;
@@ -139,20 +139,20 @@ export default function EsgReportingPage() {
       {/* ── Form ─────────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <div className="lg:flex lg:items-start lg:gap-16">
-            <div className="max-w-2xl">
+          <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">
+            <div>
               <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
                 Start with WMRS.
               </h2>
               <p className="text-base text-charcoal/65 leading-relaxed">
                 A person reads every one of these, not a queue.
               </p>
-              <div className="mt-6 lg:hidden"><DirectContact /></div>
+              <div className="mt-6 lg:hidden"><FormSidebar /></div>
               <div className="mt-6 lg:mt-8">
                 <ProjectForm defaultSelection="ESG and diversion reporting" page="/services/esg-reporting" />
               </div>
             </div>
-            <div className="hidden lg:block flex-shrink-0"><DirectContact /></div>
+            <div className="hidden lg:block"><FormSidebar /></div>
           </div>
         </Container>
       </section>

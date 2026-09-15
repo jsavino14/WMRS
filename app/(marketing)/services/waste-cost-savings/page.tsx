@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { InvoiceForm } from "@/components/InvoiceForm";
-import { DirectContact } from "@/components/DirectContact";
+import { FormSidebar } from "@/components/FormSidebar";
 import { meta, whatWeFind, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "waste-cost-savings")!;
@@ -80,20 +80,20 @@ export default function WasteCostSavingsPage() {
       {/* ── Form ─────────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <div className="lg:flex lg:items-start lg:gap-16">
-            <div className="max-w-2xl">
+          <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">
+            <div>
               <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
                 Send us one invoice.
               </h2>
               <p className="text-base text-charcoal/65 leading-relaxed">
                 The audit is free. A person reads every one of these, not a queue.
               </p>
-              <div className="mt-6 lg:hidden"><DirectContact /></div>
+              <div className="mt-6 lg:hidden"><FormSidebar /></div>
               <div className="mt-6 lg:mt-8">
                 <InvoiceForm page="/services/waste-cost-savings" />
               </div>
             </div>
-            <div className="hidden lg:block flex-shrink-0"><DirectContact /></div>
+            <div className="hidden lg:block"><FormSidebar /></div>
           </div>
         </Container>
       </section>

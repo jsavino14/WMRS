@@ -4,7 +4,7 @@ import { Container } from "@/components/Container";
 import { ConsolidationDiagram } from "@/components/ConsolidationDiagram";
 import { SiteManagementIconGrid } from "@/components/SiteManagementIcons";
 import { InvoiceForm } from "@/components/InvoiceForm";
-import { DirectContact } from "@/components/DirectContact";
+import { FormSidebar } from "@/components/FormSidebar";
 import { meta, siteManagement } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -95,20 +95,20 @@ export default function SiteManagementPage() {
       {/* ── Form ─────────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <div className="lg:flex lg:items-start lg:gap-16">
-            <div className="max-w-2xl">
+          <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">
+            <div>
               <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
                 Send us one invoice.
               </h2>
               <p className="text-base text-charcoal/65 leading-relaxed">
                 The audit is free. A person reads every one of these, not a queue.
               </p>
-              <div className="mt-6 lg:hidden"><DirectContact /></div>
+              <div className="mt-6 lg:hidden"><FormSidebar /></div>
               <div className="mt-6 lg:mt-8">
                 <InvoiceForm page="/site-management" />
               </div>
             </div>
-            <div className="hidden lg:block flex-shrink-0"><DirectContact /></div>
+            <div className="hidden lg:block"><FormSidebar /></div>
           </div>
         </Container>
       </section>

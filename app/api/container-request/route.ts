@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
   const phone           = (formData.get("phone")           as string | null)?.trim() ?? "";
   const whatYouNeed     = (formData.get("whatYouNeed")     as string | null)?.trim() ?? "";
   const deliveryAddress = (formData.get("deliveryAddress") as string | null)?.trim() ?? "";
+  const howLong         = (formData.get("howLong")         as string | null)?.trim() ?? "";
   const containerSize   = (formData.get("containerSize")   as string | null)?.trim() ?? "";
   const materialType    = (formData.get("materialType")    as string | null)?.trim() ?? "";
   const deliveryDate    = (formData.get("deliveryDate")    as string | null)?.trim() ?? "";
@@ -75,7 +76,7 @@ export async function POST(request: NextRequest) {
   // ── Log submission ──────────────────────────────────────────────────────────
   console.log("[container-request]", {
     name, company: companyName, email, phone, whatYouNeed,
-    deliveryAddress, containerSize, materialType, deliveryDate,
+    deliveryAddress, howLong, containerSize, materialType, deliveryDate,
     numberOfUnits, adaUnits, page, ip, timestamp: new Date().toISOString(),
   });
 
@@ -101,6 +102,7 @@ export async function POST(request: NextRequest) {
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Phone</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(phone) || "—"}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Delivery Address</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(deliveryAddress)}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Delivery Date</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(deliveryDate) || "—"}</td></tr>
+              ${howLong ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">How Long</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(howLong)}</td></tr>` : ""}
               ${containerSize ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Container Size</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(containerSize)}</td></tr>` : ""}
               ${materialType ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Material Type</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(materialType)}</td></tr>` : ""}
               ${numberOfUnits ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Number of Units</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(numberOfUnits)}</td></tr>` : ""}

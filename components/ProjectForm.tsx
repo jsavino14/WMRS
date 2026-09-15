@@ -166,24 +166,44 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
         </div>
       </div>
 
-      {/* What can we help with */}
-      <div>
-        <label htmlFor="pf-whatYouNeed" className={labelClass}>
-          What can we help with <span className="text-charcoal/40">*</span>
-        </label>
-        <select
-          id="pf-whatYouNeed"
-          name="whatYouNeed"
-          required
-          defaultValue={defaultSelection}
-          className={selectClass}
-          style={selectStyle}
-        >
-          <option value="" disabled>Select…</option>
-          {WHAT_OPTIONS.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+      {/* Row: What can we help with / Timeline */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="pf-whatYouNeed" className={labelClass}>
+            What can we help with <span className="text-charcoal/40">*</span>
+          </label>
+          <select
+            id="pf-whatYouNeed"
+            name="whatYouNeed"
+            required
+            defaultValue={defaultSelection}
+            className={selectClass}
+            style={selectStyle}
+          >
+            <option value="" disabled>Select…</option>
+            {WHAT_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="pf-timeline" className={labelClass}>
+            Timeline <span className="text-charcoal/40">*</span>
+          </label>
+          <select
+            id="pf-timeline"
+            name="timeline"
+            required
+            defaultValue=""
+            className={selectClass}
+            style={selectStyle}
+          >
+            <option value="" disabled>Select…</option>
+            {TIMELINE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Site or property location */}
@@ -197,26 +217,6 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
           placeholder="City, state, or address"
           className={inputClass}
         />
-      </div>
-
-      {/* Timeline */}
-      <div>
-        <label htmlFor="pf-timeline" className={labelClass}>
-          Timeline <span className="text-charcoal/40">*</span>
-        </label>
-        <select
-          id="pf-timeline"
-          name="timeline"
-          required
-          defaultValue=""
-          className={selectClass}
-          style={selectStyle}
-        >
-          <option value="" disabled>Select…</option>
-          {TIMELINE_OPTIONS.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
       </div>
 
       {/* Tell us what you need */}
