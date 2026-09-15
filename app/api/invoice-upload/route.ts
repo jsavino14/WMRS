@@ -71,6 +71,7 @@ export async function POST(request: NextRequest) {
   const phone = (formData.get("phone") as string | null)?.trim() ?? "";
   const locations = (formData.get("locations") as string | null) ?? "";
   const lookingFor = (formData.get("lookingFor") as string | null) ?? "";
+  const page = (formData.get("page") as string | null)?.trim() ?? "";
   const file = formData.get("file") as File | null;
 
   if (!name || !companyName || !email) {
@@ -147,7 +148,7 @@ export async function POST(request: NextRequest) {
         from: "WMRS Form <noreply@wmrservice.com>",
         to: company.notificationEmail,
         replyTo: email,
-        subject: `Invoice submission: ${companyName}`,
+        subject: `Send us one invoice — ${companyName} — ${page}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;color:#1E2428">
             <h2 style="margin-bottom:24px">New Invoice Submission</h2>

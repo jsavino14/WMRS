@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
+import { ProjectForm } from "@/components/ProjectForm";
 import { meta, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "equipment")!;
@@ -95,21 +96,27 @@ export default function EquipmentPage() {
         </Container>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 border-t border-charcoal/8">
-        <Container className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/contact"
-            className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-          >
-            Send us one invoice
-          </Link>
-          <a
-            href={company.phoneHref}
-            className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-          >
-            Call {company.phone}
-          </a>
+      {/* ── Form ─────────────────────────────────────────────────────────── */}
+      <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
+        <Container>
+          <div className="max-w-2xl">
+            <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+              Tell us what you need.
+            </h2>
+            <p className="text-base text-charcoal/65 leading-relaxed mb-8">
+              We will follow up within one business day.
+            </p>
+            <ProjectForm defaultSelection="Equipment financing, rental, or repair" page="/services/equipment" />
+            <p className="mt-6 text-sm text-charcoal/60">
+              Or call us directly:{" "}
+              <a
+                href={company.phoneHref}
+                className="underline underline-offset-2 hover:text-charcoal transition-colors"
+              >
+                {company.phone}
+              </a>
+            </p>
+          </div>
         </Container>
       </section>
     </div>

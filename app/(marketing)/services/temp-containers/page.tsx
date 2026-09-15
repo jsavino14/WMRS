@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
-import { ContainerForm } from "@/components/ContainerForm";
+import { DeliveryForm } from "@/components/DeliveryForm";
 import { meta, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "temp-containers")!;
@@ -37,7 +37,7 @@ export default function TempContainersPage() {
             <p className="text-base text-charcoal/65 leading-relaxed mb-8">
               We will follow up within one business day.
             </p>
-            <ContainerForm />
+            <DeliveryForm defaultSelection="Temporary container" page="/services/temp-containers" />
             <p className="mt-6 text-sm text-charcoal/60">
               Or call us directly:{" "}
               <a

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { ConsolidationDiagram } from "@/components/ConsolidationDiagram";
 import { SiteManagementIconGrid } from "@/components/SiteManagementIcons";
+import { InvoiceForm } from "@/components/InvoiceForm";
 import { meta, siteManagement, company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -91,29 +91,26 @@ export default function SiteManagementPage() {
         </Container>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
+      {/* ── Form ─────────────────────────────────────────────────────────── */}
+      <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <h2 className="text-3xl font-black text-charcoal mb-4">
-            Send us one invoice.
-          </h2>
-          <p className="text-lg text-charcoal/60 mb-10 max-w-2xl">
-            Send one recent bill. We&apos;ll tell you what we find and what we think fits,
-            whether that&apos;s an audit, ongoing management, or both.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/contact"
-              className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-            >
-              Send us one invoice
-            </Link>
-            <a
-              href={company.phoneHref}
-              className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-            >
-              Call {company.phone}
-            </a>
+          <div className="max-w-2xl">
+            <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+              Send us one invoice.
+            </h2>
+            <p className="text-base text-charcoal/65 leading-relaxed mb-8">
+              The audit is free. We will follow up within one business day.
+            </p>
+            <InvoiceForm page="/site-management" />
+            <p className="mt-6 text-sm text-charcoal/60">
+              Or call us directly:{" "}
+              <a
+                href={company.phoneHref}
+                className="underline underline-offset-2 hover:text-charcoal transition-colors"
+              >
+                {company.phone}
+              </a>
+            </p>
           </div>
         </Container>
       </section>

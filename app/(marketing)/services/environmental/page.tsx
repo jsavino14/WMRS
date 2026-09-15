@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
+import { ProjectForm } from "@/components/ProjectForm";
 import { meta, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "environmental")!;
@@ -142,28 +143,26 @@ export default function EnvironmentalPage() {
         </Container>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
+      {/* ── Form ─────────────────────────────────────────────────────────── */}
+      <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <h2 className="text-3xl font-black text-charcoal mb-4 max-w-md">
-            Find out what&apos;s on your bill.
-          </h2>
-          <p className="text-lg text-charcoal/60 mb-10 max-w-xl">
-            Send us one recent invoice. The audit is free and we&apos;ll tell you exactly what we find.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/contact"
-              className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-            >
-              Send us one invoice
-            </Link>
-            <a
-              href={company.phoneHref}
-              className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-            >
-              Call {company.phone}
-            </a>
+          <div className="max-w-2xl">
+            <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+              Tell us what you&apos;re working with.
+            </h2>
+            <p className="text-base text-charcoal/65 leading-relaxed mb-8">
+              We will follow up within one business day.
+            </p>
+            <ProjectForm defaultSelection="Tank removal, Phase II, or cleanup" page="/services/environmental" />
+            <p className="mt-6 text-sm text-charcoal/60">
+              Or call us directly:{" "}
+              <a
+                href={company.phoneHref}
+                className="underline underline-offset-2 hover:text-charcoal transition-colors"
+              >
+                {company.phone}
+              </a>
+            </p>
           </div>
         </Container>
       </section>
