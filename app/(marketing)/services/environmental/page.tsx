@@ -21,7 +21,7 @@ export default function EnvironmentalPage() {
         headline="The soil has a say in the closing date."
         intro="Phase II assessments, tank removals, and cleanups are almost always on somebody else's timeline: a buyer, a lender, a regulator, or a deadline you did not set. The work is technical. The pressure is scheduling."
         items={["Phase II Assessments", "Soil and Groundwater Sampling", "Tank Removal", "Soil Remediation", "Closure Documentation"]}
-        image={null}
+        image={{ src: "/environmental.jpg", alt: "An underground storage tank lifted from an excavation pit" }}
       />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}

@@ -192,7 +192,7 @@ export const meta = {
   tempContainers: {
     title: "Temporary Containers",
     description:
-      "[META DESCRIPTION - to be supplied]",
+      "Roll-off containers for cleanouts, renovations, and job sites, delivered on your schedule and priced across all your sites rather than one at a time.",
   },
   internationalWaste: {
     title: "International Catering Waste",

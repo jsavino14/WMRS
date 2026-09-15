@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
         from: "WMRS Form <noreply@wmrservice.com>",
         to: company.containerNotificationEmail,
         replyTo: email,
-        subject: `Container request: ${companyName}`,
+        subject: `Request a delivery - Temporary container - /services/temp-containers`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;color:#1E2428">
             <h2 style="margin-bottom:24px">New Container Request</h2>

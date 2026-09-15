@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
+import { ServiceHero } from "@/components/ServiceHero";
 import { ContainerForm } from "@/components/ContainerForm";
-import { meta, tempContainerForm, servicePages } from "@/content/site";
+import { meta, company, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "temp-containers")!;
 
@@ -18,23 +19,34 @@ export default function TempContainersPage() {
   return (
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 lg:py-24">
-        <Container>
-          <p className="label mb-4">{page.label}</p>
-          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
-            {tempContainerForm.hero.h1}
-          </h1>
-          <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed max-w-2xl">
-            {tempContainerForm.hero.sub}
-          </p>
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow={page.label}
+        headline="Tell us where it's going and when."
+        intro="Roll-offs and temporary containers for cleanouts, renovations, and job sites. Send us the address and the date and we will come back within one business day with a price. If you run more than one site, that price gets set against all of them rather than against whatever the local vendor quotes that week."
+        items={["Roll-Off Containers", "Cleanouts", "Renovations", "Job Sites", "Events", "Scheduled Swap Outs"]}
+        image={{ src: "/temp-containers.jpg", alt: "A roll-off container on a gravel construction site" }}
+      />
 
       {/* ── Form ─────────────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-16 lg:py-20">
+      <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
           <div className="max-w-2xl">
+            <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+              Request a container.
+            </h2>
+            <p className="text-base text-charcoal/65 leading-relaxed mb-8">
+              We will follow up within one business day.
+            </p>
             <ContainerForm />
+            <p className="mt-6 text-sm text-charcoal/60">
+              Or call us directly:{" "}
+              <a
+                href={company.phoneHref}
+                className="underline underline-offset-2 hover:text-charcoal transition-colors"
+              >
+                {company.phone}
+              </a>
+            </p>
           </div>
         </Container>
       </section>
