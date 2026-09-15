@@ -1,17 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 28">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
   <defs><style>
     .av0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .av1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
-  <!-- Fuselage -->
-  <path class="av0" d="M6,11 Q4,11 4,14 Q4,17 6,17 L46,17 Q54,17 54,14 Q54,11 46,11 Z"/>
-  <!-- Main wing (swept back) -->
-  <path class="av0" d="M26,11 L12,5 L14,17 L26,17"/>
-  <!-- Vertical tail fin -->
-  <path class="av0" d="M48,11 L48,4 L54,11"/>
-  <!-- Horizontal stabilizers -->
-  <path class="av0" d="M46,14 L38,10"/>
-  <path class="av0" d="M46,14 L38,18"/>
-  <!-- Accent: cockpit window row -->
-  <line class="av1" x1="8" y1="13.5" x2="20" y2="13.5"/>
+  <!-- Vertical stabiliser / tail fin: swept leading edge, flat top, vertical trailing edge -->
+  <path class="av0" d="M 8,40 L 30,6 L 36,6 L 36,40 Z"/>
+  <!-- Navigation beacon at fin tip (accent) -->
+  <circle class="av1" cx="33" cy="8" r="2.5"/>
 </svg>

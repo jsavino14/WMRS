@@ -122,7 +122,7 @@ export const industries: readonly Industry[] = [
   },
   {
     slug: "education",
-    name: "Education",
+    name: "Educational Facilities",
     icon: "education",
     paragraph: "Contracts run long with little competitive pressure applied at renewal, and recycling programs are set up once and rarely revisited. Volume falls to almost nothing over the summer while the billing continues at full schedule.",
     includes: "K-12 districts, private schools, colleges and universities, student housing",
@@ -240,11 +240,11 @@ export const meta = {
 };
 
 // ─── Customer counter ─────────────────────────────────────────────────────────
-// TrustBar computes: baseline + (baseline × growthPerYear / 12) × whole months since asOf
+// TrustBar computes: floor(baseline × 1.005^n / 100) × 100, n = whole months since asOf
 
-export const customerBaseline      = 2000;
-export const customerAsOf          = "2026-08-01";
-export const customerGrowthPerYear = 0.10;
+export const customerBaseline       = 8700;
+export const customerAsOf           = "2026-09-01";
+export const customerGrowthPerMonth = 0.005;
 
 // ─── Client logos ─────────────────────────────────────────────────────────────
 // SVGs live in /public/logos/. TrustBar embeds them inline for CSS color control.

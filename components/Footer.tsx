@@ -1,18 +1,16 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { company, companyPages, servicePages, industries } from "@/content/site";
+import { company, companyPages, servicePages } from "@/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const industryFirst = industries.slice(0, 6);
-  const industrySecond = industries.slice(6);
 
   return (
     <footer className="bg-charcoal text-white/70">
       <Container className="py-12 lg:py-16">
-        {/* Main grid: brand + 4 link columns (Industries gets 2 sub-cols internally) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1.6fr_1fr_1fr] gap-10">
+        {/* Main grid: brand + 3 link columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10">
 
           {/* Brand — spans full width on md */}
           <div className="md:col-span-2 lg:col-span-1 space-y-4">
@@ -48,39 +46,16 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Industries column — two sub-columns to accommodate 12 entries */}
+          {/* Pages column */}
           <div>
-            <p className="label text-white/40 mb-4">Industries</p>
-            <div className="grid grid-cols-2 gap-x-4">
-              <nav className="flex flex-col gap-2">
-                {industryFirst.map((ind) => (
-                  <Link
-                    key={ind.slug}
-                    href={`/industries#${ind.slug}`}
-                    className="text-sm text-white/60 hover:text-white transition-colors"
-                  >
-                    {ind.name}
-                  </Link>
-                ))}
-              </nav>
-              <nav className="flex flex-col gap-2">
-                {industrySecond.map((ind) => (
-                  <Link
-                    key={ind.slug}
-                    href={`/industries#${ind.slug}`}
-                    className="text-sm text-white/60 hover:text-white transition-colors"
-                  >
-                    {ind.name}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-          </div>
-
-          {/* Company column */}
-          <div>
-            <p className="label text-white/40 mb-4">Company</p>
+            <p className="label text-white/40 mb-4">Pages</p>
             <nav className="flex flex-col gap-2">
+              <Link
+                href="/industries"
+                className="text-sm text-white/60 hover:text-white transition-colors"
+              >
+                Industries
+              </Link>
               {companyPages.map((link) => (
                 <Link
                   key={link.href}

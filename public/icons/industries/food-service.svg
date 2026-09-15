@@ -1,19 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 44">
   <defs><style>
     .fs0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .fs1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
   <!-- Cargo box -->
-  <rect class="fs0" x="2" y="4" width="36" height="24"/>
+  <rect class="fs0" x="2" y="6" width="36" height="24"/>
   <!-- Cab outline -->
-  <polyline class="fs0" points="38,4 38,28 58,28 58,14 46,4 38,4"/>
+  <polyline class="fs0" points="38,6 38,30 58,30 58,16 46,6 38,6"/>
   <!-- Windshield -->
-  <polyline class="fs0" points="40,6 46,6 52,14 40,14"/>
+  <polyline class="fs0" points="40,8 46,8 52,16 40,16"/>
   <!-- Rear wheels -->
-  <circle class="fs0" cx="12" cy="32" r="4"/>
-  <circle class="fs0" cx="22" cy="32" r="4"/>
+  <circle class="fs0" cx="12" cy="34" r="4"/>
+  <circle class="fs0" cx="22" cy="34" r="4"/>
   <!-- Front wheel -->
-  <circle class="fs0" cx="48" cy="32" r="4"/>
+  <circle class="fs0" cx="48" cy="34" r="4"/>
   <!-- Accent: cargo door divider -->
-  <line class="fs1" x1="20" y1="8" x2="20" y2="24"/>
+  <line class="fs1" x1="20" y1="10" x2="20" y2="26"/>
 </svg>

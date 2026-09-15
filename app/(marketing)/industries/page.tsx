@@ -35,7 +35,9 @@ export default function IndustriesPage() {
       <div className="bg-white pt-8 pb-6 lg:pt-10 lg:pb-6">
         <Container>
           <h1 className="text-4xl sm:text-5xl font-black text-charcoal leading-tight">
-            Every industry gets billed the same way.
+            Restaurants, hospitals, airports, job sites.
+            <br />
+            We work in all of them.
           </h1>
         </Container>
       </div>

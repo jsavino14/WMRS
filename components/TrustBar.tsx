@@ -2,23 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { Container } from "@/components/Container";
-import { customerBaseline, customerAsOf, customerGrowthPerYear } from "@/content/site";
+import { customerBaseline, customerAsOf, customerGrowthPerMonth } from "@/content/site";
 
-// ── Client count: floor to nearest 100 — never show an exact figure ───────
+// ── Client count: compound monthly growth, floored to nearest 100 ─────────
 
 function computeCount(): number {
   const base = new Date(customerAsOf);
   const now  = new Date();
-  const months = Math.max(
+  const n = Math.max(
     0,
     (now.getFullYear() - base.getFullYear()) * 12 + (now.getMonth() - base.getMonth()),
   );
-  const exact = customerBaseline + (customerBaseline * customerGrowthPerYear / 12) * months;
-  return Math.floor(exact / 100) * 100;
+  return Math.floor(customerBaseline * Math.pow(1 + customerGrowthPerMonth, n) / 100) * 100;
 }
 
 // ── Inline SVG logos ───────────────────────────────────────────────────────
-// Explicit height attribute (not CSS max-height) is what makes SVGs render.
 // fill="currentColor" inherits white from the parent span.
 
 function ChefsWarehouseLogo({ height }: { height: number }) {
@@ -61,46 +59,57 @@ function BaldorLogo({ height }: { height: number }) {
   );
 }
 
-function ImperialLogo({ height }: { height: number }) {
+function UnitedAirlinesLogo({ height }: { height: number }) {
   return (
-    <svg viewBox="0 0 138.32 83.41" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
-      <path d="M21.04,59.24c.82,3.12,3.22,5.79,1.41,9.63-1.18,2.5-3.85,5.17-7.56,5.16H0s.04-27.68.04-27.68l14.14.07c3.12.02,5.13,2.41,6.52,4.19,2.26,2.89.18,6.13.34,8.63ZM13.34,56.98c1.28,0,2.08-1.09,2.07-2.11s-.8-2.16-2.07-2.18l-6.9-.07v4.39s6.9-.04,6.9-.04ZM15.05,67.54c1.38-.03,1.86-1.79,1.61-2.51-.3-.84-1.09-1.63-2.23-1.63h-7.94c-.17,1.66-.17,2.75,0,4.33l8.57-.19Z"/>
-      <path d="M26.93,41.62l-6.34.11-.15-10.59c-.02-1.65-1.47-2.82-2.85-2.88-1.57-.07-3.04,1.25-3.06,3.04l-.12,10.39-6.27.02v-18.14c2.58-.12,4.69-.37,6.88.49,3.13-1.8,6.77-1.53,9.7.8,3-2.22,6.16-2.52,9.29-1.17,2.76,1.2,5.22,3.94,5.27,7.49l.14,10.5-6.33.04-.15-10.6c-.02-1.65-1.44-2.79-2.85-2.88s-3.08,1.17-3.09,2.94l-.07,10.41Z"/>
-      <path d="M41.18,51.02l-.08-27.54c2.15-.09,4.66-.03,6.71.39,4.31-1.61,8.87-1.2,11.89,2.35s3.06,8.58.44,12.09c-3.01,4.02-8.24,4.87-12.67,2.53l-.06,10.18h-6.23ZM50.69,36.65c2.96.64,5.05-1.68,5.01-4.23-.03-2.28-1.98-4.43-4.66-4.09-2.16.27-3.38,2.13-3.52,4.15-.11,1.59.96,3.68,3.16,4.16Z"/>
-      <path d="M76.64,74.03c-.66,0-1.12-.35-1.46-.75-4.07,2.15-8.91,1.25-11.77-1.98-3.18-3.59-3.21-8.76-.4-12.36s7.86-4.75,12.42-2.46l.08-9.97,6.4-.15v27.67s-5.27.01-5.27.01ZM73.19,68.66c2.27-1.22,2.83-3.94,1.82-5.88s-3.59-2.9-5.56-1.67c-2.1,1.31-2.71,3.82-1.61,5.81.94,1.69,3.18,2.91,5.36,1.74Z"/>
-      <path d="M106.54,55.89l-8.9,19.52c-2.45,5.38-7.01,8.59-13.27,7.92l.27-6.46c1.7.7,6.39-.38,6.18-2.72l-7.45-18.3,6.66-.16,4.63,10.52,4.97-10.41,6.91.09Z"/>
-      <path d="M59.71,73.99l-4.34.08c-.97.02-1.74-.18-2.45-.86-4.18,2.31-9.06,1.29-12.04-2.29s-2.88-8.52-.03-12.12,8.06-4.54,12.12-2.39c2.13-1.24,4.46-.68,6.72-.53l.03,18.11ZM47.59,68.76c2.03.8,3.93-.03,4.82-1.38,1.02-1.53,1.07-3.32.23-4.77-.89-1.54-2.76-2.4-4.65-1.86s-2.78,2.19-2.9,3.83.56,3.41,2.49,4.18Z"/>
-      <path d="M130.21,41.57c-1.77.27-3.86.31-5.69.05l-.93-.76c.19.16-7.73,3.94-12.5-2.66-2.54-3.52-2.49-8.61.49-11.93s7.28-4.12,11.63-2.44c2.05.05,4.85-.83,6.97-.14l.03,17.89ZM118.92,36.69c2.73.48,4.86-1.72,4.87-4.28.01-2.3-2.05-4.44-4.74-4.04-2.11.31-3.39,2.15-3.43,4.17-.04,1.7,1.22,3.79,3.3,4.15Z"/>
-      <path d="M74.97,36.51c2.19-.36,4.29,1.18,6.43,1.53-3.67,4.62-10.25,5.47-14.74,1.87-2.7-2.16-4-5.46-3.5-8.8.45-2.97,2.44-5.76,5.52-7.21,3.42-1.6,7.52-1.26,10.56,1.04s4.65,6.08,3.51,9.93l-12.58.12c.94,2.19,2.71,1.87,4.79,1.52ZM76.7,30.71c-.68-1.69-2.15-2.36-3.62-2.4s-2.99.58-3.47,2.42l7.09-.02Z"/>
-      <polygon points="6.4 41.54 0 41.64 0 14.12 6.38 14.12 6.4 41.54"/>
-      <polygon points="138.32 41.54 131.93 41.63 131.93 14.12 138.31 14.12 138.32 41.54"/>
-      <path d="M30.7,74.05l-6.3-.03v-18.28s4.54-.04,4.54-.04c.82,0,1.51.23,2.16.82,2.74-1.58,5.8-1.68,8.96-.25-.61,1.84-1.25,3.52-2.32,5.46-1.38-.93-2.75-1.5-4.33-.88-3.92,1.55-2.5,7.47-2.71,13.2Z"/>
-      <path d="M90.84,41.62l-6.44.07.02-18.06c2.41-.71,5.14.5,7.19.07,3-.64,5.64-1.4,8.75.33l-2.54,5.32c-1.78-1.27-3.17-1.29-4.57-.68-1.21.53-2.35,1.84-2.36,3.46l-.05,9.48Z"/>
-      <path d="M107.91,41.76l-6.27.06-.05-16.13c2.06.82,4.04.91,6.31.38v15.69Z"/>
-      <path d="M112.18,13.96l-.12-4.35-4.39-.18-.08-4.68c2.71-.54,5.35-.18,7.45,1.88,1.69,1.67,2.67,4.56,1.75,7.3l-4.61.03Z"/>
-      <path d="M103.09,24.49l-.06-4.74,4.48-.12.08-4.49,4.56-.07c.76,2.42.38,5.24-1.33,7.19s-4.48,2.89-7.73,2.23Z"/>
-      <path d="M101.99,4.92l-.08,4.62-4.58-.02c-.94-2.48-.21-5.47,1.47-7.27,1.93-2.07,4.68-2.63,7.56-1.98l.03,4.68-4.41-.02Z"/>
-      <path d="M97.33,15.06l4.55.06.05,4.7c-2.65.75-5.45.25-7.32-1.64s-2.72-4.51-1.91-7.54h4.63s0,4.42,0,4.42Z"/>
-      <polygon points="107.01 14.57 102.43 14.6 102.43 10.1 106.96 10.12 107.01 14.57"/>
+    <svg viewBox="0 0 120 34" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
+      <defs>
+        <clipPath id="ua-globe">
+          <circle cx="17" cy="17" r="14"/>
+        </clipPath>
+      </defs>
+      <rect x="0" y="4"    width="34" height="3.5" clipPath="url(#ua-globe)"/>
+      <rect x="0" y="9"    width="34" height="4"   clipPath="url(#ua-globe)"/>
+      <rect x="0" y="14.5" width="34" height="5"   clipPath="url(#ua-globe)"/>
+      <rect x="0" y="20.5" width="34" height="4"   clipPath="url(#ua-globe)"/>
+      <rect x="0" y="26.5" width="34" height="3.5" clipPath="url(#ua-globe)"/>
+      <path fillRule="evenodd" d="M17 3a14 14 0 1 0 0 28A14 14 0 0 0 17 3zm0 2a12 12 0 1 1 0 24A12 12 0 0 1 17 5z"/>
+      <text x="38" y="23" fontFamily="Arial, Helvetica, sans-serif" fontSize="16" fontWeight="400" letterSpacing="0.5">united</text>
+    </svg>
+  );
+}
+
+function MarriottLogo({ height }: { height: number }) {
+  return (
+    <svg viewBox="0 0 108 30" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
+      <text x="0" y="23" fontFamily="Arial, Helvetica, sans-serif" fontSize="22" fontWeight="700" letterSpacing="0.3">Marriott</text>
+    </svg>
+  );
+}
+
+function DeltaAirLinesLogo({ height }: { height: number }) {
+  return (
+    <svg viewBox="0 0 118 34" height={height} fill="currentColor" aria-hidden="true" style={{ display: "block" }}>
+      <polygon points="18,0 0,34 36,34"/>
+      <text x="44" y="26" fontFamily="Arial, Helvetica, sans-serif" fontSize="21" fontWeight="400" letterSpacing="0.5">delta</text>
     </svg>
   );
 }
 
 // ── Logo definitions ───────────────────────────────────────────────────────
-// Heights doubled vs. original to match the taller bar.
-// name is used as title tooltip and aria fallback text.
 
-const LOGOS: { name: string; Logo: (p: { height: number }) => React.ReactElement; height: number }[] = [
+const LOGOS = [
   { name: "The Chefs\u2019 Warehouse", Logo: ChefsWarehouseLogo, height: 44 },
+  { name: "United Airlines",           Logo: UnitedAirlinesLogo, height: 32 },
   { name: "Baldor Specialty Foods",    Logo: BaldorLogo,          height: 56 },
-  { name: "Imperial Brady",            Logo: ImperialLogo,        height: 56 },
+  { name: "Marriott",                  Logo: MarriottLogo,        height: 28 },
+  { name: "Delta Air Lines",           Logo: DeltaAirLinesLogo,   height: 32 },
 ];
 
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function TrustBar() {
-  const count = computeCount(); // floored to nearest 100
-  const from = count - 100;
+  const count = computeCount();
+  const from  = count - 100;
   const [displayed, setDisplayed] = useState(from);
 
   useEffect(() => {
@@ -125,9 +134,9 @@ export function TrustBar() {
   return (
     <section className="bg-charcoal py-10 relative z-[1]">
       <Container>
-        {/* Desktop (≥900px): counter + logos centered as a group */}
-        <div className="hidden [@media(min-width:900px)]:flex items-center gap-10">
 
+        {/* ≥1024px: counter + 5 logos in one row ───────────────────────── */}
+        <div className="hidden lg:flex items-center gap-10">
           <p
             className="text-sm font-medium text-white/55 whitespace-nowrap flex-shrink-0"
             aria-label={`${count.toLocaleString()}+ sites managed`}
@@ -137,7 +146,6 @@ export function TrustBar() {
             </span>
             + sites managed
           </p>
-
           <div className="flex-1 flex items-center justify-evenly">
             {LOGOS.map(({ name, Logo, height }) => (
               <span
@@ -149,11 +157,10 @@ export function TrustBar() {
               </span>
             ))}
           </div>
-
         </div>
 
-        {/* Mobile / tablet (<900px): counter + logos centered, stacked */}
-        <div className="[@media(min-width:900px)]:hidden flex flex-col items-center gap-6 text-center">
+        {/* 768–1024px: counter on own line, logos in a row ─────────────── */}
+        <div className="hidden md:flex lg:hidden flex-col items-center gap-6 text-center">
           <p
             className="text-sm font-medium text-white/55"
             aria-label={`${count.toLocaleString()}+ sites managed`}
@@ -163,16 +170,53 @@ export function TrustBar() {
             </span>
             + sites managed
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+          <div className="flex items-center justify-center gap-8 flex-wrap">
             {LOGOS.map(({ name, Logo, height }) => (
               <span
                 key={name}
                 title={name}
                 className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
               >
-                <Logo height={Math.round(height * 0.75)} />
+                <Logo height={Math.round(height * 0.85)} />
               </span>
             ))}
+          </div>
+        </div>
+
+        {/* <768px: counter + 3+2 grid ───────────────────────────────────── */}
+        <div className="flex md:hidden flex-col items-center gap-6 text-center">
+          <p
+            className="text-sm font-medium text-white/55"
+            aria-label={`${count.toLocaleString()}+ sites managed`}
+          >
+            <span className="text-white font-bold tabular-nums">
+              {displayed.toLocaleString()}
+            </span>
+            + sites managed
+          </p>
+          <div className="flex flex-col gap-5">
+            <div className="flex justify-center gap-x-8">
+              {LOGOS.slice(0, 3).map(({ name, Logo, height }) => (
+                <span
+                  key={name}
+                  title={name}
+                  className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+                >
+                  <Logo height={Math.round(height * 0.75)} />
+                </span>
+              ))}
+            </div>
+            <div className="flex justify-center gap-x-8">
+              {LOGOS.slice(3).map(({ name, Logo, height }) => (
+                <span
+                  key={name}
+                  title={name}
+                  className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+                >
+                  <Logo height={Math.round(height * 0.75)} />
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 

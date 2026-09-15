@@ -1,19 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 28">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
   <defs><style>
     .cn0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .cn1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
-  <!-- Container body -->
-  <rect class="cn0" x="4" y="4" width="42" height="18"/>
-  <!-- Structural ribs (vertical dividers) -->
-  <line class="cn0" x1="14" y1="4" x2="14" y2="22"/>
-  <line class="cn0" x1="26" y1="4" x2="26" y2="22"/>
-  <line class="cn0" x1="36" y1="4" x2="36" y2="22"/>
-  <!-- Chain hook at pull end -->
-  <path class="cn0" d="M46,10 L52,6"/>
-  <!-- Roller wheels at base -->
-  <circle class="cn0" cx="12" cy="25" r="3"/>
-  <circle class="cn0" cx="38" cy="25" r="3"/>
-  <!-- Accent: hook chain end -->
-  <circle class="cn1" cx="52" cy="6" r="2.5"/>
+  <!-- Mast -->
+  <line class="cn0" x1="16" y1="40" x2="16" y2="4"/>
+  <!-- Horizontal jib: counter-jib (left) + main jib (right) -->
+  <line class="cn0" x1="4" y1="8" x2="40" y2="8"/>
+  <!-- Tension cables from mast peak to jib ends -->
+  <line class="cn0" x1="16" y1="4" x2="40" y2="8"/>
+  <line class="cn0" x1="16" y1="4" x2="4" y2="8"/>
+  <!-- Hoist rope (accent) -->
+  <line class="cn1" x1="30" y1="8" x2="30" y2="28"/>
+  <!-- Hook (accent) -->
+  <path class="cn1" d="M 28,28 Q 26,34 30,34 Q 34,32 32,28"/>
 </svg>
