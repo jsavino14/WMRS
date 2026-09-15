@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { InvoiceForm } from "@/components/InvoiceForm";
-import { meta, whatWeFind, company, servicePages } from "@/content/site";
+import { DirectContact } from "@/components/DirectContact";
+import { meta, whatWeFind, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "waste-cost-savings")!;
 
@@ -79,23 +80,20 @@ export default function WasteCostSavingsPage() {
       {/* ── Form ─────────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
-              Send us one invoice.
-            </h2>
-            <p className="text-base text-charcoal/65 leading-relaxed mb-8">
-              The audit is free. A person reads every one of these, not a queue.
-            </p>
-            <InvoiceForm page="/services/waste-cost-savings" />
-            <p className="mt-6 text-sm text-charcoal/60">
-              Or call us directly:{" "}
-              <a
-                href={company.phoneHref}
-                className="underline underline-offset-2 hover:text-charcoal transition-colors"
-              >
-                {company.phone}
-              </a>
-            </p>
+          <div className="lg:flex lg:items-start lg:gap-16">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+                Send us one invoice.
+              </h2>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                The audit is free. A person reads every one of these, not a queue.
+              </p>
+              <div className="mt-6 lg:hidden"><DirectContact /></div>
+              <div className="mt-6 lg:mt-8">
+                <InvoiceForm page="/services/waste-cost-savings" />
+              </div>
+            </div>
+            <div className="hidden lg:block flex-shrink-0"><DirectContact /></div>
           </div>
         </Container>
       </section>

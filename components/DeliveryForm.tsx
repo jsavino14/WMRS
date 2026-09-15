@@ -250,6 +250,20 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
         </div>
       )}
 
+      <div>
+        <label htmlFor="df-notes" className={labelClass}>
+          Site access notes or anything else
+          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+        </label>
+        <textarea
+          id="df-notes"
+          name="notes"
+          rows={3}
+          placeholder="Gate codes, site hours, contact on site, anything else we should know."
+          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
+        />
+      </div>
+
       {state === "error" && errorMsg && (
         <div className="border border-red-200 bg-red-50 px-4 py-3">
           <p className="text-sm text-red-700">{errorMsg}</p>

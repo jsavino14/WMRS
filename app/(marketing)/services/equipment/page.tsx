@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { ProjectForm } from "@/components/ProjectForm";
-import { meta, company, servicePages } from "@/content/site";
+import { DirectContact } from "@/components/DirectContact";
+import { meta, servicePages } from "@/content/site";
 
 const page = servicePages.find((p) => p.slug === "equipment")!;
 
@@ -91,23 +91,20 @@ export default function EquipmentPage() {
       {/* ── Form ─────────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8F7] pt-10 pb-16 lg:pt-14 lg:pb-24">
         <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
-              Start with WMRS.
-            </h2>
-            <p className="text-base text-charcoal/65 leading-relaxed mb-8">
-              A person reads every one of these, not a queue.
-            </p>
-            <ProjectForm defaultSelection="Equipment financing, rental, or repair" page="/services/equipment" />
-            <p className="mt-6 text-sm text-charcoal/60">
-              Or call us directly:{" "}
-              <a
-                href={company.phoneHref}
-                className="underline underline-offset-2 hover:text-charcoal transition-colors"
-              >
-                {company.phone}
-              </a>
-            </p>
+          <div className="lg:flex lg:items-start lg:gap-16">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+                Start with WMRS.
+              </h2>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                A person reads every one of these, not a queue.
+              </p>
+              <div className="mt-6 lg:hidden"><DirectContact /></div>
+              <div className="mt-6 lg:mt-8">
+                <ProjectForm defaultSelection="Equipment financing, rental, or repair" page="/services/equipment" />
+              </div>
+            </div>
+            <div className="hidden lg:block flex-shrink-0"><DirectContact /></div>
           </div>
         </Container>
       </section>

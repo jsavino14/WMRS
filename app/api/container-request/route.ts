@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
   const deliveryDate    = (formData.get("deliveryDate")    as string | null)?.trim() ?? "";
   const numberOfUnits   = (formData.get("numberOfUnits")   as string | null)?.trim() ?? "";
   const adaUnits        = (formData.get("adaUnits")        as string | null)?.trim() ?? "";
+  const notes           = (formData.get("notes")           as string | null)?.trim() ?? "";
   const page            = (formData.get("page")            as string | null)?.trim() ?? "";
 
   if (!name || !companyName || !email || !deliveryAddress) {
@@ -104,6 +105,7 @@ export async function POST(request: NextRequest) {
               ${materialType ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Material Type</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(materialType)}</td></tr>` : ""}
               ${numberOfUnits ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Number of Units</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(numberOfUnits)}</td></tr>` : ""}
               ${adaUnits ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">ADA Units</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(adaUnits)}</td></tr>` : ""}
+              ${notes ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Notes</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(notes)}</td></tr>` : ""}
               <tr><td style="padding:8px 0;font-weight:600">Page</td><td style="padding:8px 0">${escapeHtml(page) || "—"}</td></tr>
             </table>
           </div>

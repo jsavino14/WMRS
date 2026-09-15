@@ -71,8 +71,9 @@ export async function POST(request: NextRequest) {
   const companyName = (formData.get("company") as string | null)?.trim() ?? "";
   const email = (formData.get("email") as string | null)?.trim() ?? "";
   const phone = (formData.get("phone") as string | null)?.trim() ?? "";
-  const locations = (formData.get("locations") as string | null) ?? "";
-  const lookingFor = (formData.get("lookingFor") as string | null) ?? "";
+  const locations = (formData.get("locations") as string | null)?.trim() ?? "";
+  const lookingFor = (formData.get("lookingFor") as string | null)?.trim() ?? "";
+  const notes = (formData.get("notes") as string | null)?.trim() ?? "";
   const page = (formData.get("page") as string | null)?.trim() ?? "";
   const file = formData.get("file") as File | null;
 
@@ -161,6 +162,7 @@ export async function POST(request: NextRequest) {
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Email</td><td style="padding:8px 0;border-bottom:1px solid #eee"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Phone</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(phone) || "—"}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Locations</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(locations) || "—"}</td></tr>
+              ${notes ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Notes</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(notes)}</td></tr>` : ""}
               <tr><td style="padding:8px 0;font-weight:600">Invoice</td><td style="padding:8px 0">${fileUrl ? `<a href="${escapeHtml(fileUrl)}">${escapeHtml(file.name)}</a>` : `${escapeHtml(file.name)} (not stored — check logs)`}</td></tr>
             </table>
           </div>

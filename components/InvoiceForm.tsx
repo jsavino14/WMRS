@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { company } from "@/content/site";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -135,6 +134,44 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
             className={inputClass}
           />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="if-locations" className={labelClass}>
+          Number of locations
+          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+        </label>
+        <input
+          id="if-locations" name="locations" type="text"
+          placeholder="e.g. 1, 5, 20+"
+          className={inputClass}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="if-lookingFor" className={labelClass}>
+          What are you looking for
+          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+        </label>
+        <input
+          id="if-lookingFor" name="lookingFor" type="text"
+          placeholder="e.g. Cost reduction, billing audit, ESG data"
+          className={inputClass}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="if-notes" className={labelClass}>
+          Anything else we should know
+          <span className="text-charcoal/35 font-normal ml-1">(optional)</span>
+        </label>
+        <textarea
+          id="if-notes"
+          name="notes"
+          rows={3}
+          placeholder="Any context that would help us."
+          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
+        />
       </div>
 
       <div>
