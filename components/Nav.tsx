@@ -13,7 +13,7 @@ import { SectionTabStrip } from "./SectionTabStrip";
 const STRIP_BG = "#E6EAE7";
 
 // Services is the only section with a hover strip
-const SECTION_PAGES: Record<string, readonly { slug: string; label: string }[]> = {
+const SECTION_PAGES: Record<string, readonly { slug: string; navLabel: string }[]> = {
   services: servicePages,
 };
 

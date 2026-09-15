@@ -5,7 +5,7 @@ import { startTransition, useEffect, useRef, useState } from "react";
 import { useNavHover } from "./NavHoverContext";
 import { servicePages } from "@/content/site";
 
-type Page = { readonly slug: string; readonly label: string };
+type Page = { readonly slug: string; readonly navLabel: string };
 type DocWithVT = Document & { startViewTransition?: (cb: () => void) => unknown };
 
 const STRIP_BG = "#E6EAE7";
