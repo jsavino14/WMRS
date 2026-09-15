@@ -10,7 +10,7 @@ import type { NavTopItem } from "@/content/site";
 import { useNavHover } from "./NavHoverContext";
 import { SectionTabStrip } from "./SectionTabStrip";
 
-const STRIP_BG = "#F1F3F1";
+const STRIP_BG = "#E6EAE7";
 
 // Services is the only section with a hover strip
 const SECTION_PAGES: Record<string, readonly { slug: string; label: string }[]> = {
@@ -40,8 +40,10 @@ export function Nav() {
   const pathname = usePathname();
   const {
     hoveredSection,
+    pinned,
     openSection,
     openImmediate,
+    pinSection,
     closeSection,
     cancelClose,
     closeImmediate,
@@ -60,8 +62,11 @@ export function Nav() {
   if (hoveredSection !== null) lastSectionRef.current = hoveredSection;
   const overlaySection = hoveredSection ?? lastSectionRef.current;
 
-  // Refs for focus restoration after Escape
+  // Refs for focus restoration after Escape, and click-outside detection
   const sectionBtnRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const headerRef = useRef<HTMLElement | null>(null);
+  const stickyStripRef = useRef<HTMLDivElement | null>(null);
+  const overlayStripRef = useRef<HTMLDivElement | null>(null);
 
   const close = useCallback(() => {
     setMobileOpen(false);
@@ -118,6 +123,22 @@ export function Nav() {
     return () => document.removeEventListener("keydown", onKey);
   }, [hoveredSection, closeImmediate]);
 
+  // Click outside header + strip closes when pinned
+  useEffect(() => {
+    if (!pinned) return;
+    function onMouseDown(e: MouseEvent) {
+      const t = e.target as Node;
+      if (
+        headerRef.current?.contains(t) ||
+        stickyStripRef.current?.contains(t) ||
+        overlayStripRef.current?.contains(t)
+      ) return;
+      closeImmediate();
+    }
+    document.addEventListener("mousedown", onMouseDown);
+    return () => document.removeEventListener("mousedown", onMouseDown);
+  }, [pinned, closeImmediate]);
+
   const overlayOpen = !!hoveredSection && !isOnSectionPage;
 
   // Header border:
@@ -132,7 +153,7 @@ export function Nav() {
 
   return (
     <>
-      <header className={`sticky top-0 z-50 bg-white transition-[border-color] duration-150 ${borderClass}`}>
+      <header ref={headerRef} className={`sticky top-0 z-50 bg-white transition-[border-color] duration-150 ${borderClass}`}>
         <Container>
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -169,8 +190,8 @@ export function Nav() {
                       onMouseEnter={() => openSection(sectionKey)}
                       onMouseLeave={() => closeSection()}
                       onClick={() => {
-                        if (isOpen) closeImmediate();
-                        else openImmediate(sectionKey);
+                        if (pinned) closeImmediate();
+                        else pinSection(sectionKey);
                       }}
                     >
                       {item.label}
@@ -237,7 +258,7 @@ export function Nav() {
 
       {/* Services sticky strip — desktop only, sticks directly below header on /services/* */}
       {isOnSectionPage && (
-        <div className="hidden md:block sticky top-16 z-40">
+        <div ref={stickyStripRef} className="hidden md:block sticky top-16 z-40">
           <SectionTabStrip pages={servicePages} basePath="/services" />
         </div>
       )}
@@ -245,6 +266,7 @@ export function Nav() {
       {/* State C: overlay strip — desktop only, slides down below header on non-section pages */}
       <div className="hidden md:block">
         <div
+          ref={overlayStripRef}
           id="nav-section-strip"
           style={{
             position: "fixed",
@@ -253,19 +275,17 @@ export function Nav() {
             right: 0,
             zIndex: 49,
             background: STRIP_BG,
-            boxShadow: overlayOpen ? "0 6px 16px rgba(30,36,40,0.07)" : "none",
             opacity: overlayOpen ? 1 : 0,
             transform: overlayOpen ? "translateY(0)" : "translateY(-100%)",
             transition: overlayOpen
-              ? "opacity 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out"
-              : "opacity 140ms ease-in, transform 140ms ease-in, box-shadow 140ms ease-in",
+              ? "opacity 180ms ease-out, transform 180ms ease-out"
+              : "opacity 140ms ease-in, transform 140ms ease-in",
             pointerEvents: overlayOpen ? "auto" : "none",
           }}
           onMouseEnter={cancelClose}
           onMouseLeave={closeSection}
         >
-          <div className="overflow-x-auto hide-scrollbar" style={{ scrollbarWidth: "none" }}>
-            <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
               {overlaySection &&
                 SECTION_PAGES[overlaySection]?.map((page) => (
                   <Link
@@ -277,7 +297,6 @@ export function Nav() {
                   </Link>
                 ))}
             </div>
-          </div>
         </div>
       </div>
 

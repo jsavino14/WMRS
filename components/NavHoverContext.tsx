@@ -5,8 +5,10 @@ import type { ReactNode } from "react";
 
 type Ctx = {
   hoveredSection: string | null;
+  pinned: boolean;
   openSection: (section: string) => void;
   openImmediate: (section: string) => void;
+  pinSection: (section: string) => void;
   closeSection: () => void;
   cancelClose: () => void;
   closeImmediate: () => void;
@@ -14,8 +16,10 @@ type Ctx = {
 
 const NavHoverContext = createContext<Ctx>({
   hoveredSection: null,
+  pinned: false,
   openSection: () => {},
   openImmediate: () => {},
+  pinSection: () => {},
   closeSection: () => {},
   cancelClose: () => {},
   closeImmediate: () => {},
@@ -23,6 +27,7 @@ const NavHoverContext = createContext<Ctx>({
 
 export function NavHoverProvider({ children }: { children: ReactNode }) {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [pinned, setPinned] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -45,14 +50,21 @@ export function NavHoverProvider({ children }: { children: ReactNode }) {
     setHoveredSection(section);
   }, [clearTimers]);
 
+  const pinSection = useCallback((section: string) => {
+    clearTimers();
+    setHoveredSection(section);
+    setPinned(true);
+  }, [clearTimers]);
+
   const closeSection = useCallback(() => {
+    if (pinned) return;
     if (openTimer.current) { clearTimeout(openTimer.current); openTimer.current = null; }
     if (closeTimer.current) return;
     closeTimer.current = setTimeout(() => {
       setHoveredSection(null);
       closeTimer.current = null;
     }, 200);
-  }, []);
+  }, [pinned]);
 
   const cancelClose = useCallback(() => {
     if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
@@ -60,12 +72,13 @@ export function NavHoverProvider({ children }: { children: ReactNode }) {
 
   const closeImmediate = useCallback(() => {
     clearTimers();
+    setPinned(false);
     setHoveredSection(null);
   }, [clearTimers]);
 
   return (
     <NavHoverContext.Provider
-      value={{ hoveredSection, openSection, openImmediate, closeSection, cancelClose, closeImmediate }}
+      value={{ hoveredSection, pinned, openSection, openImmediate, pinSection, closeSection, cancelClose, closeImmediate }}
     >
       {children}
     </NavHoverContext.Provider>

@@ -8,7 +8,7 @@ import { servicePages } from "@/content/site";
 type Page = { readonly slug: string; readonly label: string };
 type DocWithVT = Document & { startViewTransition?: (cb: () => void) => unknown };
 
-const STRIP_BG = "#F1F3F1";
+const STRIP_BG = "#E6EAE7";
 
 // Only services uses the hover strip now
 const SECTION_PAGES: Record<string, readonly Page[]> = {
@@ -32,7 +32,6 @@ export function SectionTabStrip({
   const [displayedSection, setDisplayedSection] = useState<string | null>(null);
   const [fading, setFading] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const targetSection = hoveredSection ?? ownSection;
@@ -56,14 +55,6 @@ export function SectionTabStrip({
     return () => clearTimeout(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hoveredSection]);
-
-  // ── Scroll shadow ─────────────────────────────────────────────────────────
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // ── CSS variable: full sticky-stack height ────────────────────────────────
   useEffect(() => {
@@ -153,13 +144,11 @@ export function SectionTabStrip({
         background: STRIP_BG,
         opacity: fading ? 0 : 1,
         transition: "opacity 70ms ease",
-        boxShadow: scrolled ? "0 4px 12px rgba(30,36,40,0.06)" : "none",
       }}
       onMouseEnter={cancelClose}
       onMouseLeave={closeSection}
     >
-      <div className="overflow-x-auto hide-scrollbar" style={{ scrollbarWidth: "none" }}>
-        <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="flex px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {displayPages.map((page, i) => {
             const isActive = i === activeIndex;
             return (
@@ -176,7 +165,6 @@ export function SectionTabStrip({
               </button>
             );
           })}
-        </div>
       </div>
     </div>
   );
