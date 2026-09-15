@@ -74,19 +74,19 @@ export default function IndustriesPage() {
                       : "lg:pl-12",
                   ].join(" ")}
                 >
-                  {/* Icon */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`/icons/industries/${industry.icon}.svg`}
-                    alt=""
-                    aria-hidden="true"
-                    className="h-11 w-auto mb-5"
-                  />
-
-                  {/* Name */}
-                  <h2 className="text-xl sm:text-2xl font-black text-charcoal mb-3">
-                    {industry.name}
-                  </h2>
+                  {/* Icon + Name inline */}
+                  <div className="flex items-center gap-3 mb-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/icons/industries/${industry.icon}.svg`}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-8 w-auto flex-shrink-0"
+                    />
+                    <h2 className="text-xl sm:text-2xl font-black text-charcoal leading-tight">
+                      {industry.name}
+                    </h2>
+                  </div>
 
                   {/* Paragraph */}
                   <p className="text-sm text-charcoal/65 leading-relaxed mb-5">
