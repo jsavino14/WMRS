@@ -209,6 +209,11 @@ export const meta = {
     description:
       "Portable restrooms for job sites, events, and temporary operations, delivered and serviced on the same account as the rest of your waste program.",
   },
+  environmental: {
+    title: "Tank Removal & Site Remediation | WMRS",
+    description:
+      "Phase II assessments, underground tank removal, and soil and groundwater cleanup, managed to a written closure determination.",
+  },
   equipment: {
     title: "Equipment Financing & Servicing | WMRS",
     description:
