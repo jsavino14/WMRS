@@ -108,7 +108,7 @@ export default function IndustriesPage() {
                             href={`/services/${s.slug}`}
                             className="text-sm text-charcoal/65 hover:text-charcoal underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal transition-colors"
                           >
-                            {s.label}
+                            {s.fullName}
                           </Link>
                         ))}
                       </div>

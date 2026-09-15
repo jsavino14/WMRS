@@ -21,7 +21,7 @@ export default function EquipmentPage() {
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
-        eyebrow={page.label}
+        eyebrow={page.fullName}
         headline="Nobody budgets for a compactor until it stops."
         intro="Balers, compactors, and autoclaves are capital purchases that tend to arrive as emergencies. We finance them directly, rent them when a site's volume isn't settled yet, and repair the ones you already have, whoever sold them to you."
         image={{ src: "/equipment.jpg", alt: "A vertical baler with a compressed bale of cardboard in an industrial warehouse" }}

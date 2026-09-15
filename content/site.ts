@@ -38,7 +38,7 @@ export const industries: readonly Industry[] = [
     icon: "food-service",
     paragraph: "Distribution operations run high cardboard volume alongside organics and cold chain waste, and compactor hauls are often billed at a flat rate no matter what the load actually weighs. Cardboard at that volume is a commodity with real value, and it frequently leaves the building priced as trash.",
     includes: "Foodservice distributors, produce and protein distribution, cold storage, commissaries, catering operations",
-    relatedServices: ["equipment", "esg-reporting"],
+    relatedServices: ["equipment", "esg-reporting", "waste-cost-savings"],
   },
   {
     slug: "restaurant-groups",
@@ -46,7 +46,7 @@ export const industries: readonly Industry[] = [
     icon: "restaurant-groups",
     paragraph: "Rates get negotiated one store at a time as locations open, so a forty unit group can end up with forty different agreements and no one holding the portfolio view. Waste volume is high relative to footprint, which makes every pricing error larger than it looks on a single bill.",
     includes: "Quick service, fast casual, full service groups, franchisees, multi brand operators",
-    relatedServices: ["equipment"],
+    relatedServices: ["equipment", "temp-containers", "waste-cost-savings"],
   },
   {
     slug: "grocery",
@@ -54,7 +54,7 @@ export const industries: readonly Industry[] = [
     icon: "grocery-food",
     paragraph: "Few businesses generate more waste per square foot, across more separate streams: organics, cardboard at scale, mixed recycling, and general waste. More streams means more places for pricing to drift, and compactor haul billing is where it drifts furthest.",
     includes: "Supermarket chains, independent grocers, specialty food retail, convenience and forecourt",
-    relatedServices: ["equipment", "environmental"],
+    relatedServices: ["equipment", "esg-reporting", "waste-cost-savings"],
   },
   {
     slug: "hotel-hospitality",
@@ -62,7 +62,7 @@ export const industries: readonly Industry[] = [
     icon: "hotel-hospitality",
     paragraph: "Occupancy swings hard by season while the pickup schedule stays fixed, so half the year is spent paying for capacity that goes out empty. Rates are usually set property by property rather than across the portfolio, which is where the spread between comparable sites opens up.",
     includes: "Hotel groups, resorts, conference properties, management companies, extended stay",
-    relatedServices: ["esg-reporting"],
+    relatedServices: ["esg-reporting", "temp-containers", "equipment", "waste-cost-savings"],
   },
   {
     slug: "retail-chains",
@@ -70,7 +70,7 @@ export const industries: readonly Industry[] = [
     icon: "retail-chains",
     paragraph: "Cardboard and packaging arrive in volume and leave misclassified as general waste, at general waste prices. Locations open and close regularly, and closed stores have a way of staying on the bill long after the container is gone.",
     includes: "Specialty retail, big box, mall and strip center tenants, franchise networks",
-    relatedServices: ["esg-reporting"],
+    relatedServices: ["equipment", "temp-containers", "esg-reporting", "waste-cost-savings"],
   },
   {
     slug: "commercial-property",
@@ -78,7 +78,7 @@ export const industries: readonly Industry[] = [
     icon: "commercial-property",
     paragraph: "Waste costs are passed through to tenants and rarely audited by anyone, which means billing errors flow straight to the people paying them without ever being questioned. Equipment charges for compactors removed years earlier are common on these accounts.",
     includes: "Office portfolios, mixed use, industrial parks, REITs, third party managers",
-    relatedServices: ["equipment"],
+    relatedServices: ["environmental", "temp-containers", "equipment", "waste-cost-savings"],
   },
   {
     slug: "healthcare",
@@ -86,7 +86,7 @@ export const industries: readonly Industry[] = [
     icon: "healthcare",
     paragraph: "Regulated and general waste run side by side, and vendors price on that complexity rather than in spite of it. Regulated waste is often billed per container regardless of how full it is, so separating the streams properly is usually worth more than negotiating the rate.",
     includes: "Hospital systems, surgical centers, physician networks, dental and veterinary groups, long term care",
-    relatedServices: ["environmental", "equipment"],
+    relatedServices: ["equipment", "esg-reporting", "waste-cost-savings"],
   },
   {
     slug: "manufacturing",
@@ -94,7 +94,7 @@ export const industries: readonly Industry[] = [
     icon: "manufacturing",
     paragraph: "Scrap metal, plastics, and clean cardboard have commodity value and routinely go out classified as general waste. Production volume moves year to year while container sizing and pickup frequency stay wherever they were set at contract inception.",
     includes: "Light and heavy manufacturing, 3PL and fulfillment, distribution centers, cold and dry storage",
-    relatedServices: ["equipment", "esg-reporting"],
+    relatedServices: ["equipment", "environmental", "esg-reporting", "waste-cost-savings"],
   },
   {
     slug: "aviation",
@@ -102,7 +102,7 @@ export const industries: readonly Industry[] = [
     icon: "aviation",
     paragraph: "Passenger volume generates waste continuously, and multiple operators share one site with no one entirely clear on who is paying for which container. International catering waste carries separate regulated handling requirements and separate pricing to go with it.",
     includes: "Airports, ground handlers, in flight catering, rail and bus terminals, transit authorities",
-    relatedServices: ["international-waste", "environmental"],
+    relatedServices: ["international-waste", "environmental", "equipment", "waste-cost-savings"],
   },
   {
     slug: "construction",
@@ -110,7 +110,7 @@ export const industries: readonly Industry[] = [
     icon: "construction",
     paragraph: "Temporary containers get ordered site by site at whatever rate is quoted that day, with no reference to what the same container costs across the rest of your projects. Mixed debris is billed as general waste when a large share of it is divertible at a lower rate.",
     includes: "General contractors, demolition, restoration, roofing, civil and infrastructure",
-    relatedServices: ["temp-containers", "portable-restrooms", "equipment"],
+    relatedServices: ["temp-containers", "portable-restrooms", "environmental", "waste-cost-savings"],
   },
   {
     slug: "entertainment",
@@ -118,7 +118,7 @@ export const industries: readonly Industry[] = [
     icon: "entertainment",
     paragraph: "Volume arrives in spikes that a fixed schedule contract was never built to absorb, so event days generate overage fees and quiet weeks generate pickups of empty containers. Both are paid for in full.",
     includes: "Arenas and stadiums, theaters, casinos, amusement and water parks, festivals",
-    relatedServices: ["temp-containers", "portable-restrooms"],
+    relatedServices: ["temp-containers", "portable-restrooms", "equipment", "waste-cost-savings"],
   },
   {
     slug: "education",
@@ -126,18 +126,18 @@ export const industries: readonly Industry[] = [
     icon: "education",
     paragraph: "Contracts run long with little competitive pressure applied at renewal, and recycling programs are set up once and rarely revisited. Volume falls to almost nothing over the summer while the billing continues at full schedule.",
     includes: "K-12 districts, private schools, colleges and universities, student housing",
-    relatedServices: ["esg-reporting", "temp-containers"],
+    relatedServices: ["temp-containers", "environmental", "esg-reporting", "equipment", "waste-cost-savings"],
   },
 ] as const;
 
 export const servicePages = [
-  { slug: "waste-cost-savings",  label: "Waste Cost Savings" },
-  { slug: "temp-containers",     label: "Temporary Containers" },
-  { slug: "international-waste", label: "International Waste" },
-  { slug: "equipment",           label: "Equipment & Service" },
-  { slug: "esg-reporting",       label: "ESG Reporting" },
-  { slug: "environmental",       label: "Environmental" },
-  { slug: "portable-restrooms",  label: "Portable Restrooms" },
+  { slug: "waste-cost-savings",  navLabel: "Waste Cost Savings",   fullName: "Waste Cost Savings" },
+  { slug: "temp-containers",     navLabel: "Temporary Containers", fullName: "Temporary Containers" },
+  { slug: "international-waste", navLabel: "International Waste",  fullName: "International Catering Waste" },
+  { slug: "equipment",           navLabel: "Equipment Financing",  fullName: "Equipment Financing, Rentals, and Repairs" },
+  { slug: "esg-reporting",       navLabel: "ESG Reporting",        fullName: "ESG and Diversion Reporting" },
+  { slug: "environmental",       navLabel: "Environmental",        fullName: "Tank Removal & Site Remediation" },
+  { slug: "portable-restrooms",  navLabel: "Portable Restrooms",   fullName: "Portable Restrooms" },
 ] as const;
 export type ServiceSlug = typeof servicePages[number]["slug"];
 
@@ -157,7 +157,7 @@ export const nav: NavTopItem[] = [
     label: "Services",
     href: null,
     activePrefix: "/services",
-    dropdown: servicePages.map((p) => ({ label: p.label, href: `/services/${p.slug}` })),
+    dropdown: servicePages.map((p) => ({ label: p.navLabel, href: `/services/${p.slug}` })),
   },
   { label: "Industries", href: "/industries", activePrefix: "/industries" },
   { label: "Site Management", href: "/site-management" },

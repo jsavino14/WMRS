@@ -293,7 +293,7 @@ export function Nav() {
                     href={`/${overlaySection}/${page.slug}`}
                     className="whitespace-nowrap flex-shrink-0 px-[13px] py-3 text-[12.5px] font-medium border-b-2 border-transparent text-charcoal/50 hover:text-charcoal transition-colors duration-150"
                   >
-                    {page.label}
+                    {page.navLabel}
                   </Link>
                 ))}
             </div>

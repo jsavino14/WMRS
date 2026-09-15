@@ -40,7 +40,7 @@ export function Footer() {
                   href={`/services/${p.slug}`}
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
-                  {p.label}
+                  {p.navLabel}
                 </Link>
               ))}
             </nav>

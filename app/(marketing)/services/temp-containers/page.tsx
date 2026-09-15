@@ -20,7 +20,7 @@ export default function TempContainersPage() {
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
-        eyebrow={page.label}
+        eyebrow={page.fullName}
         headline="Tell us where it's going and when."
         intro="Roll-offs and temporary containers for cleanouts, renovations, and job sites. Send us the address and the date and we will come back within one business day with a price. If you run more than one site, that price gets set against all of them rather than against whatever the local vendor quotes that week."
         items={["Roll-Off Containers", "Cleanouts", "Renovations", "Job Sites", "Events", "Scheduled Swap Outs"]}

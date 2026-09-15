@@ -18,7 +18,7 @@ export default function PortableRestroomsPage() {
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
-        eyebrow={page.label}
+        eyebrow={page.fullName}
         headline="Ordered last minute, priced accordingly."
         intro="Restrooms get arranged the week before, from whichever vendor answers first, on a separate account from everything else on the site. It is the same pattern as the containers, and it produces the same result."
         items={["Standard Units", "ADA Accessible", "Hand Wash Stations", "Holding Tanks", "Scheduled Servicing"]}

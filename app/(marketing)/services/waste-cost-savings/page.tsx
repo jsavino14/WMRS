@@ -20,7 +20,7 @@ export default function WasteCostSavingsPage() {
     <div className="vt-section-content">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
-        eyebrow={page.label}
+        eyebrow={page.fullName}
         headline={whatWeFind.hero.h1}
         intro={whatWeFind.hero.sub}
         items={whatWeFind.items.map((item) => item.label)}

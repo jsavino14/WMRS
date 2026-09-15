@@ -161,7 +161,7 @@ export function SectionTabStrip({
                     : "border-transparent text-charcoal/50 hover:text-charcoal"
                 }`}
               >
-                {page.label}
+                {page.navLabel}
               </button>
             );
           })}
