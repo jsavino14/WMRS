@@ -208,6 +208,9 @@ export const meta = {
     title: "Industries We Serve | WMRS",
     description:
       "WMRS reduces waste and recycling costs for multi-location businesses across food service, healthcare, manufacturing, retail, construction, and more.",
+    // introP (removed from page, kept here): "The container sizes change, the streams change,
+    // the volume changes. What doesn't change is a contract with an escalator in it and a surcharge
+    // structure nobody reads. Here's where the money usually is, by sector."
   },
   siteManagement: {
     title: "Site Management",

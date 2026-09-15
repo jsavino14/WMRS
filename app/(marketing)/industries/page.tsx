@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { industries, servicePages, meta, company } from "@/content/site";
+
+const LABEL_WE_WORK_WITH = "We Work With";
+const LABEL_WHAT_WE_DO_HERE = "What We Do Here";
 
 export const metadata: Metadata = {
   title: meta.industries.title,
@@ -15,17 +19,26 @@ export const metadata: Metadata = {
 export default function IndustriesPage() {
   return (
     <>
-      {/* ── Hero ──────────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 lg:py-24">
+      {/* ── Photo band — full bleed, no container ─────────────────────────────── */}
+      <div className="relative h-[180px] md:h-[240px] min-[1440px]:h-[300px] overflow-hidden">
+        <Image
+          src="/industries-hero.png"
+          alt="Loading dock, black and white"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority
+        />
+      </div>
+
+      {/* ── Heading ───────────────────────────────────────────────────────────── */}
+      <div className="bg-white pt-8 pb-6 lg:pt-10 lg:pb-6">
         <Container>
-          <h1 className="text-4xl sm:text-5xl font-black text-charcoal leading-tight mb-6">
-            Every industry generates waste differently. Every industry gets billed the same way.
+          <h1 className="text-4xl sm:text-5xl font-black text-charcoal leading-tight">
+            Every industry gets billed the same way.
           </h1>
-          <p className="text-base lg:text-lg text-charcoal/65 leading-relaxed max-w-2xl">
-            The container sizes change, the streams change, the volume changes. What doesn&rsquo;t change is a contract with an escalator in it and a surcharge structure nobody reads. Here&rsquo;s where the money usually is, by sector.
-          </p>
         </Container>
-      </section>
+      </div>
 
       {/* ── Industry grid ─────────────────────────────────────────────────────── */}
       <section className="bg-white border-t border-charcoal/10">
@@ -40,7 +53,6 @@ export default function IndustriesPage() {
               const isSecondToLast = i === industries.length - 2;
               const isLeftCol = i % 2 === 0;
 
-              // Border-bottom: all on mobile except last; on desktop only through second-to-last row
               const borderBottomClass = isLastItem
                 ? ""
                 : isSecondToLast
@@ -79,14 +91,14 @@ export default function IndustriesPage() {
                     {industry.paragraph}
                   </p>
 
-                  {/* Includes */}
-                  <p className="label mb-1.5">Includes</p>
+                  {/* We Work With */}
+                  <p className="label mb-1.5">{LABEL_WE_WORK_WITH}</p>
                   <p className="text-sm text-charcoal/65 mb-5">{industry.includes}</p>
 
-                  {/* Related services */}
+                  {/* What We Do Here */}
                   {relServices.length > 0 && (
                     <>
-                      <p className="label mb-1.5">Related Services</p>
+                      <p className="label mb-1.5">{LABEL_WHAT_WE_DO_HERE}</p>
                       <div className="flex flex-wrap gap-x-4 gap-y-1">
                         {relServices.map((s) => (
                           <Link
