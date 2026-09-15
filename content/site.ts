@@ -134,7 +134,7 @@ export const servicePages = [
   { slug: "waste-cost-savings",  label: "Waste Cost Savings" },
   { slug: "temp-containers",     label: "Temporary Containers" },
   { slug: "international-waste", label: "International Waste" },
-  { slug: "equipment",           label: "Equipment" },
+  { slug: "equipment",           label: "Equipment & Service" },
   { slug: "esg-reporting",       label: "ESG Reporting" },
   { slug: "environmental",       label: "Environmental" },
   { slug: "portable-restrooms",  label: "Portable Restrooms" },
@@ -198,6 +198,11 @@ export const meta = {
     title: "International Waste",
     description:
       "[META DESCRIPTION - to be supplied]",
+  },
+  equipment: {
+    title: "Equipment Financing & Servicing | WMRS",
+    description:
+      "WMRS finances, rents, and services cardboard balers, self-contained compactors, and autoclaves, and repairs and welds equipment you already own.",
   },
   industries: {
     title: "Industries We Serve | WMRS",

@@ -8,6 +8,7 @@ import { Container } from "./Container";
 import { nav, company, servicePages } from "@/content/site";
 import type { NavTopItem } from "@/content/site";
 import { useNavHover } from "./NavHoverContext";
+import { SectionTabStrip } from "./SectionTabStrip";
 
 const STRIP_BG = "#F1F3F1";
 
@@ -49,6 +50,7 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(false);
 
   // Services is the only section with a tab strip in-flow
   const isOnSectionPage = pathname.startsWith("/services");
@@ -72,6 +74,15 @@ export function Nav() {
     onScroll(); // initialise
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Prefers-reduced-motion
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReduced(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   // Close hover on route change
@@ -165,8 +176,12 @@ export function Nav() {
                       {item.label}
                       <ChevronDown
                         style={{
-                          transform: isOpen ? "rotate(180deg)" : undefined,
-                          transition: "transform 150ms ease",
+                          transform: (isOnSectionPage || isOpen) ? "rotate(180deg)" : undefined,
+                          transition: prefersReduced || isOnSectionPage
+                            ? "none"
+                            : isOpen
+                              ? "transform 180ms ease-out"
+                              : "transform 140ms ease-in",
                         }}
                       />
                     </button>
@@ -219,6 +234,13 @@ export function Nav() {
           </div>
         </Container>
       </header>
+
+      {/* Services sticky strip — desktop only, sticks directly below header on /services/* */}
+      {isOnSectionPage && (
+        <div className="hidden md:block sticky top-16 z-40">
+          <SectionTabStrip pages={servicePages} basePath="/services" />
+        </div>
+      )}
 
       {/* State C: overlay strip — desktop only, slides down below header on non-section pages */}
       <div className="hidden md:block">

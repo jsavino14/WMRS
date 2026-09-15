@@ -31,6 +31,8 @@ export function SectionTabStrip({
   // ── Crossfade when hoveredSection changes to a different section ─────────
   const [displayedSection, setDisplayedSection] = useState<string | null>(null);
   const [fading, setFading] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const targetSection = hoveredSection ?? ownSection;
@@ -55,12 +57,43 @@ export function SectionTabStrip({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hoveredSection]);
 
+  // ── Scroll shadow ─────────────────────────────────────────────────────────
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // ── CSS variable: full sticky-stack height ────────────────────────────────
+  useEffect(() => {
+    function update() {
+      const header = document.querySelector("header");
+      const strip = wrapperRef.current;
+      if (!header || !strip) return;
+      document.documentElement.style.setProperty(
+        "--sticky-stack-h",
+        `${header.offsetHeight + strip.offsetHeight}px`
+      );
+    }
+    update();
+    const ro = new ResizeObserver(update);
+    const header = document.querySelector("header");
+    if (header) ro.observe(header);
+    if (wrapperRef.current) ro.observe(wrapperRef.current);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   const displaySection = displayedSection ?? ownSection;
   const displayPages = SECTION_PAGES[displaySection] ?? pages;
   const displayBasePath = `/${displaySection}`;
 
   // Active underline only when showing own content and not in hover-preview
-  const showActive = displaySection === ownSection && hoveredSection === null;
+  const showActive = displaySection === ownSection;
   const activeIndex = showActive
     ? displayPages.findIndex((p) => pathname === `${displayBasePath}/${p.slug}`)
     : -1;
@@ -114,11 +147,13 @@ export function SectionTabStrip({
 
   return (
     <div
+      ref={wrapperRef}
       className="relative"
       style={{
         background: STRIP_BG,
         opacity: fading ? 0 : 1,
         transition: "opacity 70ms ease",
+        boxShadow: scrolled ? "0 4px 12px rgba(30,36,40,0.06)" : "none",
       }}
       onMouseEnter={cancelClose}
       onMouseLeave={closeSection}
