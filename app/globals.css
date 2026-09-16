@@ -57,31 +57,6 @@
   }
 }
 
-/* ── Services grid hover animation ─────────────────────────────────────────── */
-/* Different in/out durations: hover state sets the in-transition, default sets out */
-.sg-icon,
-.sg-text {
-  transform-origin: left center;
-  transition: transform 140ms ease-out;
-}
-.group:hover .sg-icon {
-  transform: scale(1.10);
-  transition-duration: 180ms;
-}
-.group:hover .sg-text {
-  transform: scale(1.02);
-  transition-duration: 180ms;
-}
-@media (prefers-reduced-motion: reduce) {
-  .sg-icon,
-  .sg-text,
-  .group:hover .sg-icon,
-  .group:hover .sg-text {
-    transition: none;
-    transform: none;
-  }
-}
-
 /* ── Overcharge card icon hover animations ─────────────────────────────────── */
 .wmrs-pickup-arrow,
 .wmrs-location-arrow,
