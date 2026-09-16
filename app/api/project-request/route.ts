@@ -57,16 +57,17 @@ export async function POST(request: NextRequest) {
   }
 
   // ── Extract and validate fields ─────────────────────────────────────────────
-  const name         = (formData.get("name")         as string | null)?.trim() ?? "";
-  const companyName  = (formData.get("company")      as string | null)?.trim() ?? "";
-  const email        = (formData.get("email")        as string | null)?.trim() ?? "";
-  const phone        = (formData.get("phone")        as string | null)?.trim() ?? "";
-  const whatYouNeed  = (formData.get("whatYouNeed")  as string | null)?.trim() ?? "";
-  const siteLocation = (formData.get("siteLocation") as string | null)?.trim() ?? "";
-  const timeline     = (formData.get("timeline")     as string | null)?.trim() ?? "";
-  const message      = (formData.get("message")      as string | null)?.trim() ?? "";
-  const page         = (formData.get("page")         as string | null)?.trim() ?? "";
-  const file         = formData.get("file") as File | null;
+  const name          = (formData.get("name")          as string | null)?.trim() ?? "";
+  const companyName   = (formData.get("company")       as string | null)?.trim() ?? "";
+  const email         = (formData.get("email")         as string | null)?.trim() ?? "";
+  const phone         = (formData.get("phone")         as string | null)?.trim() ?? "";
+  const whatYouNeed   = (formData.get("whatYouNeed")   as string | null)?.trim() ?? "";
+  const siteLocation  = (formData.get("siteLocation")  as string | null)?.trim() ?? "";
+  const timeline      = (formData.get("timeline")      as string | null)?.trim() ?? "";
+  const message       = (formData.get("message")       as string | null)?.trim() ?? "";
+  const page          = (formData.get("page")          as string | null)?.trim() ?? "";
+  const subjectPrefix = (formData.get("subjectPrefix") as string | null)?.trim() || "Project inquiry";
+  const file          = formData.get("file") as File | null;
 
   if (!name || !companyName || !email || !whatYouNeed || !timeline || !message) {
     return NextResponse.json(
@@ -124,7 +125,7 @@ export async function POST(request: NextRequest) {
         from: "WMRS Form <noreply@wmrservice.com>",
         to: company.notificationEmail,
         replyTo: email,
-        subject: `Project inquiry — ${whatYouNeed} — ${page}`,
+        subject: `${subjectPrefix} - ${whatYouNeed} - ${page}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;color:#1E2428">
             <h2 style="margin-bottom:24px">New Project Inquiry</h2>

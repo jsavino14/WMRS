@@ -34,9 +34,10 @@ const labelClass = "block text-sm font-medium text-charcoal mb-1";
 interface ProjectFormProps {
   defaultSelection: string;
   page: string;
+  subjectPrefix?: string;
 }
 
-export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
+export function ProjectForm({ defaultSelection, page, subjectPrefix = "Project inquiry" }: ProjectFormProps) {
   const [state, setState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -112,6 +113,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
       {/* Honeypot */}
       <input type="text" name="website" aria-hidden="true" tabIndex={-1} className="absolute opacity-0 pointer-events-none w-0 h-0" autoComplete="off" />
       <input type="hidden" name="page" value={page} />
+      <input type="hidden" name="subjectPrefix" value={subjectPrefix} />
 
       <div>
         <label htmlFor="pf-name" className={labelClass}>Name <span className="text-charcoal/40">*</span></label>

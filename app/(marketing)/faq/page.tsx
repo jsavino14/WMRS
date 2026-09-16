@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/Container";
-import { meta, faq, company } from "@/content/site";
+import { meta, faq } from "@/content/site";
+import { ProjectForm } from "@/components/ProjectForm";
+import { FormSidebar } from "@/components/FormSidebar";
 
 export const metadata: Metadata = {
   title: meta.faq.title,
@@ -46,21 +47,24 @@ export default function FaqPage() {
         </Container>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 border-t border-charcoal/8">
-        <Container className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/contact"
-            className="inline-block bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors text-center"
-          >
-            Send us one invoice
-          </Link>
-          <a
-            href={company.phoneHref}
-            className="inline-block border border-charcoal/30 text-charcoal text-sm font-semibold px-8 py-4 hover:border-charcoal transition-colors text-center"
-          >
-            Call {company.phone}
-          </a>
+      {/* ── Start with WMRS ──────────────────────────────────────────────── */}
+      <section className="bg-white pt-10 pb-16 lg:pt-14 lg:pb-24">
+        <Container>
+          <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-2">
+                Start with WMRS.
+              </h2>
+              <p className="text-base text-charcoal/65 leading-relaxed">
+                A person reads every one of these, not a queue.
+              </p>
+              <div className="mt-6 lg:hidden"><FormSidebar /></div>
+              <div className="mt-6 lg:mt-8">
+                <ProjectForm defaultSelection="" page="/faq" subjectPrefix="Start with WMRS" />
+              </div>
+            </div>
+            <div className="hidden lg:block"><FormSidebar /></div>
+          </div>
         </Container>
       </section>
     </>
