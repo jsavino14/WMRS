@@ -3,7 +3,7 @@ import { servicesGrid } from "@/content/site";
 
 export function ServicesGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-10">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-10">
       {servicesGrid.map((item) => (
         <Link key={item.slug} href={item.href} className="group block">
           <div className="mb-4 h-8 flex items-end">
@@ -16,7 +16,7 @@ export function ServicesGrid() {
             />
           </div>
           <h3 className="text-base font-black text-charcoal mb-1.5 leading-snug group-hover:text-accent transition-colors">
-            {item.fullName}
+            {item.navLabel}
           </h3>
           <p className="text-sm text-charcoal/55 leading-relaxed">
             {item.gridDescription}

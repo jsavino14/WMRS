@@ -148,6 +148,7 @@ export type ServiceSlug = typeof servicePages[number]["slug"];
 export const servicesGrid = [
   {
     slug: "waste-cost-savings",
+    navLabel: "Waste Cost Savings",
     fullName: "Waste Cost Savings",
     href: "/services/waste-cost-savings",
     icon: "waste-cost-savings",
@@ -155,6 +156,7 @@ export const servicesGrid = [
   },
   {
     slug: "site-management",
+    navLabel: "Site Management",
     fullName: "Site Management",
     href: "/site-management",
     icon: "site-management",
@@ -162,6 +164,7 @@ export const servicesGrid = [
   },
   {
     slug: "temp-containers",
+    navLabel: "Temporary Containers",
     fullName: "Temporary Containers",
     href: "/services/temp-containers",
     icon: "temp-containers",
@@ -169,6 +172,7 @@ export const servicesGrid = [
   },
   {
     slug: "equipment",
+    navLabel: "Equipment Financing",
     fullName: "Equipment Financing, Rentals & Repairs",
     href: "/services/equipment",
     icon: "equipment",
@@ -176,6 +180,7 @@ export const servicesGrid = [
   },
   {
     slug: "environmental",
+    navLabel: "Environmental",
     fullName: "Tank Removal & Site Remediation",
     href: "/services/environmental",
     icon: "environmental",
@@ -183,6 +188,7 @@ export const servicesGrid = [
   },
   {
     slug: "esg-reporting",
+    navLabel: "ESG Reporting",
     fullName: "ESG & Diversion Reporting",
     href: "/services/esg-reporting",
     icon: "esg-reporting",
@@ -190,6 +196,7 @@ export const servicesGrid = [
   },
   {
     slug: "international-waste",
+    navLabel: "International Waste",
     fullName: "International Catering Waste",
     href: "/services/international-waste",
     icon: "international-waste",
@@ -197,6 +204,7 @@ export const servicesGrid = [
   },
   {
     slug: "portable-restrooms",
+    navLabel: "Portable Restrooms",
     fullName: "Portable Restrooms",
     href: "/services/portable-restrooms",
     icon: "portable-restrooms",
