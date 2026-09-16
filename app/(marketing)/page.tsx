@@ -25,7 +25,7 @@ export default function HomePage() {
   return (
     <>
 {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative z-[1] bg-white overflow-hidden min-h-[560px] lg:min-h-[580px] flex items-center">
+      <section className="relative z-[1] bg-white overflow-hidden min-h-[560px] lg:min-h-[480px] flex items-center">
 
         {/* Photo - full bleed behind everything, anchored right */}
         <div className="absolute top-0 bottom-0 w-[95%] sm:w-[85%] lg:w-[65%] right-[-6%] sm:right-0 lg:right-[-5%]">
@@ -46,7 +46,7 @@ export default function HomePage() {
         />
 
         {/* Text */}
-        <div className="relative z-10 w-full pt-10 pb-14 lg:py-20">
+        <div className="relative z-10 w-full pt-10 pb-14 lg:py-12">
           <Container>
             <div className="max-w-[360px] lg:max-w-[680px]">
               <h1 className="text-[2rem] sm:text-5xl xl:text-6xl font-black text-charcoal leading-[1.08] mb-6">
