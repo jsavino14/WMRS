@@ -29,7 +29,7 @@ const selectStyle = {
   backgroundRepeat: "no-repeat" as const,
   backgroundPosition: "right 12px center",
 };
-const labelClass = "block text-sm font-medium text-charcoal mb-1.5";
+const labelClass = "block text-sm font-medium text-charcoal mb-1";
 
 interface ProjectFormProps {
   defaultSelection: string;
@@ -108,7 +108,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7">
+    <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-5">
       {/* Honeypot */}
       <input type="text" name="website" aria-hidden="true" tabIndex={-1} className="absolute opacity-0 pointer-events-none w-0 h-0" autoComplete="off" />
       <input type="hidden" name="page" value={page} />
@@ -159,8 +159,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
         <textarea
           id="pf-message" name="message" rows={3} required
           placeholder="Site, timeline, what you currently have, what you need."
-          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none overflow-hidden"
-          onInput={(e) => { const el = e.currentTarget; el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }}
+          className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal transition-colors resize-none"
         />
       </div>
 
@@ -183,7 +182,7 @@ export function ProjectForm({ defaultSelection, page }: ProjectFormProps) {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="justify-self-start bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="justify-self-start mt-2 bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === "loading" ? "Sending…" : "Send message"}
       </button>
