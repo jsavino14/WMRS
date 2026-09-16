@@ -11,6 +11,8 @@ import { useNavHover } from "./NavHoverContext";
 import { SectionTabStrip } from "./SectionTabStrip";
 
 const STRIP_BG = "#E6EAE7";
+const NAV_CTA_LABEL = "Tell us what you need";
+const NAV_CTA_HREF = "/contact";
 
 // Services is the only section with a hover strip
 const SECTION_PAGES: Record<string, readonly { slug: string; navLabel: string }[]> = {
@@ -235,10 +237,10 @@ export function Nav() {
                 {company.phone}
               </a>
               <Link
-                href="/contact?form=invoice"
+                href={NAV_CTA_HREF}
                 className="bg-charcoal text-white text-sm font-semibold px-4 py-2 hover:bg-charcoal/85 transition-colors duration-150"
               >
-                Send us one invoice
+                {NAV_CTA_LABEL}
               </Link>
             </div>
 
@@ -404,11 +406,11 @@ export function Nav() {
                 </a>
                 <div className="pt-4 flex flex-col gap-3">
                   <Link
-                    href="/contact?form=invoice"
+                    href={NAV_CTA_HREF}
                     onClick={close}
                     className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
                   >
-                    Send us one invoice
+                    {NAV_CTA_LABEL}
                   </Link>
                   <Link
                     href="/contact?form=delivery"
