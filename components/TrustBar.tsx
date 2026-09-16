@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
 import { computeSiteCount } from "@/content/site";
 
@@ -122,28 +122,52 @@ export function TrustBar() {
   const count = computeSiteCount();
   const from  = count - 100;
   const [displayed, setDisplayed] = useState(from);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      let t0: number | null = null;
+    const el = sectionRef.current;
+    if (!el) return;
 
-      const tick = (now: number) => {
-        if (t0 === null) t0 = now;
-        const p     = Math.min((now - t0) / 1800, 1);
-        const eased = 1 - (1 - p) ** 3;
-        setDisplayed(Math.round(from + eased * 100));
-        if (p < 1) requestAnimationFrame(tick);
-      };
+    let started = false;
+    let rafId: number;
+    let timerId: ReturnType<typeof setTimeout>;
 
-      requestAnimationFrame(tick);
-    }, 700);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          observer.disconnect();
 
-    return () => clearTimeout(id);
+          timerId = setTimeout(() => {
+            let t0: number | null = null;
+
+            const tick = (now: number) => {
+              if (t0 === null) t0 = now;
+              const p     = Math.min((now - t0) / 1800, 1);
+              const eased = 1 - (1 - p) ** 3;
+              setDisplayed(Math.round(from + eased * 100));
+              if (p < 1) rafId = requestAnimationFrame(tick);
+            };
+
+            rafId = requestAnimationFrame(tick);
+          }, 200);
+        }
+      },
+      { threshold: 0.75 }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timerId);
+      cancelAnimationFrame(rafId);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <section className="bg-charcoal py-9 relative z-[1]">
+    <section ref={sectionRef} className="bg-charcoal py-9 relative z-[1]">
       <Container>
 
         {/* ≥1024px: counter + 5 logos in one row ───────────────────────── */}
