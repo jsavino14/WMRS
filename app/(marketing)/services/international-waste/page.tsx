@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { ProjectForm } from "@/components/ProjectForm";
@@ -106,35 +105,10 @@ export default function InternationalWastePage() {
                   We confirm the receiving facility&apos;s approval is current rather than assumed, set up segregation at the point of generation so it survives a shift change, and hold the records so they exist when somebody asks for them.
                 </p>
                 <p className="text-base text-charcoal/65 leading-relaxed">
-                  This runs alongside the rest of the account. Aviation sites generate ordinary waste in volume too, and the audit and billing work applies there exactly as it does anywhere else.
+                  The cost of doing this properly is modest. The cost of not being able to show you did is not.
                 </p>
               </div>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Closing ───────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 lg:py-20">
-        <Container>
-          <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
-            Who carries the risk.
-          </h2>
-          <div className="max-w-3xl space-y-4">
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              Waste regulation generally puts responsibility on the generator, and international catering waste is a strict version of that principle. Contracting the work out moves the labor but not the liability. If a load cannot be traced to an approved facility, the question gets asked of the airline, the caterer, or the port operator, not of the truck.
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              That is the practical reason to care how this is run rather than just what it costs. The cost of doing it properly is modest. The cost of not being able to show you did is not.
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              <Link
-                href="/industries#aviation"
-                className="underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal hover:text-charcoal transition-colors"
-              >
-                Aviation and transit sites generate ordinary waste in volume too.
-              </Link>
-            </p>
           </div>
         </Container>
       </section>
