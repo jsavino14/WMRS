@@ -93,8 +93,18 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── 4. We've seen bills like yours before ────────────────────────── */}
-      <section className="bg-white py-20 lg:py-28 relative z-[1]">
+      {/* ── 4. Four steps. Zero upfront cost. ───────────────────────────── */}
+      <section className="bg-white py-20 lg:py-28">
+        <Container>
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14">
+            Four steps. Zero upfront cost.
+          </h2>
+          <HomeSteps />
+        </Container>
+      </section>
+
+      {/* ── 5. We've seen bills like yours before ────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-3">
             {home.problem.h2}
@@ -111,16 +121,6 @@ export default function HomePage() {
               Detail on each overcharge →
             </Link>
           </div>
-        </Container>
-      </section>
-
-      {/* ── 5. Four steps. Zero upfront cost. ───────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28">
-        <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14">
-            Four steps. Zero upfront cost.
-          </h2>
-          <HomeSteps />
         </Container>
       </section>
 
