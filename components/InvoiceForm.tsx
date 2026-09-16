@@ -24,11 +24,11 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
     if (!name || !comp || !email) return "Name, company, and email are required.";
 
     const file = data.get("file") as File | null;
-    if (!file || file.size === 0) return "Please attach an invoice.";
-
-    const allowed = ["application/pdf", "image/png", "image/jpeg", "image/heic", "image/heif"];
-    if (!allowed.includes(file.type)) return "File must be a PDF, PNG, JPG, or HEIC.";
-    if (file.size > 8 * 1024 * 1024) return "File must be under 8 MB.";
+    if (file && file.size > 0) {
+      const allowed = ["application/pdf", "image/png", "image/jpeg", "image/heic", "image/heif"];
+      if (!allowed.includes(file.type)) return "File must be a PDF, PNG, JPG, or HEIC.";
+      if (file.size > 8 * 1024 * 1024) return "File must be under 8 MB.";
+    }
 
     return null;
   }
@@ -119,13 +119,13 @@ export function InvoiceForm({ page }: InvoiceFormProps) {
       </div>
 
       <div className="col-span-1 md:col-span-2 lg:col-span-3">
-        <label htmlFor="if-file" className={labelClass}>Invoice <span className="text-charcoal/40">*</span></label>
+        <label htmlFor="if-file" className={labelClass}>Invoice <span className="text-charcoal/35 font-normal ml-1">(optional)</span></label>
         <input
-          id="if-file" name="file" type="file" required
+          id="if-file" name="file" type="file"
           accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,application/pdf,image/png,image/jpeg,image/heic,image/heif"
           className="w-full border border-charcoal/20 bg-white px-4 py-3 text-sm text-charcoal/70 file:mr-4 file:py-0 file:px-4 file:border-0 file:bg-charcoal file:text-white file:text-xs file:font-semibold file:cursor-pointer cursor-pointer focus:outline-none focus:border-charcoal transition-colors"
         />
-        <p className="mt-1.5 text-xs text-charcoal/40">PDF, PNG, JPG, or HEIC — max 8 MB</p>
+        <p className="mt-1.5 text-xs text-charcoal/40">PDF, PNG, JPG, or HEIC, max 8 MB. Don&apos;t have it to hand? Send the form and reply to our email with the bill.</p>
       </div>
 
       {state === "error" && errorMsg && (

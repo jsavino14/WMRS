@@ -84,25 +84,19 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!file || file.size === 0) {
-    return NextResponse.json(
-      { error: "Please attach an invoice." },
-      { status: 400 }
-    );
-  }
-
-  if (!ALLOWED_TYPES.has(file.type)) {
-    return NextResponse.json(
-      { error: "File must be PDF, PNG, JPG, or HEIC." },
-      { status: 400 }
-    );
-  }
-
-  if (file.size > MAX_BYTES) {
-    return NextResponse.json(
-      { error: "File must be under 8 MB." },
-      { status: 400 }
-    );
+  if (file && file.size > 0) {
+    if (!ALLOWED_TYPES.has(file.type)) {
+      return NextResponse.json(
+        { error: "File must be PDF, PNG, JPG, or HEIC." },
+        { status: 400 }
+      );
+    }
+    if (file.size > MAX_BYTES) {
+      return NextResponse.json(
+        { error: "File must be under 8 MB." },
+        { status: 400 }
+      );
+    }
   }
 
   // ── Log submission regardless of downstream success ──────────────────────────
@@ -112,9 +106,9 @@ export async function POST(request: NextRequest) {
     email,
     phone,
     locations,
-    fileName: file.name,
-    fileType: file.type,
-    fileSize: file.size,
+    fileName: file && file.size > 0 ? file.name : null,
+    fileType: file && file.size > 0 ? file.type : null,
+    fileSize: file && file.size > 0 ? file.size : null,
     ip,
     timestamp: new Date().toISOString(),
   });
@@ -123,7 +117,7 @@ export async function POST(request: NextRequest) {
   let fileUrl: string | null = null;
   const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
 
-  if (blobToken) {
+  if (file && file.size > 0 && blobToken) {
     try {
       const slug = `${Date.now()}-${file.name.replace(/[^a-z0-9._-]/gi, "_")}`;
       const blob = await put(`invoices/${slug}`, file, {
@@ -135,7 +129,7 @@ export async function POST(request: NextRequest) {
       console.error("[invoice-upload] Blob upload failed:", err);
       // Continue — don't crash the submission
     }
-  } else {
+  } else if (file && file.size > 0 && !blobToken) {
     console.warn(
       "[invoice-upload] BLOB_READ_WRITE_TOKEN not set — file not stored remotely."
     );
@@ -163,7 +157,7 @@ export async function POST(request: NextRequest) {
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Phone</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(phone) || "—"}</td></tr>
               <tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Locations</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(locations) || "—"}</td></tr>
               ${notes ? `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">Notes</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(notes)}</td></tr>` : ""}
-              <tr><td style="padding:8px 0;font-weight:600">Invoice</td><td style="padding:8px 0">${fileUrl ? `<a href="${escapeHtml(fileUrl)}">${escapeHtml(file.name)}</a>` : `${escapeHtml(file.name)} (not stored — check logs)`}</td></tr>
+              <tr><td style="padding:8px 0;font-weight:600">Invoice</td><td style="padding:8px 0">${file && file.size > 0 ? (fileUrl ? `<a href="${escapeHtml(fileUrl)}">${escapeHtml(file.name)}</a>` : `${escapeHtml(file.name)} (not stored — check logs)`) : "No file attached"}</td></tr>
             </table>
           </div>
         `,

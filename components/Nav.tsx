@@ -12,7 +12,7 @@ import { SectionTabStrip } from "./SectionTabStrip";
 
 const STRIP_BG = "#E6EAE7";
 const NAV_CTA_LABEL = "Tell us what you need";
-const NAV_CTA_HREF = "/contact";
+const NAV_CTA_HREF = "/contact?form=project";
 
 // Services is the only section with a hover strip
 const SECTION_PAGES: Record<string, readonly { slug: string; navLabel: string }[]> = {
