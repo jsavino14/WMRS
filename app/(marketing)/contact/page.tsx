@@ -37,8 +37,8 @@ export default async function ContactPage({
           />
         </div>
 
-        {/* Tablet (768–1024px): 200px band above content */}
-        <div className="hidden md:block lg:hidden relative h-[200px]">
+        {/* Mobile + tablet (<1024px): shallow band above content */}
+        <div className="lg:hidden relative h-[120px] md:h-[200px]">
           <Image
             src="/contact-hero.jpg"
             alt="A commercial waste compactor with its hopper door open against a concrete wall"
