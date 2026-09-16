@@ -354,7 +354,7 @@ export const clientLogos = [
 export const home = {
   hero: {
     h1: ["You're probably overpaying for trash.", "We'll prove it for free."],
-    sub: "WMRS reads the bill line by line, renegotiates the rate, and takes the billing and the service calls off your desk. Temporary containers, international waste, equipment financing, portable restrooms, tank removals and reporting come with it. We split what we save you, 50/50. Find nothing and you owe nothing.",
+    sub: "WMRS reads the bill line by line, renegotiates the rate, and takes the billing and the service calls off your desk. Temporary containers, international waste, equipment financing, tank removals and reporting come with it. We split what we save you, 50/50. Find nothing and you owe nothing.",
     ctaPrimary: "Send us one invoice",
     ctaPrimaryHref: "/contact",
     ctaSecondary: "Call 914-485-1500",
