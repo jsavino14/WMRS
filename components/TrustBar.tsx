@@ -5,7 +5,7 @@ import { Container } from "@/components/Container";
 import { computeSiteCount } from "@/content/site";
 
 // ── Inline SVG logos ───────────────────────────────────────────────────────
-// fill="currentColor" inherits charcoal from the parent span.
+// fill="currentColor" inherits white from the parent span.
 
 function ChefsWarehouseLogo({ height }: { height: number }) {
   return (
@@ -143,16 +143,16 @@ export function TrustBar() {
   }, []);
 
   return (
-    <section className="bg-amber py-9 relative z-[1]">
+    <section className="bg-charcoal py-9 relative z-[1]">
       <Container>
 
         {/* ≥1024px: counter + 5 logos in one row ───────────────────────── */}
         <div className="hidden lg:flex items-center gap-10">
           <p
-            className="text-sm font-medium text-charcoal/60 whitespace-nowrap flex-shrink-0"
+            className="text-sm font-medium text-white/55 whitespace-nowrap flex-shrink-0"
             aria-label={`${count.toLocaleString()}+ sites managed`}
           >
-            <span className="text-charcoal font-bold tabular-nums">
+            <span className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
             + sites managed
@@ -162,7 +162,7 @@ export function TrustBar() {
               <span
                 key={name}
                 title={name}
-                className="text-charcoal opacity-70 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+                className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
               >
                 <Logo height={height} />
               </span>
@@ -173,10 +173,10 @@ export function TrustBar() {
         {/* 768–1024px: counter on own line, logos in a row ─────────────── */}
         <div className="hidden md:flex lg:hidden flex-col items-center gap-6 text-center">
           <p
-            className="text-sm font-medium text-charcoal/60"
+            className="text-sm font-medium text-white/55"
             aria-label={`${count.toLocaleString()}+ sites managed`}
           >
-            <span className="text-charcoal font-bold tabular-nums">
+            <span className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
             + sites managed
@@ -186,7 +186,7 @@ export function TrustBar() {
               <span
                 key={name}
                 title={name}
-                className="text-charcoal opacity-70 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+                className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
               >
                 <Logo height={Math.round(height * 0.85)} />
               </span>
@@ -197,10 +197,10 @@ export function TrustBar() {
         {/* <768px: counter + 3+2 grid ───────────────────────────────────── */}
         <div className="flex md:hidden flex-col items-center gap-6 text-center">
           <p
-            className="text-sm font-medium text-charcoal/60"
+            className="text-sm font-medium text-white/55"
             aria-label={`${count.toLocaleString()}+ sites managed`}
           >
-            <span className="text-charcoal font-bold tabular-nums">
+            <span className="text-white font-bold tabular-nums">
               {displayed.toLocaleString()}
             </span>
             + sites managed
@@ -211,7 +211,7 @@ export function TrustBar() {
                 <span
                   key={name}
                   title={name}
-                  className="text-charcoal opacity-70 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+                  className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
                 >
                   <Logo height={Math.round(height * 0.75)} />
                 </span>
@@ -222,7 +222,7 @@ export function TrustBar() {
                 <span
                   key={name}
                   title={name}
-                  className="text-charcoal opacity-70 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
+                  className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
                 >
                   <Logo height={Math.round(height * 0.75)} />
                 </span>
