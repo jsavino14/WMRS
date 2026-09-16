@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         charcoal: "#1E2428",
-        accent: "#2E7D4F",
+        amber:    "#C97A1E",
+        accent:   "#2E7D4F",
         offwhite: "#F7F8F7",
       },
       fontFamily: {
