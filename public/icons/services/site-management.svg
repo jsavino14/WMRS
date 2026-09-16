@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs><style>
+    .sm0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .sm1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Ground line -->
+  <line class="sm0" x1="2" y1="40" x2="42" y2="40"/>
+  <!-- Left building body -->
+  <rect class="sm0" x="3" y="26" width="12" height="14"/>
+  <!-- Left building roof (triangle) -->
+  <polyline class="sm0" points="1,26 9,16 17,26"/>
+  <!-- Centre building body (tallest) -->
+  <rect class="sm0" x="17" y="12" width="12" height="28"/>
+  <!-- Right building body -->
+  <rect class="sm0" x="31" y="20" width="10" height="20"/>
+  <!-- Accent: lit window on centre building -->
+  <rect class="sm1" x="20" y="18" width="5" height="6"/>
+</svg>

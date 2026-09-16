@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs><style>
+    .wc0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .wc1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Paper sheet -->
+  <rect class="wc0" x="8" y="4" width="28" height="36" rx="1"/>
+  <!-- Invoice text rows -->
+  <line class="wc0" x1="14" y1="14" x2="30" y2="14"/>
+  <line class="wc0" x1="14" y1="20" x2="30" y2="20"/>
+  <!-- Row that gets struck through -->
+  <line class="wc0" x1="14" y1="26" x2="30" y2="26"/>
+  <!-- Bottom row -->
+  <line class="wc0" x1="14" y1="32" x2="30" y2="32"/>
+  <!-- Diagonal strikethrough (accent) -->
+  <line class="wc1" x1="11" y1="24" x2="33" y2="28"/>
+</svg>

@@ -141,6 +141,69 @@ export const servicePages = [
 ] as const;
 export type ServiceSlug = typeof servicePages[number]["slug"];
 
+// ─── Homepage services grid ───────────────────────────────────────────────────
+// Eight items in display order. Site Management is included here but lives
+// outside servicePages so it stays out of the nav dropdown and footer column.
+
+export const servicesGrid = [
+  {
+    slug: "waste-cost-savings",
+    fullName: "Waste Cost Savings",
+    href: "/services/waste-cost-savings",
+    icon: "waste-cost-savings",
+    gridDescription: "A line by line audit of what your haulers are actually charging you.",
+  },
+  {
+    slug: "site-management",
+    fullName: "Site Management",
+    href: "/site-management",
+    icon: "site-management",
+    gridDescription: "Missed pickups, service issues, and billing across every site, handled once.",
+  },
+  {
+    slug: "temp-containers",
+    fullName: "Temporary Containers",
+    href: "/services/temp-containers",
+    icon: "temp-containers",
+    gridDescription: "Roll-offs for cleanouts, renovations, and job sites.",
+  },
+  {
+    slug: "equipment",
+    fullName: "Equipment Financing, Rentals & Repairs",
+    href: "/services/equipment",
+    icon: "equipment",
+    gridDescription: "Balers, compactors, and autoclaves. Financed directly, rented, or repaired.",
+  },
+  {
+    slug: "environmental",
+    fullName: "Tank Removal & Site Remediation",
+    href: "/services/environmental",
+    icon: "environmental",
+    gridDescription: "Phase II assessments, underground tank removal, and cleanups.",
+  },
+  {
+    slug: "esg-reporting",
+    fullName: "ESG & Diversion Reporting",
+    href: "/services/esg-reporting",
+    icon: "esg-reporting",
+    gridDescription: "Tonnage and diversion data, standardized across every site.",
+  },
+  {
+    slug: "international-waste",
+    fullName: "International Catering Waste",
+    href: "/services/international-waste",
+    icon: "international-waste",
+    gridDescription: "Regulated waste off aircraft and vessels, handled to an approved facility.",
+  },
+  {
+    slug: "portable-restrooms",
+    fullName: "Portable Restrooms",
+    href: "/services/portable-restrooms",
+    icon: "portable-restrooms",
+    gridDescription: "Units and servicing for job sites and events.",
+  },
+] as const;
+
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export type NavDropdownItem = { label: string; href: string };

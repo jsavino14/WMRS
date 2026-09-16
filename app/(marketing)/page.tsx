@@ -8,6 +8,7 @@ import { meta, home, faq, company } from "@/content/site";
 import { TrustBar } from "@/components/TrustBar";
 import { OverchargeCards } from "@/components/OverchargeCards";
 import { HomeSteps } from "@/components/HomeSteps";
+import { ServicesGrid } from "@/components/ServicesGrid";
 
 export const metadata: Metadata = {
   title: meta.home.title,
@@ -76,13 +77,25 @@ export default function HomePage() {
 
       </section>
 
-      {/* ── Trust bar ────────────────────────────────────────────────────── */}
+      {/* ── 2. Trust bar ─────────────────────────────────────────────────── */}
       <TrustBar />
 
-      {/* ── Nobody's job / What We Find (merged) ─────────────────────────── */}
+      {/* ── 3. Services grid ─────────────────────────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28">
+        <Container>
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-3">
+            There isn&apos;t much in waste we haven&apos;t handled.
+          </h2>
+          <p className="text-base text-charcoal/65 leading-relaxed mb-12">
+            Tanks, balers, containers, restrooms, reporting. Ask us about any of it.
+          </p>
+          <ServicesGrid />
+        </Container>
+      </section>
+
+      {/* ── 4. We've seen bills like yours before ────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
-
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-3">
             {home.problem.h2}
           </h2>
@@ -101,7 +114,51 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── Site Management ───────────────────────────────────────────────── */}
+      {/* ── 5. Four steps. Zero upfront cost. ───────────────────────────── */}
+      <section className="bg-offwhite py-20 lg:py-28">
+        <Container>
+          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14">
+            Four steps. Zero upfront cost.
+          </h2>
+          <HomeSteps />
+        </Container>
+      </section>
+
+      {/* ── 6. You pay us out of your savings. ──────────────────────────── */}
+      <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
+        <Container>
+          <div className="lg:flex lg:items-center lg:gap-16">
+
+            {/* Left: text */}
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 leading-tight max-w-xl">
+                {home.cost.h2}
+              </h2>
+              <p className="text-base text-white/55 leading-relaxed">
+                {home.cost.body}
+              </p>
+            </div>
+
+            {/* Right: 50/50 numerals */}
+            <div className="mt-14 lg:mt-0 lg:w-1/2 flex justify-center lg:justify-end items-start">
+              <div className="flex items-start">
+                <div className="flex flex-col items-center">
+                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">You keep 50%</p>
+                </div>
+                <span className="text-[70px] lg:text-[85px] font-thin text-white/[0.18] leading-none px-3 select-none flex-shrink-0">/</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">WMRS keeps 50%</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </Container>
+      </section>
+
+      {/* ── 7. Every missed pickup is somebody's afternoon. ─────────────── */}
       <section className="relative bg-offwhite overflow-hidden z-[1]">
 
         {/* Desktop: image bleeds to viewport right edge, fills full height */}
@@ -118,7 +175,6 @@ export default function HomePage() {
         {/* Copy: left half on desktop, full width on mobile */}
         <Container className="relative">
           <div className="lg:w-1/2 lg:pr-16 py-20 lg:py-28">
-  
             <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-8 max-w-xl">
               {home.siteManagementSection.h2}
             </h2>
@@ -151,14 +207,13 @@ export default function HomePage() {
 
       </section>
 
-      {/* ── Person Section ───────────────────────────────────────────────── */}
+      {/* ── 8. You get a person, not a queue. ───────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 relative z-[1]">
         <Container>
           <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
 
             {/* Left: text */}
             <div className="lg:w-[44%] lg:flex-shrink-0">
-    
               <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-6">
                 {home.personSection.h2}
               </h2>
@@ -185,57 +240,9 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── How It Works ─────────────────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-28">
-        <Container>
-          <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-14">
-            Four steps. Zero upfront cost.
-          </h2>
-          <HomeSteps />
-        </Container>
-      </section>
-
-      {/* ── Cost / 50-50 ─────────────────────────────────────────────────── */}
-      <section className="bg-charcoal py-20 lg:py-28 relative z-[1]">
-        <Container>
-          <div className="lg:flex lg:items-center lg:gap-16">
-
-            {/* Left: text */}
-            <div className="lg:w-1/2">
-    
-              <h2 className="text-3xl sm:text-4xl font-black text-white mb-8 leading-tight max-w-xl">
-                {home.cost.h2}
-              </h2>
-              <p className="text-base text-white/55 leading-relaxed">
-                {home.cost.body}
-              </p>
-            </div>
-
-            {/* Right: 50/50 numerals */}
-            <div className="mt-14 lg:mt-0 lg:w-1/2 flex justify-center lg:justify-end items-start">
-              <div className="flex items-start">
-                <div className="flex flex-col items-center">
-                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">You keep 50%</p>
-                </div>
-                <span className="text-[70px] lg:text-[85px] font-thin text-white/[0.18] leading-none px-3 select-none flex-shrink-0">/</span>
-                <div className="flex flex-col items-center">
-                  <span className="text-[100px] lg:text-[120px] font-thin text-white/[0.18] leading-none tabular-nums select-none">50</span>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mt-2 text-center">WMRS keeps 50%</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </Container>
-      </section>
-
-
-
-      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+      {/* ── 9. Common questions. ─────────────────────────────────────────── */}
       <section className="bg-offwhite py-20 lg:py-28 relative z-[1]">
         <Container>
-
           <h2 className="text-3xl sm:text-4xl font-black text-charcoal mb-12 max-w-xl">
             Common questions.
           </h2>
@@ -258,7 +265,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── Closing form ─────────────────────────────────────────────────── */}
+      {/* ── 10. Tell us what you need. ───────────────────────────────────── */}
       <section className="bg-white py-20 lg:py-28 border-t border-charcoal/8">
         <Container>
           <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-12 lg:items-start">

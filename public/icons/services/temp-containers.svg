@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs><style>
+    .tc0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .tc1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Container body: left wall, bottom, right wall — open at top -->
+  <path class="tc0" d="M5,12 L5,32 L39,32 L39,12"/>
+  <!-- Top rim showing open top and wall thickness -->
+  <line class="tc0" x1="3" y1="12" x2="7" y2="9"/>
+  <line class="tc0" x1="41" y1="12" x2="37" y2="9"/>
+  <line class="tc0" x1="7" y1="9" x2="37" y2="9"/>
+  <!-- Interior horizontal stiffener rib -->
+  <line class="tc0" x1="5" y1="22" x2="39" y2="22"/>
+  <!-- Rear roller -->
+  <circle class="tc0" cx="10" cy="36" r="3"/>
+  <!-- Front roller (accent) -->
+  <circle class="tc1" cx="34" cy="36" r="3"/>
+</svg>

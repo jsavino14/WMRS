@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs><style>
+    .pr0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .pr1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Unit body -->
+  <rect class="pr0" x="10" y="10" width="24" height="30"/>
+  <!-- Roof overhang -->
+  <rect class="pr0" x="8" y="5" width="28" height="6"/>
+  <!-- Vent grille slots below roof -->
+  <line class="pr0" x1="12" y1="14" x2="32" y2="14"/>
+  <line class="pr0" x1="12" y1="17" x2="32" y2="17"/>
+  <!-- Door panel -->
+  <rect class="pr0" x="15" y="21" width="10" height="19"/>
+  <!-- Door handle (accent) -->
+  <circle class="pr1" cx="23" cy="31" r="2"/>
+</svg>

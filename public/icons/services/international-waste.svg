@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs><style>
+    .iw0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .iw1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  </style></defs>
+  <!-- Cart body -->
+  <rect class="iw0" x="9" y="8" width="26" height="28"/>
+  <!-- Shelf dividers creating drawer sections -->
+  <line class="iw0" x1="9" y1="16" x2="35" y2="16"/>
+  <line class="iw0" x1="9" y1="24" x2="35" y2="24"/>
+  <!-- Handle bar across top -->
+  <rect class="iw0" x="7" y="4" width="30" height="4" rx="1"/>
+  <!-- Wheels -->
+  <circle class="iw0" cx="16" cy="38" r="3"/>
+  <circle class="iw0" cx="28" cy="38" r="3"/>
+  <!-- Accent: one highlighted tray in middle section -->
+  <rect class="iw1" x="11" y="17" width="22" height="5"/>
+</svg>
