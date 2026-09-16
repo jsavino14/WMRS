@@ -38,29 +38,54 @@ export function HomeSteps() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          obs.disconnect();
-          panelRefs.current.forEach((_, i) => {
-            setTimeout(() => {
+    if (isDesktop) {
+      // Desktop: all panels are in one row — fire them all once the section is 75% visible
+      const el = sectionRef.current;
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            obs.disconnect();
+            panelRefs.current.forEach((_, i) => {
+              setTimeout(() => {
+                setStartedPanels(prev => {
+                  const next = [...prev];
+                  next[i] = true;
+                  return next;
+                });
+              }, i * 150);
+            });
+          }
+        },
+        { threshold: 0.75 },
+      );
+      obs.observe(el);
+      return () => obs.disconnect();
+    } else {
+      // Mobile: panels are stacked — trigger each one individually as it scrolls into view
+      const observers: IntersectionObserver[] = [];
+      panelRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const obs = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              obs.disconnect();
               setStartedPanels(prev => {
                 const next = [...prev];
                 next[i] = true;
                 return next;
               });
-            }, i * 150);
-          });
-        }
-      },
-      { threshold: 0.75 },
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
+            }
+          },
+          { threshold: 0.75 },
+        );
+        obs.observe(el);
+        observers.push(obs);
+      });
+      return () => observers.forEach(o => o.disconnect());
+    }
   }, []);
 
   return (
