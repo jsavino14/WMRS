@@ -75,16 +75,3 @@
   .wmrs-card:hover .wmrs-recycling-arrow { transform: none; }
 }
 
-/* ── Services grid hover animation ─────────────────────────────────────────── */
-.sg-icon, .sg-text {
-  transform-origin: left center;
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.group:hover .sg-icon { transform: scale(1.10); }
-.group:hover .sg-text { transform: scale(1.02); }
-@media (prefers-reduced-motion: reduce) {
-  .sg-icon, .sg-text { transition: none; transform: none !important; }
-  .sg-name { transition: none; }
-  .group:hover .sg-name { color: #208b46; }
-}
-
