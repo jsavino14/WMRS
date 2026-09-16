@@ -2,19 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Container } from "@/components/Container";
-import { customerBaseline, customerAsOf, customerGrowthPerMonth } from "@/content/site";
-
-// ── Client count: compound monthly growth, floored to nearest 100 ─────────
-
-function computeCount(): number {
-  const base = new Date(customerAsOf);
-  const now  = new Date();
-  const n = Math.max(
-    0,
-    (now.getFullYear() - base.getFullYear()) * 12 + (now.getMonth() - base.getMonth()),
-  );
-  return Math.floor(customerBaseline * Math.pow(1 + customerGrowthPerMonth, n) / 100) * 100;
-}
+import { computeSiteCount } from "@/content/site";
 
 // ── Inline SVG logos ───────────────────────────────────────────────────────
 // fill="currentColor" inherits white from the parent span.
@@ -131,7 +119,7 @@ const LOGOS = [
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function TrustBar() {
-  const count = computeCount();
+  const count = computeSiteCount();
   const from  = count - 100;
   const [displayed, setDisplayed] = useState(from);
 

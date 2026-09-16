@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/Container";
-import { meta, about } from "@/content/site";
+import { meta, about, computeSiteCount } from "@/content/site";
 import { ProjectForm } from "@/components/ProjectForm";
 import { FormSidebar } from "@/components/FormSidebar";
 
@@ -58,6 +58,9 @@ export default function AboutPage() {
                   {para}
                 </p>
               ))}
+              <p className="text-base text-charcoal/70 leading-relaxed">
+                Since then we&apos;ve managed waste programs across {computeSiteCount().toLocaleString()}+ sites. Most of that work came from someone who&apos;d worked with us before.
+              </p>
             </div>
           </div>
         </Container>

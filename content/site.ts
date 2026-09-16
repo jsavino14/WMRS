@@ -340,6 +340,18 @@ export const customerBaseline       = 8700;
 export const customerAsOf           = "2026-09-01";
 export const customerGrowthPerMonth = 0.005;
 
+// Shared computation — import this wherever the site count is displayed.
+// Never duplicate or hardcode: both the proof bar and /who-we-are pull from here.
+export function computeSiteCount(): number {
+  const base = new Date(customerAsOf);
+  const now  = new Date();
+  const n = Math.max(
+    0,
+    (now.getFullYear() - base.getFullYear()) * 12 + (now.getMonth() - base.getMonth()),
+  );
+  return Math.floor(customerBaseline * Math.pow(1 + customerGrowthPerMonth, n) / 100) * 100;
+}
+
 // ─── Client logos ─────────────────────────────────────────────────────────────
 // SVGs live in /public/logos/. TrustBar embeds them inline for CSS color control.
 
@@ -695,7 +707,6 @@ export const about = {
       heading: "Independent since 2008.",
       body: [
         "WMRS was founded by operators who came out of the waste industry and saw the same thing at company after company: businesses paying well above market, not through carelessness, but because waste invoices are genuinely hard to read and nobody's job is to read them.",
-        "Since then we've managed waste programs for [X] businesses across [X] locations. Most of them came from someone who'd worked with us before.",
       ],
     },
     {
