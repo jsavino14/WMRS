@@ -155,7 +155,7 @@ export function TrustBar() {
   }, []);
 
   return (
-    <section className="bg-charcoal py-10 relative z-[1]">
+    <section className="bg-charcoal py-9 relative z-[1]">
       <Container>
 
         {/* ≥1024px: counter + 5 logos in one row ───────────────────────── */}
