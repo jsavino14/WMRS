@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { ProjectForm } from "@/components/ProjectForm";
@@ -107,39 +106,6 @@ export default function EnvironmentalPage() {
                 </p>
               </div>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Closing ───────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 lg:py-20">
-        <Container>
-          <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
-            What usually triggers it.
-          </h2>
-          <div className="max-w-3xl space-y-4">
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              Four things start most of this work. A property is changing hands and the buyer&apos;s or lender&apos;s due diligence turns up a recognized environmental condition. A refinancing requires an assessment the original purchase never did. A tank reaches the age where the state requires action. Or a site is being redeveloped and whatever is underneath it has to be dealt with before anything gets built on top.
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              The common factor is that none of them are discretionary and none of them are on your schedule. If one of these has landed, the useful first conversation is about sequence and timing, not price.
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              <Link
-                href="/industries#commercial-property"
-                className="underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal hover:text-charcoal transition-colors"
-              >
-                Property transactions are where most of this starts.
-              </Link>
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              <Link
-                href="/services/temp-containers"
-                className="underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal hover:text-charcoal transition-colors"
-              >
-                Redevelopment sites usually need containers on the same schedule.
-              </Link>
-            </p>
           </div>
         </Container>
       </section>
