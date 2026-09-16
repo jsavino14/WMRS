@@ -35,34 +35,36 @@ const STEPS: { variant: 0 | 1 | 2 | 3; number: string; title: string; body: stri
 export function HomeSteps() {
   const [startedPanels, setStartedPanels] = useState<boolean[]>([false, false, false, false]);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    panelRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          panelRefs.current.forEach((_, i) => {
             setTimeout(() => {
               setStartedPanels(prev => {
                 const next = [...prev];
                 next[i] = true;
                 return next;
               });
-            }, 500);
-            obs.disconnect();
-          }
-        },
-        { threshold: 0.5 },
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach(o => o.disconnect());
+            }, i * 150);
+          });
+        }
+      },
+      { threshold: 0.75 },
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   return (
-    <div>
+    <div ref={sectionRef}>
       {/* eslint-disable-next-line react/no-danger */}
       {startedPanels.some(Boolean) && <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
