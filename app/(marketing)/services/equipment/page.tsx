@@ -47,11 +47,6 @@ export default function EquipmentPage() {
                   financing the baler is the same one managing the waste program it feeds.
                 </p>
                 <p className="text-base text-charcoal/65 leading-relaxed">
-                  [PLACEHOLDER - terms and structure. Typical term length, what the payment
-                  covers, and whether it is structured as a lease or an installment purchase.
-                  Joe to supply.]
-                </p>
-                <p className="text-base text-charcoal/65 leading-relaxed">
                   Equipment we finance: cardboard balers, self-contained compactors, autoclaves.
                 </p>
               </div>
