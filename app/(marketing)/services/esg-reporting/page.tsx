@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ServiceHero } from "@/components/ServiceHero";
 import { ProjectForm } from "@/components/ProjectForm";
@@ -107,31 +106,6 @@ export default function EsgReportingPage() {
                 </p>
               </div>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Closing ───────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 lg:py-20">
-        <Container>
-          <h2 className="text-2xl sm:text-3xl font-black text-charcoal mb-8 max-w-xl">
-            What we do not do.
-          </h2>
-          <div className="max-w-3xl space-y-4">
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              We report waste and recycling. We do not audit your energy, your water, or your supply chain, and we do not certify anything against a framework. What we provide is the waste data, structured and documented well enough to drop into whatever reporting you or your consultants are producing.
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              If your framework requires something specific in a particular format, tell us what it is and we will produce it that way rather than handing you a general export to reshape yourself.
-            </p>
-            <p className="text-base text-charcoal/65 leading-relaxed">
-              <Link
-                href="/services/waste-cost-savings"
-                className="underline underline-offset-2 decoration-charcoal/30 hover:decoration-charcoal hover:text-charcoal transition-colors"
-              >
-                Mispriced recyclables are usually both a cost problem and a diversion problem.
-              </Link>
-            </p>
           </div>
         </Container>
       </section>
