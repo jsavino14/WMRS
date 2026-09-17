@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        // Distance that pushes the FormSidebar down on lg+ so the
+        // "PREFER TO CALL OR EMAIL DIRECTLY" label aligns with the
+        // second row of form fields. Change here to tune all pages at once.
+        "sidebar": "230px",
+      },
       colors: {
         charcoal: "#1E2428",
         amber:    "#C97A1E",

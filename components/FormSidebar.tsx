@@ -2,7 +2,7 @@ import { DirectContact } from "./DirectContact";
 
 export function FormSidebar() {
   return (
-    <div>
+    <div className="lg:pt-sidebar">
       <DirectContact />
       <div className="mt-6 pt-6 border-t border-charcoal/10">
         <p className="label mb-3">What happens next</p>

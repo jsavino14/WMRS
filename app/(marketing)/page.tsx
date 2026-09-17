@@ -283,7 +283,7 @@ export default function HomePage() {
                 <ContactTabs page="/" />
               </div>
             </div>
-            <div className="hidden lg:block mt-1">
+            <div className="hidden lg:block">
               <FormSidebar />
             </div>
           </div>
