@@ -631,8 +631,9 @@ export const whatWeFind = {
       label: "Oversized containers",
       title: "Containers sized for a business you no longer are.",
       detail: [
-        "Container sizing is set at contract inception. If your business has contracted - fewer locations, lower volume, different operations - the container didn't change. You're paying for cubic yards of capacity that goes out half-full.",
-        "Rightsizing a container is one of the cleanest reductions we make. It requires no rate negotiation, just an amendment to the service terms. The savings are immediate and permanent.",
+        "Container sizing is usually set when the contract starts. Your business changes. The container doesn't.",
+        "Fewer employees, lower volume, different operations, and you're still paying to haul a container that goes out half-full.",
+        "Rightsizing is one of the simplest reductions we make. Same waste. Less empty space you're paying to haul.",
       ],
     },
     {
@@ -640,8 +641,8 @@ export const whatWeFind = {
       label: "Unneeded pickups",
       title: "Pickups scheduled more often than you generate waste.",
       detail: [
-        "Weekly pickup on a container that fills every two weeks is a recurring double-charge. It accumulates quietly. A business with ten locations paying for unnecessary pickups at each one will often find this is their single largest line-item adjustment.",
-        "We verify pickup frequency against container capacity and typical generation for your business type. If the math doesn't work, we amend it.",
+        "If a container fills every two weeks and you're paying to empty it every week, half those pickups aren't doing anything for you.",
+        "Across ten, fifty, or a hundred locations, that adds up fast. We compare pickup frequency to actual volume and reset the schedule where it doesn't make sense.",
       ],
     },
     {
@@ -649,17 +650,17 @@ export const whatWeFind = {
       label: "Compounding surcharges",
       title: "Fuel and environmental surcharges billed as a percentage of the total.",
       detail: [
-        "Fuel surcharges should reflect actual fuel costs - ideally as a flat fee or tied to a published index. When structured as a percentage of the base rate, they compound every time the base rate increases.",
-        "Over a multi-year contract with annual escalators, a percentage-based surcharge grows faster than the base rate. We negotiate these to flat amounts, which produces meaningful savings over the life of the contract.",
+        "A 15% fuel surcharge doesn't stay the same when the base rate goes up. It goes up with it.",
+        "Stack percentage-based surcharges on top of annual rate increases and a reasonable contract can get expensive quickly. We separate the base rate from the add-ons and negotiate both.",
       ],
     },
     {
       number: "04",
       label: "Buried escalators",
-      title: "Auto-renewing contracts with annual escalators nobody agreed to.",
+      title: "The rate goes up. The contract renews. Nobody notices either.",
       detail: [
-        "The escalator language is usually in the original agreement - often a clause allowing annual increases of 3-5% or the CPI, whichever is greater. Clients agree to it once and then forget it exists.",
-        "Auto-renewal is the mechanism. The combination of auto-renewal and an escalator means a rate that was competitive in year one can be 20-40% above market by year five. We see this constantly.",
+        "Most contracts include an escalator clause: annual increases of 3-5% or CPI, whichever is higher. Agreed to once at signing, rarely tracked after that.",
+        "Auto-renewal is what keeps it going. The window to cancel is usually 60 to 90 days before the anniversary date. If nobody's watching for it, the rate locks in for another year at the higher number.",
         "The best time to address it is before the next renewal window closes. The second best time is now.",
       ],
     },
@@ -677,8 +678,9 @@ export const whatWeFind = {
       label: "Mispriced recyclables",
       title: "Recyclables going out as trash, at trash prices.",
       detail: [
-        "Cardboard, clean plastic, aluminum, and certain metals have commodity value. When they go out in the general waste stream - because nobody set up separate collection, or because the recycling program was quietly discontinued - you're paying the higher trash rate for material that could generate a credit.",
-        "Establishing a separate recycling stream isn't always straightforward, but for high-volume locations it often produces savings that exceed anything we find in rate negotiation.",
+        "If recyclable material is going into the trash container, you're paying trash rates to move it.",
+        "For locations generating enough cardboard, metal, or other recoverable material, separating it can reduce disposal volume and sometimes create value of its own.",
+        "We look at what's being thrown away, how much there is, and whether separating it actually makes financial sense.",
       ],
     },
   ],

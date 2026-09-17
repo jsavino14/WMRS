@@ -86,7 +86,7 @@ export default function WasteCostSavingsPage() {
                 Send us one invoice.
               </h2>
               <p className="text-base text-charcoal/65 leading-relaxed">
-                The audit is free. A person reads every one of these, not a queue.
+                A person reads every submission, not a queue.
               </p>
               <div className="mt-6 lg:hidden"><FormSidebar /></div>
               <div className="mt-6 lg:mt-8">
