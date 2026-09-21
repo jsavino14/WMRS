@@ -25,17 +25,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "WMRS",
-    // Default OG title/description — written for social, not search.
-    // Per-page metadata overrides these; <title> and meta description are left alone.
     title: "You're probably overpaying for trash.",
     description:
       "WMRS audits your waste invoices, renegotiates your rates, and takes over the billing. The audit is free. Find nothing and you owe nothing.",
+    images: [
+      {
+        url: "https://wmrs.vercel.app/og.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "You're probably overpaying for trash.",
     description:
       "WMRS audits your waste invoices, renegotiates your rates, and takes over the billing. The audit is free. Find nothing and you owe nothing.",
+    images: ["https://wmrs.vercel.app/og.png"],
   },
 };
 
