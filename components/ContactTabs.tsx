@@ -60,7 +60,7 @@ export function ContactTabs({ initialTab, page, updateUrl = false }: ContactTabs
       <div
         role="tablist"
         aria-label="Contact options"
-        className="flex border-b border-charcoal/10 mb-10 gap-1"
+        className="flex flex-wrap md:flex-nowrap md:border-b border-charcoal/10 mb-10 gap-1"
       >
         {TABS.map((tab, idx) => {
           const isActive = activeTab === tab.id;
@@ -75,7 +75,7 @@ export function ContactTabs({ initialTab, page, updateUrl = false }: ContactTabs
               tabIndex={isActive ? 0 : -1}
               onClick={() => switchTab(tab.id)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
-              className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${
+              className={`px-3 md:px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${
                 isActive
                   ? "border-charcoal text-charcoal"
                   : "border-transparent text-charcoal/45 hover:text-charcoal"
