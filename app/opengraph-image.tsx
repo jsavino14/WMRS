@@ -6,15 +6,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // ── Wordmark ────────────────────────────────────────────────────────────────
-// The original SVG uses class="st0" driven by a <style> block. Satori does not
-// process stylesheet rules inside SVG, so fill="white" is applied directly to
-// every element here.
-//
-// Approach: URL-encoded SVG in a CSS background-image. Satori's <img> SVG
-// support is unreliable; background-image: url() with a data URI is more
-// consistent across Satori versions.
-//
-// viewBox 324.42 × 57.08 → at 200px wide: height = round(200 × 57.08 / 324.42) = 35px
+// fill="white" applied directly — Satori ignores <style> blocks inside SVG.
 const WORDMARK_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 324.42 57.08">' +
   '<path fill="white" d="M254.39,10.17c2.14,5.02,2.37,11.46,1.61,16.92-.44,3.17-1.48,6.07-3.34,8.58h-55.56s0-35.09,0-35.09h41.51c2.69.21,5.03.61,7.47,1.51,3.76,1.46,6.68,4.26,8.31,8.09ZM239.61,24.56c.6-2.08.51-4.46-.21-6.38-.62-1.66-2.22-2.24-3.84-2.49l-21.84-.02v12.02s21.64-.02,21.64-.02c1.9-.28,3.66-1.03,4.25-3.11Z"/>' +
@@ -34,33 +26,31 @@ const WORDMARK_SVG =
   '<polygon fill="white" points="213.73 55.99 197.11 56.04 197.09 38.93 213.72 38.93 213.73 55.99"/>' +
   "</svg>";
 
-const LOGO_W = 200;
-const LOGO_H = 35; // round(200 × 57.08 / 324.42)
+// viewBox 324.42 × 57.08 → at 220px wide: height = round(220 × 57.08 / 324.42) = 39px
+const LOGO_W = 220;
+const LOGO_H = 39;
 
 // ── Font loading ─────────────────────────────────────────────────────────────
-// next/og does not pick up next/font — the font must be fetched and passed in
-// the ImageResponse fonts option.
-//
-// Pattern: request the Google Fonts CSS for the given weight, extract the
-// woff2 URL (Latin subset is always last in the CSS), then fetch the binary.
-async function loadInterFont(weight: 400 | 900): Promise<ArrayBuffer> {
-  const css = await fetch(
-    `https://fonts.googleapis.com/css2?family=Inter:wght@${weight}&display=swap`,
-    {
-      headers: {
-        // A desktop Chrome UA ensures Google returns woff2, not woff or ttf.
-        "User-Agent":
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+async function loadInterFont(weight: 400 | 900): Promise<ArrayBuffer | null> {
+  try {
+    const css = await fetch(
+      `https://fonts.googleapis.com/css2?family=Inter:wght@${weight}&display=swap`,
+      {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        },
       },
-    },
-  ).then((r) => r.text());
+    ).then((r) => r.text());
 
-  // Google Fonts CSS lists subsets in order; Latin is always last.
-  const matches = [...css.matchAll(/src: url\((.+?)\) format\('woff2'\)/g)];
-  const url = matches[matches.length - 1]?.[1];
-  if (!url) throw new Error(`Could not extract Inter ${weight} URL from Google Fonts CSS`);
+    const matches = [...css.matchAll(/src: url\((.+?)\) format\('woff2'\)/g)];
+    const url = matches[matches.length - 1]?.[1];
+    if (!url) return null;
 
-  return fetch(url).then((r) => r.arrayBuffer());
+    return fetch(url).then((r) => r.arrayBuffer());
+  } catch {
+    return null;
+  }
 }
 
 // ── Image ────────────────────────────────────────────────────────────────────
@@ -71,8 +61,14 @@ export default async function Image() {
     loadInterFont(400),
   ]);
 
-  // URL-encoded data URI — more reliable than base64 in Satori's background-image
-  const logoSrc = `data:image/svg+xml,${encodeURIComponent(WORDMARK_SVG)}`;
+  const fonts: ConstructorParameters<typeof ImageResponse>[1]["fonts"] = [];
+  if (interBlack)
+    fonts.push({ name: "Inter", data: interBlack, style: "normal", weight: 900 });
+  if (interRegular)
+    fonts.push({ name: "Inter", data: interRegular, style: "normal", weight: 400 });
+
+  // base64 data URI — works in Satori's <img> tag
+  const logoSrc = `data:image/svg+xml;base64,${btoa(WORDMARK_SVG)}`;
 
   return new ImageResponse(
     (
@@ -89,17 +85,14 @@ export default async function Image() {
           position: "relative",
         }}
       >
-        {/* Wordmark — rendered via background-image, not <img>, for Satori compatibility */}
-        <div
-          style={{
-            width: LOGO_W,
-            height: LOGO_H,
-            backgroundImage: `url("${logoSrc}")`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "left top",
-            flexShrink: 0,
-          }}
+        {/* Wordmark */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logoSrc}
+          width={LOGO_W}
+          height={LOGO_H}
+          alt="WMRS"
+          style={{ flexShrink: 0 }}
         />
 
         {/* Green accent rule */}
@@ -119,13 +112,13 @@ export default async function Image() {
           style={{
             color: "white",
             fontSize: 76,
-            fontFamily: "Inter",
+            fontFamily: fonts.length ? "Inter" : "sans-serif",
             fontWeight: 900,
             lineHeight: 1.05,
             maxWidth: 950,
           }}
         >
-          You're probably overpaying for trash.
+          You&apos;re probably overpaying for trash.
         </div>
 
         {/* Subline */}
@@ -133,7 +126,7 @@ export default async function Image() {
           style={{
             color: "rgba(255,255,255,0.6)",
             fontSize: 30,
-            fontFamily: "Inter",
+            fontFamily: fonts.length ? "Inter" : "sans-serif",
             fontWeight: 400,
             lineHeight: 1.4,
             marginTop: 28,
@@ -150,7 +143,7 @@ export default async function Image() {
             left: 72,
             color: "rgba(255,255,255,0.45)",
             fontSize: 26,
-            fontFamily: "Inter",
+            fontFamily: fonts.length ? "Inter" : "sans-serif",
             fontWeight: 400,
           }}
         >
@@ -160,10 +153,7 @@ export default async function Image() {
     ),
     {
       ...size,
-      fonts: [
-        { name: "Inter", data: interBlack, style: "normal", weight: 900 },
-        { name: "Inter", data: interRegular, style: "normal", weight: 400 },
-      ],
+      fonts,
     },
   );
 }
