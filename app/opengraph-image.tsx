@@ -6,23 +6,18 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // ── Font loading ─────────────────────────────────────────────────────────────
+// Satori supports TTF, OTF, and WOFF — it does NOT accept WOFF2.
+// Google Fonts returns WOFF2 by default, so fetch directly from jsDelivr
+// which serves the fontsource .woff files (not .woff2).
+const WOFF_BASE =
+  "https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin";
+
 async function loadInterFont(weight: 400 | 900): Promise<ArrayBuffer | null> {
   try {
-    const css = await fetch(
-      `https://fonts.googleapis.com/css2?family=Inter:wght@${weight}&display=swap`,
-      {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        },
-      },
-    ).then((r) => r.text());
-
-    const matches = [...css.matchAll(/src: url\((.+?)\) format\('woff2'\)/g)];
-    const url = matches[matches.length - 1]?.[1];
-    if (!url) return null;
-
-    return fetch(url).then((r) => r.arrayBuffer());
+    const url = `${WOFF_BASE}-${weight}-normal.woff`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return res.arrayBuffer();
   } catch {
     return null;
   }
@@ -30,13 +25,27 @@ async function loadInterFont(weight: 400 | 900): Promise<ArrayBuffer | null> {
 
 // ── Image ────────────────────────────────────────────────────────────────────
 
-export default async function Image() {
+export default async function Image(): Promise<Response> {
+  try {
+    return await generateImage();
+  } catch (err) {
+    console.error("[opengraph-image] generation failed:", err);
+    // Fail loudly — return 500 instead of a silent empty response
+    return new Response(
+      `OG image generation failed: ${err instanceof Error ? err.message : String(err)}`,
+      { status: 500, headers: { "Content-Type": "text/plain" } },
+    );
+  }
+}
+
+async function generateImage(): Promise<Response> {
   const [interBlack, interRegular] = await Promise.all([
     loadInterFont(900),
     loadInterFont(400),
   ]);
 
-  const fonts: ConstructorParameters<typeof ImageResponse>[1]["fonts"] = [];
+  type FontEntry = { name: string; data: ArrayBuffer; style: "normal"; weight: 900 | 400 };
+  const fonts: FontEntry[] = [];
   if (interBlack)
     fonts.push({ name: "Inter", data: interBlack, style: "normal", weight: 900 });
   if (interRegular)
