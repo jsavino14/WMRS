@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: meta.home.title,
   description: meta.home.description,
   openGraph: {
-    title: meta.home.title,
+    title: home.hero.h1[0], // "You're probably overpaying for trash." — social title, not SEO title
     description: meta.home.description,
   },
 };
