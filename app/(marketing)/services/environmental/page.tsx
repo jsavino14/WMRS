@@ -10,7 +10,7 @@ const page = servicePages.find((p) => p.slug === "environmental")!;
 export const metadata: Metadata = {
   title: meta.environmental.title,
   description: meta.environmental.description,
-  openGraph: { title: meta.environmental.title, description: meta.environmental.description },
+  openGraph: { title: meta.environmental.title, description: meta.environmental.description , images: ["/og.png"]},
 };
 
 export default function EnvironmentalPage() {

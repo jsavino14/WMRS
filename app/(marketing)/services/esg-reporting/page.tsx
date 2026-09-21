@@ -10,7 +10,7 @@ const page = servicePages.find((p) => p.slug === "esg-reporting")!;
 export const metadata: Metadata = {
   title: meta.esgReporting.title,
   description: meta.esgReporting.description,
-  openGraph: { title: meta.esgReporting.title, description: meta.esgReporting.description },
+  openGraph: { title: meta.esgReporting.title, description: meta.esgReporting.description , images: ["/og.png"]},
 };
 
 export default function EsgReportingPage() {

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: home.hero.h1[0], // "You're probably overpaying for trash." — social title, not SEO title
     description: meta.home.description,
+      images: ["/og.png"],
   },
 };
 

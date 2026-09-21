@@ -11,7 +11,7 @@ const page = servicePages.find((p) => p.slug === "portable-restrooms")!;
 export const metadata: Metadata = {
   title: meta.portableRestrooms.title,
   description: meta.portableRestrooms.description,
-  openGraph: { title: meta.portableRestrooms.title, description: meta.portableRestrooms.description },
+  openGraph: { title: meta.portableRestrooms.title, description: meta.portableRestrooms.description , images: ["/og.png"]},
 };
 
 export default function PortableRestroomsPage() {

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: meta.equipment.title,
     description: meta.equipment.description,
+      images: ["/og.png"],
   },
 };
 
