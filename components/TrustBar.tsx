@@ -112,7 +112,6 @@ const LOGOS = [
   { name: "The Chefs\u2019 Warehouse", Logo: ChefsWarehouseLogo, height: 44 },
   { name: "United Airlines",           Logo: UnitedAirlinesLogo, height: 22 },
   { name: "Baldor Specialty Foods",    Logo: BaldorLogo,          height: 56 },
-  { name: "Marriott",                  Logo: MarriottLogo,        height: 36 },
   { name: "Delta Air Lines",           Logo: DeltaAirLinesLogo,   height: 22 },
 ];
 
@@ -235,7 +234,7 @@ export function TrustBar() {
           </p>
           <div className="flex flex-col gap-5">
             <div className="flex justify-center gap-x-8">
-              {LOGOS.slice(0, 3).map(({ name, Logo, height }) => (
+              {LOGOS.slice(0, 2).map(({ name, Logo, height }) => (
                 <span
                   key={name}
                   title={name}
@@ -248,7 +247,7 @@ export function TrustBar() {
               ))}
             </div>
             <div className="flex justify-center gap-x-8">
-              {LOGOS.slice(3).map(({ name, Logo, height }) => (
+              {LOGOS.slice(2).map(({ name, Logo, height }) => (
                 <span
                   key={name}
                   title={name}
