@@ -10,6 +10,7 @@ const page = servicePages.find((p) => p.slug === "temp-containers")!;
 export const metadata: Metadata = {
   title: meta.tempContainers.title,
   description: meta.tempContainers.description,
+  alternates: { canonical: "/services/temp-containers" },
   openGraph: {
     title: meta.tempContainers.title,
     description: meta.tempContainers.description,
@@ -20,13 +21,25 @@ export const metadata: Metadata = {
 export default function TempContainersPage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.tempContainers.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow={page.fullName}
         headline="Tell us where it's going and when."
         intro="Roll-offs and temporary containers for cleanouts, renovations, and job sites. Send us the address and the date and we'll come back with a price. If you run more than one site, that price gets set against all of them rather than against whatever the local vendor quotes that week."
         items={["Roll-Off Containers", "Cleanouts", "Renovations", "Job Sites", "Events", "Scheduled Swap Outs"]}
-        image={{ src: "/temp-containers.jpg", alt: "A roll-off container on a gravel construction site" }}
+        image={{ src: "/temp-containers.png", alt: "A roll-off container on a gravel construction site" }}
       />
 
       {/* ── Form ─────────────────────────────────────────────────────────── */}

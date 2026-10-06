@@ -10,6 +10,7 @@ const page = servicePages.find((p) => p.slug === "equipment")!;
 export const metadata: Metadata = {
   title: meta.equipment.title,
   description: meta.equipment.description,
+  alternates: { canonical: "/services/equipment" },
   openGraph: {
     title: meta.equipment.title,
     description: meta.equipment.description,
@@ -20,12 +21,24 @@ export const metadata: Metadata = {
 export default function EquipmentPage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.equipment.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow={page.fullName}
         headline="Nobody budgets for a compactor until it stops."
         intro="Balers, compactors, and autoclaves are capital purchases that tend to arrive as emergencies. We finance them directly, rent them when a site's volume isn't settled yet, and repair the ones you already have, whoever sold them to you."
-        image={{ src: "/equipment.jpg", alt: "A vertical baler with a compressed bale of cardboard in an industrial warehouse" }}
+        image={{ src: "/equipment.png", alt: "A vertical baler with a compressed bale of cardboard in an industrial warehouse" }}
       />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}

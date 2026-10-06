@@ -186,6 +186,8 @@ export function TrustBar() {
               <span
                 key={name}
                 title={name}
+                role="img"
+                aria-label={name}
                 className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
               >
                 <Logo height={height} />
@@ -210,6 +212,8 @@ export function TrustBar() {
               <span
                 key={name}
                 title={name}
+                role="img"
+                aria-label={name}
                 className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
               >
                 <Logo height={Math.round(height * 0.85)} />
@@ -235,6 +239,8 @@ export function TrustBar() {
                 <span
                   key={name}
                   title={name}
+                  role="img"
+                  aria-label={name}
                   className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
                 >
                   <Logo height={Math.round(height * 0.75)} />
@@ -246,6 +252,8 @@ export function TrustBar() {
                 <span
                   key={name}
                   title={name}
+                  role="img"
+                  aria-label={name}
                   className="text-white opacity-60 hover:opacity-100 transition-opacity duration-200 inline-flex items-center"
                 >
                   <Logo height={Math.round(height * 0.75)} />

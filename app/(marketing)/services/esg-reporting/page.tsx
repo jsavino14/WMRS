@@ -10,19 +10,32 @@ const page = servicePages.find((p) => p.slug === "esg-reporting")!;
 export const metadata: Metadata = {
   title: meta.esgReporting.title,
   description: meta.esgReporting.description,
+  alternates: { canonical: "/services/esg-reporting" },
   openGraph: { title: meta.esgReporting.title, description: meta.esgReporting.description , images: ["/og.png"]},
 };
 
 export default function EsgReportingPage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.esgReporting.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow={page.fullName}
         headline="Diverting more and paying less are the same project."
         intro="A sustainability report needs tonnage by stream, by site, for the year. Haulers report in different formats on different cycles, some estimate rather than weigh, and some do not report at all unless you ask every month."
         items={["Tonnage by Stream", "Diversion Rates", "Site Level Detail", "Annual Rollups", "Auditable Back to Invoice"]}
-        image={{ src: "/esg-reporting.jpg", alt: "Rows of compressed cardboard bales stacked at a recycling facility" }}
+        image={{ src: "/esg-reporting.png", alt: "Rows of compressed cardboard bales stacked at a recycling facility" }}
       />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}

@@ -57,7 +57,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "WMRS",
+              "legalName": "Waste Management Reduction Services, LLC",
+              "url": "https://wmrservice.com",
+              "logo": "https://wmrservice.com/og.png",
+              "telephone": "+19144851500",
+              "areaServed": ["US", "CA"],
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

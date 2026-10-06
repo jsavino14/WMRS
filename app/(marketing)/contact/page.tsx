@@ -8,6 +8,7 @@ import { meta } from "@/content/site";
 export const metadata: Metadata = {
   title: meta.contact.title,
   description: meta.contact.description,
+  alternates: { canonical: "/contact" },
   openGraph: {
     title: meta.contact.title,
     description: meta.contact.description,
@@ -29,7 +30,7 @@ export default async function ContactPage({
         {/* Desktop (1024px+): image fills right 50% absolutely */}
         <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[50%]">
           <Image
-            src="/contact-hero.jpg"
+            src="/contact-hero.png"
             alt="A commercial waste compactor with its hopper door open against a concrete wall"
             fill
             className="object-cover object-[65%_40%]"
@@ -41,7 +42,7 @@ export default async function ContactPage({
         {/* Mobile + tablet (<1024px): shallow band above content */}
         <div className="lg:hidden relative h-[120px] md:h-[200px]">
           <Image
-            src="/contact-hero.jpg"
+            src="/contact-hero.png"
             alt="A commercial waste compactor with its hopper door open against a concrete wall"
             fill
             className="object-cover object-[65%_40%]"

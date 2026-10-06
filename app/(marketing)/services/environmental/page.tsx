@@ -10,19 +10,32 @@ const page = servicePages.find((p) => p.slug === "environmental")!;
 export const metadata: Metadata = {
   title: meta.environmental.title,
   description: meta.environmental.description,
+  alternates: { canonical: "/services/environmental" },
   openGraph: { title: meta.environmental.title, description: meta.environmental.description , images: ["/og.png"]},
 };
 
 export default function EnvironmentalPage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.environmental.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow="Tank Removal & Site Remediation"
         headline="The soil has a say in the closing date."
         intro="Phase II assessments, tank removals, and cleanups are almost always on somebody else's timeline: a buyer, a lender, a regulator, or a deadline you did not set. The work is technical. The pressure is scheduling."
         items={["Phase II Assessments", "Soil and Groundwater Sampling", "Tank Removal", "Soil Remediation", "Closure Documentation"]}
-        image={{ src: "/environmental.jpg", alt: "An underground storage tank lifted from an excavation pit" }}
+        image={{ src: "/environmental.png", alt: "An underground storage tank lifted from an excavation pit" }}
       />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}

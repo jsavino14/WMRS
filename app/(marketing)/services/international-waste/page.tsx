@@ -10,6 +10,7 @@ const page = servicePages.find((p) => p.slug === "international-waste")!;
 export const metadata: Metadata = {
   title: meta.internationalWaste.title,
   description: meta.internationalWaste.description,
+  alternates: { canonical: "/services/international-waste" },
   openGraph: {
     title: meta.internationalWaste.title,
     description: meta.internationalWaste.description,
@@ -20,13 +21,25 @@ export const metadata: Metadata = {
 export default function InternationalWastePage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.internationalWaste.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow="International Catering Waste"
         headline="Some food waste is a quarantine problem."
         intro="Food waste from aircraft and vessels arriving from outside the country is regulated by the USDA, not treated as ordinary garbage. It has to be segregated, sealed, and destroyed at an approved facility, and when something goes wrong the liability lands on the operator rather than the hauler."
         items={["Segregation at Source", "Sealed Transfer", "Approved Facilities", "Chain of Custody", "Retained Records"]}
-        image={{ src: "/international-waste.jpg", alt: "A row of aluminum airline catering trolleys on an airport apron" }}
+        image={{ src: "/international-waste.png", alt: "A row of aluminum airline catering trolleys on an airport apron" }}
       />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}

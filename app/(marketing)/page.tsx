@@ -13,6 +13,7 @@ import { ServicesGrid } from "@/components/ServicesGrid";
 export const metadata: Metadata = {
   title: meta.home.title,
   description: meta.home.description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: home.hero.h1[0], // "You're probably overpaying for trash." — social title, not SEO title
     description: meta.home.description,
@@ -25,6 +26,22 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "WMRS",
+            "legalName": "Waste Management Reduction Services, LLC",
+            "url": "https://wmrservice.com",
+            "telephone": "+19144851500",
+            "foundingDate": "2008",
+            "description": "WMRS audits your waste and recycling invoices, renegotiates your rates, and takes over the billing. Free audit, no upfront cost.",
+            "areaServed": ["US", "CA"],
+          }),
+        }}
+      />
 {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative z-[1] bg-white overflow-hidden min-h-[560px] lg:min-h-[530px] flex items-center">
 
@@ -165,7 +182,7 @@ export default function HomePage() {
         {/* Desktop: image bleeds to viewport right edge, fills full height */}
         <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2">
           <Image
-            src="/dumpsters-alt.jpg"
+            src="/dumpsters-alt.png"
             alt="Four commercial dumpsters against a concrete wall"
             fill
             className="object-cover object-center"
@@ -198,7 +215,7 @@ export default function HomePage() {
         {/* Mobile: image below copy at 4:3 */}
         <div className="lg:hidden relative aspect-[4/3]">
           <Image
-            src="/dumpsters-alt.jpg"
+            src="/dumpsters-alt.png"
             alt="Four commercial dumpsters against a concrete wall"
             fill
             className="object-cover object-center"

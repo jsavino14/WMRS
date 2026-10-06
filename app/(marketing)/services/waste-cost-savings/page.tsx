@@ -10,6 +10,7 @@ const page = servicePages.find((p) => p.slug === "waste-cost-savings")!;
 export const metadata: Metadata = {
   title: meta.wasteCostSavings.title,
   description: meta.wasteCostSavings.description,
+  alternates: { canonical: "/services/waste-cost-savings" },
   openGraph: {
     title: meta.wasteCostSavings.title,
     description: meta.wasteCostSavings.description,
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
 export default function WasteCostSavingsPage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.wasteCostSavings.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow={page.fullName}

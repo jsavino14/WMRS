@@ -8,6 +8,7 @@ import { FormSidebar } from "@/components/FormSidebar";
 export const metadata: Metadata = {
   title: meta.about.title,
   description: meta.about.description,
+  alternates: { canonical: "/who-we-are" },
   openGraph: {
     title: meta.about.title,
     description: meta.about.description,

@@ -10,6 +10,7 @@ import { meta, siteManagement } from "@/content/site";
 export const metadata: Metadata = {
   title: meta.siteManagement.title,
   description: meta.siteManagement.description,
+  alternates: { canonical: "/site-management" },
   openGraph: {
     title: meta.siteManagement.title,
     description: meta.siteManagement.description,
@@ -26,7 +27,7 @@ export default function SiteManagementPage() {
         {/* Desktop: image fills right 50% absolutely */}
         <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[50%]">
           <Image
-            src="/site-management-hero.jpg"
+            src="/site-management-hero.png"
             alt="Four commercial waste containers against a concrete wall"
             fill
             className="object-cover object-[center_38%]"
@@ -38,7 +39,7 @@ export default function SiteManagementPage() {
         {/* Mobile: image above content, shallow band */}
         <div className="lg:hidden relative h-[210px]">
           <Image
-            src="/site-management-hero.jpg"
+            src="/site-management-hero.png"
             alt="Four commercial waste containers against a concrete wall"
             fill
             className="object-cover object-[center_38%]"

@@ -11,19 +11,32 @@ const page = servicePages.find((p) => p.slug === "portable-restrooms")!;
 export const metadata: Metadata = {
   title: meta.portableRestrooms.title,
   description: meta.portableRestrooms.description,
+  alternates: { canonical: "/services/portable-restrooms" },
   openGraph: { title: meta.portableRestrooms.title, description: meta.portableRestrooms.description , images: ["/og.png"]},
 };
 
 export default function PortableRestroomsPage() {
   return (
     <div className="vt-section-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": page.fullName,
+            "provider": { "@type": "Organization", "name": "WMRS" },
+            "description": meta.portableRestrooms.description,
+          }),
+        }}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <ServiceHero
         eyebrow={page.fullName}
         headline="Ordered last minute, priced accordingly."
         intro="Restrooms get arranged the week before, from whichever vendor answers first, on a separate account from everything else on the site. It is the same pattern as the containers, and it produces the same result."
         items={["Standard Units", "ADA Accessible", "Hand Wash Stations", "Holding Tanks", "Scheduled Servicing"]}
-        image={{ src: "/portable-restrooms.jpg", alt: "Five portable restrooms lined up against a concrete wall" }}
+        image={{ src: "/portable-restrooms.png", alt: "Five portable restrooms lined up against a concrete wall" }}
       />
 
       {/* ── Sections ─────────────────────────────────────────────────────── */}

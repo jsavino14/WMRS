@@ -13,6 +13,7 @@ const LABEL_WHAT_WE_DO_HERE = "What We Do Here";
 export const metadata: Metadata = {
   title: meta.industries.title,
   description: meta.industries.description,
+  alternates: { canonical: "/industries" },
   openGraph: {
     title: meta.industries.title,
     description: meta.industries.description,
