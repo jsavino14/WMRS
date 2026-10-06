@@ -43,12 +43,12 @@ export default function HomePage() {
         }}
       />
 {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative z-[1] bg-white overflow-hidden min-h-[560px] lg:min-h-[530px] flex items-center">
+      <section className="relative z-[1] bg-[#f4f2ed] overflow-hidden min-h-[560px] lg:min-h-[530px] flex items-center">
 
         {/* Photo - full bleed behind everything, anchored right */}
         <div className="absolute top-0 bottom-0 w-[95%] sm:w-[85%] lg:w-[65%] right-[-6%] sm:right-0 lg:right-[-5%]">
           <Image
-            src="/hero.png"
+            src="/hero.jpg"
             alt="Industrial roll-off container"
             fill
             className="object-cover object-left-top"
@@ -60,7 +60,7 @@ export default function HomePage() {
         {/* Legibility gradient - mobile/tablet only */}
         <div
           className="lg:hidden absolute inset-0 z-[5] pointer-events-none"
-          style={{ background: "linear-gradient(to right, white 48%, rgba(255,255,255,0) 80%)" }}
+          style={{ background: "linear-gradient(to right, #f4f2ed 48%, rgba(244,242,237,0) 80%)" }}
         />
 
         {/* Text */}
