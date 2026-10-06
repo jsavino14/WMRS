@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Panel, ANIM_CSS } from "@/components/ProcessDiagram";
 
-const ACCENT = "#2E7D4F";
+const ACCENT = "#B8531C";
 
 const STEPS: { variant: 0 | 1 | 2 | 3; number: string; title: string; body: string }[] = [
   {

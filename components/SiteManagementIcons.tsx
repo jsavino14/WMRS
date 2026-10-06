@@ -8,7 +8,7 @@ import { siteManagement } from "@/content/site";
 // Same visual family as the homepage overcharge icons.
 
 const C = "#1E2428"; // charcoal stroke
-const G = "#2E7D4F"; // green accent
+const G = "#B8531C"; // amber accent
 const SW = 1.5;      // default stroke-width
 
 export function InvoiceReviewIcon() {

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
   <defs><style>
     .sm0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .sm1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .sm1{fill:none;stroke:#B8531C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
   <!-- Ground line -->
   <line class="sm0" x1="2" y1="40" x2="42" y2="40"/>

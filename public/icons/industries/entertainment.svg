@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32">
   <defs><style>
     .ev0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .ev1{fill:none;stroke:#208b46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ev1{fill:none;stroke:#B8531C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
   <!-- Ticket outline -->
   <path class="ev0" d="M4,4 L36,4 Q38,4 38,6 L38,12 Q34,12 34,16 Q34,20 38,20 L38,26 Q38,28 36,28 L4,28 Q2,28 2,26 L2,20 Q6,20 6,16 Q6,12 2,12 L2,6 Q2,4 4,4 Z"/>
