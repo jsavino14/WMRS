@@ -85,7 +85,7 @@ export function Footer() {
             <div className="mt-6 flex flex-col gap-3">
               <Link
                 href="/contact?form=invoice"
-                className="inline-block bg-white text-charcoal text-sm font-semibold px-4 py-2.5 hover:bg-white/90 transition-colors text-center"
+                className="inline-block bg-[#B8531C] text-white text-sm font-semibold px-4 py-2.5 hover:bg-[#B8531C]/85 transition-colors text-center"
               >
                 Send us one invoice
               </Link>

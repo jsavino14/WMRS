@@ -215,7 +215,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="bg-charcoal text-white text-sm font-semibold px-8 py-4 hover:bg-charcoal/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="bg-[#B8531C] text-white text-sm font-semibold px-8 py-4 hover:bg-[#B8531C]/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === "loading" ? "Sending…" : form.submit}
       </button>

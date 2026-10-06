@@ -238,7 +238,7 @@ export function Nav() {
               </a>
               <Link
                 href={NAV_CTA_HREF}
-                className="bg-charcoal text-white text-sm font-semibold px-4 py-2 hover:bg-charcoal/85 transition-colors duration-150"
+                className="bg-[#B8531C] text-white text-sm font-semibold px-4 py-2 hover:bg-[#B8531C]/85 transition-colors duration-150"
               >
                 {NAV_CTA_LABEL}
               </Link>
@@ -408,7 +408,7 @@ export function Nav() {
                   <Link
                     href={NAV_CTA_HREF}
                     onClick={close}
-                    className="block w-full bg-charcoal text-white text-sm font-semibold px-4 py-4 text-center hover:bg-charcoal/85 transition-colors"
+                    className="block w-full bg-[#B8531C] text-white text-sm font-semibold px-4 py-4 text-center hover:bg-[#B8531C]/85 transition-colors"
                   >
                     {NAV_CTA_LABEL}
                   </Link>
