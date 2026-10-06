@@ -43,7 +43,7 @@ export default function EsgReportingPage() {
         <Container>
           {/* 01 */}
           <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14 border-b border-charcoal/10">
-            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
+            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-[#E8E3DD] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
               01
             </div>
             <div>
@@ -63,7 +63,7 @@ export default function EsgReportingPage() {
 
           {/* 02 */}
           <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14 border-b border-charcoal/10">
-            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
+            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-[#E8E3DD] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
               02
             </div>
             <div>
@@ -83,7 +83,7 @@ export default function EsgReportingPage() {
 
           {/* 03 */}
           <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14 border-b border-charcoal/10">
-            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
+            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-[#E8E3DD] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
               03
             </div>
             <div>
@@ -103,7 +103,7 @@ export default function EsgReportingPage() {
 
           {/* 04 */}
           <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14">
-            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
+            <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-[#E8E3DD] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
               04
             </div>
             <div>

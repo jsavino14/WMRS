@@ -51,7 +51,7 @@ export default function WasteCostSavingsPage() {
                 key={item.number}
                 className={`grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[260px_1fr] gap-x-10 lg:gap-x-16 py-10 md:py-12 lg:py-14 ${i < whatWeFind.items.length - 1 ? "border-b border-charcoal/10" : ""}`}
               >
-                <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-charcoal/[0.14] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
+                <div className="text-[64px] md:text-[120px] lg:text-[220px] font-black text-[#E8E3DD] leading-none mb-3 md:mb-0 md:pt-7 lg:pt-8 tabular-nums select-none">
                   {item.number}
                 </div>
                 <div>
