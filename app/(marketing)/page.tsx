@@ -72,7 +72,7 @@ export default function HomePage() {
                 <br />
                 {home.hero.h1[1]}
               </h1>
-              <p className="text-base lg:text-lg text-[#1f2428] leading-relaxed mb-8 max-w-[245px] sm:max-w-none lg:max-w-[500px]">
+              <p className="text-base lg:text-lg text-[#1f2428] leading-relaxed mb-8 max-w-[245px] sm:max-w-none lg:max-w-[580px]">
                 {home.hero.sub}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
