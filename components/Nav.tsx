@@ -161,7 +161,7 @@ export function Nav() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex-shrink-0 text-[#B8531C]"
+              className="flex-shrink-0"
               onClick={close}
               onMouseEnter={() => closeImmediate()}
             >
@@ -309,7 +309,7 @@ export function Nav() {
           <div className="flex-shrink-0 border-b border-charcoal/10">
             <Container>
               <div className="flex items-center justify-between h-16">
-                <Link href="/" className="flex-shrink-0 text-[#B8531C]" onClick={close}>
+                <Link href="/" className="flex-shrink-0" onClick={close}>
                   <Logo />
                 </Link>
                 <button
