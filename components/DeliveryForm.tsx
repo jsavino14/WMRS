@@ -187,7 +187,7 @@ export function DeliveryForm({ defaultSelection, page }: DeliveryFormProps) {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="justify-self-start mt-2 bg-[#B8531C] text-white text-sm font-semibold px-8 py-4 hover:bg-[#B8531C]/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="justify-self-start mt-2 bg-[#74202A] text-white text-sm font-semibold px-8 py-4 hover:bg-[#74202A]/85 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {state === "loading" ? "Sending…" : "Submit request"}
       </button>

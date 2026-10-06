@@ -17,7 +17,7 @@ const config: Config = {
       colors: {
         charcoal: "#1E2428",
         amber:    "#C97A1E",
-        accent:   "#B8531C",
+        accent:   "#74202A",
         offwhite: "#F7F8F7",
       },
       fontFamily: {

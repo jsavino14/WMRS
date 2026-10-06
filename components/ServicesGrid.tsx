@@ -41,7 +41,7 @@ export function ServicesGrid() {
                 <h3
                   className="text-base font-black leading-snug"
                   style={{
-                    color: on ? "#B8531C" : "#262d34",
+                    color: on ? "#74202A" : "#262d34",
                     transition: `color ${DUR} ${EASE}`,
                   }}
                 >

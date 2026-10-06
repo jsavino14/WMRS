@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const CHARCOAL = "#1E2428";
-const ACCENT   = "#B8531C";
+const ACCENT   = "#74202A";
 const GREY     = "#C9CFCB";
 
 // ── Panel geometry (SVG units; viewBox 0 0 66 100) ───────────────────────────

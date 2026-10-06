@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 52">
   <defs><style>
     .cp0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .cp1{fill:none;stroke:#B8531C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .cp1{fill:none;stroke:#74202A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
   <!-- Building outline (flat roof — distinct from hotel's peaked roof) -->
   <rect class="cp0" x="4" y="4" width="36" height="44"/>

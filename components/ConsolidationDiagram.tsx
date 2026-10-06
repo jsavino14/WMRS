@@ -5,7 +5,7 @@ import { siteManagement } from "@/content/site";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const W   = "white";
-const G   = "#B8531C";
+const G   = "#74202A";
 const BG  = "#1E2428";
 const SL  = 1.2;
 const SB  = 1.5;

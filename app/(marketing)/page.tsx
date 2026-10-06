@@ -78,7 +78,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href={home.hero.ctaPrimaryHref}
-                  className="inline-block bg-[#B8531C] text-white text-sm font-semibold px-8 py-4 hover:bg-[#B8531C]/85 transition-colors text-center"
+                  className="inline-block bg-[#74202A] text-white text-sm font-semibold px-8 py-4 hover:bg-[#74202A]/85 transition-colors text-center"
                 >
                   {home.hero.ctaPrimary}
                 </Link>

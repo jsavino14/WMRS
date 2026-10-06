@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 48">
   <defs><style>
     .ed0{fill:none;stroke:#262d34;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .ed1{fill:none;stroke:#B8531C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ed1{fill:none;stroke:#74202A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   </style></defs>
   <!-- Mortarboard flat top (diamond viewed from slight angle) -->
   <polygon class="ed0" points="28,6 52,18 28,24 4,18"/>
